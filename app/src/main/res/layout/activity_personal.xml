@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:background="#fff"
         android:orientation="vertical">
-        <!-- 个人信息栏 -->
+        <!-- 个人信息 -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y180"
@@ -24,7 +24,7 @@
             </ImageView>
 
             <TextView
-                android:id="@+id/namepersonaltv"
+                android:id="@+id/nameTv"
                 android:text="黄可"
                 android:textColor="#666666"
                 android:textSize="20sp"
@@ -36,13 +36,12 @@
                 android:layout_marginTop="@dimen/x20" />
 
             <TextView
-                android:id="@+id/discribepersonaltv"
-                android:text="湖南省长沙市长沙县泉塘街道"
+                android:id="@+id/addressTv"
                 android:textColor="#666666"
                 android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/namepersonaltv"
+                android:layout_below="@id/nameTv"
                 android:layout_toRightOf="@id/headImgPersonal"
                 android:layout_marginLeft="@dimen/x40"
                 android:layout_marginTop="@dimen/x20"/>
