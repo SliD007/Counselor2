@@ -25,6 +25,7 @@ public class LoginPresenter {
 
     public void loadLogin(final Context mContext, final String account, final String password){
         Log.i("loginInfo", "account=" + account + ",password=" + password);
+        mLoginView.loginSuccess();
     }
     public void getParams(){
         Log.e("LoginPresenter","loginean------------->");

@@ -2,24 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0EFF5"
+    android:background="#000"
     android:orientation="vertical" >
+    <!--头-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120"
+        android:layout_marginTop="@dimen/y100">
+        <TextView
+            android:text="个人中心"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/x1"
         android:background="#fff"
         android:orientation="vertical">
         <!-- 个人信息 -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y180"
+            android:layout_height="@dimen/y240"
             android:padding="@dimen/x20" >
 
             <ImageView
                 android:id="@+id/headImgPersonal"
-                android:layout_width="@dimen/x120"
-                android:layout_height="@dimen/y120"
-                android:layout_marginLeft="@dimen/x60"
+                android:layout_width="@dimen/x160"
+                android:layout_height="@dimen/y160"
+                android:layout_marginLeft="@dimen/x40"
                 android:src="@drawable/u1740" >
             </ImageView>
 
@@ -27,24 +43,25 @@
                 android:id="@+id/nameTv"
                 android:text="黄可"
                 android:textColor="#666666"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/headImgPersonal"
                 android:layout_alignTop="@id/headImgPersonal"
                 android:layout_marginLeft="@dimen/x40"
-                android:layout_marginTop="@dimen/x20" />
+                android:layout_marginTop="@dimen/x10" />
 
             <TextView
                 android:id="@+id/addressTv"
+                android:text="湖南省长沙市长沙县泉塘街道"
                 android:textColor="#666666"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/nameTv"
                 android:layout_toRightOf="@id/headImgPersonal"
                 android:layout_marginLeft="@dimen/x40"
-                android:layout_marginTop="@dimen/x20"/>
+                android:layout_marginTop="@dimen/x10"/>
 
         </RelativeLayout>
         <View
@@ -57,7 +74,7 @@
         <RelativeLayout
             android:id="@+id/lawFirmRl"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y120">
+            android:layout_height="@dimen/y160">
             <ImageView
                 android:id="@+id/lawFirmIm"
                 android:src="@drawable/u1842"
@@ -70,7 +87,7 @@
                 android:id="@+id/lawFirmTv"
                 android:text="明诚明律师事务所"
                 style="@style/text1"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/x20"/>
         </RelativeLayout>
@@ -84,7 +101,7 @@
         <RelativeLayout
             android:id="@+id/rankListRl"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y120">
+            android:layout_height="@dimen/y160">
             <ImageView
                 android:id="@+id/rankListIm"
                 android:src="@drawable/u1853"
@@ -107,7 +124,7 @@
         <RelativeLayout
             android:id="@+id/assessRl"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y120">
+            android:layout_height="@dimen/y160">
             <ImageView
                 android:id="@+id/assessIm"
                 android:src="@drawable/u1853"
@@ -130,7 +147,7 @@
         <RelativeLayout
             android:id="@+id/contractRl"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y120">
+            android:layout_height="@dimen/y160">
             <ImageView
                 android:id="@+id/contractIm"
                 android:src="@drawable/u1833"
@@ -153,7 +170,7 @@
         <RelativeLayout
             android:id="@+id/changePwRl"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y120">
+            android:layout_height="@dimen/y160">
             <ImageView
                 android:id="@+id/changePwIm"
                 android:src="@drawable/u1815"
@@ -176,7 +193,7 @@
         <RelativeLayout
             android:id="@+id/versionRl"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y120">
+            android:layout_height="@dimen/y160">
             <ImageView
                 android:id="@+id/versionIm"
                 android:src="@drawable/u1824"
@@ -189,7 +206,7 @@
                 android:id="@+id/versionTv"
                 android:text="当前为最新版本"
                 style="@style/text1"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/x20"/>
         </RelativeLayout>
@@ -200,26 +217,34 @@
         </View>
     </LinearLayout>
 
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x2"
-        android:layout_marginTop="@dimen/y60"
-        android:background="#ccc" >
-    </View>
-    <RelativeLayout
-        android:id="@+id/unloginRl"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y120"
-        android:background="#fff">
-        <TextView
-            android:text="退出登录"
-            style="@style/title1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x2"
-        android:background="#ccc" >
-    </View>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#F0EFF5">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2"
+            android:layout_marginTop="@dimen/y40"
+            android:background="#ccc" >
+        </View>
+        <RelativeLayout
+            android:id="@+id/unloginRl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y160"
+            android:background="#fff">
+            <TextView
+                android:text="退出登录"
+                style="@style/title1"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2"
+            android:background="#ccc" >
+        </View>
+    </LinearLayout>
+
 </LinearLayout>
