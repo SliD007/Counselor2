@@ -1,6 +1,7 @@
 package test.example.com.counselor.login;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,9 +17,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
-import test.example.com.counselor.util.Md5Util;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements ILoginView{
 
     @BindView(R.id.userNameEt)
     EditText userNameEt;
@@ -31,11 +31,15 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.forgetPwTv)
     TextView forgetPwTv;
 
+    private String account;
+    private String password;
+    private LoginPresenter mLoginPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         initView();
+        mLoginPresenter = new LoginPresenter(this);
     }
 
     @Override
@@ -43,6 +47,22 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
     }
 
+    /*
+    在单击响应中完成两个实现
+     */
+    @OnClick({R.id.loginBtn, R.id.forgetPwTv})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.loginBtn:
+                account = userNameEt.getText().toString().trim();
+                password = passwordEt.getText().toString().trim();
+                mLoginPresenter.loadLogin(LoginActivity.this,account,password);
+                break;
+            case R.id.forgetPwTv:
+
+                break;
+        }
+    }
 
     /*
     登录初始化
@@ -105,33 +125,16 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-
-    @OnClick({R.id.loginBtn, R.id.forgetPwTv})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.loginBtn:
-                String id = userNameEt.getEditableText().toString();
-                String psw = userNameEt.getEditableText().toString();
-
-                //每次保存账号密码
-                SharedPreferences userNameSp = getSharedPreferences("userNameSp", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = userNameSp.edit();
-                editor.putString("userName", id);
-                editor.commit();
-                SharedPreferences passwordSp = getSharedPreferences("passwordSp", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor1 = passwordSp.edit();
-                editor1.putString("password", psw);
-                editor1.commit();
-                psw = Md5Util.md5(psw);
-                Log.i("loginInfo", "id=" + id + ",psw=" + psw);
-                login(id, psw);
-                break;
-            case R.id.forgetPwTv:
-                break;
-        }
+    /*
+    登录之后两个回调
+     */
+    @Override
+    public void loginSuccess() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
     }
-
-    private void login(final String id, final String psw) {
-        Log.i("loginInfo", "id=" + id + ",psw=" + psw);
+    @Override
+    public void loginFailed() {
+        toast("登录失败！",true);
     }
 }
