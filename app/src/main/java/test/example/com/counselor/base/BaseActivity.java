@@ -12,8 +12,8 @@ public abstract class BaseActivity extends Activity {
     private String TAG = "BaseActivity";
     protected boolean hide_status = false;
     protected boolean hide_title = true;
-    public BaseActivity() {
 
+    public BaseActivity() {
     }
 
     @Override
