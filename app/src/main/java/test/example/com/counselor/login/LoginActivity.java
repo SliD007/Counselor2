@@ -1,7 +1,8 @@
-package test.example.com.counselor;
+package test.example.com.counselor.login;
 
 import android.os.Bundle;
 
+import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 
 public class LoginActivity extends BaseActivity {

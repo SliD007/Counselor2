@@ -1,4 +1,4 @@
-package test.example.com.counselor;
+package test.example.com.counselor.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 
 public class MainActivity extends BaseActivity {
