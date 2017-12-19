@@ -11,7 +11,11 @@
         android:background="#fff"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <TextView
+            android:text="账号登录"
+            style="@style/title1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </LinearLayout>
