@@ -37,7 +37,7 @@ public class PersonalActivity extends BaseActivity {
         setContentView(R.layout.activity_personal);
     }
 
-    @OnClick({R.id.rankListRl, R.id.assessRl, R.id.contractRl, R.id.changePwRl, R.id.versionTv})
+    @OnClick({R.id.rankListRl, R.id.assessRl, R.id.contractRl, R.id.changePwRl, R.id.versionTv, R.id.unloginRl})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rankListRl:
@@ -54,6 +54,11 @@ public class PersonalActivity extends BaseActivity {
                 break;
             case R.id.versionTv:
                 toast("versionTv",false);
+                break;
+            case R.id.unloginRl:
+                toast("unloginRl",false);
+                break;
+            default:
                 break;
         }
     }

@@ -29,13 +29,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/y240"
-            android:padding="@dimen/x20" >
+            android:paddingTop="@dimen/x40" >
 
             <ImageView
                 android:id="@+id/headImgPersonal"
                 android:layout_width="@dimen/x160"
                 android:layout_height="@dimen/y160"
-                android:layout_marginLeft="@dimen/x40"
+                android:layout_marginLeft="@dimen/x60"
                 android:src="@drawable/u1740" >
             </ImageView>
 
