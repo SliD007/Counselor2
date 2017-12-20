@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#303135">
+
+    <RelativeLayout
+        android:id="@+id/titlelBarRl"
+        android:background="#393a3f"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp">
+        <TextView
+            android:id="@+id/titleBarTv"
+            android:text="工作安排"
+            style="@style/text_titleBarCenter" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottomBarRl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <include
+            android:id="@+id/bottomBar"
+            layout="@layout/buttom_bar">
+
+        </include>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/titlelBarRl"
+        android:layout_above="@id/bottomBarRl"
+        android:background="#EBEBEB">
+    </ScrollView>
+
+</RelativeLayout>

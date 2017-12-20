@@ -13,6 +13,8 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.view.backlog.BacklogActivity;
+import test.example.com.counselor.view.schedule.ScheduleActivity;
+import test.example.com.counselor.view.service.ServiceActivity;
 
 /**
  * Created by Sli.D on 2017/12/19.
@@ -37,7 +39,6 @@ public class PersonalActivity extends BaseActivity {
     @BindView(R.id.buttomTv4)
     TextView buttomTv4;
 
-    Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,19 +79,21 @@ public class PersonalActivity extends BaseActivity {
 
     @OnClick({R.id.buttomRl1, R.id.buttomRl2, R.id.buttomRl3, R.id.buttomRl4})
     public void onButtomBarClick(View view) {
+        Intent i;
         switch (view.getId()) {
             case R.id.buttomRl1:
                 i = new Intent(PersonalActivity.this, BacklogActivity.class);
                 startActivity(i);
                 break;
             case R.id.buttomRl2:
-                toast("buttomRl2", false);
+                i = new Intent(PersonalActivity.this, ScheduleActivity.class);
+                startActivity(i);
                 break;
             case R.id.buttomRl3:
-                toast("buttomRl3", false);
+                i = new Intent(PersonalActivity.this, ServiceActivity.class);
+                startActivity(i);
                 break;
             case R.id.buttomRl4:
-                toast("buttomRl4", false);
                 break;
             default:
                 break;

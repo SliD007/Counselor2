@@ -16,6 +16,8 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.view.personal.PersonalActivity;
+import test.example.com.counselor.view.schedule.ScheduleActivity;
+import test.example.com.counselor.view.service.ServiceActivity;
 
 /**
  * Created by Sli.D on 2017/12/19.
@@ -110,10 +112,12 @@ public class BacklogActivity extends BaseActivity {
             case R.id.buttomRl1:
                 break;
             case R.id.buttomRl2:
-                toast("buttomRl2", false);
+                i = new Intent(BacklogActivity.this, ScheduleActivity.class);
+                startActivity(i);
                 break;
             case R.id.buttomRl3:
-                toast("buttomRl3", false);
+                i = new Intent(BacklogActivity.this, ServiceActivity.class);
+                startActivity(i);
                 break;
             case R.id.buttomRl4:
                 i = new Intent(BacklogActivity.this, PersonalActivity.class);
