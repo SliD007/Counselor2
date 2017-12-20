@@ -1,43 +1,47 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_login"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000">
+    android:background="#fff">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/y100"
-        android:padding="@dimen/x60"
-        android:background="#fff">
+        android:layout_height="0dp"
+        android:layout_weight="1">
         <ImageView
             android:id="@+id/iv_icon"
             android:src="@drawable/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/y160"
+            android:layout_alignParentBottom="true"
             android:scaleType="centerCrop" />
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
         <TextView
             android:id="@+id/tv_title"
             android:text="法律顾问"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv_icon"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/y40"
             android:textColor="#000"
             android:textSize="23sp"
             android:typeface="monospace" />
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
         <RelativeLayout
             android:id="@+id/rl_userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_title"
-            android:layout_marginTop="@dimen/y200"
             android:background="@drawable/rectangle_edittext">
 
             <ImageView
@@ -135,16 +139,19 @@
                 android:layout_marginRight="@dimen/x40"
                 android:src="@drawable/ic_backspace_grey600_24dp"
                 android:visibility="invisible" />
-
         </RelativeLayout>
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="2dp">
         <Button
             android:id="@+id/loginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rl_userPassword"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/y40"
             android:background="#01A0F3"
             android:gravity="center"
             android:padding="@dimen/x20"
@@ -161,7 +168,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/loginBtn"
             android:layout_alignLeft="@id/loginBtn"
-            android:layout_marginTop="@dimen/y40"
             android:background="@null"
             android:checked="false"
             android:duplicateParentState="false"/>
@@ -173,10 +179,9 @@
             android:textSize="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:layout_below="@id/loginBtn"
             android:layout_alignRight="@id/loginBtn"
-            android:layout_marginTop="@dimen/y40"
             />
     </RelativeLayout>
-
-</RelativeLayout>
+</LinearLayout>
