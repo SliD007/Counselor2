@@ -37,6 +37,7 @@ public class PersonalActivity extends BaseActivity {
     @BindView(R.id.buttomTv4)
     TextView buttomTv4;
 
+    Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +78,6 @@ public class PersonalActivity extends BaseActivity {
 
     @OnClick({R.id.buttomRl1, R.id.buttomRl2, R.id.buttomRl3, R.id.buttomRl4})
     public void onButtomBarClick(View view) {
-        Intent i;
         switch (view.getId()) {
             case R.id.buttomRl1:
                 i = new Intent(PersonalActivity.this, BacklogActivity.class);

@@ -1,13 +1,14 @@
 package test.example.com.counselor.base;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends FragmentActivity {
 
     private String TAG = "BaseActivity";
     protected boolean hide_status = false;
@@ -22,6 +23,7 @@ public abstract class BaseActivity extends Activity {
 //        setViewBase();  //默认隐藏标题栏
         initContentView(savedInstanceState);
         MyApplication.getInstance().addActivity(this);
+        Log.i(TAG,""+this);
     }
     /*
     初始化布局

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#303135">
-
+    <!-- 头 -->
     <LinearLayout
         android:id="@+id/titlelBarRl"
         android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                 android:layout_marginLeft="10dp"/>
         </RelativeLayout>
     </LinearLayout>
-
+    <!-- 尾 -->
     <RelativeLayout
         android:id="@+id/bottomBarRl"
         android:layout_width="match_parent"
@@ -89,7 +89,7 @@
         android:layout_above="@id/bottomBarRl"
         android:background="#EBEBEB">
         <FrameLayout
-            android:id="@+id/content"
+            android:id="@+id/backlogFL"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </ScrollView>

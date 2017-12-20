@@ -16,10 +16,9 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".view.login.LoginActivity" >
-        </activity>
-        <activity android:name=".view.personal.PersonalActivity" android:theme="@style/TranslucentTheme"/>
-        <activity android:name=".view.backlog.BacklogActivity" android:theme="@style/TranslucentTheme"/>
+        <activity android:name=".view.login.LoginActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
+        <activity android:name=".view.personal.PersonalActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
+        <activity android:name=".view.backlog.BacklogActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
     </application>
 
 </manifest>
