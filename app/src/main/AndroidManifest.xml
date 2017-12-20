@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.MainActivity">
+        <activity android:name=".view.login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -16,9 +16,9 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".login.LoginActivity" >
+        <activity android:name=".view.login.LoginActivity" >
         </activity>
-        <activity android:name=".personal.PersonalActivity" android:theme="@style/TranslucentTheme"/>
+        <activity android:name=".view.personal.PersonalActivity" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.backlog.BacklogActivity" android:theme="@style/TranslucentTheme"/>
     </application>
 

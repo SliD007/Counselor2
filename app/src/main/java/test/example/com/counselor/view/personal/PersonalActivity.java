@@ -1,4 +1,4 @@
-package test.example.com.counselor.personal;
+package test.example.com.counselor.view.personal;
 
 import android.content.Intent;
 import android.graphics.Color;

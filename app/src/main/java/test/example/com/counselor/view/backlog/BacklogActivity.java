@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
-import test.example.com.counselor.personal.PersonalActivity;
+import test.example.com.counselor.view.personal.PersonalActivity;
 
 /**
  * Created by Sli.D on 2017/12/19.

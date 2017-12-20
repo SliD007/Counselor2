@@ -1,4 +1,4 @@
-package test.example.com.counselor.login;
+package test.example.com.counselor.view.login;
 
 import org.json.JSONObject;
 

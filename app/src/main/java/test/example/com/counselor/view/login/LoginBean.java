@@ -1,4 +1,4 @@
-package test.example.com.counselor.login;
+package test.example.com.counselor.view.login;
 
 /**
  * Created by Sli.D on 2017/5/12.

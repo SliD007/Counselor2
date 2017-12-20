@@ -1,4 +1,4 @@
-package test.example.com.counselor.login;
+package test.example.com.counselor.view.login;
 
 import android.content.Context;
 import android.util.Log;
