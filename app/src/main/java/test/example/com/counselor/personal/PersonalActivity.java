@@ -38,7 +38,7 @@ public class PersonalActivity extends BaseActivity {
     }
 
     @OnClick({R.id.rankListRl, R.id.assessRl, R.id.contractRl, R.id.changePwRl, R.id.versionTv, R.id.unloginRl})
-    public void onClick(View view) {
+    public void onListClick(View view) {
         switch (view.getId()) {
             case R.id.rankListRl:
                 toast("rankListRl",false);

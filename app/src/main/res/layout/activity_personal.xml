@@ -11,12 +11,19 @@
         android:layout_marginTop="@dimen/y100">
         <TextView
             android:text="个人中心"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textColor="#fff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"/>
-
+        <ImageView
+            android:id="@+id/newsIm"
+            android:src="@drawable/u2353"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y80"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x20"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -215,13 +222,7 @@
             android:layout_height="@dimen/x2"
             android:background="#ccc" >
         </View>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#F0EFF5">
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/x2"
@@ -246,5 +247,18 @@
             android:background="#ccc" >
         </View>
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F0EFF5">
+
+        <include
+            android:id="@+id/persenalBar"
+            layout="@layout/buttom_bar">
+
+        </include>
+    </RelativeLayout>
+
 
 </LinearLayout>
