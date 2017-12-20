@@ -1,5 +1,6 @@
 package test.example.com.counselor.personal;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
+import test.example.com.counselor.view.backlog.BacklogActivity;
 
 /**
  * Created by Sli.D on 2017/12/19.
@@ -75,9 +77,11 @@ public class PersonalActivity extends BaseActivity {
 
     @OnClick({R.id.buttomRl1, R.id.buttomRl2, R.id.buttomRl3, R.id.buttomRl4})
     public void onButtomBarClick(View view) {
+        Intent i;
         switch (view.getId()) {
             case R.id.buttomRl1:
-                toast("buttomRl1", false);
+                i = new Intent(PersonalActivity.this, BacklogActivity.class);
+                startActivity(i);
                 break;
             case R.id.buttomRl2:
                 toast("buttomRl2", false);

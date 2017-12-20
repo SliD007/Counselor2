@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
-import test.example.com.counselor.personal.PersonalActivity;
+import test.example.com.counselor.view.backlog.BacklogActivity;
 
 public class LoginActivity extends BaseActivity implements ILoginView{
 
@@ -131,7 +131,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
      */
     @Override
     public void loginSuccess() {
-        Intent intent = new Intent(LoginActivity.this, PersonalActivity.class);
+        Intent intent = new Intent(LoginActivity.this, BacklogActivity.class);
         startActivity(intent);
     }
     @Override
