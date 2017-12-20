@@ -1,264 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
-    android:orientation="vertical" >
-    <!--头-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y120"
-        android:layout_marginTop="@dimen/y100">
-        <TextView
-            android:text="个人中心"
-            android:textSize="20sp"
-            android:textColor="#fff"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"/>
-        <ImageView
-            android:id="@+id/newsIm"
-            android:src="@drawable/u2353"
-            android:layout_width="@dimen/x80"
-            android:layout_height="@dimen/y80"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/x20"/>
-    </RelativeLayout>
+    android:background="#303135">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/titlelBarRl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/x1"
-        android:background="#fff"
-        android:orientation="vertical">
-        <!-- 个人信息 -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y240"
-            android:paddingTop="@dimen/x40" >
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp">
+        <include
+            android:id="@+id/titleBar"
+            layout="@layout/onlytitle_bar">
 
-            <ImageView
-                android:id="@+id/headImgPersonal"
-                android:layout_width="@dimen/x160"
-                android:layout_height="@dimen/y160"
-                android:layout_marginLeft="@dimen/x60"
-                android:src="@drawable/u1740" >
-            </ImageView>
-
-            <TextView
-                android:id="@+id/nameTv"
-                android:text="黄可"
-                android:textColor="#666666"
-                android:textSize="18sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/headImgPersonal"
-                android:layout_alignTop="@id/headImgPersonal"
-                android:layout_marginLeft="@dimen/x40"
-                android:layout_marginTop="@dimen/x10" />
-
-            <TextView
-                android:id="@+id/addressTv"
-                android:text="湖南省长沙市长沙县泉塘街道"
-                android:textColor="#666666"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/nameTv"
-                android:layout_toRightOf="@id/headImgPersonal"
-                android:layout_marginLeft="@dimen/x40"
-                android:layout_marginTop="@dimen/x10"/>
-
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x2"
-            android:background="#ccc" >
-        </View>
-
-        <!-- 所属机构 -->
-        <RelativeLayout
-            android:id="@+id/lawFirmRl"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y160">
-            <ImageView
-                android:id="@+id/lawFirmIm"
-                android:src="@drawable/u1842"
-                style="@style/image1"/>
-            <TextView
-                android:text="所属机构"
-                android:layout_toRightOf="@id/lawFirmIm"
-                style="@style/text1"/>
-            <TextView
-                android:id="@+id/lawFirmTv"
-                android:text="明诚明律师事务所"
-                style="@style/text1"
-                android:textSize="14sp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/x20"/>
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x2"
-            android:background="#ccc" >
-        </View>
-
-        <!-- 我的排行 -->
-        <RelativeLayout
-            android:id="@+id/rankListRl"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y160">
-            <ImageView
-                android:id="@+id/rankListIm"
-                android:src="@drawable/u1853"
-                style="@style/image1"/>
-            <TextView
-                android:text="我的排行"
-                android:layout_toRightOf="@id/rankListIm"
-                style="@style/text1"/>
-            <ImageView
-                android:src="@drawable/u609"
-                style="@style/backIm"/>
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x2"
-            android:background="#ccc" >
-        </View>
-
-        <!-- 我的考核 -->
-        <RelativeLayout
-            android:id="@+id/assessRl"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y160">
-            <ImageView
-                android:id="@+id/assessIm"
-                android:src="@drawable/u1853"
-                style="@style/image1"/>
-            <TextView
-                android:text="我的考核"
-                android:layout_toRightOf="@id/assessIm"
-                style="@style/text1"/>
-            <ImageView
-                android:src="@drawable/u609"
-                style="@style/backIm"/>
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x2"
-            android:background="#ccc" >
-        </View>
-
-        <!-- 我的合同 -->
-        <RelativeLayout
-            android:id="@+id/contractRl"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y160">
-            <ImageView
-                android:id="@+id/contractIm"
-                android:src="@drawable/u1833"
-                style="@style/image1"/>
-            <TextView
-                android:text="我的合同"
-                android:layout_toRightOf="@id/contractIm"
-                style="@style/text1"/>
-            <ImageView
-                android:src="@drawable/u609"
-                style="@style/backIm"/>
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x2"
-            android:background="#ccc" >
-        </View>
-
-        <!-- 修改密码 -->
-        <RelativeLayout
-            android:id="@+id/changePwRl"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y160">
-            <ImageView
-                android:id="@+id/changePwIm"
-                android:src="@drawable/u1815"
-                style="@style/image1"/>
-            <TextView
-                android:text="修改密码"
-                android:layout_toRightOf="@id/changePwIm"
-                style="@style/text1"/>
-            <ImageView
-                android:src="@drawable/u609"
-                style="@style/backIm"/>
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x2"
-            android:background="#ccc" >
-        </View>
-
-        <!-- 版本更新 -->
-        <RelativeLayout
-            android:id="@+id/versionRl"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y160">
-            <ImageView
-                android:id="@+id/versionIm"
-                android:src="@drawable/u1824"
-                style="@style/image1"/>
-            <TextView
-                android:text="版本更新"
-                android:layout_toRightOf="@id/versionIm"
-                style="@style/text1"/>
-            <TextView
-                android:id="@+id/versionTv"
-                android:text="当前为最新版本"
-                style="@style/text1"
-                android:textSize="14sp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/x20"/>
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x2"
-            android:background="#ccc" >
-        </View>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x2"
-            android:layout_marginTop="@dimen/y40"
-            android:background="#ccc" >
-        </View>
-        <RelativeLayout
-            android:id="@+id/unloginRl"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y160"
-            android:background="#fff">
-            <TextView
-                android:text="退出登录"
-                style="@style/title1"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x2"
-            android:background="#ccc" >
-        </View>
-    </LinearLayout>
+        </include>
+    </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/bottomBarRl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#F0EFF5">
-
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <include
-            android:id="@+id/persenalBar"
+            android:id="@+id/bottomBar"
             layout="@layout/buttom_bar">
 
         </include>
     </RelativeLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/titlelBarRl"
+        android:layout_above="@id/bottomBarRl"
+        android:background="#EBEBEB">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:orientation="vertical" >
 
-</LinearLayout>
+            <!-- 个人信息 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp" >
+
+                <ImageView
+                    android:src="@drawable/u1740"
+                    android:id="@+id/headImgPersonal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp" >
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/nameTv"
+                    android:text="黄可"
+                    android:textColor="#666666"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/headImgPersonal"
+                    android:layout_alignTop="@id/headImgPersonal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp" />
+
+                <TextView
+                    android:id="@+id/addressTv"
+                    android:text="湖南省长沙市长沙县泉塘街道"
+                    android:textColor="#666666"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/nameTv"
+                    android:layout_toRightOf="@id/headImgPersonal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp" />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc"/>
+
+            <!-- 所属机构 -->
+            <RelativeLayout
+                android:id="@+id/lawFirmRl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/lawFirmIm"
+                    android:src="@drawable/u1842"
+                    style="@style/image1"/>
+                <TextView
+                    android:text="所属机构"
+                    android:layout_toRightOf="@id/lawFirmIm"
+                    style="@style/text1"/>
+                <TextView
+                    android:id="@+id/lawFirmTv"
+                    android:text="明诚明律师事务所"
+                    style="@style/text1"
+                    android:textSize="14sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc"/>
+
+            <!-- 我的排行 -->
+            <RelativeLayout
+                android:id="@+id/rankListRl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/rankListIm"
+                    android:src="@drawable/u1853"
+                    style="@style/image1"/>
+                <TextView
+                    android:text="我的排行"
+                    android:layout_toRightOf="@id/rankListIm"
+                    style="@style/text1"/>
+                <ImageView
+                    android:src="@drawable/u609"
+                    style="@style/nextIm"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc"/>
+
+            <!-- 我的考核 -->
+            <RelativeLayout
+                android:id="@+id/assessRl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/assessIm"
+                    android:src="@drawable/u1853"
+                    style="@style/image1"/>
+                <TextView
+                    android:text="我的考核"
+                    android:layout_toRightOf="@id/assessIm"
+                    style="@style/text1"/>
+                <ImageView
+                    android:src="@drawable/u609"
+                    style="@style/nextIm"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc"/>
+
+            <!-- 我的合同 -->
+            <RelativeLayout
+                android:id="@+id/contractRl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/contractIm"
+                    android:src="@drawable/u1833"
+                    style="@style/image1"/>
+                <TextView
+                    android:text="我的合同"
+                    android:layout_toRightOf="@id/contractIm"
+                    style="@style/text1"/>
+                <ImageView
+                    android:src="@drawable/u609"
+                    style="@style/nextIm"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc"/>
+
+            <!-- 修改密码 -->
+            <RelativeLayout
+                android:id="@+id/changePwRl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/changePwIm"
+                    android:src="@drawable/u1815"
+                    style="@style/image1"/>
+                <TextView
+                    android:text="修改密码"
+                    android:layout_toRightOf="@id/changePwIm"
+                    style="@style/text1"/>
+                <ImageView
+                    android:src="@drawable/u609"
+                    style="@style/nextIm"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x2"
+                android:background="#ccc"/>
+
+            <!-- 版本更新 -->
+            <RelativeLayout
+                android:id="@+id/versionRl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/versionIm"
+                    android:src="@drawable/u1824"
+                    style="@style/image1"/>
+                <TextView
+                    android:text="版本更新"
+                    android:layout_toRightOf="@id/versionIm"
+                    style="@style/text1"/>
+                <TextView
+                    android:id="@+id/versionTv"
+                    android:text="当前为最新版本"
+                    style="@style/text1"
+                    android:textSize="14sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="#EBEBEB"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc" />
+
+            <RelativeLayout
+                android:id="@+id/unloginRl"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#fff">
+                <TextView
+                    android:text="退出登录"
+                    style="@style/title1"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

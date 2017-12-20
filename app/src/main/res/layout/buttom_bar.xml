@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/y160"
-    android:layout_alignParentBottom="true"
+    android:layout_height="60dp"
     android:background="#000">
     <RelativeLayout
         android:id="@+id/buttomRl1"
@@ -13,10 +12,7 @@
         <ImageView
             android:id="@+id/buttomIm1"
             android:src="@drawable/u2335"
-            android:layout_width="@dimen/x80"
-            android:layout_height="@dimen/y80"
-            android:layout_marginTop="@dimen/y20"
-            android:layout_centerHorizontal="true"/>
+            style="@style/icon_buttom"/>
         <TextView
             android:text="待办事项"
             android:layout_below="@id/buttomIm1"
@@ -32,10 +28,7 @@
         <ImageView
             android:id="@+id/buttomIm2"
             android:src="@drawable/u2345"
-            android:layout_width="@dimen/x80"
-            android:layout_height="@dimen/y80"
-            android:layout_marginTop="@dimen/y20"
-            android:layout_centerHorizontal="true"/>
+            style="@style/icon_buttom"/>
         <TextView
             android:text="工作安排"
             android:layout_below="@id/buttomIm2"
@@ -50,10 +43,7 @@
         <ImageView
             android:id="@+id/buttomIm3"
             android:src="@drawable/u2348"
-            android:layout_width="@dimen/x80"
-            android:layout_height="@dimen/y80"
-            android:layout_marginTop="@dimen/y20"
-            android:layout_centerHorizontal="true"/>
+            style="@style/icon_buttom"/>
         <TextView
             android:text="业务办理"
             android:layout_below="@id/buttomIm3"
@@ -68,10 +58,7 @@
         <ImageView
             android:id="@+id/buttomIm4"
             android:src="@drawable/u1740"
-            android:layout_width="@dimen/x80"
-            android:layout_height="@dimen/y80"
-            android:layout_marginTop="@dimen/y20"
-            android:layout_centerHorizontal="true"/>
+            style="@style/icon_buttom"/>
         <TextView
             android:text="个人中心"
             android:layout_below="@id/buttomIm4"

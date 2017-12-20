@@ -19,6 +19,17 @@
         <item name="android:layout_centerInParent">true</item>
     </style>
 
+    <!-- 标题栏中央字体主题 18白色居中 -->
+    <style name="text_titleBarCenter">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
     <!-- 左侧栏字体主题 16浅色居左x20 -->
     <style name="text1">
         <item name="android:textSize">16sp</item>
@@ -36,20 +47,29 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:layout_marginTop">@dimen/y10</item>
+        <item name="android:layout_marginTop">2dp</item>
     </style>
 
+    <!-- 底部栏icon主题 12白色距上y10 -->
+    <style name="icon_buttom">
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
+
+    <!-- 左侧栏icon  -->
     <style name="image1">
-        <item name="android:layout_width">@dimen/x60</item>
-        <item name="android:layout_height">@dimen/y60</item>
+        <item name="android:layout_width">30dp</item>
+        <item name="android:layout_height">30dp</item>
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_marginLeft">@dimen/x40</item>
     </style>
-
-    <style name="backIm">
-        <item name="android:layout_width">@dimen/x60</item>
-        <item name="android:layout_height">@dimen/y60</item>
+    <!-- 右侧栏next_icon  -->
+    <style name="nextIm">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_marginRight">@dimen/x40</item>
