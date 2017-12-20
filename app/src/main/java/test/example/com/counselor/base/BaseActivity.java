@@ -46,7 +46,7 @@ public abstract class BaseActivity extends Activity {
     /*
         handler消息传递
      */
-    protected void setHandler() {
+    protected void setIconText() {
 
     }
 

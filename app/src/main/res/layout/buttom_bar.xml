@@ -14,6 +14,7 @@
             android:src="@drawable/u2335"
             style="@style/icon_buttom"/>
         <TextView
+            android:id="@+id/buttomTv1"
             android:text="待办事项"
             android:layout_below="@id/buttomIm1"
             style="@style/text_buttom" />
@@ -30,6 +31,7 @@
             android:src="@drawable/u2345"
             style="@style/icon_buttom"/>
         <TextView
+            android:id="@+id/buttomTv2"
             android:text="工作安排"
             android:layout_below="@id/buttomIm2"
             style="@style/text_buttom" />
@@ -45,6 +47,7 @@
             android:src="@drawable/u2348"
             style="@style/icon_buttom"/>
         <TextView
+            android:id="@+id/buttomTv3"
             android:text="业务办理"
             android:layout_below="@id/buttomIm3"
             style="@style/text_buttom" />
@@ -60,6 +63,7 @@
             android:src="@drawable/u1740"
             style="@style/icon_buttom"/>
         <TextView
+            android:id="@+id/buttomTv4"
             android:text="个人中心"
             android:layout_below="@id/buttomIm4"
             style="@style/text_buttom" />
