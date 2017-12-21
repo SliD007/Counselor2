@@ -16,7 +16,7 @@
             android:layout_height="0dp"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/addAdviceTitleTv"
+                android:id="@+id/addCommonTitleTv"
                 android:text="标题:"
                 android:textSize="18sp"
                 android:textColor="#000"
@@ -25,11 +25,11 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"/>
             <EditText
-                android:id="@+id/addAdviceTitleEt"
+                android:id="@+id/addCommonTitleEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/addAdviceTitleTv"
+                android:layout_toRightOf="@id/addCommonTitleTv"
                 android:layout_marginLeft="10dp"
                 android:background="@null"
                 android:ems="19"
@@ -40,9 +40,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="8">
+            android:layout_weight="9">
             <TextView
-                android:id="@+id/addAdviceContextTv"
+                android:id="@+id/addCommonContextTv"
                 android:text="内容:"
                 android:textSize="18sp"
                 android:textColor="#000"
@@ -50,55 +50,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"/>
             <EditText
-                android:id="@+id/addAdviceContextEt"
+                android:id="@+id/addCommonContextEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/addAdviceContextTv"
+                android:layout_toRightOf="@id/addCommonContextTv"
                 android:layout_marginLeft="10dp"
                 android:background="@null"
                 android:ems="19"
                 android:hint="请输入内容"
                 android:textColorHint="#666"
                 android:textSize="16sp" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_gravity="bottom"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <TextView
-                android:id="@+id/addAdvicesentToTv"
-                android:text="报送至："
-                android:textSize="18sp"
-                android:textColor="#000"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"/>
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_toRightOf="@id/addAdvicesentToTv"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp">
-                <RadioButton
-                    android:id="@+id/radioButton1"
-                    android:text="县司法局"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:text="镇街司法所"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <RadioButton
-                    android:id="@+id/radioButton3"
-                    android:text="村社"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </RadioGroup>
         </RelativeLayout>
     </LinearLayout>
 
