@@ -1,5 +1,6 @@
 package test.example.com.counselor.view.service;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import test.example.com.counselor.adapter.ListAdapter;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.entity.ListEntity;
 import test.example.com.counselor.listener.MyLvClickListener;
+import test.example.com.counselor.view.service.addadvice.AddAdviceActivity;
 
 /**
  * Created by Sli.D on 2017/12/20.
@@ -50,7 +52,7 @@ public class ServiceFragment extends BaseFragment {
     @BindView(R.id.serviceVw4)
     View serviceVw4;
 
-
+    private int fragmentType;
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_service;
@@ -61,7 +63,7 @@ public class ServiceFragment extends BaseFragment {
         setTabSelection(0);//初始化显示wq未读List
     }
 
-    @OnClick({R.id.serviceRl1, R.id.serviceRl2, R.id.serviceRl3, R.id.serviceRl4, R.id.serviceRl5})
+    @OnClick({R.id.serviceRl1, R.id.serviceRl2, R.id.serviceRl3, R.id.serviceRl4})
     public void onClick(View view) {
         clearStatus();
         switch (view.getId()) {
@@ -77,12 +79,18 @@ public class ServiceFragment extends BaseFragment {
             case R.id.serviceRl4:
                 setTabSelection(3);
                 break;
-            case R.id.serviceRl5:
-                setTabSelection(3);
+        }
+    }
+    @OnClick({ R.id.serviceRl5})
+    public void onAddClick(View view) {
+        Intent i;
+        switch (fragmentType) {
+            case 1:
+                i = new Intent(getActivity(), AddAdviceActivity.class);
+                startActivity(i);
                 break;
         }
     }
-
     private void clearStatus() {
         serviceTv1.setTextColor(Color.rgb(102, 102, 102));
         serviceTv2.setTextColor(Color.rgb(102, 102, 102));
@@ -98,6 +106,7 @@ public class ServiceFragment extends BaseFragment {
     根据传入值设置不同listview
      */
     private void setTabSelection(int index) {
+        fragmentType = index;
         switch (index) {
             case 0:
                 serviceTv1.setTextColor(Color.rgb(255, 255, 255));

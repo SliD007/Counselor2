@@ -81,10 +81,22 @@
         <RelativeLayout
             android:id="@+id/serviceRl5"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingBottom="5dp">
-
+            <TextView
+                android:id="@+id/addTv"
+                android:text="新增"
+                style="@style/serviceTitleTv"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+            <ImageView
+                android:id="@+id/addIm"
+                android:src="@drawable/u74"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@id/addTv"/>
         </RelativeLayout>
     </LinearLayout>
 
