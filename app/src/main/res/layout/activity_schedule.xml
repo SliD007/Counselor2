@@ -38,6 +38,13 @@
         android:layout_below="@id/titlelBarRl"
         android:layout_above="@id/bottomBarRl"
         android:background="#EBEBEB">
+        <ListView
+            android:id="@+id/scheduleLv"
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
     </ScrollView>
 
 </RelativeLayout>

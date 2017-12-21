@@ -29,6 +29,7 @@ public class MyApplication extends Application {
     // 添加Activity到容器中
     public void addActivity(Activity activity) {
         activityList.add(activity);
+        Log.e("activityList",activityList.toString());
     }
 
     // 遍历所有Activity并finish

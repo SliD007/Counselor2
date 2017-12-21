@@ -46,13 +46,6 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     /*
-        handler消息传递
-     */
-    protected void setIconText() {
-
-    }
-
-    /*
     toast封装
      */
     protected void toast(String str, boolean is_long){

@@ -91,7 +91,15 @@
         <FrameLayout
             android:id="@+id/backlogFL"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+            <ListView
+                android:id="@+id/backlogLv"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+        </FrameLayout>
     </ScrollView>
 
 </RelativeLayout>
