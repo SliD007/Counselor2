@@ -68,10 +68,11 @@ public class MainActivity extends BaseActivity {
 
     @OnClick({R.id.buttomRl1, R.id.buttomRl2, R.id.buttomRl3, R.id.buttomRl4})
     public void onButtomBarClick(View view) {
-        fragmentManager = getSupportFragmentManager();
+        clearStatus();
         fragmentTransaction = fragmentManager.beginTransaction();
         switch (view.getId()) {
             case R.id.buttomRl1:
+                buttomTv1.setTextColor(Color.rgb(1, 160, 243));
                 fragmentTransaction.replace(R.id.mainFL,mBacklogFragment);
                 break;
             case R.id.buttomRl2:
@@ -101,4 +102,10 @@ public class MainActivity extends BaseActivity {
         fragmentTransaction.commit();
     }
 
+    private void clearStatus(){
+        buttomTv1.setTextColor(Color.rgb(255, 255, 255));
+        buttomTv2.setTextColor(Color.rgb(255, 255, 255));
+        buttomTv3.setTextColor(Color.rgb(255, 255, 255));
+        buttomTv4.setTextColor(Color.rgb(255, 255, 255));
+    }
 }
