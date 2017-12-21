@@ -69,9 +69,9 @@ public class ServiceFragment extends BaseFragment {
             case 0:
                 //构造数据
                 entityList = new ArrayList<ListEntity>();//空指针高发处
-                for (int i = 0; i < 50; i++) {
+                for (int i = 0; i < 30; i++) {
                     mEntity = new ListEntity(R.layout.item_commonlist,
-                            "工作日志", "来源：星沙街道司法所", "13:" + (10 + i));
+                            "服务对象：李本忠", "未完结", "2017/11/" + (1+i));
                     entityList.add(mEntity);
                 }
                 //创建adapter
@@ -83,9 +83,9 @@ public class ServiceFragment extends BaseFragment {
             case 1:
                 //构造数据
                 entityList = new ArrayList<ListEntity>();//空指针高发处
-                for (int i = 0; i < 50; i++) {
+                for (int i = 0; i < 30; i++) {
                     mEntity = new ListEntity(R.layout.item_commonlist,
-                            "建议上报", "来源：星沙街道司法所", "12:" + (10 + i));
+                            "关于预防老年人被金融诈骗的建议", "报送值：长沙县司法局", "2017/10/" + (1+i));
                     entityList.add(mEntity);
                 }
                 //创建adapter
@@ -97,9 +97,9 @@ public class ServiceFragment extends BaseFragment {
             case 2:
                 //构造数据
                 entityList = new ArrayList<ListEntity>();//空指针高发处
-                for (int i = 0; i < 50; i++) {
+                for (int i = 0; i < 30; i++) {
                     mEntity = new ListEntity(R.layout.item_commonlist,
-                            "典型案件", "来源：星沙街道司法所", "13:" + (10 + i));
+                            "预防老年人被金融诈骗的典型案例", "报送值：长沙县司法局", "2017/9/" + (1+i));
                     entityList.add(mEntity);
                 }
                 //创建adapter
@@ -111,9 +111,9 @@ public class ServiceFragment extends BaseFragment {
             case 3:
                 //构造数据
                 entityList = new ArrayList<ListEntity>();//空指针高发处
-                for (int i = 0; i < 50; i++) {
+                for (int i = 0; i < 12; i++) {
                     mEntity = new ListEntity(R.layout.item_commonlist,
-                            "月度总结", "来源：星沙街道司法所", "12:" + (10 + i));
+                            "2017年新塘村"+(12-i)+"月度总结", "报送值：星沙街道司法所", "2017/"+(12-i)+"/30");
                     entityList.add(mEntity);
                 }
                 //创建adapter
@@ -153,14 +153,13 @@ public class ServiceFragment extends BaseFragment {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            toast("时间：" + "12:" + (10 + position), true);
+            toast("" + (position), true);
         }
     };
     //控件响应回调
     MyLvClickListener mClickListener = new MyLvClickListener() {
         @Override
         public void myOnClick(int position, View view) {
-            toast("这是第" + (position + 1) + "条", true);
         }
 
         public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去

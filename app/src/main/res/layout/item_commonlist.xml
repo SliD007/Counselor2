@@ -9,12 +9,11 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:padding="1dp"
-        android:layout_height="match_parent"
-        android:src="@drawable/u2335"/>
+        android:layout_height="match_parent"/>
 
     <RelativeLayout
         android:layout_width="0dp"
-        android:layout_weight="4"
+        android:layout_weight="19"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/itemTv1"

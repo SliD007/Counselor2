@@ -43,7 +43,7 @@ public class ListAdapter extends CommonAdapter {
         tv1.setText(mEntity.getName());
         tv2.setText(mEntity.getFrom());
         tv3.setText(mEntity.getTime());
-        leftImg.setTag(position);
-        leftImg.setOnClickListener(mClickListener);
+        tv3.setTag(position);
+        tv3.setOnClickListener(mClickListener);
     }
 }

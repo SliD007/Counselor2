@@ -137,14 +137,13 @@ public class BacklogFragment extends BaseFragment {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            toast("时间：" + "12:"+(10+position), true);
+            toast(""+(position), true);
         }
     };
     //控件响应回调
     MyLvClickListener mClickListener = new MyLvClickListener() {
         @Override
         public void myOnClick(int position, View view) {
-            toast("这是第" + (position + 1) + "条", true);
         }
         public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去
             myOnClick((Integer) v.getTag(), v);
