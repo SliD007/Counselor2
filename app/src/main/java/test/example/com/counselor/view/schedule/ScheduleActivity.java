@@ -23,7 +23,7 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.entity.ListEntity;
-import test.example.com.counselor.listener.MyClickListener;
+import test.example.com.counselor.listener.MyLvClickListener;
 import test.example.com.counselor.view.backlog.BacklogActivity;
 import test.example.com.counselor.view.personal.PersonalActivity;
 import test.example.com.counselor.view.service.ServiceActivity;
@@ -59,7 +59,7 @@ public class ScheduleActivity extends BaseActivity {
     private void setItem() {
         //构造数据
         entityList = new ArrayList<ListEntity>();//空指针高发处
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 50; i++) {
             mEntity = new ListEntity(R.layout.item_commonlist,
                     "开展深入学校贯彻十九大精神报告会", "来源：星沙街道司法所", "11:" + (10 + i));
             entityList.add(mEntity);
@@ -99,16 +99,15 @@ public class ScheduleActivity extends BaseActivity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            toast("时间：" + 10 + position, true);
+            toast("时间：" + "11:"+(10+position), true);
         }
     };
     //控件响应回调
-    MyClickListener mClickListener = new MyClickListener() {
+    MyLvClickListener mClickListener = new MyLvClickListener() {
         @Override
         public void myOnClick(int position, View view) {
             toast("这是第" + (position + 1) + "条", true);
         }
-
         public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去
             myOnClick((Integer) v.getTag(), v);
         }

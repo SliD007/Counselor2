@@ -11,7 +11,7 @@ import test.example.com.counselor.R;
 import test.example.com.counselor.adapter.CommonAdapter;
 import test.example.com.counselor.adapter.ViewHolder;
 import test.example.com.counselor.entity.ListEntity;
-import test.example.com.counselor.listener.MyClickListener;
+import test.example.com.counselor.listener.MyLvClickListener;
 
 /**
  * Created by Sli.D on 2017/12/21.
@@ -23,13 +23,13 @@ public class ScheduleAdapter extends CommonAdapter {
     //OnItemClickListenerListView自带属性
     AdapterView.OnItemClickListener onItemClickListener;
     //MyClickListener自定义响应接口（也可使用抽象类回调）
-    MyClickListener mClickListener; //暂时用不到
+    MyLvClickListener mClickListener; //暂时用不到
 
     public ScheduleAdapter(Context context, List<ListEntity> list) {
         super(context, list);
     }
 
-    public ScheduleAdapter(Context context, List<ListEntity> list, MyClickListener myClickListener,
+    public ScheduleAdapter(Context context, List<ListEntity> list, MyLvClickListener myClickListener,
                         AdapterView.OnItemClickListener onItemClickListener) {
         //回调父类构造方法
         super(context, list);
@@ -45,6 +45,7 @@ public class ScheduleAdapter extends CommonAdapter {
         tv1.setText(mEntity.getName());
         tv2.setText(mEntity.getFrom());
         tv3.setText(mEntity.getTime());
+        leftImg.setTag(position);
         leftImg.setOnClickListener(mClickListener);
     }
 }
