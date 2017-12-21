@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.schedule;
+package test.example.com.counselor.adapter;
 
 import android.content.Context;
 import android.widget.AdapterView;
@@ -8,8 +8,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import test.example.com.counselor.R;
-import test.example.com.counselor.adapter.CommonAdapter;
-import test.example.com.counselor.adapter.ViewHolder;
 import test.example.com.counselor.entity.ListEntity;
 import test.example.com.counselor.listener.MyLvClickListener;
 
@@ -17,7 +15,7 @@ import test.example.com.counselor.listener.MyLvClickListener;
  * Created by Sli.D on 2017/12/21.
  */
 
-public class ScheduleAdapter extends CommonAdapter {
+public class ListAdapter extends CommonAdapter {
 
     //这里声明了两种回调响应
     //OnItemClickListenerListView自带属性
@@ -25,12 +23,12 @@ public class ScheduleAdapter extends CommonAdapter {
     //MyClickListener自定义响应接口（也可使用抽象类回调）
     MyLvClickListener mClickListener; //暂时用不到
 
-    public ScheduleAdapter(Context context, List<ListEntity> list) {
+    public ListAdapter(Context context, List<ListEntity> list) {
         super(context, list);
     }
 
-    public ScheduleAdapter(Context context, List<ListEntity> list, MyLvClickListener myClickListener,
-                        AdapterView.OnItemClickListener onItemClickListener) {
+    public ListAdapter(Context context, List<ListEntity> list, MyLvClickListener myClickListener,
+                       AdapterView.OnItemClickListener onItemClickListener) {
         //回调父类构造方法
         super(context, list);
         this.onItemClickListener = onItemClickListener;

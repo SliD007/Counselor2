@@ -82,24 +82,19 @@
         </include>
     </RelativeLayout>
 
-    <ScrollView
+    <FrameLayout
+        android:id="@+id/backlogFL"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/titlelBarRl"
         android:layout_above="@id/bottomBarRl"
         android:background="#EBEBEB">
-        <FrameLayout
-            android:id="@+id/backlogFL"
+        <ListView
+            android:id="@+id/backlogLv"
+            android:layout_marginTop="2dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ListView
-                android:id="@+id/backlogLv"
-                android:layout_marginTop="2dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
-            </ListView>
-        </FrameLayout>
-    </ScrollView>
-
+        </ListView>
+    </FrameLayout>
 </RelativeLayout>

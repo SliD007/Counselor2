@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
+import test.example.com.counselor.adapter.ListAdapter;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.entity.ListEntity;
 import test.example.com.counselor.listener.MyLvClickListener;
@@ -39,7 +40,7 @@ public class ScheduleActivity extends BaseActivity {
 
     ListEntity mEntity;
     List<ListEntity> entityList;
-    ScheduleAdapter mScheduleAdapter;
+    ListAdapter mListAdapter;
     @BindView(R.id.scheduleLv)
     ListView scheduleLv;
 
@@ -65,8 +66,8 @@ public class ScheduleActivity extends BaseActivity {
             entityList.add(mEntity);
         }
         //创建adapter
-        mScheduleAdapter = new ScheduleAdapter(this, entityList, mClickListener, onItemClickListener);
-        scheduleLv.setAdapter(mScheduleAdapter);
+        mListAdapter = new ListAdapter(this, entityList, mClickListener, onItemClickListener);
+        scheduleLv.setAdapter(mListAdapter);
         //设置回调
         scheduleLv.setOnItemClickListener(onItemClickListener);
     }
