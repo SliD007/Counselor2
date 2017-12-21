@@ -1,42 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/x1"
-    android:paddingLeft="@dimen/x1"
-    android:paddingRight="@dimen/x1"
-    android:paddingTop="@dimen/x1"
-    tools:context=".view.login.MainActivity">
-    <RelativeLayout
-        android:id="@+id/loginBtnRL"
-        android:background="#fff"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/loginBtn">
-        <ImageView
-            android:id="@+id/logoImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/x200"
-            android:src="@drawable/logo"
-            />
-        <TextView
-            android:text="法律顾问"
-            android:textColor="#000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/logoImg"/>
+    android:background="#303135">
 
-    </RelativeLayout>
-    <Button
-        android:id="@+id/loginBtn"
-        android:text="登录"
-        android:background="#01a0f3"
+    <!-- 尾 -->
+    <RelativeLayout
+        android:id="@+id/bottomBarRl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <include
+            android:id="@+id/bottomBar"
+            layout="@layout/buttom_bar">
+
+        </include>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/mainFL"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomBarRl"
+        android:background="#EBEBEB">
+        <ListView
+            android:id="@+id/backlogLv"
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </FrameLayout>
 </RelativeLayout>

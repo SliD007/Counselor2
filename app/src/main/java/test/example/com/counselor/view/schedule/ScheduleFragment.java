@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.backlog;
+package test.example.com.counselor.view.schedule;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,18 +22,18 @@ import test.example.com.counselor.listener.MyLvClickListener;
  * Created by Sli.D on 2017/12/20.
  */
 
-public class ReadedBacklogFragment extends BaseFragment {
+public class ScheduleFragment extends BaseFragment {
 
 
     ListEntity mEntity;
     List<ListEntity> entityList;
     ListAdapter mListAdapter;
-    @BindView(R.id.commonLv)
-    ListView commonLv;
+    @BindView(R.id.scheduleLv)
+    ListView scheduleLv;
 
     @Override
     protected int getFragmentLayoutId() {
-        return R.layout.fragment_commonlist;
+        return R.layout.fragment_schedule;
     }
 
     @Override
@@ -42,14 +42,14 @@ public class ReadedBacklogFragment extends BaseFragment {
         entityList = new ArrayList<ListEntity>();//空指针高发处
         for (int i = 0; i < 50; i++) {
             mEntity = new ListEntity(R.layout.item_commonlist,
-                    "开展深入学校贯彻十九大精神报告会", "来源：星沙街道司法所", "11:" + (10 + i));
+                    "排版", "来源：星沙街道司法所", "11:" + (10 + i));
             entityList.add(mEntity);
         }
         //创建adapter
         mListAdapter = new ListAdapter(super.mContext, entityList, mClickListener, onItemClickListener);
-        commonLv.setAdapter(mListAdapter);
+        scheduleLv.setAdapter(mListAdapter);
         //设置回调
-        commonLv.setOnItemClickListener(onItemClickListener);
+        scheduleLv.setOnItemClickListener(onItemClickListener);
     }
 
     @Override

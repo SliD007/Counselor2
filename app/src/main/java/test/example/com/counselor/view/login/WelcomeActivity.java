@@ -12,7 +12,7 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 
-public class MainActivity extends BaseActivity {
+public class WelcomeActivity extends BaseActivity {
 
     @BindView(R.id.loginBtn)
     Button loginBtn;
@@ -26,7 +26,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_welcome);
     }
 
     private void hideStatus() {
@@ -37,7 +37,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.loginBtn)
     public void onClick() {
-        Intent i = new Intent(MainActivity.this,LoginActivity.class);
+        Intent i = new Intent(WelcomeActivity.this,LoginActivity.class);
         startActivity(i);
     }
 
