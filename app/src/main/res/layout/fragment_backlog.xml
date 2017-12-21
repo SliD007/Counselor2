@@ -76,7 +76,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/titlelBarRl"
-        android:layout_above="@id/bottomBarRl"
         android:dividerHeight="1dp"/>
 
 </LinearLayout>

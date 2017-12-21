@@ -15,6 +15,7 @@ import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.view.backlog.BacklogFragment;
 import test.example.com.counselor.view.schedule.ScheduleFragment;
+import test.example.com.counselor.view.service.ServiceFragment;
 
 /**
  * Created by Sli.D on 2017/12/19.
@@ -41,6 +42,7 @@ public class MainActivity extends BaseActivity {
 
     BacklogFragment mBacklogFragment;
     ScheduleFragment mScheduleFragment;
+    ServiceFragment mServiceFragment;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     @Override
@@ -75,9 +77,13 @@ public class MainActivity extends BaseActivity {
                     mScheduleFragment = new ScheduleFragment();
                 }
                 fragmentTransaction.replace(R.id.mainFL,mScheduleFragment);
-
                 break;
             case R.id.buttomRl3:
+                buttomTv3.setTextColor(Color.rgb(1, 160, 243));
+                if(mServiceFragment==null){
+                    mServiceFragment = new ServiceFragment();
+                }
+                fragmentTransaction.replace(R.id.mainFL,mServiceFragment);
                 break;
             case R.id.buttomRl4:
                 break;
