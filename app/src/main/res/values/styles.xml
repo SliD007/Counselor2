@@ -74,4 +74,29 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_marginRight">20dp</item>
     </style>
+
+    <!-- 业务管理title下划线  -->
+    <style name="serviceTitleVw">
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">#303135</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+    <!-- 业务管理titleTv  -->
+    <style name="serviceTitleTv">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#666</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginBottom">2dp</item>
+    </style>
+    <!-- 业务管理titleBarRl  -->
+    <style name="TitleBar">
+        <item name="android:background">#393a3f</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_marginTop">25dp</item>
+    </style>
 </resources>

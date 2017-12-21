@@ -1,11 +1,13 @@
 package test.example.com.counselor.view.service;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,22 @@ public class ServiceFragment extends BaseFragment {
     ListAdapter mListAdapter;
     @BindView(R.id.serviceLv)
     ListView serviceLv;
+    @BindView(R.id.serviceTv1)
+    TextView serviceTv1;
+    @BindView(R.id.serviceTv2)
+    TextView serviceTv2;
+    @BindView(R.id.serviceTv3)
+    TextView serviceTv3;
+    @BindView(R.id.serviceTv4)
+    TextView serviceTv4;
+    @BindView(R.id.serviceVw1)
+    View serviceVw1;
+    @BindView(R.id.serviceVw2)
+    View serviceVw2;
+    @BindView(R.id.serviceVw3)
+    View serviceVw3;
+    @BindView(R.id.serviceVw4)
+    View serviceVw4;
 
 
     @Override
@@ -43,8 +61,9 @@ public class ServiceFragment extends BaseFragment {
         setTabSelection(0);//初始化显示wq未读List
     }
 
-    @OnClick({R.id.serviceRl1, R.id.serviceRl2, R.id.serviceRl3, R.id.serviceRl4})
+    @OnClick({R.id.serviceRl1, R.id.serviceRl2, R.id.serviceRl3, R.id.serviceRl4, R.id.serviceRl5})
     public void onClick(View view) {
+        clearStatus();
         switch (view.getId()) {
             case R.id.serviceRl1:
                 setTabSelection(0);
@@ -58,7 +77,21 @@ public class ServiceFragment extends BaseFragment {
             case R.id.serviceRl4:
                 setTabSelection(3);
                 break;
+            case R.id.serviceRl5:
+                setTabSelection(3);
+                break;
         }
+    }
+
+    private void clearStatus() {
+        serviceTv1.setTextColor(Color.rgb(102, 102, 102));
+        serviceTv2.setTextColor(Color.rgb(102, 102, 102));
+        serviceTv3.setTextColor(Color.rgb(102, 102, 102));
+        serviceTv4.setTextColor(Color.rgb(102, 102, 102));
+        serviceVw1.setBackgroundColor(Color.rgb(48,49,53));
+        serviceVw2.setBackgroundColor(Color.rgb(48,49,53));
+        serviceVw3.setBackgroundColor(Color.rgb(48,49,53));
+        serviceVw4.setBackgroundColor(Color.rgb(48,49,53));
     }
 
     /*
@@ -67,11 +100,13 @@ public class ServiceFragment extends BaseFragment {
     private void setTabSelection(int index) {
         switch (index) {
             case 0:
+                serviceTv1.setTextColor(Color.rgb(255, 255, 255));
+                serviceVw1.setBackgroundColor(Color.rgb(1,160,243));
                 //构造数据
                 entityList = new ArrayList<ListEntity>();//空指针高发处
                 for (int i = 0; i < 30; i++) {
                     mEntity = new ListEntity(R.layout.item_commonlist,
-                            "服务对象：李本忠", "未完结", "2017/11/" + (1+i));
+                            "服务对象：李本忠", "未完结", "2017/11/" + (1 + i));
                     entityList.add(mEntity);
                 }
                 //创建adapter
@@ -81,11 +116,13 @@ public class ServiceFragment extends BaseFragment {
                 serviceLv.setOnItemClickListener(onItemClickListener);
                 break;
             case 1:
+                serviceTv2.setTextColor(Color.rgb(255, 255, 255));
+                serviceVw2.setBackgroundColor(Color.rgb(1,160,243));
                 //构造数据
                 entityList = new ArrayList<ListEntity>();//空指针高发处
                 for (int i = 0; i < 30; i++) {
                     mEntity = new ListEntity(R.layout.item_commonlist,
-                            "关于预防老年人被金融诈骗的建议", "报送值：长沙县司法局", "2017/10/" + (1+i));
+                            "关于预防老年人被金融诈骗的建议", "报送值：长沙县司法局", "2017/10/" + (1 + i));
                     entityList.add(mEntity);
                 }
                 //创建adapter
@@ -95,11 +132,13 @@ public class ServiceFragment extends BaseFragment {
                 serviceLv.setOnItemClickListener(onItemClickListener);
                 break;
             case 2:
+                serviceTv3.setTextColor(Color.rgb(255, 255, 255));
+                serviceVw3.setBackgroundColor(Color.rgb(1,160,243));
                 //构造数据
                 entityList = new ArrayList<ListEntity>();//空指针高发处
                 for (int i = 0; i < 30; i++) {
                     mEntity = new ListEntity(R.layout.item_commonlist,
-                            "预防老年人被金融诈骗的典型案例", "报送值：长沙县司法局", "2017/9/" + (1+i));
+                            "预防老年人被金融诈骗的典型案例", "报送值：长沙县司法局", "2017/9/" + (1 + i));
                     entityList.add(mEntity);
                 }
                 //创建adapter
@@ -109,11 +148,13 @@ public class ServiceFragment extends BaseFragment {
                 serviceLv.setOnItemClickListener(onItemClickListener);
                 break;
             case 3:
+                serviceTv4.setTextColor(Color.rgb(255, 255, 255));
+                serviceVw4.setBackgroundColor(Color.rgb(1,160,243));
                 //构造数据
                 entityList = new ArrayList<ListEntity>();//空指针高发处
                 for (int i = 0; i < 12; i++) {
                     mEntity = new ListEntity(R.layout.item_commonlist,
-                            "2017年新塘村"+(12-i)+"月度总结", "报送值：星沙街道司法所", "2017/"+(12-i)+"/30");
+                            "2017年新塘村" + (12 - i) + "月度总结", "报送值：星沙街道司法所", "2017/" + (12 - i) + "/30");
                     entityList.add(mEntity);
                 }
                 //创建adapter
