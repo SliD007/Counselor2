@@ -33,7 +33,7 @@ public class UnreadBacklogFragment extends BaseFragment {
 
     @Override
     protected int getFragmentLayoutId() {
-        return R.layout.fragment_unreadbacklog;
+        return R.layout.fragment_commonlist;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class UnreadBacklogFragment extends BaseFragment {
         entityList = new ArrayList<ListEntity>();//空指针高发处
         for (int i = 0; i < 50; i++) {
             mEntity = new ListEntity(R.layout.item_commonlist,
-                    "开展深入学校贯彻十九大精神报告会", "来源：星沙街道司法所", "11:" + (10 + i));
+                    "开展深入学校贯彻十九大精神报告会", "来源：星沙街道司法所", "12:" + (10 + i));
             entityList.add(mEntity);
         }
         //创建adapter
@@ -80,7 +80,7 @@ public class UnreadBacklogFragment extends BaseFragment {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            toast("时间：" + "11:"+(10+position), true);
+            toast("时间：" + "12:"+(10+position), true);
         }
     };
     //控件响应回调
