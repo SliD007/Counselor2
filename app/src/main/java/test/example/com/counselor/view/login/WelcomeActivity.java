@@ -1,5 +1,6 @@
 package test.example.com.counselor.view.login;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,7 +11,7 @@ import android.view.WindowManager;
 
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
-import test.example.com.counselor.view.MainActivity;
+import test.example.com.counselor.view.HomeActivity;
 
 public class WelcomeActivity extends BaseActivity {
 
@@ -24,7 +25,7 @@ public class WelcomeActivity extends BaseActivity {
                     startActivity(i);
                     break;
                 case 1:
-                    i = new Intent(WelcomeActivity.this,MainActivity.class);
+                    i = new Intent(WelcomeActivity.this,HomeActivity.class);
                     startActivity(i);
                     break;
             }
@@ -43,17 +44,15 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     private void init() {
-        SharedPreferences sf=getSharedPreferences("data", MODE_PRIVATE);//判断是否是第一次进入
-        boolean isFirstIn=sf.getBoolean("isFirstIn", true);
-        SharedPreferences.Editor editor=sf.edit();
-        if(isFirstIn) {     //若为true，则是第一次进入
-            editor.putBoolean("isFirstIn", false);
+
+        //初始化checkbox
+        SharedPreferences rememberPswSp = getSharedPreferences("rememberPswSp", Context.MODE_PRIVATE);
+        if (rememberPswSp.getInt("rememberPsw", 0) == 1) {
+            mhandler.sendEmptyMessageDelayed(1, 2000);//将欢迎页停留5秒，并且将message设置文跳转到MainActivity
+        } else {
             mhandler.sendEmptyMessageDelayed(0, 2000);//将欢迎页停留5秒，并且将message设置为跳转到登录
-        }else{
-                mhandler.sendEmptyMessageDelayed(1,2000);//将欢迎页停留5秒，并且将message设置文跳转到MainActivity
-            }
-            editor.commit();
         }
+    }
 
     private void hideStatus() {
         Window window = getWindow();

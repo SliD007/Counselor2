@@ -19,12 +19,11 @@
         </include>
     </RelativeLayout>
 
-    <FrameLayout
-        android:id="@+id/mainFL"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <!-- VIewPager 主要是加载内容的 -->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
         android:layout_above="@id/bottomBarRl"
-        android:background="#EBEBEB">
-
-    </FrameLayout>
+        android:layout_marginBottom="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </RelativeLayout>

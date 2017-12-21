@@ -1,13 +1,16 @@
 package test.example.com.counselor.view.personal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseFragment;
+import test.example.com.counselor.view.login.LoginActivity;
 
 /**
  * Created by Sli.D on 2017/12/20.
@@ -45,5 +48,11 @@ public class PersonalFragment extends BaseFragment {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    @OnClick(R.id.unloginRl)
+    public void onClick() {
+        Intent i = new Intent(getActivity(), LoginActivity.class);
+        startActivity(i);
     }
 }
