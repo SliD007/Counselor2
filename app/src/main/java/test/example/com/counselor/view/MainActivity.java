@@ -14,6 +14,7 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.view.backlog.BacklogFragment;
+import test.example.com.counselor.view.personal.PersonalFragment;
 import test.example.com.counselor.view.schedule.ScheduleFragment;
 import test.example.com.counselor.view.service.ServiceFragment;
 
@@ -43,6 +44,7 @@ public class MainActivity extends BaseActivity {
     BacklogFragment mBacklogFragment;
     ScheduleFragment mScheduleFragment;
     ServiceFragment mServiceFragment;
+    PersonalFragment mPersonalFragment;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     @Override
@@ -70,6 +72,7 @@ public class MainActivity extends BaseActivity {
         fragmentTransaction = fragmentManager.beginTransaction();
         switch (view.getId()) {
             case R.id.buttomRl1:
+                fragmentTransaction.replace(R.id.mainFL,mBacklogFragment);
                 break;
             case R.id.buttomRl2:
                 buttomTv2.setTextColor(Color.rgb(1, 160, 243));
@@ -86,6 +89,11 @@ public class MainActivity extends BaseActivity {
                 fragmentTransaction.replace(R.id.mainFL,mServiceFragment);
                 break;
             case R.id.buttomRl4:
+                buttomTv4.setTextColor(Color.rgb(1, 160, 243));
+                if(mPersonalFragment==null){
+                    mPersonalFragment = new PersonalFragment();
+                }
+                fragmentTransaction.replace(R.id.mainFL,mPersonalFragment);
                 break;
             default:
                 break;
