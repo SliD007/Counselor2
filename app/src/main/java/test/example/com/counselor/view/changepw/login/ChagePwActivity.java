@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
-import test.example.com.counselor.view.login.LoginEntity;
+import test.example.com.counselor.view.login.LoginActivity;
 
 public class ChagePwActivity extends BaseActivity implements IChangePwView {
 
@@ -27,10 +27,12 @@ public class ChagePwActivity extends BaseActivity implements IChangePwView {
     @BindView(R.id.new2PwEt)
     EditText new2PwEt;
 
+    ChangePwPresenter mChangePwPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        mChangePwPresenter = new ChangePwPresenter(this);
     }
 
     @Override
@@ -38,25 +40,6 @@ public class ChagePwActivity extends BaseActivity implements IChangePwView {
         setContentView(R.layout.activity_changepw);
     }
 
-    /*
-    登录之后两个回调
-     */
-    @Override
-    public void changePwSuccess() {
-        toast("修改成功！", true);
-        SharedPreferences passwordSp = getSharedPreferences("passwordSp",
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor1 = passwordSp.edit();
-        editor1.putString("password", null);
-        editor1.commit();
-        Intent intent = new Intent(ChagePwActivity.this, LoginEntity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public void changePwFailed() {
-        toast("修改失败！", true);
-    }
 
     @OnClick({R.id.backPersonalTv, R.id.changePwBt})
     public void onClick(View view) {
@@ -77,9 +60,27 @@ public class ChagePwActivity extends BaseActivity implements IChangePwView {
                 } else if(!newPw.equals(new2Pw)){
                     toast("两次输入密码不一致！",false);
                 }  else {
-
+                    mChangePwPresenter.changePw(this,oldPw,newPw);
                 }
                 break;
         }
     }
+
+    @Override
+    public void changePwSuccess() {
+        toast("修改成功！", true);
+        SharedPreferences passwordSp = getSharedPreferences("passwordSp",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor1 = passwordSp.edit();
+        editor1.putString("password", null);
+        editor1.commit();
+        Intent intent = new Intent(ChagePwActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void changePwFailed() {
+        toast("修改失败！", true);
+    }
+
 }
