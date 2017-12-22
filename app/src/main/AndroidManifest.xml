@@ -20,6 +20,7 @@
         <activity android:name=".view.HomeActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
         <activity android:name=".view.service.addadvice.AddAdviceActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
         <activity android:name=".view.service.addcommon.AddCommonActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
+        <activity android:name=".view.changepw.login.ChagePwActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
 
     </application>
 

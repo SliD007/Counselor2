@@ -1,6 +1,7 @@
 package test.example.com.counselor.view.login;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.util.Md5Util;
+import test.example.com.counselor.view.HomeActivity;
 
 public class LoginActivity extends BaseActivity implements ILoginView{
 
@@ -143,8 +145,8 @@ public class LoginActivity extends BaseActivity implements ILoginView{
     @Override
     public void loginSuccess() {
         toast("登录成功！",true);
-//        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+        startActivity(intent);
     }
     @Override
     public void loginFailed() {

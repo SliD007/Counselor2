@@ -10,6 +10,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseFragment;
+import test.example.com.counselor.view.changepw.login.ChagePwActivity;
 import test.example.com.counselor.view.login.LoginActivity;
 
 /**
@@ -50,9 +51,16 @@ public class PersonalFragment extends BaseFragment {
         return rootView;
     }
 
-    @OnClick(R.id.unloginRl)
-    public void onClick() {
-        Intent i = new Intent(getActivity(), LoginActivity.class);
-        startActivity(i);
+    @OnClick({R.id.unloginRl,R.id.changePwRl})
+    public void onClick(View view) {
+        Intent i;
+        switch (view.getId()){
+            case R.id.unloginRl:
+                i = new Intent(getActivity(), LoginActivity.class);
+                startActivity(i);
+            case R.id.changePwRl:
+                i = new Intent(getActivity(), ChagePwActivity.class);
+                startActivity(i);
+        }
     }
 }
