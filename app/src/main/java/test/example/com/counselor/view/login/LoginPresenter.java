@@ -33,6 +33,7 @@ public class LoginPresenter {
     }
 
     public void loadLogin(final Context mContext, final String account, final String password){
+        Log.e(account,password);
         HashMap<String,String> params = new HashMap<>();
         params.put("account",account);
         params.put("password",password);

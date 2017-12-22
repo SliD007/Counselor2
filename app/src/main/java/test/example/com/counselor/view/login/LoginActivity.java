@@ -38,49 +38,13 @@ public class LoginActivity extends BaseActivity implements ILoginView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        initView();
         mLoginPresenter = new LoginPresenter(this);
+        initView();
     }
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_login);
-    }
-
-    /*
-    在单击响应中完成两个实现
-     */
-    @OnClick({R.id.loginBtn, R.id.forgetPwTv})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.loginBtn:
-
-                account = userNameEt.getEditableText().toString();
-                password = passwordEt.getEditableText().toString();
-                saveUser(account,password);
-                password = Md5Util.md5(password);
-                Log.e("loginInfo", "account=" + account + ",password=" + password);
-                mLoginPresenter.loadLogin(LoginActivity.this,account,password);
-
-                break;
-            case R.id.forgetPwTv:
-
-                break;
-        }
-    }
-    //每次都保存账号密码
-    private void saveUser(String account, String password) {
-        // 每次保存账号密码
-        SharedPreferences userNameSp = getSharedPreferences("userNameSp",
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = userNameSp.edit();
-        editor.putString("userName", account);
-        editor.commit();
-        SharedPreferences passwordSp = getSharedPreferences("passwordSp",
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor1 = passwordSp.edit();
-        editor1.putString("password", password);
-        editor1.commit();
     }
 
     /*
@@ -91,20 +55,31 @@ public class LoginActivity extends BaseActivity implements ILoginView{
      */
     public void initView() {
 
+        //初始化用户名
+        SharedPreferences userNameSp = getSharedPreferences("userNameSp", Context.MODE_PRIVATE);
+        if(userNameSp.getString("userName", null)!=null){
+            account = userNameSp.getString("userName", null);
+            userNameEt.setText(account);
+        }else{
+            Log.e("userName","-----------null");
+        }
+        // 初始化密码
+        SharedPreferences passwordSp = getSharedPreferences("passwordSp",Context.MODE_PRIVATE);
+        if (passwordSp.getString("password", null)!=null) {
+            password = passwordSp.getString("password", null);
+        } else {
+            Log.e("password", "-----------null");
+        }
         //初始化checkbox
         SharedPreferences rememberPswSp = getSharedPreferences("rememberPswSp", Context.MODE_PRIVATE);
         if(rememberPswSp.getInt("rememberPsw", 0)==1){
             rememberPwCb.setChecked(true);
+            //直接发起登录
+            passwordEt.setText(password);
+            password = Md5Util.md5(password);
+            mLoginPresenter.loadLogin(this,account,password);
         }else{
             rememberPwCb.setChecked(false);
-        }
-
-        //初始化用户名
-        SharedPreferences userNameSp = getSharedPreferences("userNameSp", Context.MODE_PRIVATE);
-        if(userNameSp.getString("userName", null)!=null){
-            userNameEt.setText(userNameSp.getString("userName", null));
-        }else{
-            Log.e("userName","-----------null");
         }
         // 记住密码状态改变，存储记住密码状态已经登录响应是记住密码
         rememberPwCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
@@ -124,6 +99,43 @@ public class LoginActivity extends BaseActivity implements ILoginView{
             }
         });
     }
+
+    /*
+    在单击响应中完成两个实现
+     */
+    @OnClick({R.id.loginBtn, R.id.forgetPwTv})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.loginBtn:
+
+                account = userNameEt.getEditableText().toString();
+                password = passwordEt.getEditableText().toString();
+                saveUser(account,password);
+                password = Md5Util.md5(password);
+                mLoginPresenter.loadLogin(LoginActivity.this,account,password);
+
+                break;
+            case R.id.forgetPwTv:
+
+                break;
+        }
+    }
+    //每次都保存账号密码
+    private void saveUser(String account, String password) {
+
+        // 每次保存账号密码
+        SharedPreferences userNameSp = getSharedPreferences("userNameSp",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = userNameSp.edit();
+        editor.putString("userName", account);
+        editor.commit();
+        SharedPreferences passwordSp = getSharedPreferences("passwordSp",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor1 = passwordSp.edit();
+        editor1.putString("password", password);
+        editor1.commit();
+    }
+
 
     /*
     登录之后两个回调
