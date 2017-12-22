@@ -30,4 +30,10 @@ dependencies {
     //    compile 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.jakewharton:butterknife:8.8.1'
     apt 'com.jakewharton:butterknife-compiler:8.8.1'
+
+//    compile 'com.github.jdsjlzx:LRecyclerView:1.3.3'//下拉刷新
+    compile 'com.lzy.net:okgo:2.1.4'
+    compile 'com.lzy.net:okrx:0.1.2'
+    compile 'com.lzy.net:okserver:1.1.3'
+    compile 'com.alibaba:fastjson:1.2.20'
 }

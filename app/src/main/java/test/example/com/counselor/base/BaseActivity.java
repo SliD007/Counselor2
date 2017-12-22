@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+
 public abstract class BaseActivity extends FragmentActivity {
 
     private String TAG = "BaseActivity";
@@ -24,6 +25,8 @@ public abstract class BaseActivity extends FragmentActivity {
         initContentView(savedInstanceState);
         MyApplication.getInstance().addActivity(this);
         Log.i(TAG,""+this);
+
+
     }
     /*
     初始化布局
