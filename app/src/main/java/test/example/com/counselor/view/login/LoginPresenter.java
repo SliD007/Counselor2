@@ -12,13 +12,13 @@ import java.util.HashMap;
 
 import okhttp3.Call;
 import okhttp3.Response;
-import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.base.BasePresenter;
 
 /**
  * Created by Sli.D on 2017/5/17.
  */
 
-public class LoginPresenter {
+public class LoginPresenter extends BasePresenter{
     private ILoginModel mLoginModel;
     private ILoginView mLoginView;
 
@@ -26,11 +26,14 @@ public class LoginPresenter {
     public LoginPresenter(ILoginView view){
         mLoginView = view;
         mLoginModel = new LoginModel();
-
     }
 
-    public void saveValue(JSONObject value){
-        mLoginModel.setValue(value);
+    public void saveValue(JSONObject object){
+        JSONObject value = JSON.parseObject(object.getString("value"));
+        LoginEntity entity = JSON.parseObject(value.toString(),LoginEntity.class);
+        mLoginModel.setEntity(entity);
+        Log.e("LoginEntity",mLoginModel.getEntity().toString());
+
     }
 
     public void loadLogin(final Context mContext, final String account, final String password){
@@ -46,10 +49,7 @@ public class LoginPresenter {
                 JSONObject object = JSON.parseObject(s);
                 if (object.getBoolean("success")==true){
                     mLoginView.loginSuccess();
-                    JSONObject value = JSON.parseObject(object.getString("value"));
-                    LoginEntity entity = JSON.parseObject(value.toString(),LoginEntity.class);
-                    MyApplication.getInstance().setLoginEntity(entity);
-                    Log.e("LoginEntity",entity.toString());
+                    saveValue(object);
                 }else {
                     mLoginView.loginFailed();
                 }
@@ -61,5 +61,15 @@ public class LoginPresenter {
                 mLoginView.loginFailed();
             }
         });
+    }
+
+    @Override
+    public void onAttachView() {
+
+    }
+
+    @Override
+    public void onDetachView() {
+
     }
 }
