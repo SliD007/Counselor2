@@ -4,13 +4,14 @@ package test.example.com.counselor.view.login;
  * Created by Sli.D on 2017/5/12.
  */
 
-public class LoginBean {
+public class LoginEntity {
     private int id;
     private String account;
     private String username;
     private String avatar;
     private String email;
     private String tel;
+    private String createTime;
     private String role;
     private int parentId;
     private String parentName;
@@ -18,10 +19,10 @@ public class LoginBean {
     private String departmentName;
     private String departmentDescription;
     private int departmentTotalNum;
-    public LoginBean(){
+    public LoginEntity(){
 
     }
-    public LoginBean(
+    public LoginEntity(
              int id,
              String account,
              String username,
@@ -152,5 +153,10 @@ public class LoginBean {
 
     public void setDepartmentTotalNum(int departmentTotalNum) {
         this.departmentTotalNum = departmentTotalNum;
+    }
+    @Override
+    public String toString() {
+        return "UserEntity [id=" + id + ", account=" + account + ", username="
+                + username + ", avatar=" + avatar +  ", email=" + email + ", tel=" + tel + ", role=" + role +  ", parentId=" + parentId + "]";
     }
 }

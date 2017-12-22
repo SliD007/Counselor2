@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSONObject;
 
 public class LoginModel implements ILoginModel{
 
-    private LoginBean mLoginBean;
+    private LoginEntity mLoginEntity;
 
     private JSONObject value;
 
@@ -48,8 +48,8 @@ public class LoginModel implements ILoginModel{
         //getLoginBean();
     }
 
-    public LoginBean getLoginBean() {
-        Log.e("LoginModel","loginBean------------->"+mLoginBean.getEmail());
-        return mLoginBean;
+    public LoginEntity getLoginBean() {
+        Log.e("LoginModel","loginBean------------->"+ mLoginEntity.getEmail());
+        return mLoginEntity;
     }
 }

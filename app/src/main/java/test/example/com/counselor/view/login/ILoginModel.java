@@ -9,5 +9,5 @@ import com.alibaba.fastjson.JSONObject;
 public interface ILoginModel {
     JSONObject getValue();
     void setValue(JSONObject value);
-    LoginBean getLoginBean();
+    LoginEntity getLoginBean();
 }

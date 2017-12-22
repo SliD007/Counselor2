@@ -40,11 +40,14 @@ public class LoginPresenter {
         OkGo.post(URL).params(params).execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {
-                Log.e("response",response.toString());
+//                Log.e("response",response.toString());
                 Log.e("s",s);
                 JSONObject object = JSON.parseObject(s);
                 if (object.getBoolean("success")==true){
                     mLoginView.loginSuccess();
+                    JSONObject value = JSON.parseObject(object.getString("value"));
+                    LoginEntity entity = JSON.parseObject(value.toString(),LoginEntity.class);
+                    Log.e("LoginEntity",entity.toString());
                 }else {
                     mLoginView.loginFailed();
                 }
