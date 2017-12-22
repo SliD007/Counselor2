@@ -48,7 +48,7 @@ public class WelcomeActivity extends BaseActivity {
         //初始化checkbox
         SharedPreferences rememberPswSp = getSharedPreferences("rememberPswSp", Context.MODE_PRIVATE);
         if (rememberPswSp.getInt("rememberPsw", 0) == 1) {
-            mhandler.sendEmptyMessageDelayed(1, 2000);//将欢迎页停留5秒，并且将message设置文跳转到MainActivity
+            mhandler.sendEmptyMessageDelayed(0, 2000);//将欢迎页停留5秒，并且将message设置文跳转到MainActivity
         } else {
             mhandler.sendEmptyMessageDelayed(0, 2000);//将欢迎页停留5秒，并且将message设置为跳转到登录
         }

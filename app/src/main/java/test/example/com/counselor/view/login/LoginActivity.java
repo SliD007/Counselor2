@@ -1,7 +1,6 @@
 package test.example.com.counselor.view.login;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
-import test.example.com.counselor.view.HomeActivity;
+import test.example.com.counselor.util.Md5Util;
 
 public class LoginActivity extends BaseActivity implements ILoginView{
 
@@ -55,14 +54,33 @@ public class LoginActivity extends BaseActivity implements ILoginView{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.loginBtn:
-                account = userNameEt.getText().toString().trim();
-                password = passwordEt.getText().toString().trim();
+
+                account = userNameEt.getEditableText().toString();
+                password = passwordEt.getEditableText().toString();
+                saveUser(account,password);
+                password = Md5Util.md5(password);
+                Log.e("loginInfo", "account=" + account + ",password=" + password);
                 mLoginPresenter.loadLogin(LoginActivity.this,account,password);
+
                 break;
             case R.id.forgetPwTv:
 
                 break;
         }
+    }
+    //每次都保存账号密码
+    private void saveUser(String account, String password) {
+        // 每次保存账号密码
+        SharedPreferences userNameSp = getSharedPreferences("userNameSp",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = userNameSp.edit();
+        editor.putString("userName", account);
+        editor.commit();
+        SharedPreferences passwordSp = getSharedPreferences("passwordSp",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor1 = passwordSp.edit();
+        editor1.putString("password", password);
+        editor1.commit();
     }
 
     /*
@@ -72,26 +90,6 @@ public class LoginActivity extends BaseActivity implements ILoginView{
           暂不实现自动登录
      */
     public void initView() {
-        // TODO Auto-generated method stub
-        //开启记住密码自动登录检测
-
-        rememberPwCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,
-                                         boolean isChecked) {
-                // TODO Auto-generated method stub
-                SharedPreferences rememberPswSp = getSharedPreferences("rememberPswSp", MODE_PRIVATE);
-                SharedPreferences.Editor editor = rememberPswSp.edit();
-                if(isChecked){
-
-                    editor.putInt("rememberPsw", 1);
-                    Log.e("rememberPsw","rememberPsw------------>"+rememberPswSp.getInt("rememberPsw", 0));
-                }else{
-                    editor.putInt("rememberPsw", 0);
-                }
-                editor.commit();
-            }
-        });
 
         //初始化checkbox
         SharedPreferences rememberPswSp = getSharedPreferences("rememberPswSp", Context.MODE_PRIVATE);
@@ -108,22 +106,23 @@ public class LoginActivity extends BaseActivity implements ILoginView{
         }else{
             Log.e("userName","-----------null");
         }
-
-        //初始化密码
-        SharedPreferences passwordSp = getSharedPreferences("passwordSp", Context.MODE_PRIVATE);
-        if((rememberPswSp.getInt("rememberPsw", 0)==1)){
-            Log.e("password","-----------"+passwordSp.getString("password", null));
-            passwordEt.setText(passwordSp.getString("password", null));
-        }else{
-            Log.e("password","-----------something wrong");
-        }
-        //初始化自动登陆
-        if((rememberPswSp.getInt("rememberPsw", 0)==1)){
-            Log.e("password","-----------"+passwordSp.getString("password", null));
-            passwordEt.setText(passwordSp.getString("password", null));
-        }else{
-            Log.e("password","-----------something wrong");
-        }
+        // 记住密码状态改变，存储记住密码状态已经登录响应是记住密码
+        rememberPwCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+                // TODO Auto-generated method stub
+                SharedPreferences rememberPswSp = getSharedPreferences("rememberPswSp", MODE_PRIVATE);
+                SharedPreferences.Editor editor = rememberPswSp.edit();
+                if(isChecked){
+                    editor.putInt("rememberPsw", 1);
+                    Log.e("rememberPsw","rememberPsw------------>"+rememberPswSp.getInt("rememberPsw", 0));
+                }else{
+                    editor.putInt("rememberPsw", 0);
+                }
+                editor.commit();
+            }
+        });
     }
 
     /*
@@ -131,8 +130,9 @@ public class LoginActivity extends BaseActivity implements ILoginView{
      */
     @Override
     public void loginSuccess() {
-        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-        startActivity(intent);
+        toast("登录成功！",true);
+//        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+//        startActivity(intent);
     }
     @Override
     public void loginFailed() {

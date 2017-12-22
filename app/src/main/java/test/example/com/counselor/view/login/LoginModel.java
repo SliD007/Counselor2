@@ -2,8 +2,7 @@ package test.example.com.counselor.view.login;
 
 import android.util.Log;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * Created by Sli.D on 2017/5/17.
@@ -38,41 +37,12 @@ public class LoginModel implements ILoginModel{
     @Override
     public void setValue(JSONObject value) {
         this.value = value;
-        Log.e("","value:"+value);
-        Log.e("","this.value:"+this.value);
         try {
-            this.id = value.getInt("id");
-            this.account = value.getString("account");
-            this.username = value.getString("username");
-            this.avatar = value.getString("avatar");
-            this.email = value.getString("email");
-            this.tel = value.getString("tel");
-            this.role = value.getString("role");
 
-            this.parentId = value.getInt("parentId");
-            this.parentName = value.getString("parentName");
-            this.department = value.getJSONObject("department");
+            Log.e("","value:"+value);
+            Log.e("","this.value:"+this.value);
 
-            this.departmentId = this.department.getInt("id");
-            this.departmentName = this.department.getString("name");
-            this.departmentDescription = this.department.getString("description");
-            this.departmentTotalNum = this.department.getInt("totalNum");
-            mLoginBean = new LoginBean(
-                    this.id,
-                    this.account,
-                    this.username,
-                    this.avatar,
-                    this.email,
-                    this.tel,
-                    this.role,
-                    this.parentId,
-                    this.parentName,
-                    this.departmentId,
-                    this.departmentName,
-                    this.departmentDescription,
-                    this.departmentTotalNum);
-
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         //getLoginBean();
