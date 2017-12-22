@@ -14,6 +14,8 @@ import com.lzy.okgo.model.HttpParams;
 import java.util.LinkedList;
 import java.util.List;
 
+import test.example.com.counselor.view.login.LoginEntity;
+
 /**
  * Created by Sli.D on 2017/12/19.
  */
@@ -22,6 +24,15 @@ public class MyApplication extends Application {
     private static List<Activity> activityList = new LinkedList<Activity>();
     private static MyApplication instance;
 
+    public LoginEntity getLoginEntity() {
+        return loginEntity;
+    }
+
+    public void setLoginEntity(LoginEntity loginEntity) {
+        this.loginEntity = loginEntity;
+    }
+
+    private LoginEntity loginEntity;// 当前的用户信息
     public MyApplication() {
     }
 

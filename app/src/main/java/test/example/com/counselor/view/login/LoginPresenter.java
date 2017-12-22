@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 import okhttp3.Call;
 import okhttp3.Response;
+import test.example.com.counselor.base.MyApplication;
 
 /**
  * Created by Sli.D on 2017/5/17.
@@ -41,12 +42,13 @@ public class LoginPresenter {
             @Override
             public void onSuccess(String s, Call call, Response response) {
 //                Log.e("response",response.toString());
-                Log.e("s",s);
+//                Log.e("s",s);
                 JSONObject object = JSON.parseObject(s);
                 if (object.getBoolean("success")==true){
                     mLoginView.loginSuccess();
                     JSONObject value = JSON.parseObject(object.getString("value"));
                     LoginEntity entity = JSON.parseObject(value.toString(),LoginEntity.class);
+                    MyApplication.getInstance().setLoginEntity(entity);
                     Log.e("LoginEntity",entity.toString());
                 }else {
                     mLoginView.loginFailed();
