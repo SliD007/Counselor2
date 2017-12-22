@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/x1"
     android:paddingRight="@dimen/x1"
     android:paddingTop="@dimen/x1"
-    tools:context=".view.login.WelcomeActivity">
+    tools:context=".view.WelcomeActivity">
     <RelativeLayout
         android:id="@+id/loginBtnRL"
         android:background="#fff"

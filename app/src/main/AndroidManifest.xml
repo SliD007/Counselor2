@@ -8,7 +8,7 @@
         android:label="法律顾问"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.login.WelcomeActivity">
+        <activity android:name=".view.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

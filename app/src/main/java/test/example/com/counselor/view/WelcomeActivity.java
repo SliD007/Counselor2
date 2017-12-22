@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.login;
+package test.example.com.counselor.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import android.view.WindowManager;
 
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
-import test.example.com.counselor.view.HomeActivity;
+import test.example.com.counselor.view.login.LoginActivity;
 
 public class WelcomeActivity extends BaseActivity {
 
