@@ -3,6 +3,7 @@
     package="test.example.com.counselor">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
+        android:name=".base.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="法律顾问"
@@ -20,7 +21,7 @@
         <activity android:name=".view.HomeActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
         <activity android:name=".view.service.addadvice.AddAdviceActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
         <activity android:name=".view.service.addcommon.AddCommonActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
-        <activity android:name=".view.changepw.login.ChagePwActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
+        <activity android:name=".view.changepw.ChagePwActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
 
     </application>
 

@@ -10,7 +10,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseFragment;
-import test.example.com.counselor.view.changepw.login.ChagePwActivity;
+import test.example.com.counselor.view.changepw.ChagePwActivity;
 import test.example.com.counselor.view.login.LoginActivity;
 
 /**

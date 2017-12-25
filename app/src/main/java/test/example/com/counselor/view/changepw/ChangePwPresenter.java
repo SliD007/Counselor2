@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.changepw.login;
+package test.example.com.counselor.view.changepw;
 
 import android.content.Context;
 import android.util.Log;

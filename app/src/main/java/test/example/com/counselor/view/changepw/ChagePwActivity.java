@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.changepw.login;
+package test.example.com.counselor.view.changepw;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +32,7 @@ public class ChagePwActivity extends BaseActivity implements IChangePwView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        super.allow_quit=false;
         mChangePwPresenter = new ChangePwPresenter(this);
     }
 
