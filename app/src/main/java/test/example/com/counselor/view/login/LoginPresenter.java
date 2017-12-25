@@ -14,6 +14,7 @@ import java.util.HashMap;
 import okhttp3.Call;
 import okhttp3.Response;
 import test.example.com.counselor.base.BasePresenter;
+import test.example.com.counselor.util.Constants;
 
 /**
  * Created by Sli.D on 2017/5/17.
@@ -44,7 +45,7 @@ public class LoginPresenter extends BasePresenter{
         params.put("password",password);
         OkGo.post(URL)
                 .params(params)
-                .cacheKey("Login")
+                .cacheKey(Constants.getAppCacheFolder())
                 .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                 .cacheTime(-1)
                 .execute(loginStringCallback);
