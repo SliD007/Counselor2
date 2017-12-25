@@ -63,6 +63,11 @@ public class LoginPresenter extends BasePresenter{
 
     StringCallback loginStringCallback = new StringCallback() {
 
+        @Override
+        public String convertSuccess(Response response) throws Exception {
+            return super.convertSuccess(response);
+        }
+
         public void onSuccess(String s, Call call, Response response) {
 //            Log.e("onSuccess",response.toString());
             JSONObject object = JSON.parseObject(s);

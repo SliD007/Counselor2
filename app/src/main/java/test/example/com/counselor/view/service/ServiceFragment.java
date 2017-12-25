@@ -28,7 +28,7 @@ import test.example.com.counselor.view.service.addcommon.AddCommonActivity;
  * Created by Sli.D on 2017/12/20.
  */
 
-public class ServiceFragment extends BaseFragment {
+public class ServiceFragment extends BaseFragment implements IServiceView{
 
 
     ListEntity mEntity;
@@ -227,4 +227,8 @@ public class ServiceFragment extends BaseFragment {
 
     };
 
+    @Override
+    public void setItem(int index, String str1, String str2, String str3) {
+
+    }
 }
