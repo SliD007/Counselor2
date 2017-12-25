@@ -23,6 +23,7 @@ import test.example.com.counselor.entity.ListEntity;
 import test.example.com.counselor.listener.MyLvClickListener;
 import test.example.com.counselor.view.service.addadvice.AddAdviceActivity;
 import test.example.com.counselor.view.service.addcommon.AddCommonActivity;
+import test.example.com.counselor.view.service.addworklog.AddWorkLogActivity;
 
 /**
  * Created by Sli.D on 2017/12/20.
@@ -99,6 +100,8 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         Intent i;
         switch (fragmentType) {
             case 0:
+                i = new Intent(getActivity(), AddWorkLogActivity.class);
+                startActivity(i);
                 break;
             case 1:
                 i = new Intent(getActivity(), AddAdviceActivity.class);
