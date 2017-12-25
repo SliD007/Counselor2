@@ -6,6 +6,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 
 import java.util.HashMap;
@@ -41,26 +42,12 @@ public class LoginPresenter extends BasePresenter{
         HashMap<String,String> params = new HashMap<>();
         params.put("account",account);
         params.put("password",password);
-        OkGo.post(URL).params(params).execute(new StringCallback() {
-            @Override
-            public void onSuccess(String s, Call call, Response response) {
-//                Log.e("response",response.toString());
-//                Log.e("s",s);
-                JSONObject object = JSON.parseObject(s);
-                if (object.getBoolean("success")==true){
-                    mLoginView.loginSuccess();
-                    saveValue(object);
-                }else {
-                    mLoginView.loginFailed();
-                }
-            }
-            @Override
-            public void onError(Call call, Response response, Exception e) {
-                super.onError(call, response, e);
-                Log.e("response",response.toString());
-                mLoginView.loginFailed();
-            }
-        });
+        OkGo.post(URL)
+                .params(params)
+                .cacheKey("Login")
+                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+                .cacheTime(-1)
+                .execute(loginStringCallback);
     }
 
     @Override
@@ -72,4 +59,37 @@ public class LoginPresenter extends BasePresenter{
     public void onDetachView() {
 
     }
+
+    StringCallback loginStringCallback = new StringCallback() {
+
+        public void onSuccess(String s, Call call, Response response) {
+//            Log.e("onSuccess",response.toString());
+            JSONObject object = JSON.parseObject(s);
+            if (object.getBoolean("success")==true){
+                mLoginView.loginSuccess();
+                saveValue(object);
+            }else {
+                mLoginView.loginFailed();
+            }
+        }
+
+        @Override
+        public void onError(Call call, Response response, Exception e) {
+            super.onError(call, response, e);
+            Log.e("onError",response.toString());
+            mLoginView.loginFailed();
+        }
+
+        @Override
+        public void onCacheSuccess(String s, Call call) {
+            super.onCacheSuccess(s, call);
+            Log.e("onCacheSuccess",s);
+        }
+
+        @Override
+        public void onCacheError(Call call, Exception e) {
+            super.onCacheError(call, e);
+            Log.e("onCacheError",e.toString());
+        }
+    };
 }

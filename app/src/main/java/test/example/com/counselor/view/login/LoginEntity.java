@@ -1,10 +1,12 @@
 package test.example.com.counselor.view.login;
 
+import java.io.Serializable;
+
 /**
  * Created by Sli.D on 2017/5/12.
  */
 
-public class LoginEntity {
+public class LoginEntity implements Serializable{
     private int id;
     private String account;
     private String username;

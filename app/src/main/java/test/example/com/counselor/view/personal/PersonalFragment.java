@@ -57,6 +57,7 @@ public class PersonalFragment extends BaseFragment {
         switch (view.getId()){
             case R.id.unloginRl:
                 i = new Intent(getActivity(), LoginActivity.class);
+                toast("确定退出吗",true);
                 startActivity(i);
             case R.id.changePwRl:
                 i = new Intent(getActivity(), ChagePwActivity.class);
