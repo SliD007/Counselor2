@@ -5,5 +5,5 @@ package test.example.com.counselor.view.service;
  */
 
 public interface IServiceView {
-    void setItem(int index, String str1, String str2, String str3);
+    void setTabSelection(int index, String[] str1, String[] str2, String[] str3);
 }

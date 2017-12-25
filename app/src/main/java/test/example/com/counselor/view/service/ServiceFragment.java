@@ -53,7 +53,10 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     @BindView(R.id.serviceVw4)
     View serviceVw4;
 
+    ServicePersenter mServicePersenter;
     private int fragmentType;
+    boolean need_request = true;
+    boolean[] first_request ;
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_service;
@@ -61,7 +64,11 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
 
     @Override
     protected void initViews() {
-        setTabSelection(0);//初始化显示wq未读List
+        mServicePersenter = new ServicePersenter(this);
+        fragmentType = 0;
+        first_request = new boolean[]{true, true, true, true};
+        mServicePersenter.requestData(fragmentType,true);
+        first_request[0] = false;
     }
 
     @OnClick({R.id.serviceRl1, R.id.serviceRl2, R.id.serviceRl3, R.id.serviceRl4})
@@ -69,23 +76,30 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         clearStatus();
         switch (view.getId()) {
             case R.id.serviceRl1:
-                setTabSelection(0);
+                fragmentType = 0;
                 break;
             case R.id.serviceRl2:
-                setTabSelection(1);
+                fragmentType = 1;
                 break;
             case R.id.serviceRl3:
-                setTabSelection(2);
+                fragmentType = 2;
                 break;
             case R.id.serviceRl4:
-                setTabSelection(3);
-                break;
+                fragmentType = 3;
+        }
+
+        mServicePersenter.requestData(fragmentType,first_request[fragmentType]);
+        if (first_request[fragmentType]){
+            first_request[fragmentType] = false;
         }
     }
+
     @OnClick({ R.id.serviceRl5})
     public void onAddClick(View view) {
         Intent i;
         switch (fragmentType) {
+            case 0:
+                break;
             case 1:
                 i = new Intent(getActivity(), AddAdviceActivity.class);
                 startActivity(i);
@@ -100,6 +114,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 startActivity(i);
         }
     }
+
     private void clearStatus() {
         serviceTv1.setTextColor(Color.rgb(102, 102, 102));
         serviceTv2.setTextColor(Color.rgb(102, 102, 102));
@@ -114,74 +129,38 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     /*
     根据传入值设置不同listview
      */
-    private void setTabSelection(int index) {
-        fragmentType = index;
+    public void setTabSelection(int index, String[] str1, String[] str2, String[] str3) {
+
         switch (index) {
             case 0:
                 serviceTv1.setTextColor(Color.rgb(255, 255, 255));
                 serviceVw1.setBackgroundColor(Color.rgb(1,160,243));
-                //构造数据
-                entityList = new ArrayList<ListEntity>();//空指针高发处
-                for (int i = 0; i < 30; i++) {
-                    mEntity = new ListEntity(R.layout.item_commonlist,
-                            "服务对象：李本忠", "未完结", "2017/11/" + (1 + i));
-                    entityList.add(mEntity);
-                }
-                //创建adapter
-                mListAdapter = new ListAdapter(super.mContext, entityList, mClickListener, onItemClickListener);
-                serviceLv.setAdapter(mListAdapter);
-                //设置回调
-                serviceLv.setOnItemClickListener(onItemClickListener);
                 break;
             case 1:
                 serviceTv2.setTextColor(Color.rgb(255, 255, 255));
                 serviceVw2.setBackgroundColor(Color.rgb(1,160,243));
-                //构造数据
-                entityList = new ArrayList<ListEntity>();//空指针高发处
-                for (int i = 0; i < 30; i++) {
-                    mEntity = new ListEntity(R.layout.item_commonlist,
-                            "关于预防老年人被金融诈骗的建议", "报送值：长沙县司法局", "2017/10/" + (1 + i));
-                    entityList.add(mEntity);
-                }
-                //创建adapter
-                mListAdapter = new ListAdapter(super.mContext, entityList, mClickListener, onItemClickListener);
-                serviceLv.setAdapter(mListAdapter);
-                //设置回调
-                serviceLv.setOnItemClickListener(onItemClickListener);
                 break;
             case 2:
                 serviceTv3.setTextColor(Color.rgb(255, 255, 255));
                 serviceVw3.setBackgroundColor(Color.rgb(1,160,243));
-                //构造数据
-                entityList = new ArrayList<ListEntity>();//空指针高发处
-                for (int i = 0; i < 30; i++) {
-                    mEntity = new ListEntity(R.layout.item_commonlist,
-                            "预防老年人被金融诈骗的典型案例", "报送值：长沙县司法局", "2017/9/" + (1 + i));
-                    entityList.add(mEntity);
-                }
-                //创建adapter
-                mListAdapter = new ListAdapter(super.mContext, entityList, mClickListener, onItemClickListener);
-                serviceLv.setAdapter(mListAdapter);
-                //设置回调
-                serviceLv.setOnItemClickListener(onItemClickListener);
                 break;
             case 3:
                 serviceTv4.setTextColor(Color.rgb(255, 255, 255));
                 serviceVw4.setBackgroundColor(Color.rgb(1,160,243));
-                //构造数据
-                entityList = new ArrayList<ListEntity>();//空指针高发处
-                for (int i = 0; i < 12; i++) {
-                    mEntity = new ListEntity(R.layout.item_commonlist,
-                            "2017年新塘村" + (12 - i) + "月度总结", "报送值：星沙街道司法所", "2017/" + (12 - i) + "/30");
-                    entityList.add(mEntity);
-                }
-                //创建adapter
-                mListAdapter = new ListAdapter(super.mContext, entityList, mClickListener, onItemClickListener);
-                serviceLv.setAdapter(mListAdapter);
-                //设置回调
-                serviceLv.setOnItemClickListener(onItemClickListener);
                 break;
         }
+        //加载数据
+        entityList = new ArrayList<ListEntity>();//空指针高发处
+        for (int i = 0; i < str1.length; i++) {
+            mEntity = new ListEntity(R.layout.item_commonlist,
+                    str1[i], str2[i], str3[i]);
+            entityList.add(mEntity);
+        }
+        //创建adapter
+        mListAdapter = new ListAdapter(super.mContext, entityList, mClickListener, onItemClickListener);
+        serviceLv.setAdapter(mListAdapter);
+        //设置回调
+        serviceLv.setOnItemClickListener(onItemClickListener);
     }
 
     @Override
@@ -227,8 +206,4 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
 
     };
 
-    @Override
-    public void setItem(int index, String str1, String str2, String str3) {
-
-    }
 }
