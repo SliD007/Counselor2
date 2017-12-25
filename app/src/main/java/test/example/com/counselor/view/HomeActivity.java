@@ -1,5 +1,6 @@
 package test.example.com.counselor.view;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -44,20 +45,21 @@ public class HomeActivity extends BaseActivity {
     ImageView buttomIm4;
     @BindView(R.id.buttomTv4)
     TextView buttomTv4;
-
+    @BindView(R.id.viewpager)
+    ViewPager viewpager;
+    private int fragmentId;
     BacklogFragment mBacklogFragment;
     ScheduleFragment mScheduleFragment;
     ServiceFragment mServiceFragment;
     PersonalFragment mPersonalFragment;
-    @BindView(R.id.viewpager)
-    ViewPager viewpager;
     private List<Fragment> list;// 声明一个list集合存放Fragment（数据源）
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        initView();
-
+        Intent i = getIntent();
+        fragmentId = i.getIntExtra("fragmentId",0);
+        initView(fragmentId);
     }
 
     @Override
@@ -65,7 +67,7 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
     }
 
-    private void initView(){
+    private void initView(int fragmentId){
         buttomTv1.setTextColor(Color.rgb(1, 160, 243));
         list = new ArrayList<Fragment>();
         mBacklogFragment = new BacklogFragment();

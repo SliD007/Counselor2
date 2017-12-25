@@ -1,7 +1,6 @@
 package test.example.com.counselor.view.service.addadvice;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -17,7 +16,7 @@ import test.example.com.counselor.base.BaseActivity;
  * Created by Sli.D on 2017/12/21.
  */
 
-public class AddAdviceActivity extends BaseActivity {
+public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
     @BindView(R.id.addAdviceTitleEt)
@@ -27,6 +26,7 @@ public class AddAdviceActivity extends BaseActivity {
     @BindView(R.id.radioGroup)
     RadioGroup radioGroup;
     int rbId;
+    AddAdvicePersenter mAddAdvicePersenter;
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addadvice);
@@ -34,6 +34,7 @@ public class AddAdviceActivity extends BaseActivity {
         super.allow_quit = false;
         titleBarTv.setText("新增建议上报");
         initView();
+        mAddAdvicePersenter = new AddAdvicePersenter(this,this);
     }
 
     private void initView() {
@@ -75,14 +76,24 @@ public class AddAdviceActivity extends BaseActivity {
             case R.id.sumbitTv:
                 String title = addAdviceTitleEt.getText().toString();
                 String context_str = addAdviceContextEt.getText().toString();
-                sumbitAdvice(title,context_str,rbId);
+                mAddAdvicePersenter.addAdvice(title,context_str,rbId);
                 break;
         }
     }
 
-    private void sumbitAdvice(String title, String context_str, int rbId) {
-        Log.e("Advice","title:"+title+",context:"+context_str+",rbId:"+rbId);
+
+
+    @Override
+    public void addSuccess() {
+        toast("添加成功",false);
+//        Intent i = new Intent(AddAdviceActivity.this, HomeActivity.class);
+//        i.putExtra("fragmentId",3);
+//        startActivity(i);
+
     }
 
-
+    @Override
+    public void addFailed() {
+        toast("添加失败",false);
+    }
 }
