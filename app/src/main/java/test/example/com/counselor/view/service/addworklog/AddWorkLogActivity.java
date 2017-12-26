@@ -70,7 +70,6 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         titleBarTv.setText("新增工作日志");
         //S1
         list = new ArrayList<String>();
-        list.add("选择");
         list.add("村民");
         list.add("村社");
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
@@ -79,7 +78,6 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         spinner1.setOnItemSelectedListener(mOnItemClickListener);
         //S2
         list = new ArrayList<String>();
-        list.add("选择");
         list.add("坐班");
         list.add("电话咨询");
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
@@ -102,21 +100,24 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         spinner7.setOnItemSelectedListener(mOnItemClickListener);
         //S8
         list = new ArrayList<String>();
-        list.add("选择");
+        list.add("民事案件");
+        list.add("刑事案件");
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner8.setAdapter(adapter);
         spinner8.setOnItemSelectedListener(mOnItemClickListener);
         //S9
         list = new ArrayList<String>();
-        list.add("选择");
+        list.add("咨询");
+        list.add("指导");
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner9.setAdapter(adapter);
         spinner9.setOnItemSelectedListener(mOnItemClickListener);
         //S10
         list = new ArrayList<String>();
-        list.add("选择");
+        list.add("老年人");
+        list.add("青少年");
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner10.setAdapter(adapter);

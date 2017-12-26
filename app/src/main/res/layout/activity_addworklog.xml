@@ -72,7 +72,9 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="50dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
                 <ImageView
                     android:id="@+id/imageLeftIm3"
                     android:layout_width="5dp"
@@ -91,7 +93,8 @@
                     android:hint="请输入"
                     android:textColorHint="#ccc"
                     android:textSize="16sp"
-                    android:focusable="false"
+                    android:nextFocusUp="@id/editText3"
+                    android:nextFocusLeft="@id/editText3"
                     />
             </RelativeLayout>
             <View
@@ -101,7 +104,9 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="50dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
                 <ImageView
                     android:id="@+id/imageLeftIm4"
                     android:layout_width="5dp"
@@ -120,7 +125,8 @@
                     android:hint="请输入"
                     android:textColorHint="#ccc"
                     android:textSize="16sp"
-                    android:focusable="false"
+                    android:nextFocusUp="@id/editText4"
+                    android:nextFocusLeft="@id/editText4"
                     />
             </RelativeLayout>
             <View
@@ -130,7 +136,9 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="50dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
                 <ImageView
                     android:id="@+id/imageLeftIm5"
                     android:layout_width="5dp"
@@ -149,7 +157,8 @@
                     android:hint="请输入"
                     android:textColorHint="#ccc"
                     android:textSize="16sp"
-                    android:focusable="false"
+                    android:nextFocusUp="@id/editText4"
+                    android:nextFocusLeft="@id/editText4"
                     />
             </RelativeLayout>
             <View
@@ -289,34 +298,74 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/imageLeftIm11"
-                    android:layout_width="5dp"
-                    style="@style/image1"/>
-                <TextView
-                    android:text="服务内容概述"
-                    android:layout_toRightOf="@id/imageLeftIm11"
-                    style="@style/text_worklog"/>
-                <ImageView
-                    android:id="@+id/imageRightIm11"
-                    style="@style/nextIm"/>
+                android:layout_height="500dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+                <RelativeLayout
+                    android:id="@+id/rl11"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentTop="true">
+                    <ImageView
+                        android:id="@+id/imageLeftIm11"
+                        android:layout_width="5dp"
+                        style="@style/image1"/>
+                    <TextView
+                        android:text="服务内容概述"
+                        android:layout_toRightOf="@id/imageLeftIm11"
+                        style="@style/text_worklog"/>
+
+                    <ImageView
+                        android:id="@+id/imageRightIm11"
+                        style="@style/nextIm"/>
+                </RelativeLayout>
                 <EditText
                     android:id="@+id/editText11"
-                    android:layout_toLeftOf="@id/imageRightIm11"
-                    style="@style/log_spinner"
-                    android:layout_height="300dp"
-                    android:hint="请输入"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/rl11"
+                    android:hint="  请输入"
+                    android:gravity="top"
                     android:textColorHint="#ccc"
                     android:textSize="16sp"
-                    android:focusable="false"
+                    android:background="@null"
+                    android:nextFocusUp="@id/editText11"
+                    android:nextFocusLeft="@id/editText11"
                     />
             </RelativeLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#ccc"/>
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom">
+                <ImageView
+                    android:id="@+id/imageLeftIm12"
+                    android:layout_width="5dp"
+                    style="@style/image1"/>
+                <TextView
+                    android:text="上传图片"
+                    android:layout_toRightOf="@id/imageLeftIm12"
+                    style="@style/text_worklog"/>
+                <ImageView
+                    android:id="@+id/imageRightIm12"
+                    style="@style/nextIm"/>
+                <TextView
+                    android:id="@+id/textview12"
+                    android:layout_toLeftOf="@id/imageRightIm12"
+                    style="@style/log_spinner"
+                    android:text="请选择"
+                    android:textColor="#ccc"
+                    android:textSize="16sp"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc"
+                android:layout_marginBottom="10dp"/>
         </LinearLayout>
     </ScrollView>
 
