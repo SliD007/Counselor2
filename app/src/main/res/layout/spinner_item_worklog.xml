@@ -3,7 +3,7 @@
     android:layout_width="100dp"
     android:layout_height="40dp"
     android:gravity="center"
-    android:textColor="#666"
+    android:textColor="#999"
     android:textSize="16dp"
     android:background="#fff"
     android:ellipsize="marquee"
