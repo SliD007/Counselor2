@@ -1,5 +1,6 @@
 package test.example.com.counselor.view.schedule;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,6 +88,11 @@ public class ScheduleFragment extends BaseFragment {
         @Override
         public void myOnClick(int position, View view) {
             toast("确定要修改第" + (position + 1) + "条吗", true);
+            Intent i = new Intent(getActivity(),ChangeScheduleActivity.class);
+            i.putExtra("workfor","星沙街道新塘村");
+            i.putExtra("worktime","2017-11-19");
+            startActivity(i);
+
         }
         public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去
             myOnClick((Integer) v.getTag(), v);
