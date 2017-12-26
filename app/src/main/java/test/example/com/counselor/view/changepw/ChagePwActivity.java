@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
+import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.view.login.LoginActivity;
 
 public class ChagePwActivity extends BaseActivity implements IChangePwView {
@@ -42,10 +43,12 @@ public class ChagePwActivity extends BaseActivity implements IChangePwView {
     }
 
 
-    @OnClick({R.id.backPersonalTv, R.id.changePwBt})
+    @OnClick({R.id.backTv, R.id.changePwBt})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.backPersonalTv:
+            case R.id.backTv:
+                MyApplication.getInstance().finishActivity(this);
+                this.finish();
                 break;
             case R.id.changePwBt:
                 final String oldPw = oldPwEt.getText().toString().trim();

@@ -10,8 +10,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseFragment;
+import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.view.changepw.ChagePwActivity;
-import test.example.com.counselor.view.login.LoginActivity;
 
 /**
  * Created by Sli.D on 2017/12/20.
@@ -45,7 +45,6 @@ public class PersonalFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
@@ -56,12 +55,14 @@ public class PersonalFragment extends BaseFragment {
         Intent i;
         switch (view.getId()){
             case R.id.unloginRl:
-                i = new Intent(getActivity(), LoginActivity.class);
                 toast("确定退出吗",true);
-                startActivity(i);
+                MyApplication.getInstance().finishActivity(getActivity());
+                getActivity().finish();
+                break;
             case R.id.changePwRl:
                 i = new Intent(getActivity(), ChagePwActivity.class);
                 startActivity(i);
+                break;
         }
     }
 }
