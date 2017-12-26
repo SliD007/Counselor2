@@ -82,7 +82,7 @@ public class LoginPresenter extends BasePresenter{
         @Override
         public void onError(Call call, Response response, Exception e) {
             super.onError(call, response, e);
-            Log.e("onError",response.toString());
+            Log.e("onError",e.toString());
             mLoginView.loginFailed();
         }
 

@@ -99,4 +99,14 @@
         <item name="android:layout_height">45dp</item>
         <item name="android:layout_marginTop">25dp</item>
     </style>
+    <!-- 日志填写spinner  -->
+    <style name="log_spinner">
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:popupBackground">#666</item>
+    </style>
+
 </resources>

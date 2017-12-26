@@ -115,6 +115,12 @@ public class MyApplication extends Application {
         Log.e("activityList",activityList.toString());
     }
 
+    //销毁栈顶activity
+    public void finishActivity(Activity activity){
+        activityList.remove(activity);
+        Log.e("activityList",activityList.toString());
+    }
+
     // 遍历所有Activity并finish
     public void exit() {
         for (Activity activity : activityList) {

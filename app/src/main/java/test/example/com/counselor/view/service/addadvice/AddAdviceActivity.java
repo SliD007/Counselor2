@@ -11,6 +11,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
+import test.example.com.counselor.base.MyApplication;
 
 /**
  * Created by Sli.D on 2017/12/21.
@@ -30,6 +31,11 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addadvice);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         super.allow_quit = false;
         titleBarTv.setText("新增建议上报");
@@ -57,21 +63,16 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
     }
 
-    @OnClick({R.id.backPersonalTv, R.id.sumbitTv})
+    @OnClick({R.id.backTv, R.id.sumbitTv})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.backPersonalTv:
+            case R.id.backTv:
+                MyApplication.getInstance().finishActivity(this);
+                this.finish();
                 break;
             case R.id.sumbitTv:
                 String title = addAdviceTitleEt.getText().toString();

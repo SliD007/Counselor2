@@ -11,6 +11,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
+import test.example.com.counselor.base.MyApplication;
 
 /**
  * Created by Sli.D on 2017/12/21.
@@ -25,16 +26,16 @@ public class AddCommonActivity extends BaseActivity implements IAddCommonView{
     EditText addCommonContextEt;
     int fragmentType;
     AddCommonPersenter mAddCommonPersenter;
-    @Override
+
+    protected void initContentView(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_addcommon);
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         initView();
         mAddCommonPersenter = new AddCommonPersenter(this,this);
-    }
-
-    protected void initContentView(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_addcommon);
     }
 
     private void initView() {
@@ -49,15 +50,12 @@ public class AddCommonActivity extends BaseActivity implements IAddCommonView{
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @OnClick({R.id.backPersonalTv, R.id.sumbitTv})
+    @OnClick({R.id.backTv, R.id.sumbitTv})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.backPersonalTv:
+            case R.id.backTv:
+                MyApplication.getInstance().finishActivity(this);
+                this.finish();
                 break;
             case R.id.sumbitTv:
                 String title = addCommonTitleEt.getText().toString();
