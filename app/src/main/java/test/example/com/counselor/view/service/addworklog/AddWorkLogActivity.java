@@ -51,11 +51,11 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     Spinner spinner10;
     @BindView(R.id.editText11)
     EditText editText11;
-
+    String[] sumbit_str;
     List<String> list;
     ArrayAdapter<String> adapter;
     AddWorkLogPersenter mAddWorkLogPersenter;
-    private CustomDatePicker customDatePicker;
+    private CustomDatePicker customDatePicker1,customDatePicker2;
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addworklog);
     }
@@ -71,6 +71,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
 
         super.allow_quit = false;
         titleBarTv.setText("新增工作日志");
+        sumbit_str = new String[11];
         //S1
         list = new ArrayList<String>();
         list.add("村民");
@@ -115,48 +116,36 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         String now = sdf.format(new Date());
         textview6.setText(now);
-        customDatePicker = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
+        customDatePicker1 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
             @Override
             public void handle(String time) { // 回调接口，获得选中的时间
                 textview6.setText(time);
             }
         }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
-        customDatePicker.showSpecificTime(true); // 显示时和分
-        customDatePicker.setIsLoop(true); // 允许循环滚动
+        customDatePicker1.showSpecificTime(true); // 显示时和分
+        customDatePicker1.setIsLoop(true); // 允许循环滚动
         //T7
         textview7.setText(now);
-        customDatePicker = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
+        customDatePicker2 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
             @Override
             public void handle(String time) { // 回调接口，获得选中的时间
                 textview7.setText(time);
             }
         }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
-        customDatePicker.showSpecificTime(true); // 显示时和分
-        customDatePicker.setIsLoop(true); // 允许循环滚动
+        customDatePicker2.showSpecificTime(true); // 显示时和分
+        customDatePicker2.setIsLoop(true); // 允许循环滚动
+
+
+
     }
-
-    @OnClick({R.id.backTv, R.id.sumbitTv})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.backTv:
-                MyApplication.getInstance().finishActivity(this);
-                this.finish();
-                break;
-            case R.id.sumbitTv:
-
-                mAddWorkLogPersenter.addWorkLog(0, null, null);
-                break;
-        }
-    }
-
     @OnClick({R.id.textview6, R.id.textview7})
     public void onItemClick(View view) {
         switch (view.getId()) {
             case R.id.textview6:
-                customDatePicker.show(textview6.getText().toString());
+                customDatePicker1.show(textview6.getText().toString());
                 break;
             case R.id.textview7:
-                customDatePicker.show(textview6.getText().toString());
+                customDatePicker2.show(textview7.getText().toString());
                 break;
         }
     }
@@ -167,19 +156,19 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
 
             switch (parent.getId()) {
                 case R.id.spinner1:
-                    toast("R.id.spinner1" + parent.getSelectedItem() + position, false);
+                    sumbit_str[0] = parent.getSelectedItem().toString();
                     break;
                 case R.id.spinner2:
-                    toast("R.id.spinner2" + parent.getSelectedItem() + position, false);
+                    sumbit_str[1] = parent.getSelectedItem().toString();
                     break;
                 case R.id.spinner8:
-                    toast("R.id.spinner8" + parent.getSelectedItem() + position, false);
+                    sumbit_str[7] = parent.getSelectedItem().toString();
                     break;
                 case R.id.spinner9:
-                    toast("R.id.spinner9" + parent.getSelectedItem() + position, false);
+                    sumbit_str[8] = parent.getSelectedItem().toString();
                     break;
                 case R.id.spinner10:
-                    toast("R.id.spinner10" + parent.getSelectedItem() + position, false);
+                    sumbit_str[9] = parent.getSelectedItem().toString();
                     break;
             }
         }
@@ -189,6 +178,27 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
 
         }
     };
+
+
+    @OnClick({R.id.backTv, R.id.sumbitTv})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.backTv:
+                MyApplication.getInstance().finishActivity(this);
+                this.finish();
+                break;
+            case R.id.sumbitTv:
+                //E3
+                sumbit_str[2] = editText3.getText().toString();
+                sumbit_str[3] = editText4.getText().toString();
+                sumbit_str[4] = editText5.getText().toString();
+                sumbit_str[5] = textview6.getText().toString();
+                sumbit_str[6] = textview7.getText().toString();
+                sumbit_str[10] = editText11.getText().toString();
+                mAddWorkLogPersenter.addWorkLog(sumbit_str);
+                break;
+        }
+    }
 
 
     @Override

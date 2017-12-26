@@ -14,8 +14,10 @@ public class AddWorkLogPersenter {
         this.mIAddWorkLogView = iAddWorkLogView;
     }
 
-    public void addWorkLog(int fragmentType,String title,String context_str){
-        Log.e("addWorkLog","title:"+title+",context:"+context_str+",fragmentType:"+fragmentType);
+    public void addWorkLog(String[] str){
+        for (int i=0;i<str.length;i++){
+            Log.e("addWorkLog",""+str[i]);
+        }
         mIAddWorkLogView.addSuccess();
     }
 
