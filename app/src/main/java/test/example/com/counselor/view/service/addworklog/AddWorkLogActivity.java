@@ -1,6 +1,5 @@
 package test.example.com.counselor.view.service.addworklog;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,8 +8,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,6 +20,7 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.util.CustomDatePicker;
 
 /**
  * Created by Sli.D on 2017/12/21.
@@ -30,19 +33,16 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     Spinner spinner1;
     @BindView(R.id.spinner2)
     Spinner spinner2;
-    List<String> list;
-    ArrayAdapter<String> adapter;
-    AddWorkLogPersenter mAddWorkLogPersenter;
     @BindView(R.id.editText3)
     EditText editText3;
     @BindView(R.id.editText4)
     EditText editText4;
     @BindView(R.id.editText5)
     EditText editText5;
-    @BindView(R.id.spinner6)
-    Spinner spinner6;
-    @BindView(R.id.spinner7)
-    Spinner spinner7;
+    @BindView(R.id.textview6)
+    TextView textview6;
+    @BindView(R.id.textview7)
+    TextView textview7;
     @BindView(R.id.spinner8)
     Spinner spinner8;
     @BindView(R.id.spinner9)
@@ -52,6 +52,10 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     @BindView(R.id.editText11)
     EditText editText11;
 
+    List<String> list;
+    ArrayAdapter<String> adapter;
+    AddWorkLogPersenter mAddWorkLogPersenter;
+    private CustomDatePicker customDatePicker;
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addworklog);
     }
@@ -65,7 +69,6 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
 
     private void initView() {
 
-        Intent i = getIntent();
         super.allow_quit = false;
         titleBarTv.setText("新增工作日志");
         //S1
@@ -84,20 +87,6 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner2.setAdapter(adapter);
         spinner2.setOnItemSelectedListener(mOnItemClickListener);
-        //S6
-        list = new ArrayList<String>();
-        list.add("选择");
-        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
-        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
-        spinner6.setAdapter(adapter);
-        spinner6.setOnItemSelectedListener(mOnItemClickListener);
-        //S7
-        list = new ArrayList<String>();
-        list.add("选择");
-        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
-        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
-        spinner7.setAdapter(adapter);
-        spinner7.setOnItemSelectedListener(mOnItemClickListener);
         //S8
         list = new ArrayList<String>();
         list.add("民事案件");
@@ -122,6 +111,28 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner10.setAdapter(adapter);
         spinner10.setOnItemSelectedListener(mOnItemClickListener);
+        //T6
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+        String now = sdf.format(new Date());
+        textview6.setText(now);
+        customDatePicker = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
+            @Override
+            public void handle(String time) { // 回调接口，获得选中的时间
+                textview6.setText(time);
+            }
+        }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        customDatePicker.showSpecificTime(true); // 显示时和分
+        customDatePicker.setIsLoop(true); // 允许循环滚动
+        //T7
+        textview7.setText(now);
+        customDatePicker = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
+            @Override
+            public void handle(String time) { // 回调接口，获得选中的时间
+                textview7.setText(time);
+            }
+        }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
+        customDatePicker.showSpecificTime(true); // 显示时和分
+        customDatePicker.setIsLoop(true); // 允许循环滚动
     }
 
     @OnClick({R.id.backTv, R.id.sumbitTv})
@@ -138,6 +149,18 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         }
     }
 
+    @OnClick({R.id.textview6, R.id.textview7})
+    public void onItemClick(View view) {
+        switch (view.getId()) {
+            case R.id.textview6:
+                customDatePicker.show(textview6.getText().toString());
+                break;
+            case R.id.textview7:
+                customDatePicker.show(textview6.getText().toString());
+                break;
+        }
+    }
+
     AdapterView.OnItemSelectedListener mOnItemClickListener = new AdapterView.OnItemSelectedListener() {
 
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -148,12 +171,6 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                     break;
                 case R.id.spinner2:
                     toast("R.id.spinner2" + parent.getSelectedItem() + position, false);
-                    break;
-                case R.id.spinner6:
-                    toast("R.id.spinner6" + parent.getSelectedItem() + position, false);
-                    break;
-                case R.id.spinner7:
-                    toast("R.id.spinner7" + parent.getSelectedItem() + position, false);
                     break;
                 case R.id.spinner8:
                     toast("R.id.spinner8" + parent.getSelectedItem() + position, false);
@@ -183,6 +200,5 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     public void addFailed() {
         toast("添加失败", false);
     }
-
 
 }

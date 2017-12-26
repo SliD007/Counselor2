@@ -181,10 +181,14 @@
                     android:id="@+id/imageRightIm6"
                     android:src="@drawable/u609"
                     style="@style/nextIm"/>
-                <Spinner
-                    android:id="@+id/spinner6"
+                <TextView
+                    android:id="@+id/textview6"
                     android:layout_toLeftOf="@id/imageRightIm6"
                     style="@style/log_spinner"
+                    android:layout_width="160dp"
+                    android:text="请选择时间"
+                    android:textColor="#ccc"
+                    android:textSize="16sp"
                     />
             </RelativeLayout>
             <View
@@ -207,10 +211,14 @@
                     android:id="@+id/imageRightIm7"
                     android:src="@drawable/u609"
                     style="@style/nextIm"/>
-                <Spinner
-                    android:id="@+id/spinner7"
+                <TextView
+                    android:id="@+id/textview7"
                     android:layout_toLeftOf="@id/imageRightIm7"
                     style="@style/log_spinner"
+                    android:layout_width="160dp"
+                    android:text="请选择时间"
+                    android:textColor="#ccc"
+                    android:textSize="16sp"
                     />
             </RelativeLayout>
             <View
