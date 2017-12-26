@@ -56,6 +56,7 @@ public class CustomDatePicker {
     private static final int MIN_HOUR = 0;
     private static final int MAX_MONTH = 12;
 
+
     private ArrayList<String> year, month, day, hour, minute;
     private int startYear, startMonth, startDay, startHour, startMinute, endYear, endMonth, endDay, endHour, endMinute;
     private boolean spanYear, spanMon, spanDay, spanHour, spanMin;
