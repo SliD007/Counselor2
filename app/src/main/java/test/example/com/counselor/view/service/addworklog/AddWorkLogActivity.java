@@ -1,5 +1,6 @@
 package test.example.com.counselor.view.service.addworklog;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -7,7 +8,15 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.okgo.OkGo;
+
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +30,7 @@ import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.CustomDatePicker;
+import test.example.com.counselor.util.GlideImageLoader;
 
 /**
  * Created by Sli.D on 2017/12/21.
@@ -51,11 +61,16 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     Spinner spinner10;
     @BindView(R.id.editText11)
     EditText editText11;
+    @BindView(R.id.textview12)
+    TextView textview12;
+
     String[] sumbit_str;
     List<String> list;
     ArrayAdapter<String> adapter;
     AddWorkLogPersenter mAddWorkLogPersenter;
     private CustomDatePicker customDatePicker1,customDatePicker2;
+
+    private ArrayList<ImageItem> imageItems;
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addworklog);
     }
@@ -138,7 +153,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
 
 
     }
-    @OnClick({R.id.textview6, R.id.textview7})
+    @OnClick({R.id.textview6, R.id.textview7, R.id.textview12})
     public void onItemClick(View view) {
         switch (view.getId()) {
             case R.id.textview6:
@@ -147,6 +162,41 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
             case R.id.textview7:
                 customDatePicker2.show(textview7.getText().toString());
                 break;
+            case R.id.textview12:
+                ImagePicker imagePicker = ImagePicker.getInstance();
+                imagePicker.setImageLoader(new GlideImageLoader());
+                imagePicker.setMultiMode(true);   //多选
+                imagePicker.setShowCamera(true);  //显示拍照按钮
+                imagePicker.setSelectLimit(9);    //最多选择9张
+                imagePicker.setCrop(false);       //不进行裁剪
+                Intent intent = new Intent(this, ImageGridActivity.class);
+                startActivityForResult(intent, 100);
+                break;
+        }
+    }
+
+    //图片返回
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == 100) {
+                imageItems = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if (imageItems != null && imageItems.size() > 0) {
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < imageItems.size(); i++) {
+                        if (i == imageItems.size() - 1) sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path);
+                        else sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path).append("\n");
+                    }
+                    textview12.setText(sb.toString());
+                    textview12.setTextSize(10);
+                } else {
+                    textview12.setText("--");
+                }
+            } else {
+                Toast.makeText(this, "没有选择图片", Toast.LENGTH_SHORT).show();
+                textview12.setText("--");
+            }
         }
     }
 
@@ -198,6 +248,28 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                 mAddWorkLogPersenter.addWorkLog(sumbit_str);
                 break;
         }
+    }
+
+    private void upLoadTest() throws IOException {
+
+        ArrayList<File> files = new ArrayList<>();
+        if (imageItems != null && imageItems.size() > 0) {
+            for (int i = 0; i < imageItems.size(); i++) {
+                files.add(new File(imageItems.get(i).path));
+            }
+        }
+        //拼接参数
+        OkGo.post("http://server.jeasonlzy.com/OkHttpUtils/upload")//
+                .tag(this)//
+                .headers("header1", "headerValue1")//
+                .headers("header2", "headerValue2")//
+                .params("param1", "paramValue1")//
+                .params("param2", "paramValue2")//
+//                .params("file1",new File("文件路径"))   //这种方式为一个key，对应一个文件
+//                .params("file2",new File("文件路径"))
+//                .params("file3",new File("文件路径"))
+                .addFileParams("file", files)           // 这种方式为同一个key，上传多个文件
+                .execute();
     }
 
 

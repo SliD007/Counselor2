@@ -357,14 +357,14 @@
                     android:text="上传图片"
                     android:layout_toRightOf="@id/imageLeftIm12"
                     style="@style/text_worklog"/>
-                <ImageView
-                    android:id="@+id/imageRightIm12"
-                    style="@style/nextIm"/>
                 <TextView
                     android:id="@+id/textview12"
-                    android:layout_toLeftOf="@id/imageRightIm12"
-                    style="@style/log_spinner"
-                    android:text="请选择"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
+                    android:text="请选择（可多选）"
                     android:textColor="#ccc"
                     android:textSize="16sp"
                     />
@@ -373,7 +373,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#ccc"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="30dp"/>
         </LinearLayout>
     </ScrollView>
 
