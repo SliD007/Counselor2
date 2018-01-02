@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Sli.D on 2018/1/2.
  */
 
-public class ToDoListModel {
+public class ToDoListModel implements IToDoListModel{
 
 
     public List<ToDoListEntity> getToDoListEntities() {

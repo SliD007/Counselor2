@@ -5,33 +5,36 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import test.example.com.counselor.R;
+import test.example.com.counselor.adapter.Common1Adapter;
 import test.example.com.counselor.adapter.ListAdapter;
+import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
+import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.entity.ListEntity;
 import test.example.com.counselor.listener.MyLvClickListener;
+import test.example.com.counselor.view.schedule.chage.ChangeScheduleActivity;
 
 /**
  * Created by Sli.D on 2017/12/20.
  */
 
-public class ScheduleFragment extends BaseFragment {
+public class ScheduleFragment extends BaseFragment implements IScheduleView{
 
 
     ListEntity mEntity;
-    List<ListEntity> entityList;
+    List<ScheduleEntity> entityList;
     ListAdapter mListAdapter;
     @BindView(R.id.scheduleLv)
     ListView scheduleLv;
-
+    SchedulePersenter mSchedulePersenter;
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_schedule;
@@ -39,23 +42,14 @@ public class ScheduleFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-        //构造数据
-        entityList = new ArrayList<ListEntity>();//空指针高发处
-        for (int i = 0; i < 50; i++) {
-            mEntity = new ListEntity(R.layout.item_commonlist,
-                    "2017/11/19", "服务单位：星沙街道新塘村", "申请修改");
-            entityList.add(mEntity);
-        }
-        //创建adapter
-        mListAdapter = new ListAdapter(super.mContext, entityList, mClickListener, onItemClickListener);
-        scheduleLv.setAdapter(mListAdapter);
-        //设置回调
-        scheduleLv.setOnItemClickListener(onItemClickListener);
+
     }
 
     @Override
     protected void initPresenter() {
 
+        mSchedulePersenter = new SchedulePersenter(getActivity(),this);
+        mSchedulePersenter.requestScheduleList(0,12, MyApplication.getInstance().loginEntity.getId());
     }
 
     @Override
@@ -65,7 +59,21 @@ public class ScheduleFragment extends BaseFragment {
 
     @Override
     protected void initDatas() {
-
+        entityList = mSchedulePersenter.getScheduleEntityList();
+        scheduleLv.setAdapter(new Common1Adapter<ScheduleEntity>(super.mContext, entityList,
+                R.layout.item_commonlist, mClickListener) {
+            @Override
+            protected void convertView(ViewHolder1 mViewHolder, View item, ScheduleEntity scheduleEntity, int position) {
+                TextView tv1 = (TextView) mViewHolder.getView(R.id.itemTv1);
+                TextView tv2 = (TextView) mViewHolder.getView(R.id.itemTv2);
+                TextView tv3 = (TextView) mViewHolder.getView(R.id.itemTv3);
+                tv1.setText(scheduleEntity.getTime());
+                tv2.setText("服务单位："+scheduleEntity.getWorkfor());
+                tv3.setText("申请修改");
+                tv3.setTag(position);
+                tv3.setOnClickListener(mClickListener);
+            }
+        });
     }
 
     @Override
@@ -76,21 +84,13 @@ public class ScheduleFragment extends BaseFragment {
         return rootView;
     }
 
-    //Item响应回调
-    AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        }
-    };
     //控件响应回调
     MyLvClickListener mClickListener = new MyLvClickListener() {
         @Override
         public void myOnClick(int position, View view) {
-            toast("确定要修改第" + (position + 1) + "条吗", true);
             Intent i = new Intent(getActivity(),ChangeScheduleActivity.class);
-            i.putExtra("workfor","星沙街道新塘村");
-            i.putExtra("worktime","2017-11-19");
+            i.putExtra("workfor",entityList.get(position).getWorkfor());
+            i.putExtra("worktime",entityList.get(position).getTime());
             startActivity(i);
 
         }
@@ -99,4 +99,16 @@ public class ScheduleFragment extends BaseFragment {
         }
 
     };
+
+    @Override
+    public void requestScheduleSuccess() {
+        toast("请求成功",false);
+        initDatas();
+    }
+
+    @Override
+    public void requestScheduleFaild() {
+        toast("请求失败",false);
+
+    }
 }

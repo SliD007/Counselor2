@@ -19,7 +19,6 @@ import test.example.com.counselor.adapter.Common1Adapter;
 import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
-import test.example.com.counselor.listener.MyLvClickListener;
 
 /**
  * Created by Sli.D on 2017/12/20.
@@ -153,16 +152,6 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView{
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             toast(""+(position), true);
         }
-    };
-    //控件响应回调
-    MyLvClickListener mClickListener = new MyLvClickListener() {
-        @Override
-        public void myOnClick(int position, View view) {
-        }
-        public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去
-            myOnClick((Integer) v.getTag(), v);
-        }
-
     };
 
     @Override

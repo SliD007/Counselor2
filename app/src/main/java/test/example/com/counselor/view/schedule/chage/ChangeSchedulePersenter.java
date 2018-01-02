@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.schedule;
+package test.example.com.counselor.view.schedule.chage;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,6 +8,7 @@ import android.util.Log;
  */
 
 public class ChangeSchedulePersenter {
+
 
     Context mContext;
     IChangeSchedule mIChangeSchedule;

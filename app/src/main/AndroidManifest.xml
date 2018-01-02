@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".view.login.LoginActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
         <activity android:name=".view.HomeActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
-        <activity android:name=".view.schedule.ChangeScheduleActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+        <activity android:name=".view.schedule.chage.ChangeScheduleActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addworklog.AddWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addadvice.AddAdviceActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addcommon.AddCommonActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>

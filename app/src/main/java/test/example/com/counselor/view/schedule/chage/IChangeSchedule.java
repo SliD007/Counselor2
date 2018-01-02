@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.schedule;
+package test.example.com.counselor.view.schedule.chage;
 
 /**
  * Created by Sli.D on 2017/12/26.

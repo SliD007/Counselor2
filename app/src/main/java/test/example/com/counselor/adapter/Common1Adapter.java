@@ -39,6 +39,13 @@ public abstract class Common1Adapter<T> extends BaseAdapter {
         this.onItemClickListener = onItemClickListener;
     }
 
+    public Common1Adapter(Context context, List<T> datas, int layoutId, MyLvClickListener myClickListener) {
+        this.context = context;
+        this.datas = datas;
+        this.layoutId = layoutId;
+        this.mClickListener = myClickListener;
+    }
+
     public Common1Adapter(Context context, List<T> datas, int layoutId,
                           MyLvClickListener myClickListener,AdapterView.OnItemClickListener onItemClickListener) {
         this.context = context;
