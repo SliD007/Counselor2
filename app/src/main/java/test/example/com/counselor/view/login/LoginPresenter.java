@@ -67,36 +67,6 @@ public class LoginPresenter extends BasePresenter{
     JsonCallback jsonCallback = new JsonCallback() {
 
         @Override
-        public void onBefore(BaseRequest request) {
-            super.onBefore(request);
-            Log.e("onBeforeJSON",request.toString());
-        }
-
-        @Override
-        public void onCacheSuccess(JSONObject jsonObject, Call call) {
-            Log.e("onCacheSuccess",jsonObject.toString());
-            super.onCacheSuccess(jsonObject, call);
-        }
-
-        @Override
-        public void onCacheError(Call call, Exception e) {
-            Log.e("onCacheError",e.toString());
-            super.onCacheError(call, e);
-        }
-
-        @Override
-        public JSONObject convertSuccess(Response response) throws Exception {
-            Log.e("convertSuccess",response.toString());
-            return super.convertSuccess(response);
-        }
-
-        @Override
-        public void parseError(Call call, Exception e) {
-            Log.e("parseError",e.toString());
-            super.parseError(call, e);
-        }
-
-        @Override
         public void onSuccess(JSONObject jsonObject, Call call, Response response) {
             if (jsonObject.getBoolean("success")==true){
                 mLoginView.loginSuccess();
@@ -112,13 +82,6 @@ public class LoginPresenter extends BasePresenter{
             super.onError(call, response, e);
             mLoginView.loginFailed();
         }
-
-        @Override
-        public void onAfter(JSONObject jsonObject, Exception e) {
-            Log.e("onAfter",jsonObject.toString());
-            super.onAfter(jsonObject, e);
-        }
-
 
     };
 
