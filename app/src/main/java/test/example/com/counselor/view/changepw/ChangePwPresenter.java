@@ -36,10 +36,9 @@ public class ChangePwPresenter extends BasePresenter{
         OkGo.post(URL).params(params).execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {
-//                Log.e("response",response.toString());
                 Log.e("s",s);
                 JSONObject object = JSON.parseObject(s);
-                if (object.getBoolean("success")==true){
+                if (object.getInteger("code")==0){
                     mIChangePwView.changePwSuccess();
                 }else {
                     mIChangePwView.changePwFailed();
