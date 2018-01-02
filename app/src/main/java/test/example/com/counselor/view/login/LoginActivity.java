@@ -151,7 +151,5 @@ public class LoginActivity extends BaseActivity implements ILoginView{
     @Override
     public void loginFailed() {
         toast("登录失败！",true);
-        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-        startActivity(intent);
     }
 }
