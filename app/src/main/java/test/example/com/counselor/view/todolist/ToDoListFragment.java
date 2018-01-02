@@ -9,17 +9,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
-import test.example.com.counselor.adapter.ListAdapter;
+import test.example.com.counselor.adapter.Common1Adapter;
+import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
-import test.example.com.counselor.entity.ListEntity;
 import test.example.com.counselor.listener.MyLvClickListener;
 
 /**
@@ -29,9 +28,8 @@ import test.example.com.counselor.listener.MyLvClickListener;
 public class ToDoListFragment extends BaseFragment implements IToDoListView{
 
 
-    ListEntity mEntity;
-    List<ListEntity> entityList;
-    ListAdapter mListAdapter;
+    List<ToDoListEntity> toDoListEntities;
+    List<DoneListEntity> doneListEntities;
     @BindView(R.id.backlogLv)
     ListView backlogLv;
     @BindView(R.id.backlogLeftVw)
@@ -43,6 +41,8 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView{
     @BindView(R.id.backlogRightTv)
     TextView backlogRightTv;
     ToDoListPresenter mToDoListPresenter;
+    private int fragmentType;
+
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_backlog;
@@ -53,6 +53,7 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView{
     protected void initPresenter() {
         mToDoListPresenter = new ToDoListPresenter(getActivity(),this);
         mToDoListPresenter.requestToDoList(0,20,1,MyApplication.getInstance().loginEntity.getId());
+        mToDoListPresenter.requestToDoList(0,20,0,MyApplication.getInstance().loginEntity.getId());
     }
 
     @Override
@@ -78,42 +79,20 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView{
     private void setTabSelection(int index) {
         switch (index){
             case 0:
+                fragmentType=0;
                 backlogLeftTv.setTextColor(Color.rgb(255, 255, 255));
                 backlogLeftVw.setBackgroundColor(Color.rgb(1, 160, 243));
                 backlogRightTv.setTextColor(Color.rgb(102, 102, 102));
                 backlogRightVw.setBackgroundColor(Color.rgb(48, 49, 53));
-
-                //构造数据
-                entityList = new ArrayList<ListEntity>();//空指针高发处
-                for (int i = 0; i < 20; i++) {
-                    mEntity = new ListEntity(R.layout.item_commonlist,
-                            "开展深入学校贯彻十九大精神报告会", "来源：星沙街道司法所", "13:" + (10 + i));
-                    entityList.add(mEntity);
-                }
-                //创建adapter
-                mListAdapter = new ListAdapter(super.mContext, entityList, mClickListener, onItemClickListener);
-                backlogLv.setAdapter(mListAdapter);
-                //设置回调
-                backlogLv.setOnItemClickListener(onItemClickListener);
+                initDatas();
                 break;
             case 1:
+                fragmentType=1;
                 backlogLeftTv.setTextColor(Color.rgb(102, 102, 102));
                 backlogLeftVw.setBackgroundColor(Color.rgb(48, 49, 53));
                 backlogRightTv.setTextColor(Color.rgb(255, 255, 255));
                 backlogRightVw.setBackgroundColor(Color.rgb(1, 160, 243));
-
-                //构造数据
-                entityList = new ArrayList<ListEntity>();//空指针高发处
-                for (int i = 0; i < 50; i++) {
-                    mEntity = new ListEntity(R.layout.item_commonlist,
-                            "开展深入学校贯彻十九大精神报告会", "来源：星沙街道司法所", "12:" + (10 + i));
-                    entityList.add(mEntity);
-                }
-                //创建adapter
-                mListAdapter = new ListAdapter(super.mContext, entityList, mClickListener, onItemClickListener);
-                backlogLv.setAdapter(mListAdapter);
-                //设置回调
-                backlogLv.setOnItemClickListener(onItemClickListener);
+                initDatas();
                 break;
         }
     }
@@ -125,6 +104,37 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView{
 
     @Override
     protected void initDatas() {
+        if(fragmentType==0){
+            toDoListEntities = mToDoListPresenter.getToDoListEntityList();
+            backlogLv.setAdapter(new Common1Adapter<ToDoListEntity>(super.mContext, toDoListEntities,
+                    R.layout.item_commonlist, onItemClickListener) {
+                @Override
+                protected void convertView(ViewHolder1 mViewHolder, View item, ToDoListEntity toDoListEntity, int position) {
+                    TextView tv1 = (TextView) mViewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = (TextView) mViewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = (TextView) mViewHolder.getView(R.id.itemTv3);
+                    tv1.setText(toDoListEntity.getTitle());
+                    tv2.setText(toDoListEntity.getFrom());
+                    tv3.setText(toDoListEntity.getTime());
+                }
+            });
+            backlogLv.setOnItemClickListener(onItemClickListener);
+        }else {
+            doneListEntities = mToDoListPresenter.getDoneListEntityList();
+            backlogLv.setAdapter(new Common1Adapter<DoneListEntity>(super.mContext, doneListEntities,
+                    R.layout.item_commonlist, onItemClickListener) {
+                @Override
+                protected void convertView(ViewHolder1 mViewHolder, View item, DoneListEntity toDoListEntity, int position) {
+                    TextView tv1 = (TextView) mViewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = (TextView) mViewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = (TextView) mViewHolder.getView(R.id.itemTv3);
+                    tv1.setText(toDoListEntity.getTitle());
+                    tv2.setText(toDoListEntity.getFrom());
+                    tv3.setText(toDoListEntity.getTime());
+                }
+            });
+            backlogLv.setOnItemClickListener(onItemClickListener);
+        }
 
     }
 
@@ -158,6 +168,7 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView{
     @Override
     public void requestToDoListSuccess() {
         toast("请求成功",false);
+        initDatas();
     }
 
     @Override
