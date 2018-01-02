@@ -29,9 +29,10 @@ public class ChangePwPresenter extends BasePresenter{
     public void changePw(final Context mContext, final String oldPassword, final String newPassword){
         Log.e(oldPassword,newPassword);
         HashMap<String,String> params = new HashMap<>();
-        params.put("id","dj");
-        params.put("oldPassword",oldPassword);
+        params.put("username","dj");
+        params.put("olderpassword",oldPassword);
         params.put("newPassword",newPassword);
+        params.put("userType","1");
         OkGo.post(URL).params(params).execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {
