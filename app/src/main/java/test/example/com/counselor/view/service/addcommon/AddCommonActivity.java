@@ -25,7 +25,7 @@ public class AddCommonActivity extends BaseActivity implements IAddCommonView{
     @BindView(R.id.addCommonContextEt)
     EditText addCommonContextEt;
     int fragmentType;
-    AddCommonPersenter mAddCommonPersenter;
+    AddCommonPresenter mAddCommonPersenter;
 
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addcommon);
@@ -35,7 +35,7 @@ public class AddCommonActivity extends BaseActivity implements IAddCommonView{
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         initView();
-        mAddCommonPersenter = new AddCommonPersenter(this,this);
+        mAddCommonPersenter = new AddCommonPresenter(this,this);
     }
 
     private void initView() {

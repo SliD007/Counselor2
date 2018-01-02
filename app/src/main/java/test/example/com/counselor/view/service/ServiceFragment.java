@@ -54,7 +54,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     @BindView(R.id.serviceVw4)
     View serviceVw4;
 
-    ServicePersenter mServicePersenter;
+    ServicePresenter mServicePersenter;
     private int fragmentType;
     boolean need_request = true;
     boolean[] first_request ;
@@ -65,7 +65,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
 
     @Override
     protected void initViews() {
-        mServicePersenter = new ServicePersenter(this);
+        mServicePersenter = new ServicePresenter(this);
         fragmentType = 0;
         first_request = new boolean[]{true, true, true, true};
         mServicePersenter.requestData(fragmentType,true);

@@ -7,10 +7,10 @@ import android.util.Log;
  * Created by Sli.D on 2017/12/25.
  */
 
-public class AddCommonPersenter {
+public class AddCommonPresenter {
 
     private IAddCommonView mIAddCommonView;
-    public AddCommonPersenter(Context context, IAddCommonView iAddCommonView) {
+    public AddCommonPresenter(Context context, IAddCommonView iAddCommonView) {
         this.mIAddCommonView = iAddCommonView;
     }
 

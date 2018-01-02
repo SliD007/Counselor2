@@ -7,10 +7,10 @@ import android.util.Log;
  * Created by Sli.D on 2017/12/25.
  */
 
-public class AddAdvicePersenter{
+public class AddAdvicePresenter {
 
     private IAddAdviceView mIAddAdviceView;
-    public AddAdvicePersenter(Context context, IAddAdviceView iAddAdviceView) {
+    public AddAdvicePresenter(Context context, IAddAdviceView iAddAdviceView) {
         this.mIAddAdviceView = iAddAdviceView;
     }
 

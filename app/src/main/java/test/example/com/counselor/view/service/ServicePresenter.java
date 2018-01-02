@@ -6,10 +6,10 @@ import test.example.com.counselor.base.BasePresenter;
  * Created by Sli.D on 2017/12/25.
  */
 
-public class ServicePersenter extends BasePresenter {
+public class ServicePresenter extends BasePresenter {
 
     IServiceView mIServiceView;
-    public ServicePersenter(IServiceView serviceView) {
+    public ServicePresenter(IServiceView serviceView) {
         this.mIServiceView = serviceView;
     }
 

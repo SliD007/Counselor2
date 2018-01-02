@@ -32,7 +32,7 @@ public class MyApplication extends Application {
         this.loginEntity = loginEntity;
     }
 
-    private LoginEntity loginEntity;// 当前的用户信息
+    public LoginEntity loginEntity;// 当前的用户信息
     public MyApplication() {
     }
 

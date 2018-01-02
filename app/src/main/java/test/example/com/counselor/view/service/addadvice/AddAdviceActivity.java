@@ -27,7 +27,7 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
     @BindView(R.id.radioGroup)
     RadioGroup radioGroup;
     int rbId;
-    AddAdvicePersenter mAddAdvicePersenter;
+    AddAdvicePresenter mAddAdvicePersenter;
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addadvice);
@@ -40,7 +40,7 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
         super.allow_quit = false;
         titleBarTv.setText("新增建议上报");
         initView();
-        mAddAdvicePersenter = new AddAdvicePersenter(this,this);
+        mAddAdvicePersenter = new AddAdvicePresenter(this,this);
     }
 
     private void initView() {

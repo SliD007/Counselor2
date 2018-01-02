@@ -71,5 +71,13 @@
         android:layout_height="match_parent"
         android:layout_below="@id/titlelBarRl"
         android:dividerHeight="1dp"/>
-
+    <TextView
+        android:id="@+id/requestMoreToDoListTv"
+        android:text="加载更多"
+        android:gravity="center"
+        android:textColor="#666"
+        android:background="#EBEBEB"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"/>
 </LinearLayout>

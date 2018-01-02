@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.backlog;
+package test.example.com.counselor.view.todolist;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.adapter.ListAdapter;
 import test.example.com.counselor.base.BaseFragment;
+import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.entity.ListEntity;
 import test.example.com.counselor.listener.MyLvClickListener;
 
@@ -25,7 +26,7 @@ import test.example.com.counselor.listener.MyLvClickListener;
  * Created by Sli.D on 2017/12/20.
  */
 
-public class BacklogFragment extends BaseFragment {
+public class ToDoListFragment extends BaseFragment implements IToDoListView{
 
 
     ListEntity mEntity;
@@ -41,10 +42,17 @@ public class BacklogFragment extends BaseFragment {
     View backlogRightVw;
     @BindView(R.id.backlogRightTv)
     TextView backlogRightTv;
-
+    ToDoListPresenter mToDoListPresenter;
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_backlog;
+    }
+
+
+    @Override
+    protected void initPresenter() {
+        mToDoListPresenter = new ToDoListPresenter(getActivity(),this);
+        mToDoListPresenter.requestToDoList(0,20,1,MyApplication.getInstance().loginEntity.getId());
     }
 
     @Override
@@ -77,7 +85,7 @@ public class BacklogFragment extends BaseFragment {
 
                 //构造数据
                 entityList = new ArrayList<ListEntity>();//空指针高发处
-                for (int i = 0; i < 50; i++) {
+                for (int i = 0; i < 20; i++) {
                     mEntity = new ListEntity(R.layout.item_commonlist,
                             "开展深入学校贯彻十九大精神报告会", "来源：星沙街道司法所", "13:" + (10 + i));
                     entityList.add(mEntity);
@@ -108,10 +116,6 @@ public class BacklogFragment extends BaseFragment {
                 backlogLv.setOnItemClickListener(onItemClickListener);
                 break;
         }
-    }
-    @Override
-    protected void initPresenter() {
-
     }
 
     @Override
@@ -150,4 +154,19 @@ public class BacklogFragment extends BaseFragment {
         }
 
     };
+
+    @Override
+    public void requestToDoListSuccess() {
+        toast("请求成功",false);
+    }
+
+    @Override
+    public void requestToDoListFaild() {
+        toast("请求失败",false);
+    }
+
+    @Override
+    public void showDialog(boolean show) {
+
+    }
 }
