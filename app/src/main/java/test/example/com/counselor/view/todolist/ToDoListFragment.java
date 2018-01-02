@@ -57,7 +57,50 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView{
 
     @Override
     protected void initViews() {
+
         setTabSelection(0);//初始化显示wq未读List
+    }
+
+    @Override
+    protected void initEvents() {
+
+    }
+
+    @Override
+    protected void initDatas() {
+
+        if(fragmentType==0){
+            toDoListEntities = mToDoListPresenter.getToDoListEntityList();
+            backlogLv.setAdapter(new Common1Adapter<ToDoListEntity>(super.mContext, toDoListEntities,
+                    R.layout.item_commonlist, onItemClickListener) {
+                @Override
+                protected void convertView(ViewHolder1 mViewHolder, View item, ToDoListEntity toDoListEntity, int position) {
+                    TextView tv1 = (TextView) mViewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = (TextView) mViewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = (TextView) mViewHolder.getView(R.id.itemTv3);
+                    tv1.setText(toDoListEntity.getTitle());
+                    tv2.setText(toDoListEntity.getFrom());
+                    tv3.setText(toDoListEntity.getTime());
+                }
+            });
+            backlogLv.setOnItemClickListener(onItemClickListener);
+        }else {
+            doneListEntities = mToDoListPresenter.getDoneListEntityList();
+            backlogLv.setAdapter(new Common1Adapter<DoneListEntity>(super.mContext, doneListEntities,
+                    R.layout.item_commonlist, onItemClickListener) {
+                @Override
+                protected void convertView(ViewHolder1 mViewHolder, View item, DoneListEntity toDoListEntity, int position) {
+                    TextView tv1 = mViewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = mViewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = mViewHolder.getView(R.id.itemTv3);
+                    tv1.setText(toDoListEntity.getTitle());
+                    tv2.setText(toDoListEntity.getFrom());
+                    tv3.setText(toDoListEntity.getTime());
+                }
+            });
+            backlogLv.setOnItemClickListener(onItemClickListener);
+        }
+
     }
 
 
@@ -96,46 +139,6 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView{
         }
     }
 
-    @Override
-    protected void initEvents() {
-
-    }
-
-    @Override
-    protected void initDatas() {
-        if(fragmentType==0){
-            toDoListEntities = mToDoListPresenter.getToDoListEntityList();
-            backlogLv.setAdapter(new Common1Adapter<ToDoListEntity>(super.mContext, toDoListEntities,
-                    R.layout.item_commonlist, onItemClickListener) {
-                @Override
-                protected void convertView(ViewHolder1 mViewHolder, View item, ToDoListEntity toDoListEntity, int position) {
-                    TextView tv1 = (TextView) mViewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = (TextView) mViewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = (TextView) mViewHolder.getView(R.id.itemTv3);
-                    tv1.setText(toDoListEntity.getTitle());
-                    tv2.setText(toDoListEntity.getFrom());
-                    tv3.setText(toDoListEntity.getTime());
-                }
-            });
-            backlogLv.setOnItemClickListener(onItemClickListener);
-        }else {
-            doneListEntities = mToDoListPresenter.getDoneListEntityList();
-            backlogLv.setAdapter(new Common1Adapter<DoneListEntity>(super.mContext, doneListEntities,
-                    R.layout.item_commonlist, onItemClickListener) {
-                @Override
-                protected void convertView(ViewHolder1 mViewHolder, View item, DoneListEntity toDoListEntity, int position) {
-                    TextView tv1 = (TextView) mViewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = (TextView) mViewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = (TextView) mViewHolder.getView(R.id.itemTv3);
-                    tv1.setText(toDoListEntity.getTitle());
-                    tv2.setText(toDoListEntity.getFrom());
-                    tv3.setText(toDoListEntity.getTime());
-                }
-            });
-            backlogLv.setOnItemClickListener(onItemClickListener);
-        }
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

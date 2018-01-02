@@ -33,6 +33,7 @@ public class MyApplication extends Application {
     }
 
     public LoginEntity loginEntity;// 当前的用户信息
+    public boolean refresh = false;
     public MyApplication() {
     }
 

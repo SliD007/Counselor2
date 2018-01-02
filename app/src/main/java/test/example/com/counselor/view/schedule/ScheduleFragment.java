@@ -2,6 +2,7 @@ package test.example.com.counselor.view.schedule;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import test.example.com.counselor.R;
 import test.example.com.counselor.adapter.Common1Adapter;
-import test.example.com.counselor.adapter.ListAdapter;
 import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
-import test.example.com.counselor.entity.ListEntity;
 import test.example.com.counselor.listener.MyLvClickListener;
 import test.example.com.counselor.view.schedule.chage.ChangeScheduleActivity;
 
@@ -29,20 +28,13 @@ import test.example.com.counselor.view.schedule.chage.ChangeScheduleActivity;
 public class ScheduleFragment extends BaseFragment implements IScheduleView{
 
 
-    ListEntity mEntity;
-    List<ScheduleEntity> entityList;
-    ListAdapter mListAdapter;
     @BindView(R.id.scheduleLv)
     ListView scheduleLv;
-    SchedulePersenter mSchedulePersenter;
+    private List<ScheduleEntity> entityList;
+    public SchedulePersenter mSchedulePersenter;
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_schedule;
-    }
-
-    @Override
-    protected void initViews() {
-
     }
 
     @Override
@@ -50,6 +42,16 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
 
         mSchedulePersenter = new SchedulePersenter(getActivity(),this);
         mSchedulePersenter.requestScheduleList(0,12, MyApplication.getInstance().loginEntity.getId());
+    }
+
+    @Override
+    protected void initViews() {
+
+        Log.e("initViews",""+MyApplication.getInstance().refresh);
+        if(MyApplication.getInstance().refresh){
+            mSchedulePersenter.requestScheduleList(0,12, MyApplication.getInstance().loginEntity.getId());
+            MyApplication.getInstance().refresh = false;
+        }
     }
 
     @Override
@@ -64,9 +66,9 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
                 R.layout.item_commonlist, mClickListener) {
             @Override
             protected void convertView(ViewHolder1 mViewHolder, View item, ScheduleEntity scheduleEntity, int position) {
-                TextView tv1 = (TextView) mViewHolder.getView(R.id.itemTv1);
-                TextView tv2 = (TextView) mViewHolder.getView(R.id.itemTv2);
-                TextView tv3 = (TextView) mViewHolder.getView(R.id.itemTv3);
+                TextView tv1 = mViewHolder.getView(R.id.itemTv1);
+                TextView tv2 = mViewHolder.getView(R.id.itemTv2);
+                TextView tv3 = mViewHolder.getView(R.id.itemTv3);
                 tv1.setText(scheduleEntity.getTime());
                 tv2.setText("服务单位："+scheduleEntity.getWorkfor());
                 tv3.setText("申请修改");

@@ -10,8 +10,8 @@ import android.util.Log;
 public class ChangeSchedulePersenter {
 
 
-    Context mContext;
-    IChangeSchedule mIChangeSchedule;
+    private Context mContext;
+    private IChangeSchedule mIChangeSchedule;
     public ChangeSchedulePersenter(Context context,IChangeSchedule iChangeSchedule) {
         this.mContext = context;
         this.mIChangeSchedule = iChangeSchedule;
@@ -20,5 +20,6 @@ public class ChangeSchedulePersenter {
     public void changeSchedule(String time){
         Log.e("NewTime:",""+time);
         mIChangeSchedule.changeSuccess();
+
     }
 }

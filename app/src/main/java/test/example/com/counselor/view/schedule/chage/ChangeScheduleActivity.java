@@ -71,11 +71,12 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
     @Override
     public void changeSuccess() {
         toast("修改成功！",false);
+
     }
 
     @Override
     public void changeFailed() {
-
+        toast("修改失败！",false);
     }
 
     @OnClick({R.id.backTv, R.id.sumbitTv, R.id.workTimeTv})
@@ -88,6 +89,9 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
             case R.id.sumbitTv:
                 String newtime = workTimeTv.getText().toString();
                 mChangeSchedulePersenter.changeSchedule(newtime);
+                MyApplication.getInstance().refresh = true;
+                MyApplication.getInstance().finishActivity(this);
+                this.finish();
                 break;
             case R.id.workTimeTv:
                 customDatePicker.show(workTimeTv.getText().toString());
