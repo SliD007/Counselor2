@@ -62,8 +62,10 @@ public class ToDoListPresenter {
                             mIToDoListModel.setToDoListEntities(entities);
                         }else {
                             List<DoneListEntity> entities = new ArrayList<DoneListEntity>();
-                            entities.add(new DoneListEntity(0,"开展深入学习十九大精神","星沙街道司法局","2018/01/01/19:47"));
-                            entities.add(new DoneListEntity(1,"开展深入学习十九大精神","星沙街道司法局","2018/01/01/9:47"));
+                            for(int i=0;i<24;i++){
+                                entities.add(new DoneListEntity(i,"开展深入学习十九大精神","星沙街道司法局","2018/01/01/"+i+":47"));
+
+                            }
                             mIToDoListModel.setDoneListEntities(entities);
 
                         }
@@ -74,6 +76,12 @@ public class ToDoListPresenter {
                         super.onError(call, response, e);
                         mIToDoListView.requestToDoListFaild();
                     }
+
+                    @Override
+                    public void onAfter(String s, Exception e) {
+                        super.onAfter(s, e);
+                    }
+
                 });
     }
 

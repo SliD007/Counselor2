@@ -1,7 +1,6 @@
 package test.example.com.counselor.util;
 
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.File;
 
@@ -77,7 +76,7 @@ public class Constants {
         if(!f.exists()){
             f.mkdirs();
         }
-        Log.e("CACHE_FOLDER_PATH",CACHE_FOLDER_PATH);
+//        Log.e("CACHE_FOLDER_PATH",CACHE_FOLDER_PATH);
         return CACHE_FOLDER_PATH;
     }
 

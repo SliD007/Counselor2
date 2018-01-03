@@ -2,6 +2,7 @@ package test.example.com.counselor.view.todolist;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +25,8 @@ import test.example.com.counselor.base.MyApplication;
  * Created by Sli.D on 2017/12/20.
  */
 
-public class ToDoListFragment extends BaseFragment implements IToDoListView{
+public class ToDoListFragment extends BaseFragment implements IToDoListView {
 
-
-    List<ToDoListEntity> toDoListEntities;
-    List<DoneListEntity> doneListEntities;
     @BindView(R.id.backlogLv)
     ListView backlogLv;
     @BindView(R.id.backlogLeftVw)
@@ -40,8 +38,15 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView{
     @BindView(R.id.backlogRightTv)
     TextView backlogRightTv;
     ToDoListPresenter mToDoListPresenter;
+    @BindView(R.id.requestMoreToDoListTv)
+    TextView requestMoreToDoListTv;
     private int fragmentType;
 
+    List<ToDoListEntity> toDoListEntities;
+    List<DoneListEntity> doneListEntities;
+    private int requestSize=20;
+    private int requestToDoCurrent=0;
+    private int requestDoneCurrent=0;
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_backlog;
@@ -50,14 +55,15 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView{
 
     @Override
     protected void initPresenter() {
-        mToDoListPresenter = new ToDoListPresenter(getActivity(),this);
-        mToDoListPresenter.requestToDoList(0,20,1,MyApplication.getInstance().loginEntity.getId());
-        mToDoListPresenter.requestToDoList(0,20,0,MyApplication.getInstance().loginEntity.getId());
+        mToDoListPresenter = new ToDoListPresenter(getActivity(), this);
+        mToDoListPresenter.requestToDoList(requestToDoCurrent, requestSize, 1, MyApplication.getInstance().loginEntity.getId());
+        mToDoListPresenter.requestToDoList(requestDoneCurrent, requestSize, 0, MyApplication.getInstance().loginEntity.getId());
+        requestToDoCurrent=1;
+        requestDoneCurrent=1;
     }
 
     @Override
     protected void initViews() {
-
         setTabSelection(0);//初始化显示wq未读List
     }
 
@@ -69,22 +75,31 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView{
     @Override
     protected void initDatas() {
 
-        if(fragmentType==0){
+        if (fragmentType == 0) {
+
             toDoListEntities = mToDoListPresenter.getToDoListEntityList();
+            Log.e("toDoListEntities",""+(toDoListEntities==null));
             backlogLv.setAdapter(new Common1Adapter<ToDoListEntity>(super.mContext, toDoListEntities,
                     R.layout.item_commonlist, onItemClickListener) {
                 @Override
                 protected void convertView(ViewHolder1 mViewHolder, View item, ToDoListEntity toDoListEntity, int position) {
-                    TextView tv1 = (TextView) mViewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = (TextView) mViewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = (TextView) mViewHolder.getView(R.id.itemTv3);
+                    TextView tv1 = mViewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = mViewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = mViewHolder.getView(R.id.itemTv3);
                     tv1.setText(toDoListEntity.getTitle());
                     tv2.setText(toDoListEntity.getFrom());
                     tv3.setText(toDoListEntity.getTime());
                 }
             });
             backlogLv.setOnItemClickListener(onItemClickListener);
-        }else {
+            if(toDoListEntities!=null){
+                if(toDoListEntities.size()<requestSize){
+                    requestMoreToDoListTv.setText("没有更多");
+                }else {
+                    requestMoreToDoListTv.setText("点击加载更多");
+                }
+            }
+        } else {
             doneListEntities = mToDoListPresenter.getDoneListEntityList();
             backlogLv.setAdapter(new Common1Adapter<DoneListEntity>(super.mContext, doneListEntities,
                     R.layout.item_commonlist, onItemClickListener) {
@@ -99,42 +114,62 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView{
                 }
             });
             backlogLv.setOnItemClickListener(onItemClickListener);
+            if(doneListEntities.size()<requestSize){
+                requestMoreToDoListTv.setText("没有更多");
+            }else {
+                requestMoreToDoListTv.setText("点击加载更多");}
         }
 
     }
 
 
-    @OnClick({R.id.backlogLeftRl, R.id.backlogRightRl})
+    @OnClick({R.id.backlogLeftRl, R.id.backlogRightRl,R.id.requestMoreToDoListTv})
     public void onSwitchClick(View view) {
         switch (view.getId()) {
             case R.id.backlogLeftRl:
                 setTabSelection(0);
+                initDatas();
                 break;
             case R.id.backlogRightRl:
                 setTabSelection(1);
+                initDatas();
+                break;
+            case R.id.requestMoreToDoListTv:
+                if(fragmentType==0 & toDoListEntities!=null){
+                    if(toDoListEntities.size()<requestSize){
+                        toast("没有更多了",false);
+                    }else {
+                        mToDoListPresenter.requestToDoList(requestToDoCurrent, requestSize, 1, MyApplication.getInstance().loginEntity.getId());
+                    }
+                }else if(fragmentType==1 & doneListEntities!=null){
+                    if(doneListEntities.size()<requestSize){
+                        toast("没有更多了",false);
+                    }else {
+                        mToDoListPresenter.requestToDoList(requestDoneCurrent, requestSize, 0, MyApplication.getInstance().loginEntity.getId());
+                    }
+                }
                 break;
         }
     }
+
     /*
     根据传入值设置不同listview
      */
     private void setTabSelection(int index) {
-        switch (index){
+        switch (index) {
             case 0:
-                fragmentType=0;
+                fragmentType = 0;
                 backlogLeftTv.setTextColor(Color.rgb(255, 255, 255));
                 backlogLeftVw.setBackgroundColor(Color.rgb(1, 160, 243));
                 backlogRightTv.setTextColor(Color.rgb(102, 102, 102));
                 backlogRightVw.setBackgroundColor(Color.rgb(48, 49, 53));
-                initDatas();
                 break;
             case 1:
-                fragmentType=1;
+                fragmentType = 1;
                 backlogLeftTv.setTextColor(Color.rgb(102, 102, 102));
                 backlogLeftVw.setBackgroundColor(Color.rgb(48, 49, 53));
                 backlogRightTv.setTextColor(Color.rgb(255, 255, 255));
                 backlogRightVw.setBackgroundColor(Color.rgb(1, 160, 243));
-                initDatas();
                 break;
         }
     }
@@ -153,19 +188,19 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView{
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            toast(""+(position), true);
+            toast("" + (position), true);
         }
     };
 
     @Override
     public void requestToDoListSuccess() {
-        toast("请求成功",false);
+        toast("请求成功", false);
         initDatas();
     }
 
     @Override
     public void requestToDoListFaild() {
-        toast("请求失败",false);
+        toast("请求失败", false);
     }
 
     @Override

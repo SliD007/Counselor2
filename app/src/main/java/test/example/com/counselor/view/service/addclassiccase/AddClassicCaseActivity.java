@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.service.addcommon;
+package test.example.com.counselor.view.service.addclassiccase;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,37 +17,35 @@ import test.example.com.counselor.base.MyApplication;
  * Created by Sli.D on 2017/12/21.
  */
 
-public class AddCommonActivity extends BaseActivity implements IAddCommonView{
+public class AddClassicCaseActivity extends BaseActivity implements IAddClassicCaseView {
+
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
-    @BindView(R.id.addCommonTitleEt)
-    EditText addCommonTitleEt;
-    @BindView(R.id.addCommonContextEt)
-    EditText addCommonContextEt;
-    int fragmentType;
-    AddCommonPresenter mAddCommonPersenter;
+
+    AddClassicCasePresenter mAddClassicCasePresenter;
+
+    @BindView(R.id.addClassicCaseTitleEt)
+    EditText addClassicCaseTitleEt;
+    @BindView(R.id.addClassicCaseContextEt)
+    EditText addClassicCaseContextEt;
 
     protected void initContentView(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_addcommon);
+        setContentView(R.layout.activity_addclassiccase);
     }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         initView();
-        mAddCommonPersenter = new AddCommonPresenter(this,this);
+        mAddClassicCasePresenter = new AddClassicCasePresenter(this, this);
     }
 
     private void initView() {
 
         Intent i = getIntent();
         super.allow_quit = false;
-        fragmentType = i.getIntExtra("fragmentType",0);
-        if(fragmentType==2){
-            titleBarTv.setText("新增典型案例");
-        }else{
-            titleBarTv.setText("新增月度总结");
-        }
+        titleBarTv.setText("新增典型案例");
+
     }
 
     @OnClick({R.id.backTv, R.id.sumbitTv})
@@ -58,9 +56,9 @@ public class AddCommonActivity extends BaseActivity implements IAddCommonView{
                 this.finish();
                 break;
             case R.id.sumbitTv:
-                String title = addCommonTitleEt.getText().toString();
-                String context_str = addCommonContextEt.getText().toString();
-                mAddCommonPersenter.addCommonText(fragmentType,title,context_str);
+                String title = addClassicCaseTitleEt.getText().toString();
+                String context_str = addClassicCaseContextEt.getText().toString();
+                mAddClassicCasePresenter.addCommonText(title, context_str);
                 break;
         }
     }
@@ -71,11 +69,11 @@ public class AddCommonActivity extends BaseActivity implements IAddCommonView{
 
     @Override
     public void addSuccess() {
-        toast("添加成功",false);
+        toast("添加成功", false);
     }
 
     @Override
     public void addFailed() {
-        toast("添加失败",false);
+        toast("添加失败", false);
     }
 }

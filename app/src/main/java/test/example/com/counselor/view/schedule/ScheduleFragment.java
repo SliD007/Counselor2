@@ -2,7 +2,6 @@ package test.example.com.counselor.view.schedule;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,7 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
     @Override
     protected void initViews() {
 
-        Log.e("initViews",""+MyApplication.getInstance().refresh);
+//        Log.e("initViews",""+MyApplication.getInstance().refresh);
         if(MyApplication.getInstance().refresh){
             mSchedulePersenter.requestScheduleList(0,12, MyApplication.getInstance().loginEntity.getId());
             MyApplication.getInstance().refresh = false;
@@ -80,7 +79,6 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;

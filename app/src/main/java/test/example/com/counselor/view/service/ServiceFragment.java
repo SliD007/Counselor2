@@ -22,7 +22,8 @@ import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.entity.ListEntity;
 import test.example.com.counselor.listener.MyLvClickListener;
 import test.example.com.counselor.view.service.addadvice.AddAdviceActivity;
-import test.example.com.counselor.view.service.addcommon.AddCommonActivity;
+import test.example.com.counselor.view.service.addclassiccase.AddClassicCaseActivity;
+import test.example.com.counselor.view.service.addsummary.addclassiccase.AddSummaryActivity;
 import test.example.com.counselor.view.service.addworklog.AddWorkLogActivity;
 
 /**
@@ -108,12 +109,10 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 startActivity(i);
                 break;
             case 2:
-                i = new Intent(getActivity(), AddCommonActivity.class);
-                i.putExtra("fragmentType",fragmentType);
+                i = new Intent(getActivity(), AddClassicCaseActivity.class);
                 startActivity(i);
             case 3:
-                i = new Intent(getActivity(), AddCommonActivity.class);
-                i.putExtra("fragmentType",fragmentType);
+                i = new Intent(getActivity(), AddSummaryActivity.class);
                 startActivity(i);
         }
     }

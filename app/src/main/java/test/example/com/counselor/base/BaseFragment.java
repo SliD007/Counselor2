@@ -34,20 +34,22 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         initViews();
+//        Log.e("BaseFragment","onStart"+getFragmentLayoutId());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        Log.e("BaseFragment","onResume"+getFragmentLayoutId());
     }
 
     @Override
     public void onPause() {
         super.onPause();
+//        Log.e("BaseFragment","onPause"+getFragmentLayoutId());
     }
 
     @Override
