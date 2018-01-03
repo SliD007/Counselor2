@@ -17,8 +17,8 @@ public class ChangeSchedulePersenter {
         this.mIChangeSchedule = iChangeSchedule;
     }
 
-    public void changeSchedule(String time){
-        Log.e("NewTime:",""+time);
+    public void changeSchedule(int id,String time,String workWay){
+        Log.e("changeSchedule:","id:"+id+"time:"+time+"workWay:"+workWay);
         mIChangeSchedule.changeSuccess();
 
     }

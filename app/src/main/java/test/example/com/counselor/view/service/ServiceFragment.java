@@ -23,7 +23,7 @@ import test.example.com.counselor.entity.ListEntity;
 import test.example.com.counselor.listener.MyLvClickListener;
 import test.example.com.counselor.view.service.addadvice.AddAdviceActivity;
 import test.example.com.counselor.view.service.addclassiccase.AddClassicCaseActivity;
-import test.example.com.counselor.view.service.addsummary.addclassiccase.AddSummaryActivity;
+import test.example.com.counselor.view.service.addsummary.AddSummaryActivity;
 import test.example.com.counselor.view.service.addworklog.AddWorkLogActivity;
 
 /**

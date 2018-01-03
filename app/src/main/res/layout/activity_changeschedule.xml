@@ -17,7 +17,7 @@
             android:layout_height="60dp">
             <TextView
                 android:text="服务单位"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="#000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -26,8 +26,8 @@
             <TextView
                 android:id="@+id/workForTv"
                 android:text="星沙街道蓝田新村"
-                android:textSize="18sp"
-                android:textColor="#666"
+                android:textColor="#999"
+                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -41,7 +41,7 @@
 
             <TextView
                 android:text="服务时间"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="#000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,15 +54,43 @@
             <TextView
                 android:id="@+id/workTimeTv"
                 android:text="时间"
-                android:textSize="18sp"
-                android:textColor="#666"
+                android:textColor="#999"
+                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@id/imageRightIm"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"/>
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <TextView
+                android:id="@+id/workWayTv"
+                android:text="服务方式"
+                android:textSize="16sp"
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"/>
+            <ImageView
+                android:id="@+id/imageRightIm2"
+                android:src="@drawable/u609"
+                style="@style/nextIm"/>
+            <Spinner
+                android:id="@+id/workWaySp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_toLeftOf="@id/imageRightIm2"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                />
+        </RelativeLayout>
     </LinearLayout>
+
 
 
 </LinearLayout>

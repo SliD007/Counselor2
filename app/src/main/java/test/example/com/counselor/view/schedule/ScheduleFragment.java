@@ -89,6 +89,7 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
         @Override
         public void myOnClick(int position, View view) {
             Intent i = new Intent(getActivity(),ChangeScheduleActivity.class);
+            i.putExtra("id",position);
             i.putExtra("workfor",entityList.get(position).getWorkfor());
             i.putExtra("worktime",entityList.get(position).getTime());
             startActivity(i);

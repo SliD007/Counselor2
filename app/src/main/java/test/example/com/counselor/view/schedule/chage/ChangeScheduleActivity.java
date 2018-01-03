@@ -2,11 +2,17 @@ package test.example.com.counselor.view.schedule.chage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -29,6 +35,13 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
     TextView workForTv;
     @BindView(R.id.workTimeTv)
     TextView workTimeTv;
+    @BindView(R.id.workWaySp)
+    Spinner workWaySp;
+
+    List<String> list;
+    ArrayAdapter<String> adapter;
+    int ScheduleId;
+    String workWay;
 
     ChangeSchedulePersenter mChangeSchedulePersenter;
     private CustomDatePicker customDatePicker;
@@ -50,11 +63,11 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
         super.allow_quit = false;
         titleBarTv.setText("修改工作安排");
         Intent i = getIntent();
+        ScheduleId = i.getIntExtra("id",0);
         String workfor = i.getStringExtra("workfor");
         String worktime = i.getStringExtra("worktime");
         workForTv.setText(workfor);
         workTimeTv.setText(worktime);
-
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         String now = sdf.format(new Date());
 
@@ -66,17 +79,25 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
         }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker.showSpecificTime(false); // 不显示时和分
         customDatePicker.setIsLoop(false); // 不允许循环滚动
+
+        list = new ArrayList<String>();
+        list.add("坐班");
+        list.add("电话");
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        workWaySp.setAdapter(adapter);
+        workWaySp.setOnItemSelectedListener(mOnItemClickListener);
     }
 
     @Override
     public void changeSuccess() {
-        toast("修改成功！",false);
+        toast("修改成功！", false);
 
     }
 
     @Override
     public void changeFailed() {
-        toast("修改失败！",false);
+        toast("修改失败！", false);
     }
 
     @OnClick({R.id.backTv, R.id.sumbitTv, R.id.workTimeTv})
@@ -88,14 +109,28 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
                 break;
             case R.id.sumbitTv:
                 String newtime = workTimeTv.getText().toString();
-                mChangeSchedulePersenter.changeSchedule(newtime);
+                mChangeSchedulePersenter.changeSchedule(ScheduleId,newtime,workWay);
                 MyApplication.getInstance().refresh = true;
                 MyApplication.getInstance().finishActivity(this);
                 this.finish();
                 break;
             case R.id.workTimeTv:
+                Log.e("workTimeTv",""+workTimeTv.getText().toString());
                 customDatePicker.show(workTimeTv.getText().toString());
                 break;
         }
     }
+
+    AdapterView.OnItemSelectedListener mOnItemClickListener = new AdapterView.OnItemSelectedListener() {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            workWay = parent.getSelectedItem().toString();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            workWay = "default";
+        }
+    };
+
 }

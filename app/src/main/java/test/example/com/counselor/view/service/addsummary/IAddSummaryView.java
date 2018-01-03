@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.service.addsummary.addclassiccase;
+package test.example.com.counselor.view.service.addsummary;
 
 /**
  * Created by Sli.D on 2017/12/25.

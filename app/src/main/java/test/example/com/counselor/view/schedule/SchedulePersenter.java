@@ -37,7 +37,7 @@ public class SchedulePersenter {
         //String  contact  手机号码; String  password  用户登录密码
         params.put("current",current+"");
         params.put("size",size+"");
-        params.put("size",counselorId+"");
+        params.put("counselorId",counselorId+"");
         OkGo.post(URL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())

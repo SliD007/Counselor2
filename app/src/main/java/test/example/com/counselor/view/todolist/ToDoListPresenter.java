@@ -38,8 +38,8 @@ public class ToDoListPresenter {
         //String  contact  手机号码; String  password  用户登录密码
         params.put("current",current+"");
         params.put("size",size+"");
-        params.put("current",type+"");
-        params.put("size",counselorId+"");
+        params.put("type",type+"");
+        params.put("counselorId",counselorId+"");
         OkGo.post(URL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())

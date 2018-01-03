@@ -26,7 +26,7 @@
         <activity android:name=".view.service.addworklog.AddWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addadvice.AddAdviceActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addclassiccase.AddClassicCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
-        <activity android:name=".view.service.addsummary.addclassiccase.AddSummaryActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+        <activity android:name=".view.service.addsummary.AddSummaryActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.changepw.ChagePwActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
 
     </application>

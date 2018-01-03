@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.service.addsummary.addclassiccase;
+package test.example.com.counselor.view.service.addsummary;
 
 import android.content.Intent;
 import android.os.Bundle;

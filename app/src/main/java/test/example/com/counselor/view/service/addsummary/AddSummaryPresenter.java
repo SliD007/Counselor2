@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.service.addsummary.addclassiccase;
+package test.example.com.counselor.view.service.addsummary;
 
 import android.content.Context;
 import android.util.Log;
