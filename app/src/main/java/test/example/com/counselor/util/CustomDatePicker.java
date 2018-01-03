@@ -145,6 +145,9 @@ public class CustomDatePicker {
         spanHour = (!spanDay) && (startHour != endHour);
         spanMin = (!spanHour) && (startMinute != endMinute);
         selectedCalender.setTime(startCalendar.getTime());
+        startYear=endCalendar.get(Calendar.YEAR);
+        endMonth = 12;
+//        Log.e("Time",""+endYear+endMonth+endDay);
     }
 
     private void initTimer() {
@@ -481,6 +484,7 @@ public class CustomDatePicker {
     }
 
     public void show(String time) {
+
         if (canAccess) {
             if (isValidDate(time, "yyyy-MM-dd")) {
                 if (startCalendar.getTime().getTime() < endCalendar.getTime().getTime()) {

@@ -68,6 +68,7 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
         String worktime = i.getStringExtra("worktime");
         workForTv.setText(workfor);
         workTimeTv.setText(worktime);
+        //T
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         String now = sdf.format(new Date());
 
@@ -79,7 +80,7 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
         }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker.showSpecificTime(false); // 不显示时和分
         customDatePicker.setIsLoop(false); // 不允许循环滚动
-
+        //S
         list = new ArrayList<String>();
         list.add("坐班");
         list.add("电话");

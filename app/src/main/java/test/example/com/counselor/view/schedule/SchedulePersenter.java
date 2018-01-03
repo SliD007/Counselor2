@@ -54,14 +54,14 @@ public class SchedulePersenter {
 //                            mIToDoListView.requestToDoListFaild();
 //                        }
                         List<ScheduleEntity> entities = new ArrayList<ScheduleEntity>();
-                        entities.add(new ScheduleEntity(0,"2018/01/12/","星沙街道新塘村"));
-                        entities.add(new ScheduleEntity(0,"2018/02/12/","星沙街道新塘村"));
-                        entities.add(new ScheduleEntity(0,"2018/03/12/","星沙街道新塘村"));
-                        entities.add(new ScheduleEntity(0,"2018/04/12/","星沙街道新塘村"));
-                        entities.add(new ScheduleEntity(0,"2018/05/12/","星沙街道新塘村"));
-                        entities.add(new ScheduleEntity(0,"2018/06/12/","星沙街道新塘村"));
-                        entities.add(new ScheduleEntity(0,"2018/07/12/","星沙街道新塘村"));
-                        entities.add(new ScheduleEntity(0,"2018/08/12/","星沙街道新塘村"));
+                        entities.add(new ScheduleEntity(0,"2018-01-12","星沙街道新塘村"));
+                        entities.add(new ScheduleEntity(1,"2018-02-12","星沙街道新塘村"));
+                        entities.add(new ScheduleEntity(2,"2018-03-12","星沙街道新塘村"));
+                        entities.add(new ScheduleEntity(3,"2018-04-12","星沙街道新塘村"));
+                        entities.add(new ScheduleEntity(4,"2018-05-12","星沙街道新塘村"));
+                        entities.add(new ScheduleEntity(5,"2018-06-12","星沙街道新塘村"));
+                        entities.add(new ScheduleEntity(6,"2018-07-12","星沙街道新塘村"));
+                        entities.add(new ScheduleEntity(7,"2018-08-12","星沙街道新塘村"));
                         mIScheduleModel.setScheduleEntities(entities);
                         mIScheduleView.requestScheduleSuccess();
                     }
