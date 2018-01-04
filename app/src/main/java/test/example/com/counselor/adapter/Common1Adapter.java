@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 
 import java.util.List;
 
-import test.example.com.counselor.listener.MyLvClickListener;
+import test.example.com.counselor.base.MyLvClickListener;
 
 import static test.example.com.counselor.adapter.ViewHolder1.getViewHolder;
 

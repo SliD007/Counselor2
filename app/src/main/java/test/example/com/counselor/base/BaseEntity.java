@@ -1,4 +1,4 @@
-package test.example.com.counselor.entity;
+package test.example.com.counselor.base;
 
 /**
  * Created by Sli.D on 2017/6/19.

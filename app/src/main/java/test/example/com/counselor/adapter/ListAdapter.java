@@ -9,7 +9,7 @@ import java.util.List;
 
 import test.example.com.counselor.R;
 import test.example.com.counselor.entity.ListEntity;
-import test.example.com.counselor.listener.MyLvClickListener;
+import test.example.com.counselor.base.MyLvClickListener;
 
 /**
  * Created by Sli.D on 2017/12/21.

@@ -17,7 +17,7 @@ import test.example.com.counselor.adapter.Common1Adapter;
 import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
-import test.example.com.counselor.listener.MyLvClickListener;
+import test.example.com.counselor.base.MyLvClickListener;
 import test.example.com.counselor.view.schedule.chage.ChangeScheduleActivity;
 
 /**
