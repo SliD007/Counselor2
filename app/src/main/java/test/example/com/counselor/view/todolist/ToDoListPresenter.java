@@ -13,6 +13,8 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Response;
 import test.example.com.counselor.util.Constants;
+import test.example.com.counselor.view.todolist.entity.DoneListEntity;
+import test.example.com.counselor.view.todolist.entity.ToDoListEntity;
 
 /**
  * Created by Sli.D on 2018/1/2.

@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.todolist;
+package test.example.com.counselor.view.todolist.entity;
 
 import java.io.Serializable;
 
@@ -6,13 +6,13 @@ import java.io.Serializable;
  * Created by Sli.D on 2017/5/12.
  */
 
-public class ToDoListEntity implements Serializable{
+public class DoneListEntity implements Serializable{
     private int id;
     private String title;
     private String from;
     private String time;
 
-    public ToDoListEntity(int id, String title, String from, String time) {
+    public DoneListEntity(int id, String title, String from, String time) {
         this.from = from;
         this.id = id;
         this.time = time;

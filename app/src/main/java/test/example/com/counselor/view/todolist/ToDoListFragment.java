@@ -20,6 +20,8 @@ import test.example.com.counselor.adapter.Common1Adapter;
 import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.view.todolist.entity.DoneListEntity;
+import test.example.com.counselor.view.todolist.entity.ToDoListEntity;
 
 /**
  * Created by Sli.D on 2017/12/20.
