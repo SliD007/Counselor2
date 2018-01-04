@@ -1,4 +1,4 @@
-package test.example.com.counselor.callback;
+package test.example.com.counselor.base;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;

@@ -2,6 +2,7 @@ package test.example.com.counselor.view.todolist;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +78,7 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
 
     @Override
     protected void initDatas() {
-
+        Log.e("ToDoListFragment","加载数据");
         if (fragmentType == 0) {
             toDoListEntities = mToDoListPresenter.getToDoListEntityList();
             backlogLv.setAdapter(new Common1Adapter<ToDoListEntity>(super.mContext, toDoListEntities,
@@ -176,7 +177,8 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
 
     @Override
     public void requestToDoListSuccess() {
-        toast("请求成功", false);
+//        toast("请求成功", false);
+        Log.e("ToDoListFragment","请求成功");
         initDatas();
     }
 

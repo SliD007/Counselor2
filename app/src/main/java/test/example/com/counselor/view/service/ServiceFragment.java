@@ -3,6 +3,7 @@ package test.example.com.counselor.view.service;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,6 +101,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
 
     @Override
     protected void initDatas() {
+        Log.e("ServiceFragment","加载数据");
         if (fragmentType == 0) {
             workLogEntities = mServicePersenter.getWorkLogEntities();
             serviceLv.setAdapter(new Common1Adapter<WorkLogEntity>(super.mContext, workLogEntities,
@@ -239,7 +241,8 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
 
     @Override
     public void requestServiceSuccess() {
-        toast("请求成功", false);
+//        toast("请求成功", false);
+        Log.e("ServiceFragment","请求成功");
         initDatas();
     }
 

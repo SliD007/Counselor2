@@ -2,6 +2,7 @@ package test.example.com.counselor.view.personal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ public class PersonalFragment extends BaseFragment {
 
     @Override
     protected void initDatas() {
-
+        Log.e("PersonalFragment","加载数据");
     }
 
     @Override

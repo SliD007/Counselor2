@@ -15,7 +15,7 @@ import java.util.HashMap;
 import okhttp3.Call;
 import okhttp3.Response;
 import test.example.com.counselor.base.BasePresenter;
-import test.example.com.counselor.callback.JsonCallback;
+import test.example.com.counselor.base.JsonCallback;
 import test.example.com.counselor.util.Constants;
 
 /**

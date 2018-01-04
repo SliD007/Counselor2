@@ -19,10 +19,28 @@ public abstract class BaseFragment extends Fragment {
     protected Context mContext;
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (!isCreated) {
+            return;
+        }
+
+        if (isVisibleToUser) {
+//            Log.e("BaseFragment","setUserVisibleHint"+getFragmentLayoutId()+isVisibleToUser);
+            initDatas();
+        }else {
+//            Log.e("BaseFragment","setUserVisibleHint"+getFragmentLayoutId()+isVisibleToUser);
+        }
+
+    }
+    protected boolean isCreated = false;
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
         initPresenter();
+        isCreated = true;
     }
 
     @Nullable
