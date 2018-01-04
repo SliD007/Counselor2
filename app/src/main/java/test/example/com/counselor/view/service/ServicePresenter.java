@@ -26,69 +26,19 @@ public class ServicePresenter extends BasePresenter {
     String URL = "http://www.baidu.com";
     IServiceView mIServiceView;
     IServiceModel mServiceModel;
+    List<WorkLogEntity> workLogEntities;
+    List<AdviceEntity> adviceEntities;
+    List<ClassicCaseEntity> classicCaseEntities;
+    List<SummaryEntity> summaryEntities;
     public ServicePresenter(IServiceView serviceView) {
         this.mIServiceView = serviceView;
         this.mServiceModel = new ServiceModel();
+        workLogEntities = new ArrayList<WorkLogEntity>();
+        adviceEntities = new ArrayList<AdviceEntity>();
+        classicCaseEntities = new ArrayList<ClassicCaseEntity>();
+        summaryEntities = new ArrayList<SummaryEntity>();
     }
 
-    public void requestData(int index,boolean need_request){
-        String[] str1 = new String[0];
-        String[] str2 = new String[0];
-        String[] str3 = new String[0];
-
-        /*
-        need_request获取模式，在okgo里：
-            true则使用FIRST_CACHE_THEN_REQUEST先缓存仔请求
-            false则使用IF_NONE_CACHE_REQUEST缓存不在才请求
-         */
-        if (need_request){  //需要进行网络请求
-            switch (index){
-                case 0:
-                    str1 = new String[]{"工作日志r", "工作日志r", "工作日志r"};
-                    str2 = new String[]{"报送至：长沙县司法局", "报送至：长沙县司法局", "报送至：长沙县司法局"};
-                    str3 = new String[]{"2017/12/01", "2017/11/01", "2017/10/01"};
-                    break;
-                case 1:
-                    str1 = new String[]{"关于预防金融诈骗的建议r", "关于预防虚假网络贷款的建议", "关于预防老年人被诈骗的建议"};
-                    str2 = new String[]{"报送至：长沙县司法局", "报送至：长沙县司法局", "报送至：长沙县司法局"};
-                    str3 = new String[]{"2017/12/01", "2017/11/01", "2017/10/01"};
-                    break;
-                case 2:
-                    str1 = new String[]{"关于预防金融诈骗的典型案件r", "关于预防虚假网络贷款的典型案件", "关于预防老年人被诈骗的典型案件"};
-                    str2 = new String[]{"报送至：长沙县司法局", "报送至：长沙县司法局", "报送至：长沙县司法局"};
-                    str3 = new String[]{"2017/12/01", "2017/11/01", "2017/10/01"};
-                    break;
-                case 3:
-                    str1 = new String[]{"11月总结r", "10月总结", "9月总结"};
-                    str2 = new String[]{"报送至：长沙县司法局", "报送至：长沙县司法局", "报送至：长沙县司法局"};
-                    str3 = new String[]{"2017/12/01", "2017/11/01", "2017/10/01"};
-                    break;
-            }
-        }else { // 在本地获取
-            switch (index){
-                case 0:
-                    str1 = new String[]{"工作日志", "工作日志", "工作日志"};
-                    str2 = new String[]{"报送至：长沙县司法局", "报送至：长沙县司法局", "报送至：长沙县司法局"};
-                    str3 = new String[]{"2017/12/01", "2017/11/01", "2017/10/01"};
-                    break;
-                case 1:
-                    str1 = new String[]{"关于预防金融诈骗的建议", "关于预防虚假网络贷款的建议", "关于预防老年人被诈骗的建议"};
-                    str2 = new String[]{"报送至：长沙县司法局", "报送至：长沙县司法局", "报送至：长沙县司法局"};
-                    str3 = new String[]{"2017/12/01", "2017/11/01", "2017/10/01"};
-                    break;
-                case 2:
-                    str1 = new String[]{"关于预防金融诈骗的典型案件", "关于预防虚假网络贷款的典型案件", "关于预防老年人被诈骗的典型案件"};
-                    str2 = new String[]{"报送至：长沙县司法局", "报送至：长沙县司法局", "报送至：长沙县司法局"};
-                    str3 = new String[]{"2017/12/01", "2017/11/01", "2017/10/01"};
-                    break;
-                case 3:
-                    str1 = new String[]{"11月总结", "10月总结", "9月总结"};
-                    str2 = new String[]{"报送至：长沙县司法局", "报送至：长沙县司法局", "报送至：长沙县司法局"};
-                    str3 = new String[]{"2017/12/01", "2017/11/01", "2017/10/01"};
-                    break;
-            }
-        }
-    }
 
     public void requestServiceData(int current, int size, final int type, int counselorId){
 
@@ -115,25 +65,21 @@ public class ServicePresenter extends BasePresenter {
 //                            mIToDoListView.requestToDoListFaild();
 //                        }
                         if (type==0){
-                            List<WorkLogEntity> entities = new ArrayList<WorkLogEntity>();
-                            entities.add(new WorkLogEntity(0,"工作日志","报送至：长沙县司法局","2018/01/02/19:47"));
-                            entities.add(new WorkLogEntity(1,"开展深入学习十九大精神","星沙街道司法局","2018/01/02/9:47"));
-                            mServiceModel.setWorkLogEntities(entities);
+                            workLogEntities.add(new WorkLogEntity(0,"工作日志","报送至：长沙县司法局","2018/01/02/19:47"));
+                            workLogEntities.add(new WorkLogEntity(1,"开展深入学习十九大精神","星沙街道司法局","2018/01/02/9:47"));
+                            mServiceModel.setWorkLogEntities(workLogEntities);
                         }else if(type==1){
-                            List<AdviceEntity> entities = new ArrayList<AdviceEntity>();
-                            entities.add(new AdviceEntity(0,"关于预防金融诈骗的建议","报送至：长沙县司法局","2018/01/02/19:47"));
-                            entities.add(new AdviceEntity(1,"关于预防金融诈骗的建议","星沙街道司法局","2018/01/02/9:47"));
-                            mServiceModel.setAdviceEntities(entities);
+                            adviceEntities.add(new AdviceEntity(0,"关于预防金融诈骗的建议","报送至：长沙县司法局","2018/01/02/19:47"));
+                            adviceEntities.add(new AdviceEntity(1,"关于预防金融诈骗的建议","星沙街道司法局","2018/01/02/9:47"));
+                            mServiceModel.setAdviceEntities(adviceEntities);
                         }else if(type==2){
-                            List<ClassicCaseEntity> entities = new ArrayList<ClassicCaseEntity>();
-                            entities.add(new ClassicCaseEntity(0,"关于预防金融诈骗的典型案件","报送至：长沙县司法局","2018/01/02/19:47"));
-                            entities.add(new ClassicCaseEntity(1,"关于预防金融诈骗的典型案件","星沙街道司法局","2018/01/02/9:47"));
-                            mServiceModel.setClassicCaseEntities(entities);
+                            classicCaseEntities.add(new ClassicCaseEntity(0,"关于预防金融诈骗的典型案件","报送至：长沙县司法局","2018/01/02/19:47"));
+                            classicCaseEntities.add(new ClassicCaseEntity(1,"关于预防金融诈骗的典型案件","星沙街道司法局","2018/01/02/9:47"));
+                            mServiceModel.setClassicCaseEntities(classicCaseEntities);
                         }else {
-                            List<SummaryEntity> entities = new ArrayList<SummaryEntity>();
-                            entities.add(new SummaryEntity(0,"11月总结","报送至：长沙县司法局","2017/12/02/19:47"));
-                            entities.add(new SummaryEntity(1,"12月总结","星沙街道司法局","2018/01/02/9:47"));
-                            mServiceModel.setSummaryEntities(entities);
+                            summaryEntities.add(new SummaryEntity(0,"11月总结","报送至：长沙县司法局","2017/12/02/19:47"));
+                            summaryEntities.add(new SummaryEntity(1,"12月总结","星沙街道司法局","2018/01/02/9:47"));
+                            mServiceModel.setSummaryEntities(summaryEntities);
                         }
 
                     mIServiceView.requestServiceSuccess();

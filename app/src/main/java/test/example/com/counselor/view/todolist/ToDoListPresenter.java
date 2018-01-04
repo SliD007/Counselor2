@@ -27,10 +27,14 @@ public class ToDoListPresenter {
     Context context;
     IToDoListView mIToDoListView;
     IToDoListModel mIToDoListModel;
+    List<ToDoListEntity> toDoListEntities;
+    List<DoneListEntity> doneListEntities;
     public ToDoListPresenter(Context context,IToDoListView iToDoListView){
         this.context = context;
         this.mIToDoListView = iToDoListView;
         mIToDoListModel = new ToDoListModel();
+        toDoListEntities = new ArrayList<ToDoListEntity>();
+        doneListEntities = new ArrayList<DoneListEntity>();
     }
 
     public void requestToDoList(int current, int size, final int type, int counselorId){
@@ -58,17 +62,14 @@ public class ToDoListPresenter {
 //                            mIToDoListView.requestToDoListFaild();
 //                        }
                         if (type==1){
-                            List<ToDoListEntity> entities = new ArrayList<ToDoListEntity>();
-                            entities.add(new ToDoListEntity(0,"开展深入学习十九大精神","星沙街道司法局","2018/01/02/19:47"));
-                            entities.add(new ToDoListEntity(1,"开展深入学习十九大精神","星沙街道司法局","2018/01/02/9:47"));
-                            mIToDoListModel.setToDoListEntities(entities);
+                            toDoListEntities.add(new ToDoListEntity(0,"开展深入学习十九大精神","星沙街道司法局","2018/01/02/19:47"));
+                            toDoListEntities.add(new ToDoListEntity(1,"开展深入学习十九大精神","星沙街道司法局","2018/01/02/9:47"));
+                            mIToDoListModel.setToDoListEntities(toDoListEntities);
                         }else {
-                            List<DoneListEntity> entities = new ArrayList<DoneListEntity>();
                             for(int i=0;i<24;i++){
-                                entities.add(new DoneListEntity(i,"开展深入学习十九大精神","星沙街道司法局","2018/01/01/"+i+":47"));
-
+                                doneListEntities.add(new DoneListEntity(i,"开展深入学习十九大精神","星沙街道司法局","2018/01/01/"+i+":47"));
                             }
-                            mIToDoListModel.setDoneListEntities(entities);
+                            mIToDoListModel.setDoneListEntities(doneListEntities);
 
                         }
                         mIToDoListView.requestToDoListSuccess();

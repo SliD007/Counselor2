@@ -55,12 +55,9 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     View serviceVw4;
 
     private int fragmentType;
+    private int[] fragmentCuttent;
     ServicePresenter mServicePersenter;
     private int requestSize=20;
-    private int requestWorkLogCurrent=0;
-    private int requestAdviceCurrent=0;
-    private int requestClassicCaseCurrent=0;
-    private int requestSummaryCurrent=0;
     List<WorkLogEntity> workLogEntities;
     List<AdviceEntity> adviceEntities;
     List<ClassicCaseEntity> classicCaseEntities;
@@ -73,15 +70,16 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     @Override
     protected void initPresenter() {
         fragmentType = 0;
+        fragmentCuttent = new int[]{0, 0, 0, 0};
         mServicePersenter = new ServicePresenter(this);
-        mServicePersenter.requestServiceData(requestWorkLogCurrent,requestSize,0, MyApplication.getInstance().loginEntity.getId());
-        mServicePersenter.requestServiceData(requestAdviceCurrent,requestSize,1, MyApplication.getInstance().loginEntity.getId());
-        mServicePersenter.requestServiceData(requestClassicCaseCurrent,requestSize,2, MyApplication.getInstance().loginEntity.getId());
-        mServicePersenter.requestServiceData(requestSummaryCurrent,requestSize,3, MyApplication.getInstance().loginEntity.getId());
-        requestWorkLogCurrent=1;
-        requestAdviceCurrent=1;
-        requestClassicCaseCurrent=1;
-        requestSummaryCurrent=1;
+        mServicePersenter.requestServiceData(fragmentCuttent[0],requestSize,0, MyApplication.getInstance().loginEntity.getId());
+        mServicePersenter.requestServiceData(fragmentCuttent[1],requestSize,1, MyApplication.getInstance().loginEntity.getId());
+        mServicePersenter.requestServiceData(fragmentCuttent[2],requestSize,2, MyApplication.getInstance().loginEntity.getId());
+        mServicePersenter.requestServiceData(fragmentCuttent[3],requestSize,3, MyApplication.getInstance().loginEntity.getId());
+        fragmentCuttent[0]=1;
+        fragmentCuttent[1]=1;
+        fragmentCuttent[2]=1;
+        fragmentCuttent[3]=1;
     }
 
     @Override
@@ -262,6 +260,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             toast("" + (position), true);
+            mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],requestSize,fragmentType, MyApplication.getInstance().loginEntity.getId());
         }
     };
 
