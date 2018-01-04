@@ -2,7 +2,6 @@ package test.example.com.counselor.view.todolist;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +42,7 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
     @BindView(R.id.requestMoreToDoListTv)
     TextView requestMoreToDoListTv;
     private int fragmentType;
-
+    private int[] fragmentCuttent;
     List<ToDoListEntity> toDoListEntities;
     List<DoneListEntity> doneListEntities;
     private int requestSize=20;
@@ -57,16 +56,18 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
 
     @Override
     protected void initPresenter() {
+        fragmentType = 0;
+        fragmentCuttent = new int[]{0, 0};
         mToDoListPresenter = new ToDoListPresenter(getActivity(), this);
-        mToDoListPresenter.requestToDoList(requestToDoCurrent, requestSize, 1, MyApplication.getInstance().loginEntity.getId());
-        mToDoListPresenter.requestToDoList(requestDoneCurrent, requestSize, 0, MyApplication.getInstance().loginEntity.getId());
-        requestToDoCurrent=1;
-        requestDoneCurrent=1;
+        mToDoListPresenter.requestToDoList(fragmentCuttent[0], requestSize, 1, MyApplication.getInstance().loginEntity.getId());
+        mToDoListPresenter.requestToDoList(fragmentCuttent[1], requestSize, 0, MyApplication.getInstance().loginEntity.getId());
+        fragmentCuttent[0]=1;
+        fragmentCuttent[1]=1;
     }
 
     @Override
     protected void initViews() {
-        setTabSelection(0);//初始化显示wq未读List
+        setTabSelection(fragmentType);//初始化显示wq未读List
     }
 
     @Override
@@ -190,6 +191,9 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             toast("" + (position), true);
+            mToDoListPresenter.requestToDoList(fragmentCuttent[fragmentType],requestSize,
+                    fragmentType, MyApplication.getInstance().loginEntity.getId());
+
         }
     };
 
