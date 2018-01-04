@@ -276,6 +276,9 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     @Override
     public void addSuccess() {
         toast("添加成功", false);
+        MyApplication.getInstance().refresh = true;
+        MyApplication.getInstance().finishActivity(this);
+        this.finish();
     }
 
     @Override

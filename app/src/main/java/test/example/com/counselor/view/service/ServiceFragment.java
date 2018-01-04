@@ -84,7 +84,12 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
 
     @Override
     protected void initViews() {
-        setTabSelection(0);
+        setTabSelection(fragmentType);
+        if(MyApplication.getInstance().refresh){
+            mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],
+                    requestSize,fragmentType, MyApplication.getInstance().loginEntity.getId());
+            MyApplication.getInstance().refresh = false;
+        }
     }
 
 

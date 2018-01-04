@@ -58,7 +58,7 @@ public class AddClassicCaseActivity extends BaseActivity implements IAddClassicC
             case R.id.sumbitTv:
                 String title = addClassicCaseTitleEt.getText().toString();
                 String context_str = addClassicCaseContextEt.getText().toString();
-                mAddClassicCasePresenter.addCommonText(title, context_str);
+                mAddClassicCasePresenter.addClassicCase(title, context_str);
                 break;
         }
     }
@@ -70,6 +70,9 @@ public class AddClassicCaseActivity extends BaseActivity implements IAddClassicC
     @Override
     public void addSuccess() {
         toast("添加成功", false);
+        MyApplication.getInstance().refresh = true;
+        MyApplication.getInstance().finishActivity(this);
+        this.finish();
     }
 
     @Override

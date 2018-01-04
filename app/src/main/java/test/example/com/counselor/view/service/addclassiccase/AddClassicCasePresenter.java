@@ -14,7 +14,7 @@ public class AddClassicCasePresenter {
         this.mIAddClassicCaseView = iAddClassicCaseView;
     }
 
-    public void addCommonText(String title,String context_str){
+    public void addClassicCase(String title,String context_str){
         Log.e("Advice","title:"+title+",context:"+context_str);
         mIAddClassicCaseView.addSuccess();
     }

@@ -56,7 +56,7 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
             case R.id.sumbitTv:
                 String title = addSummaryTitleEt.getText().toString();
                 String context_str = addSummaryContextEt.getText().toString();
-                mAddSummaryPresenter.addCommonText(title, context_str);
+                mAddSummaryPresenter.addSummary(title, context_str);
                 break;
         }
     }
@@ -68,6 +68,9 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
     @Override
     public void addSuccess() {
         toast("添加成功", false);
+        MyApplication.getInstance().refresh = true;
+        MyApplication.getInstance().finishActivity(this);
+        this.finish();
     }
 
     @Override

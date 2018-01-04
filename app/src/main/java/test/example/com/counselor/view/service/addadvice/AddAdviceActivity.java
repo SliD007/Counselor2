@@ -78,6 +78,7 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
                 String title = addAdviceTitleEt.getText().toString();
                 String context_str = addAdviceContextEt.getText().toString();
                 mAddAdvicePersenter.addAdvice(title,context_str,rbId);
+
                 break;
         }
     }
@@ -87,9 +88,9 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
     @Override
     public void addSuccess() {
         toast("添加成功",false);
-//        Intent i = new Intent(AddAdviceActivity.this, HomeActivity.class);
-//        i.putExtra("fragmentId",3);
-//        startActivity(i);
+        MyApplication.getInstance().refresh = true;
+        MyApplication.getInstance().finishActivity(this);
+        this.finish();
 
     }
 

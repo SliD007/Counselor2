@@ -14,7 +14,7 @@ public class AddSummaryPresenter {
         this.mIAddSummaryView = iAddSummaryView;
     }
 
-    public void addCommonText(String title,String context_str){
+    public void addSummary(String title,String context_str){
         Log.e("Advice","title:"+title+",context:"+context_str);
         mIAddSummaryView.addSuccess();
     }

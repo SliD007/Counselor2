@@ -80,7 +80,6 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
         if (fragmentType == 0) {
 
             toDoListEntities = mToDoListPresenter.getToDoListEntityList();
-            Log.e("toDoListEntities",""+(toDoListEntities==null));
             backlogLv.setAdapter(new Common1Adapter<ToDoListEntity>(super.mContext, toDoListEntities,
                     R.layout.item_commonlist, onItemClickListener) {
                 @Override

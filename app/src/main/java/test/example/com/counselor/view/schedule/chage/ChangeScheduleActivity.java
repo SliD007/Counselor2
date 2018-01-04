@@ -93,6 +93,9 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
     @Override
     public void changeSuccess() {
         toast("修改成功！", false);
+        MyApplication.getInstance().refresh = true;
+        MyApplication.getInstance().finishActivity(this);
+        this.finish();
 
     }
 
@@ -111,9 +114,6 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
             case R.id.sumbitTv:
                 String newtime = workTimeTv.getText().toString();
                 mChangeSchedulePersenter.changeSchedule(ScheduleId,newtime,workWay);
-                MyApplication.getInstance().refresh = true;
-                MyApplication.getInstance().finishActivity(this);
-                this.finish();
                 break;
             case R.id.workTimeTv:
                 Log.e("workTimeTv",""+workTimeTv.getText().toString());
