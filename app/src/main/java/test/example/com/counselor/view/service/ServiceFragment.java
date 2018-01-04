@@ -10,21 +10,24 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
-import test.example.com.counselor.adapter.ListAdapter;
+import test.example.com.counselor.adapter.Common1Adapter;
+import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
-import test.example.com.counselor.entity.ListEntity;
-import test.example.com.counselor.listener.MyLvClickListener;
+import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.view.service.addadvice.AddAdviceActivity;
 import test.example.com.counselor.view.service.addclassiccase.AddClassicCaseActivity;
 import test.example.com.counselor.view.service.addsummary.AddSummaryActivity;
 import test.example.com.counselor.view.service.addworklog.AddWorkLogActivity;
+import test.example.com.counselor.view.service.entity.AdviceEntity;
+import test.example.com.counselor.view.service.entity.ClassicCaseEntity;
+import test.example.com.counselor.view.service.entity.SummaryEntity;
+import test.example.com.counselor.view.service.entity.WorkLogEntity;
 
 /**
  * Created by Sli.D on 2017/12/20.
@@ -32,10 +35,6 @@ import test.example.com.counselor.view.service.addworklog.AddWorkLogActivity;
 
 public class ServiceFragment extends BaseFragment implements IServiceView{
 
-
-    ListEntity mEntity;
-    List<ListEntity> entityList;
-    ListAdapter mListAdapter;
     @BindView(R.id.serviceLv)
     ListView serviceLv;
     @BindView(R.id.serviceTv1)
@@ -55,26 +54,114 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     @BindView(R.id.serviceVw4)
     View serviceVw4;
 
-    ServicePresenter mServicePersenter;
     private int fragmentType;
-    boolean need_request = true;
-    boolean[] first_request ;
+    ServicePresenter mServicePersenter;
+    private int requestSize=20;
+    private int requestWorkLogCurrent=0;
+    private int requestAdviceCurrent=0;
+    private int requestClassicCaseCurrent=0;
+    private int requestSummaryCurrent=0;
+    List<WorkLogEntity> workLogEntities;
+    List<AdviceEntity> adviceEntities;
+    List<ClassicCaseEntity> classicCaseEntities;
+    List<SummaryEntity> summaryEntities;
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_service;
     }
 
     @Override
-    protected void initViews() {
-        mServicePersenter = new ServicePresenter(this);
+    protected void initPresenter() {
         fragmentType = 0;
-        first_request = new boolean[]{true, true, true, true};
-        mServicePersenter.requestData(fragmentType,true);
-        first_request[0] = false;
+        mServicePersenter = new ServicePresenter(this);
+        mServicePersenter.requestServiceData(requestWorkLogCurrent,requestSize,0, MyApplication.getInstance().loginEntity.getId());
+        mServicePersenter.requestServiceData(requestAdviceCurrent,requestSize,1, MyApplication.getInstance().loginEntity.getId());
+        mServicePersenter.requestServiceData(requestClassicCaseCurrent,requestSize,2, MyApplication.getInstance().loginEntity.getId());
+        mServicePersenter.requestServiceData(requestSummaryCurrent,requestSize,3, MyApplication.getInstance().loginEntity.getId());
+        requestWorkLogCurrent=1;
+        requestAdviceCurrent=1;
+        requestClassicCaseCurrent=1;
+        requestSummaryCurrent=1;
+    }
+
+    @Override
+    protected void initViews() {
+        setTabSelection(0);
+    }
+
+
+    @Override
+    protected void initEvents() {
+
+    }
+
+    @Override
+    protected void initDatas() {
+        if (fragmentType == 0) {
+            workLogEntities = mServicePersenter.getWorkLogEntities();
+            serviceLv.setAdapter(new Common1Adapter<WorkLogEntity>(super.mContext, workLogEntities,
+                    R.layout.item_commonlist, onItemClickListener) {
+                @Override
+                protected void convertView(ViewHolder1 mViewHolder, View item, WorkLogEntity workLogEntities, int position) {
+                    TextView tv1 = mViewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = mViewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = mViewHolder.getView(R.id.itemTv3);
+                    tv1.setText(workLogEntities.getTitle());
+                    tv2.setText(workLogEntities.getFrom());
+                    tv3.setText(workLogEntities.getTime());
+                }
+            });
+            serviceLv.setOnItemClickListener(onItemClickListener);
+        }else if(fragmentType==1){
+            adviceEntities = mServicePersenter.getAdviceEntities();
+            serviceLv.setAdapter(new Common1Adapter<AdviceEntity>(super.mContext, adviceEntities,
+                    R.layout.item_commonlist, onItemClickListener) {
+                @Override
+                protected void convertView(ViewHolder1 mViewHolder, View item, AdviceEntity adviceEntity, int position) {
+                    TextView tv1 = mViewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = mViewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = mViewHolder.getView(R.id.itemTv3);
+                    tv1.setText(adviceEntity.getTitle());
+                    tv2.setText(adviceEntity.getFrom());
+                    tv3.setText(adviceEntity.getTime());
+                }
+            });
+            serviceLv.setOnItemClickListener(onItemClickListener);
+        }else if(fragmentType==2){
+            classicCaseEntities = mServicePersenter.getClassicCaseEntities();
+            serviceLv.setAdapter(new Common1Adapter<ClassicCaseEntity>(super.mContext, classicCaseEntities,
+                    R.layout.item_commonlist, onItemClickListener) {
+                @Override
+                protected void convertView(ViewHolder1 mViewHolder, View item, ClassicCaseEntity classicCaseEntity, int position) {
+                    TextView tv1 = mViewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = mViewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = mViewHolder.getView(R.id.itemTv3);
+                    tv1.setText(classicCaseEntity.getTitle());
+                    tv2.setText(classicCaseEntity.getFrom());
+                    tv3.setText(classicCaseEntity.getTime());
+                }
+            });
+            serviceLv.setOnItemClickListener(onItemClickListener);
+        }else {
+            summaryEntities = mServicePersenter.getSummaryEntities();
+            serviceLv.setAdapter(new Common1Adapter<SummaryEntity>(super.mContext, summaryEntities,
+                    R.layout.item_commonlist, onItemClickListener) {
+                @Override
+                protected void convertView(ViewHolder1 mViewHolder, View item, SummaryEntity summaryEntity, int position) {
+                    TextView tv1 = mViewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = mViewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = mViewHolder.getView(R.id.itemTv3);
+                    tv1.setText(summaryEntity.getTitle());
+                    tv2.setText(summaryEntity.getFrom());
+                    tv3.setText(summaryEntity.getTime());
+                }
+            });
+            serviceLv.setOnItemClickListener(onItemClickListener);
+        }
     }
 
     @OnClick({R.id.serviceRl1, R.id.serviceRl2, R.id.serviceRl3, R.id.serviceRl4})
-    public void onClick(View view) {
+    public void onSelectClick(View view) {
         clearStatus();
         switch (view.getId()) {
             case R.id.serviceRl1:
@@ -89,11 +176,8 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
             case R.id.serviceRl4:
                 fragmentType = 3;
         }
-
-        mServicePersenter.requestData(fragmentType,first_request[fragmentType]);
-        if (first_request[fragmentType]){
-            first_request[fragmentType] = false;
-        }
+        setTabSelection(fragmentType);
+        initDatas();
     }
 
     @OnClick({ R.id.serviceRl5})
@@ -131,8 +215,8 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     /*
     根据传入值设置不同listview
      */
-    public void setTabSelection(int index, String[] str1, String[] str2, String[] str3) {
-
+    public void setTabSelection(int index) {
+        clearStatus();
         switch (index) {
             case 0:
                 serviceTv1.setTextColor(Color.rgb(255, 255, 255));
@@ -151,33 +235,17 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 serviceVw4.setBackgroundColor(Color.rgb(1,160,243));
                 break;
         }
-        //加载数据
-        entityList = new ArrayList<ListEntity>();//空指针高发处
-        for (int i = 0; i < str1.length; i++) {
-            mEntity = new ListEntity(R.layout.item_commonlist,
-                    str1[i], str2[i], str3[i]);
-            entityList.add(mEntity);
-        }
-        //创建adapter
-        mListAdapter = new ListAdapter(super.mContext, entityList, mClickListener, onItemClickListener);
-        serviceLv.setAdapter(mListAdapter);
-        //设置回调
-        serviceLv.setOnItemClickListener(onItemClickListener);
     }
 
     @Override
-    protected void initPresenter() {
-
+    public void requestServiceSuccess() {
+        toast("请求成功", false);
+        initDatas();
     }
 
     @Override
-    protected void initEvents() {
-
-    }
-
-    @Override
-    protected void initDatas() {
-
+    public void requestServiceFailed() {
+        toast("请求失败", false);
     }
 
     @Override
@@ -195,17 +263,6 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             toast("" + (position), true);
         }
-    };
-    //控件响应回调
-    MyLvClickListener mClickListener = new MyLvClickListener() {
-        @Override
-        public void myOnClick(int position, View view) {
-        }
-
-        public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去
-            myOnClick((Integer) v.getTag(), v);
-        }
-
     };
 
 }
