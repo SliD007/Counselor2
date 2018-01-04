@@ -79,7 +79,6 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
     protected void initDatas() {
 
         if (fragmentType == 0) {
-
             toDoListEntities = mToDoListPresenter.getToDoListEntityList();
             backlogLv.setAdapter(new Common1Adapter<ToDoListEntity>(super.mContext, toDoListEntities,
                     R.layout.item_commonlist, onItemClickListener) {
@@ -126,13 +125,15 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
 
 
     @OnClick({R.id.backlogLeftRl, R.id.backlogRightRl,R.id.requestMoreToDoListTv})
-    public void onSwitchClick(View view) {
+    public void onSelectClick(View view) {
         switch (view.getId()) {
             case R.id.backlogLeftRl:
+                fragmentType=0;
                 setTabSelection(0);
                 initDatas();
                 break;
             case R.id.backlogRightRl:
+                fragmentType=1;
                 setTabSelection(1);
                 initDatas();
                 break;
@@ -154,9 +155,6 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
         }
     }
 
-    /*
-    根据传入值设置不同listview
-     */
     private void setTabSelection(int index) {
         switch (index) {
             case 0:
@@ -176,6 +174,21 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
         }
     }
 
+    @Override
+    public void requestToDoListSuccess() {
+        toast("请求成功", false);
+        initDatas();
+    }
+
+    @Override
+    public void requestToDoListFaild() {
+        toast("请求失败", false);
+    }
+
+    @Override
+    public void showDialog(boolean show) {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -196,20 +209,4 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
 
         }
     };
-
-    @Override
-    public void requestToDoListSuccess() {
-        toast("请求成功", false);
-        initDatas();
-    }
-
-    @Override
-    public void requestToDoListFaild() {
-        toast("请求失败", false);
-    }
-
-    @Override
-    public void showDialog(boolean show) {
-
-    }
 }

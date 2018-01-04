@@ -61,14 +61,13 @@ public class ToDoListPresenter {
 //                        }else {
 //                            mIToDoListView.requestToDoListFaild();
 //                        }
-                        if (type==1){
+                        if (type==0){
                             toDoListEntities.add(new ToDoListEntity(0,"开展深入学习十九大精神","星沙街道司法局","2018/01/02/19:47"));
                             toDoListEntities.add(new ToDoListEntity(1,"开展深入学习十九大精神","星沙街道司法局","2018/01/02/9:47"));
                             mIToDoListModel.setToDoListEntities(toDoListEntities);
                         }else {
-                            for(int i=0;i<24;i++){
-                                doneListEntities.add(new DoneListEntity(i,"开展深入学习十九大精神","星沙街道司法局","2018/01/01/"+i+":47"));
-                            }
+                            doneListEntities.add(new DoneListEntity(0,"开展深入学习十九大精神","星沙街道司法局","2018/01/01/19:47"));
+                            doneListEntities.add(new DoneListEntity(1,"开展深入学习十九大精神","星沙街道司法局","2018/01/01/9:47"));
                             mIToDoListModel.setDoneListEntities(doneListEntities);
 
                         }

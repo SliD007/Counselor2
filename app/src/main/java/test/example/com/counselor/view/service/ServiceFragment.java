@@ -215,9 +215,6 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         serviceVw4.setBackgroundColor(Color.rgb(48,49,53));
     }
 
-    /*
-    根据传入值设置不同listview
-     */
     public void setTabSelection(int index) {
         clearStatus();
         switch (index) {
