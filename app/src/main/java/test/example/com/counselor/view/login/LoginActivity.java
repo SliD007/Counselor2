@@ -19,6 +19,7 @@ import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.util.Md5Util;
 import test.example.com.counselor.view.HomeActivity;
+import test.example.com.counselor.view.forgetpw.ForgetPwActivity;
 
 public class LoginActivity extends BaseActivity implements ILoginView{
 
@@ -118,7 +119,8 @@ public class LoginActivity extends BaseActivity implements ILoginView{
 
                 break;
             case R.id.forgetPwTv:
-
+                Intent i = new Intent(LoginActivity.this, ForgetPwActivity.class);
+                startActivity(i);
                 break;
         }
     }
