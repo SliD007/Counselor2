@@ -1,12 +1,16 @@
 package test.example.com.counselor.view.todolist;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +24,7 @@ import test.example.com.counselor.adapter.Common1Adapter;
 import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.view.service.addworklog.AddWorkLogActivity;
 import test.example.com.counselor.view.todolist.entity.DoneListEntity;
 import test.example.com.counselor.view.todolist.entity.ToDoListEntity;
 
@@ -69,6 +74,7 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
     @Override
     protected void initViews() {
         setTabSelection(fragmentType);//初始化显示wq未读List
+        showCustomizeDialog();
     }
 
     @Override
@@ -213,4 +219,40 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
 
         }
     };
+
+    private void showCustomizeDialog() {
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        final AlertDialog dialog = builder.show();
+        final View dialogView = LayoutInflater.from(getActivity())
+                .inflate(R.layout.dialog_normal_layout,null);
+        builder.setView(dialogView);
+        TextView centerTv = (TextView) dialogView.findViewById(R.id.centerTv);
+        ImageView closeIm = (ImageView) dialogView.findViewById(R.id.closeIm);
+        closeIm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        Button button1 = (Button) dialogView.findViewById(R.id.dialogBt1);
+        Button button2 = (Button) dialogView.findViewById(R.id.dialogBt2);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Intent i = new Intent(getContext(), AddWorkLogActivity.class);
+                startActivity(i);
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Intent i = new Intent(getContext(), AddWorkLogActivity.class);
+                startActivity(i);
+            }
+        });
+        builder.show();
+    }
 }
