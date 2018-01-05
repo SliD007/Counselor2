@@ -91,6 +91,8 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
                     tv1.setText(toDoListEntity.getTitle());
                     tv2.setText(toDoListEntity.getFrom());
                     tv3.setText(toDoListEntity.getTime());
+                    TextView tv4 = mViewHolder.getView(R.id.itemTv1);
+                    tv4.setText(toDoListEntity.getTime());
                 }
             });
             backlogLv.setOnItemClickListener(onItemClickListener);

@@ -28,7 +28,7 @@ public abstract class BaseFragment extends Fragment {
 
         if (isVisibleToUser) {
 //            Log.e("BaseFragment","setUserVisibleHint"+getFragmentLayoutId()+isVisibleToUser);
-            initDatas();
+//            initDatas();
         }else {
 //            Log.e("BaseFragment","setUserVisibleHint"+getFragmentLayoutId()+isVisibleToUser);
         }
@@ -55,6 +55,7 @@ public abstract class BaseFragment extends Fragment {
     public void onStart() {
         super.onStart();
         initViews();
+        initDatas();
 //        Log.e("BaseFragment","onStart"+getFragmentLayoutId());
     }
 

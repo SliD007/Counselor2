@@ -37,6 +37,7 @@ public abstract class Common1Adapter<T> extends BaseAdapter {
         this.datas = datas;
         this.layoutId = layoutId;
         this.onItemClickListener = onItemClickListener;
+
     }
 
     public Common1Adapter(Context context, List<T> datas, int layoutId, MyLvClickListener myClickListener) {
@@ -70,13 +71,17 @@ public abstract class Common1Adapter<T> extends BaseAdapter {
         return position;
     }
 
+    private void initView(){
+
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //获取mViewHolder实例
         ViewHolder1 mViewHolder = getViewHolder(context,position,convertView,parent,layoutId);
+//        ViewHolder1 mViewHolder = new ViewHolder1(context,position,parent,layoutId);
         T t = getItem(position);
         convertView(mViewHolder,convertView, t, position);
-        //一定注意这里返回的方式，我就遗忘这里不止一次造成空指针
         return mViewHolder.getContertView();
     }
     /**

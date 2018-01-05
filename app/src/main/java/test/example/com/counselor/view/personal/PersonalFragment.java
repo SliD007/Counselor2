@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
@@ -20,6 +22,13 @@ import test.example.com.counselor.view.changepw.ChagePwActivity;
 
 public class PersonalFragment extends BaseFragment {
 
+    @BindView(R.id.nameTv)
+    TextView nameTv;
+    @BindView(R.id.addressTv)
+    TextView addressTv;
+    @BindView(R.id.lawFirmTv)
+    TextView lawFirmTv;
+
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_personal;
@@ -27,6 +36,9 @@ public class PersonalFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
+        nameTv.setText(MyApplication.getInstance().loginEntity.getName());
+        addressTv.setText(MyApplication.getInstance().loginEntity.getCommunityA()+","+MyApplication.getInstance().loginEntity.getCommunityB());
+        lawFirmTv.setText(MyApplication.getInstance().loginEntity.getOrganization());
     }
 
     @Override
@@ -41,7 +53,7 @@ public class PersonalFragment extends BaseFragment {
 
     @Override
     protected void initDatas() {
-        Log.e("PersonalFragment","加载数据");
+        Log.e("PersonalFragment", "加载数据");
     }
 
     @Override
@@ -51,12 +63,12 @@ public class PersonalFragment extends BaseFragment {
         return rootView;
     }
 
-    @OnClick({R.id.unloginRl,R.id.changePwRl})
+    @OnClick({R.id.unloginRl, R.id.changePwRl})
     public void onClick(View view) {
         Intent i;
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.unloginRl:
-                toast("确定退出吗",true);
+                toast("确定退出吗", true);
                 MyApplication.getInstance().finishActivity(getActivity());
                 getActivity().finish();
                 break;
