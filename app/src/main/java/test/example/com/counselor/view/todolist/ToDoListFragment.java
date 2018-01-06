@@ -1,6 +1,5 @@
 package test.example.com.counselor.view.todolist;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -270,41 +269,5 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
         lp.alpha = 0.9f; // 透明度
         dialogWindow.setAttributes(lp);
     }
-
-    private void showCustomizeDialog() {
-        final AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity()); // 先得到构造器
-
-        View dialogView = LayoutInflater.from(getActivity())
-                .inflate(R.layout.dialog_normal_layout,null);
-        builder.setView(dialogView);
-        builder.create().show();
-        TextView centerTv = (TextView) dialogView.findViewById(R.id.centerTv);
-        ImageView closeIm = (ImageView) dialogView.findViewById(R.id.closeIm);
-        Button button1 = (Button) dialogView.findViewById(R.id.dialogBt1);
-        Button button2 = (Button) dialogView.findViewById(R.id.dialogBt2);
-
-        closeIm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                builder.create().dismiss();
-
-            }
-        });
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(), AddWorkLogActivity.class);
-                startActivity(i);
-            }
-        });
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(), AddWorkLogActivity.class);
-                startActivity(i);
-            }
-        });
-    }
-
 
 }

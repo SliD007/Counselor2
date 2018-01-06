@@ -17,6 +17,7 @@ import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.view.changepw.ChagePwActivity;
+import test.example.com.counselor.view.rank.RankActivity;
 
 /**
  * Created by Sli.D on 2017/12/20.
@@ -65,7 +66,7 @@ public class PersonalFragment extends BaseFragment {
         return rootView;
     }
 
-    @OnClick({R.id.unloginRl, R.id.changePwRl})
+    @OnClick({R.id.unloginRl, R.id.changePwRl, R.id.rankListRl})
     public void onClick(View view) {
         Intent i;
         switch (view.getId()) {
@@ -74,6 +75,10 @@ public class PersonalFragment extends BaseFragment {
                 break;
             case R.id.changePwRl:
                 i = new Intent(getActivity(), ChagePwActivity.class);
+                startActivity(i);
+                break;
+            case R.id.rankListRl:
+                i = new Intent(getActivity(), RankActivity.class);
                 startActivity(i);
                 break;
         }
@@ -93,14 +98,6 @@ public class PersonalFragment extends BaseFragment {
         builder.setNegativeButton("确定", new DialogInterface.OnClickListener() { // 设置取消按钮
             @Override
             public void onClick(DialogInterface dialog, int which) {
-//                SharedPreferences autoLoginSp = getActivity().getSharedPreferences("autoLoginSp", Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = autoLoginSp.edit();
-//                editor.putInt("autoLogin", 0);
-//                editor.commit();
-//                Intent i = new Intent(getActivity(),LoginActivity.class);
-//                i.putExtra("autologin", true);
-//                i.putExtra("autologinInt", 1);
-//                startActivity(i);
 
                 MyApplication.getInstance().finishActivity(getActivity());
                 getActivity().finish();
