@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.rank;
+package test.example.com.counselor.view.contract.rank;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -7,7 +7,6 @@ import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -22,58 +21,53 @@ import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.base.MyLvClickListener;
 
-public class RankActivity extends BaseActivity implements IRankView {
+public class ContractActivity extends BaseActivity implements IContractView {
 
 
-    RankPresenter mRankPresenter;
+    ContractPresenter mContractPresenter;
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
-    @BindView(R.id.rankLv)
-    ListView rankLv;
-
-    List<RankEntity> rankEntities;
     @BindView(R.id.backTv)
     TextView backTv;
-    @BindView(R.id.rankVs)
-    ViewStub rankVs;
+    @BindView(R.id.contractVs)
+    ViewStub contractVs;
+    @BindView(R.id.contractLv)
+    ListView contractLv;
+
+    List<ContractEntity> rankEntities;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         super.allow_quit = false;
-        mRankPresenter = new RankPresenter(this);
-        titleBarTv.setText("我的排行");
+        mContractPresenter = new ContractPresenter(this);
+        titleBarTv.setText("我的合同");
 
-        mRankPresenter.requestRank();
+        mContractPresenter.requestContract();
     }
 
 
     protected void initContentView(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_rank);
+        setContentView(R.layout.activity_contract);
     }
 
     private boolean show_vs = false;
 
     private void initDatas() {
         Log.e("ContractActivity", "加载数据");
-        rankEntities = mRankPresenter.getRankEntity();
-        rankLv.setAdapter(new Common1Adapter<RankEntity>(this, rankEntities,
+        rankEntities = mContractPresenter.getContractEntity();
+        contractLv.setAdapter(new Common1Adapter<ContractEntity>(this, rankEntities,
                 R.layout.item_rank, onItemClickListener) {
             @Override
-            protected void convertView(ViewHolder1 mViewHolder, View item, RankEntity rankEntity, int position) {
+            protected void convertView(ViewHolder1 mViewHolder, View item, ContractEntity contractEntity, int position) {
                 TextView tv1 = mViewHolder.getView(R.id.itemRankTv);
-                TextView tv2 = mViewHolder.getView(R.id.itemWorkForTv);
-                ImageView im = mViewHolder.getView(R.id.nextIm);
-                RelativeLayout titlelBarLl = mViewHolder.getView(R.id.titleRankRl);
+                tv1.setText("  " + contractEntity.getWorkFor());
 
-                tv1.setText("第" + rankEntity.getRank() + "名  " + rankEntity.getName());
-                tv2.setText("服务村社：" + rankEntity.getWorkFor());
-//                titlelBarLl.setTag(position);
-//                titlelBarLl.setOnClickListener(mClickListener);
             }
         });
-        rankLv.setOnItemClickListener(onItemClickListener);
+        contractLv.setOnItemClickListener(onItemClickListener);
     }
 
     @OnClick({R.id.backTv})
@@ -87,13 +81,13 @@ public class RankActivity extends BaseActivity implements IRankView {
     }
 
     @Override
-    public void requestRankSuccess() {
+    public void requestContractSuccess() {
         toast("请求成功！", true);
         initDatas();
     }
 
     @Override
-    public void requestRankFailed() {
+    public void requestContractFailed() {
         toast("请求失败！", true);
     }
 
@@ -110,10 +104,10 @@ public class RankActivity extends BaseActivity implements IRankView {
             ImageView im = (ImageView) view.findViewById(R.id.nextIm);
             if (!show_vs) {
                 im.setImageResource(R.drawable.u608);
-                rankVs.setVisibility(View.VISIBLE);
+                contractVs.setVisibility(View.VISIBLE);
             }else {
                 im.setImageResource(R.drawable.u609);
-                rankVs.setVisibility(View.GONE);
+                contractVs.setVisibility(View.GONE);
             }
             show_vs = !show_vs;
         }

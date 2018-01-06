@@ -32,7 +32,7 @@ public class RankEntity {
 
     @Override
     public String toString() {
-        return "RankEntity{" +
+        return "ContractEntity{" +
                 "name='" + name + '\'' +
                 ", workFor='" + workFor + '\'' +
                 ", rank='" + rank + '\'' +

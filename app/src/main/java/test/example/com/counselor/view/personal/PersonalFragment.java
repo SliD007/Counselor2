@@ -17,6 +17,7 @@ import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.view.changepw.ChagePwActivity;
+import test.example.com.counselor.view.contract.rank.ContractActivity;
 import test.example.com.counselor.view.rank.RankActivity;
 
 /**
@@ -66,7 +67,7 @@ public class PersonalFragment extends BaseFragment {
         return rootView;
     }
 
-    @OnClick({R.id.unloginRl, R.id.changePwRl, R.id.rankListRl})
+    @OnClick({R.id.unloginRl, R.id.changePwRl, R.id.rankListRl, R.id.contractRl})
     public void onClick(View view) {
         Intent i;
         switch (view.getId()) {
@@ -79,6 +80,10 @@ public class PersonalFragment extends BaseFragment {
                 break;
             case R.id.rankListRl:
                 i = new Intent(getActivity(), RankActivity.class);
+                startActivity(i);
+                break;
+            case R.id.contractRl:
+                i = new Intent(getActivity(), ContractActivity.class);
                 startActivity(i);
                 break;
         }

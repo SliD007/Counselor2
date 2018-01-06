@@ -18,7 +18,7 @@
             style="@style/nextIm"/>
         <TextView
             android:id="@+id/itemWorkForTv"
-            android:text="workfor"
+            android:text=""
             style="@style/text_right_rank"
             android:layout_toLeftOf="@id/nextIm"/>
     </RelativeLayout>
