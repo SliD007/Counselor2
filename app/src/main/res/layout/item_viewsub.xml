@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <RelativeLayout
-        android:id="@+id/titleRankRl"
         android:layout_width="wrap_content"
         android:layout_height="50dp">
         <TextView
-            android:id="@+id/itemRankTv"
             android:text="name"
             style="@style/text_left_rank"/>
-        <ImageView
-            android:id="@+id/nextIm"
-            android:src="@drawable/u609"
-            style="@style/nextIm"/>
+
         <TextView
-            android:id="@+id/itemWorkForTv"
+            android:id="@+id/item1Tv"
             android:text="workfor"
             style="@style/text_right_rank"
-            android:layout_toLeftOf="@id/nextIm"/>
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dp"/>
     </RelativeLayout>
-
 </LinearLayout>
