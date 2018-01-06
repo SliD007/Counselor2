@@ -1,5 +1,7 @@
 package test.example.com.counselor.view.personal;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,14 +70,42 @@ public class PersonalFragment extends BaseFragment {
         Intent i;
         switch (view.getId()) {
             case R.id.unloginRl:
-                toast("确定退出吗", true);
-                MyApplication.getInstance().finishActivity(getActivity());
-                getActivity().finish();
+                showUnloginDialog();
                 break;
             case R.id.changePwRl:
                 i = new Intent(getActivity(), ChagePwActivity.class);
                 startActivity(i);
                 break;
         }
+    }
+    public void showUnloginDialog(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()); // 先得到构造器
+        builder.setTitle("退出登录"); // 设置标题
+        builder.setMessage("确定退出登录？"); // 设置内容
+        builder.setPositiveButton("取消", new DialogInterface.OnClickListener() { // 设置确定按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss(); // 关闭dialog
+            }
+        });
+        builder.setNegativeButton("确定", new DialogInterface.OnClickListener() { // 设置取消按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+//                SharedPreferences autoLoginSp = getActivity().getSharedPreferences("autoLoginSp", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor = autoLoginSp.edit();
+//                editor.putInt("autoLogin", 0);
+//                editor.commit();
+//                Intent i = new Intent(getActivity(),LoginActivity.class);
+//                i.putExtra("autologin", true);
+//                i.putExtra("autologinInt", 1);
+//                startActivity(i);
+
+                MyApplication.getInstance().finishActivity(getActivity());
+                getActivity().finish();
+            }
+        });
+        builder.create().show();
     }
 }
