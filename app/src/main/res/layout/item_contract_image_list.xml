@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ListView
-        android:id="@+id/contractImLV"
+    <ImageView
+        android:id="@+id/contractIm"
+        android:src="@drawable/logo"
         android:layout_marginTop="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -1,5 +1,6 @@
 package test.example.com.counselor.view.contract;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -7,9 +8,13 @@ import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +24,6 @@ import test.example.com.counselor.adapter.Common1Adapter;
 import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
-import test.example.com.counselor.base.MyLvClickListener;
 
 public class ContractActivity extends BaseActivity implements IContractView {
 
@@ -33,9 +37,9 @@ public class ContractActivity extends BaseActivity implements IContractView {
     ViewStub contractVs;
     @BindView(R.id.contractLv)
     ListView contractLv;
-
-    List<ContractEntity> rankEntities;
-
+    ArrayList<Map<String,Integer>> mData= new ArrayList<Map<String,Integer>>();
+    List<ContractEntity> contractEntities;
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +48,9 @@ public class ContractActivity extends BaseActivity implements IContractView {
         super.allow_quit = false;
         mContractPresenter = new ContractPresenter(this);
         titleBarTv.setText("我的合同");
-
+        mContext=this;
         mContractPresenter.requestContract();
+
     }
 
 
@@ -57,8 +62,8 @@ public class ContractActivity extends BaseActivity implements IContractView {
 
     private void initDatas() {
         Log.e("ContractActivity", "加载数据");
-        rankEntities = mContractPresenter.getContractEntity();
-        contractLv.setAdapter(new Common1Adapter<ContractEntity>(this, rankEntities,
+        contractEntities = mContractPresenter.getContractEntity();
+        contractLv.setAdapter(new Common1Adapter<ContractEntity>(this, contractEntities,
                 R.layout.item_contract, onItemClickListener) {
             @Override
             protected void convertView(ViewHolder1 mViewHolder, View item, ContractEntity contractEntity, int position) {
@@ -68,6 +73,12 @@ public class ContractActivity extends BaseActivity implements IContractView {
             }
         });
         contractLv.setOnItemClickListener(onItemClickListener);
+
+        for(int i =0; i < 3; i++) {
+            Map<String,Integer> item = new HashMap<String,Integer>();
+            item.put("image", R.drawable.logo);
+            mData.add(item);
+        }
     }
 
     @OnClick({R.id.backTv})
@@ -101,29 +112,26 @@ public class ContractActivity extends BaseActivity implements IContractView {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             toast("" + (position), true);
-            ImageView im = (ImageView) view.findViewById(R.id.nextIm);
+            ImageView nextIm = (ImageView) view.findViewById(R.id.nextIm);
             if (!show_vs) {
-                im.setImageResource(R.drawable.u608);
+                nextIm.setImageResource(R.drawable.u608);
+//                contractVs.inflate();
                 contractVs.setVisibility(View.VISIBLE);
+                initViewSub();
+
             }else {
-                im.setImageResource(R.drawable.u609);
+                nextIm.setImageResource(R.drawable.u609);
                 contractVs.setVisibility(View.GONE);
             }
             show_vs = !show_vs;
         }
     };
 
-    MyLvClickListener mClickListener = new MyLvClickListener() {
-        @Override
-        public void myOnClick(int position, View view) {
-//            toast("" + (position), true);
+    private void initViewSub(){
+        ListView contractImLV = (ListView) findViewById(R.id.contractImLV);
 
-        }
+        contractImLV.setAdapter(new SimpleAdapter(mContext, mData, R.layout.item_contract_image_list
+                , new String[]{"image"},new int[]{R.id.contractIm}));
+    }
 
-        public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去
-//            myOnClick((Integer) v.getTag(), v);
-            initDatas();
-        }
-
-    };
 }

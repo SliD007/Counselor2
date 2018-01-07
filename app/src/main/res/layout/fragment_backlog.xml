@@ -74,20 +74,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/titlelBarRl"
             android:dividerHeight="1dp"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ccc"/>
-        <TextView
-            android:id="@+id/requestMoreToDoListTv"
-            android:text=""
-            android:textSize="12sp"
-            android:gravity="center"
-            android:textColor="#999"
-            android:background="#EBEBEB"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="bottom"/>
     </LinearLayout>
 
 </LinearLayout>

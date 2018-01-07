@@ -49,8 +49,7 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
     @BindView(R.id.backlogRightTv)
     TextView backlogRightTv;
     ToDoListPresenter mToDoListPresenter;
-    @BindView(R.id.requestMoreToDoListTv)
-    TextView requestMoreToDoListTv;
+
     private int fragmentType;
     private int[] fragmentCuttent;
     List<ToDoListEntity> toDoListEntities;
@@ -109,13 +108,7 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
                 }
             });
             backlogLv.setOnItemClickListener(onItemClickListener);
-            if(toDoListEntities!=null){
-                if(toDoListEntities.size()<requestSize){
-                    requestMoreToDoListTv.setText("没有更多");
-                }else {
-                    requestMoreToDoListTv.setText("点击加载更多");
-                }
-            }
+
         } else {
             doneListEntities = mToDoListPresenter.getDoneListEntityList();
             backlogLv.setAdapter(new Common1Adapter<DoneListEntity>(super.mContext, doneListEntities,
@@ -131,16 +124,11 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
                 }
             });
             backlogLv.setOnItemClickListener(onItemClickListener);
-            if(doneListEntities.size()<requestSize){
-                requestMoreToDoListTv.setText("没有更多");
-            }else {
-                requestMoreToDoListTv.setText("点击加载更多");}
         }
-
     }
 
 
-    @OnClick({R.id.backlogLeftRl, R.id.backlogRightRl,R.id.requestMoreToDoListTv})
+    @OnClick({R.id.backlogLeftRl, R.id.backlogRightRl})
     public void onSelectClick(View view) {
         switch (view.getId()) {
             case R.id.backlogLeftRl:
@@ -152,21 +140,6 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
                 fragmentType=1;
                 setTabSelection(1);
                 initDatas();
-                break;
-            case R.id.requestMoreToDoListTv:
-                if(fragmentType==0 & toDoListEntities!=null){
-                    if(toDoListEntities.size()<requestSize){
-                        toast("没有更多了",false);
-                    }else {
-                        mToDoListPresenter.requestToDoList(requestToDoCurrent, requestSize, 1, MyApplication.getInstance().loginEntity.getId());
-                    }
-                }else if(fragmentType==1 & doneListEntities!=null){
-                    if(doneListEntities.size()<requestSize){
-                        toast("没有更多了",false);
-                    }else {
-                        mToDoListPresenter.requestToDoList(requestDoneCurrent, requestSize, 0, MyApplication.getInstance().loginEntity.getId());
-                    }
-                }
                 break;
         }
     }
