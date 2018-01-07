@@ -17,7 +17,7 @@ import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.view.changepw.ChagePwActivity;
-import test.example.com.counselor.view.contract.rank.ContractActivity;
+import test.example.com.counselor.view.contract.ContractActivity;
 import test.example.com.counselor.view.rank.RankActivity;
 
 /**

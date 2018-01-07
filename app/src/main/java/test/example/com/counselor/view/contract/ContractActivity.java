@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.contract.rank;
+package test.example.com.counselor.view.contract;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -59,10 +59,10 @@ public class ContractActivity extends BaseActivity implements IContractView {
         Log.e("ContractActivity", "加载数据");
         rankEntities = mContractPresenter.getContractEntity();
         contractLv.setAdapter(new Common1Adapter<ContractEntity>(this, rankEntities,
-                R.layout.item_rank, onItemClickListener) {
+                R.layout.item_contract, onItemClickListener) {
             @Override
             protected void convertView(ViewHolder1 mViewHolder, View item, ContractEntity contractEntity, int position) {
-                TextView tv1 = mViewHolder.getView(R.id.itemRankTv);
+                TextView tv1 = mViewHolder.getView(R.id.itemWorkForTv);
                 tv1.setText("  " + contractEntity.getWorkFor());
 
             }

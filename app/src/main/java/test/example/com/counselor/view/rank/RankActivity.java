@@ -3,11 +3,8 @@ package test.example.com.counselor.view.rank;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewStub;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -34,8 +31,6 @@ public class RankActivity extends BaseActivity implements IRankView {
     List<RankEntity> rankEntities;
     @BindView(R.id.backTv)
     TextView backTv;
-    @BindView(R.id.rankVs)
-    ViewStub rankVs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +57,23 @@ public class RankActivity extends BaseActivity implements IRankView {
                 R.layout.item_rank, onItemClickListener) {
             @Override
             protected void convertView(ViewHolder1 mViewHolder, View item, RankEntity rankEntity, int position) {
-                TextView tv1 = mViewHolder.getView(R.id.itemRankTv);
-                TextView tv2 = mViewHolder.getView(R.id.itemWorkForTv);
-                ImageView im = mViewHolder.getView(R.id.nextIm);
-                RelativeLayout titlelBarLl = mViewHolder.getView(R.id.titleRankRl);
+                TextView itemRankTv = mViewHolder.getView(R.id.itemRankTv1);
+                TextView itemWorkForTv = mViewHolder.getView(R.id.itemWorkForTv);
+                TextView itemNumRankTv1 = mViewHolder.getView(R.id.itemNumRankTv1);
+                TextView itemNumRankTv2 = mViewHolder.getView(R.id.itemNumRankTv2);
+                TextView itemNumRankTv3 = mViewHolder.getView(R.id.itemNumRankTv3);
+                TextView itemNumRankTv4 = mViewHolder.getView(R.id.itemNumRankTv4);
+                TextView itemNumRankTv5 = mViewHolder.getView(R.id.itemNumRankTv5);
+                TextView itemNumRankTv6 = mViewHolder.getView(R.id.itemNumRankTv6);
+                itemRankTv.setText("第" + rankEntity.getRank() + "名  " + rankEntity.getName());
+                itemWorkForTv.setText("服务村社：" + rankEntity.getWorkFor());
+                itemNumRankTv1.setText("现场咨询：" + rankEntity.getStr11() + "次" );
+                itemNumRankTv2.setText("电话咨询：" + rankEntity.getStr12()+"次");
+                itemNumRankTv3.setText("法律援助：" + rankEntity.getStr2()+"次");
+                itemNumRankTv4.setText("参与调解：" + rankEntity.getStr3()+"次");
+                itemNumRankTv5.setText("法制宣传：" + rankEntity.getStr4()+"次");
+                itemNumRankTv6.setText("法制讲座：" + rankEntity.getStr5()+"次");
 
-                tv1.setText("第" + rankEntity.getRank() + "名  " + rankEntity.getName());
-                tv2.setText("服务村社：" + rankEntity.getWorkFor());
-//                titlelBarLl.setTag(position);
-//                titlelBarLl.setOnClickListener(mClickListener);
             }
         });
         rankLv.setOnItemClickListener(onItemClickListener);
@@ -107,15 +110,6 @@ public class RankActivity extends BaseActivity implements IRankView {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             toast("" + (position), true);
-            ImageView im = (ImageView) view.findViewById(R.id.nextIm);
-            if (!show_vs) {
-                im.setImageResource(R.drawable.u608);
-                rankVs.setVisibility(View.VISIBLE);
-            }else {
-                im.setImageResource(R.drawable.u609);
-                rankVs.setVisibility(View.GONE);
-            }
-            show_vs = !show_vs;
         }
     };
 

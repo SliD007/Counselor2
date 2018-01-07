@@ -19,11 +19,6 @@
             android:layout_height="wrap_content"
             android:dividerHeight="1dp"/>
 
-        <ViewStub
-            android:id="@+id/rankVs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout="@layout/item_viewsub"/>
     </LinearLayout>
 
 </LinearLayout>

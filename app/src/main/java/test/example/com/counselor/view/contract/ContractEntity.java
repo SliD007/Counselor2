@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.contract.rank;
+package test.example.com.counselor.view.contract;
 
 /**
  * Created by Sli.D on 2018/1/6.

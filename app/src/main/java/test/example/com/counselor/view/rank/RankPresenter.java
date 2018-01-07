@@ -35,6 +35,15 @@ public class RankPresenter extends BasePresenter{
                 List<RankEntity> entities = new ArrayList<RankEntity>();
                 entities.add(new RankEntity("黄可","西递","1","20","10","10","5","20","5","20"));
                 entities.add(new RankEntity("绿山","宏村","2","20","10","10","5","20","5","20"));
+                entities.add(new RankEntity("黄可","西递","3","20","10","10","5","20","5","20"));
+                entities.add(new RankEntity("绿山","宏村","4","20","10","10","5","20","5","20"));
+                entities.add(new RankEntity("黄可","西递","5","20","10","10","5","20","5","20"));
+                entities.add(new RankEntity("绿山","宏村","6","20","10","10","5","20","5","20"));
+                entities.add(new RankEntity("黄可","西递","7","20","10","10","5","20","5","20"));
+                entities.add(new RankEntity("绿山","宏村","8","20","10","10","5","20","5","20"));
+                entities.add(new RankEntity("黄可","西递","9","20","10","10","5","20","5","20"));
+                entities.add(new RankEntity("绿山","宏村","10","20","10","10","5","20","5","20"));
+
                 mRankModel.setRankEntities(entities);
                 mIRankView.requestRankSuccess();
 

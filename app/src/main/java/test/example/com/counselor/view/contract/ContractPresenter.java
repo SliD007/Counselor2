@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.contract.rank;
+package test.example.com.counselor.view.contract;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
