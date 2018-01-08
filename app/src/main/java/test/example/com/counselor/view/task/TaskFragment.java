@@ -31,7 +31,7 @@ import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.view.news.NewsActivity;
 import test.example.com.counselor.view.rank.RankActivity;
 import test.example.com.counselor.view.service.addworklog.AddWorkLogActivity;
-import test.example.com.counselor.view.task.entity.DoneTasskEntity;
+import test.example.com.counselor.view.task.entity.DoneTaskEntity;
 import test.example.com.counselor.view.task.entity.ToDoTaskEntity;
 
 /**
@@ -53,7 +53,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
 
     TaskPresenter mTaskPresenter;
     List<ToDoTaskEntity> toDoListEntities;
-    List<DoneTasskEntity> doneListEntities;
+    List<DoneTaskEntity> doneListEntities;
     private int fragmentType;
     private int[] fragmentCuttent;
     private int requestSize=20;
@@ -94,7 +94,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
     protected void initDatas() {
         Log.e("TaskFragment","加载数据");
         if (fragmentType == 0) {
-            toDoListEntities = mTaskPresenter.getToDoListEntityList();
+            toDoListEntities = mTaskPresenter.getToDoTaskEntity();
             backlogLv.setAdapter(new Common1Adapter<ToDoTaskEntity>(super.mContext, toDoListEntities,
                     R.layout.item_commonlist, onItemClickListener) {
                 @Override
@@ -104,24 +104,24 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                     TextView tv3 = mViewHolder.getView(R.id.itemTv3);
                     tv1.setText(toDoTaskEntity.getTitle());
                     tv2.setText(toDoTaskEntity.getFrom());
-                    tv3.setText(toDoTaskEntity.getTime());
+                    tv3.setText(toDoTaskEntity.getTime()+"");
 
                 }
             });
             backlogLv.setOnItemClickListener(onItemClickListener);
 
         } else {
-            doneListEntities = mTaskPresenter.getDoneListEntityList();
-            backlogLv.setAdapter(new Common1Adapter<DoneTasskEntity>(super.mContext, doneListEntities,
+            doneListEntities = mTaskPresenter.getDoneTaskEntityList();
+            backlogLv.setAdapter(new Common1Adapter<DoneTaskEntity>(super.mContext, doneListEntities,
                     R.layout.item_commonlist, onItemClickListener) {
                 @Override
-                protected void convertView(ViewHolder1 mViewHolder, View item, DoneTasskEntity toDoListEntity, int position) {
+                protected void convertView(ViewHolder1 mViewHolder, View item, DoneTaskEntity toDoListEntity, int position) {
                     TextView tv1 = mViewHolder.getView(R.id.itemTv1);
                     TextView tv2 = mViewHolder.getView(R.id.itemTv2);
                     TextView tv3 = mViewHolder.getView(R.id.itemTv3);
                     tv1.setText(toDoListEntity.getTitle());
                     tv2.setText(toDoListEntity.getFrom());
-                    tv3.setText(toDoListEntity.getTime());
+                    tv3.setText(toDoListEntity.getTime()+"");
                 }
             });
             backlogLv.setOnItemClickListener(onItemClickListener);

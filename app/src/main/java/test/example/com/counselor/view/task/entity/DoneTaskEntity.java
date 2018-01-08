@@ -6,26 +6,26 @@ import java.io.Serializable;
  * Created by Sli.D on 2017/5/12.
  */
 
-public class DoneTasskEntity implements Serializable{
+public class DoneTaskEntity implements Serializable{
     private int id;
-    private String time;
+    private long time;
     private String title;
     private String fromWhere;
 
-    public DoneTasskEntity() {
+    public DoneTaskEntity() {
 
     }
 
-    public DoneTasskEntity(int id, String title, String from, String time) {
-        this.fromWhere = from;
+    public DoneTaskEntity(int id, String title, String fromWhere, long time) {
         this.id = id;
         this.time = time;
         this.title = title;
+        this.fromWhere = fromWhere;
     }
 
     @Override
     public String toString() {
-        return "UserEntity [id=" + id + ", title=" + title + ", from="
+        return "UserEntity [id=" + id + ", title=" + title + ", fromWhere="
                 + fromWhere + ", time=" + time + "]";
     }
 
@@ -33,8 +33,8 @@ public class DoneTasskEntity implements Serializable{
         return fromWhere;
     }
 
-    public void setFrom(String from) {
-        this.fromWhere = from;
+    public void setFrom(String fromWhere) {
+        this.fromWhere = fromWhere;
     }
 
     public int getId() {
@@ -45,11 +45,11 @@ public class DoneTasskEntity implements Serializable{
         this.id = id;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 

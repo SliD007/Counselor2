@@ -18,7 +18,7 @@ import okhttp3.Call;
 import okhttp3.Response;
 import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.Urls;
-import test.example.com.counselor.view.task.entity.DoneTasskEntity;
+import test.example.com.counselor.view.task.entity.DoneTaskEntity;
 import test.example.com.counselor.view.task.entity.ToDoTaskEntity;
 
 /**
@@ -31,13 +31,13 @@ public class TaskPresenter {
     ITaskView mITaskView;
     ITaskModel mITaskModel;
     List<ToDoTaskEntity> toDoTaskEntities;
-    List<DoneTasskEntity> doneTaskEntities;
+    List<DoneTaskEntity> doneTaskEntities;
     public TaskPresenter(Context context, ITaskView iTaskView){
         this.context = context;
         this.mITaskView = iTaskView;
         mITaskModel = new TaskModel();
         toDoTaskEntities = new ArrayList<ToDoTaskEntity>();
-        doneTaskEntities = new ArrayList<DoneTasskEntity>();
+        doneTaskEntities = new ArrayList<DoneTaskEntity>();
     }
 
     public void requestTask(int current, int size, final int type, int counselorId){
@@ -86,11 +86,11 @@ public class TaskPresenter {
     }
 
 
-    public List<ToDoTaskEntity> getToDoListEntityList(){
-        return mITaskModel.getToDoListEntities();
+    public List<ToDoTaskEntity> getToDoTaskEntity(){
+        return mITaskModel.getToDoTaskEntity();
     }
-    public List<DoneTasskEntity> getDoneListEntityList(){
-        return mITaskModel.getDoneListEntities();
+    public List<DoneTaskEntity> getDoneTaskEntityList(){
+        return mITaskModel.getDoneTaskEntity();
     }
 
     public void saveValue(JSONObject object, int type){
@@ -99,11 +99,11 @@ public class TaskPresenter {
 
         if (type==0){
             toDoTaskEntities = JSONArray.parseArray(listArray.toString(),ToDoTaskEntity.class);
-            mITaskModel.setToDoListEntities(toDoTaskEntities);
+            mITaskModel.setToDoTaskEntity(toDoTaskEntities);
             Log.e("saveValue",""+toDoTaskEntities.toString());
         }else {
-            doneTaskEntities = JSONArray.parseArray(listArray.toString(),DoneTasskEntity.class);
-            mITaskModel.setDoneListEntities(doneTaskEntities);
+            doneTaskEntities = JSONArray.parseArray(listArray.toString(),DoneTaskEntity.class);
+            mITaskModel.setDoneTaskEntity(doneTaskEntities);
             Log.e("saveValue",""+doneTaskEntities.toString());
         }
     }

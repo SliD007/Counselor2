@@ -7,24 +7,25 @@ import java.io.Serializable;
  */
 
 public class ToDoTaskEntity implements Serializable{
+
     private int id;
-    private String time;
+    private long time;
     private String title;
     private String fromWhere;
 
     public ToDoTaskEntity() {
     }
 
-    public ToDoTaskEntity(int id, String title, String from, String time) {
+    public ToDoTaskEntity(int id, String title, String fromWhere, long time) {
         this.id = id;
         this.time = time;
         this.title = title;
-        this.fromWhere = from;
+        this.fromWhere = fromWhere;
     }
 
     @Override
     public String toString() {
-        return "UserEntity [id=" + id + ", title=" + title + ", from="
+        return "UserEntity [id=" + id + ", title=" + title + ", fromWhere="
                 + fromWhere + ", time=" + time + "]";
     }
 
@@ -32,8 +33,8 @@ public class ToDoTaskEntity implements Serializable{
         return fromWhere;
     }
 
-    public void setFrom(String from) {
-        this.fromWhere = from;
+    public void setFrom(String fromWhere) {
+        this.fromWhere = fromWhere;
     }
 
     public int getId() {
@@ -44,11 +45,11 @@ public class ToDoTaskEntity implements Serializable{
         this.id = id;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 

@@ -2,7 +2,7 @@ package test.example.com.counselor.view.task;
 
 import java.util.List;
 
-import test.example.com.counselor.view.task.entity.DoneTasskEntity;
+import test.example.com.counselor.view.task.entity.DoneTaskEntity;
 import test.example.com.counselor.view.task.entity.ToDoTaskEntity;
 
 /**
@@ -12,22 +12,22 @@ import test.example.com.counselor.view.task.entity.ToDoTaskEntity;
 public class TaskModel implements ITaskModel {
 
 
-    public List<ToDoTaskEntity> getToDoListEntities() {
+    public List<ToDoTaskEntity> getToDoTaskEntity() {
         return toDoListEntities;
     }
 
-    public void setToDoListEntities(List<ToDoTaskEntity> toDoListEntities) {
+    public void setToDoTaskEntity(List<ToDoTaskEntity> toDoListEntities) {
         this.toDoListEntities = toDoListEntities;
     }
 
-    public List<DoneTasskEntity> getDoneListEntities() {
+    public List<DoneTaskEntity> getDoneTaskEntity() {
         return doneListEntities;
     }
 
-    public void setDoneListEntities(List<DoneTasskEntity> doneListEntities) {
+    public void setDoneTaskEntity(List<DoneTaskEntity> doneListEntities) {
         this.doneListEntities = doneListEntities;
     }
 
     List<ToDoTaskEntity> toDoListEntities;
-    List<DoneTasskEntity> doneListEntities;
+    List<DoneTaskEntity> doneListEntities;
 }
