@@ -156,12 +156,12 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
                 fragmentType = 0;
                 backlogLeftTv.setTextColor(Color.rgb(255, 255, 255));
                 backlogLeftVw.setBackgroundColor(Color.rgb(1, 160, 243));
-                backlogRightTv.setTextColor(Color.rgb(102, 102, 102));
+                backlogRightTv.setTextColor(Color.rgb(144, 144, 144));
                 backlogRightVw.setBackgroundColor(Color.rgb(48, 49, 53));
                 break;
             case 1:
                 fragmentType = 1;
-                backlogLeftTv.setTextColor(Color.rgb(102, 102, 102));
+                backlogLeftTv.setTextColor(Color.rgb(144, 144, 144));
                 backlogLeftVw.setBackgroundColor(Color.rgb(48, 49, 53));
                 backlogRightTv.setTextColor(Color.rgb(255, 255, 255));
                 backlogRightVw.setBackgroundColor(Color.rgb(1, 160, 243));

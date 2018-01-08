@@ -93,7 +93,6 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         }
     }
 
-
     @Override
     protected void initEvents() {
 
@@ -207,10 +206,10 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     }
 
     private void clearStatus() {
-        serviceTv1.setTextColor(Color.rgb(102, 102, 102));
-        serviceTv2.setTextColor(Color.rgb(102, 102, 102));
-        serviceTv3.setTextColor(Color.rgb(102, 102, 102));
-        serviceTv4.setTextColor(Color.rgb(102, 102, 102));
+        serviceTv1.setTextColor(Color.rgb(144, 144, 144));
+        serviceTv2.setTextColor(Color.rgb(144, 144, 144));
+        serviceTv3.setTextColor(Color.rgb(144, 144, 144));
+        serviceTv4.setTextColor(Color.rgb(144, 144, 144));
         serviceVw1.setBackgroundColor(Color.rgb(48,49,53));
         serviceVw2.setBackgroundColor(Color.rgb(48,49,53));
         serviceVw3.setBackgroundColor(Color.rgb(48,49,53));

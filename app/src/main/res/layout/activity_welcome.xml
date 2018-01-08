@@ -17,11 +17,11 @@
         android:layout_above="@+id/loginBtn">
         <ImageView
             android:id="@+id/logoImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="110dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="180dp"
-            android:src="@drawable/logo1"
+            android:src="@drawable/logo2"
             />
         <TextView
             android:text="法律顾问"
