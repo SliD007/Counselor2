@@ -4,10 +4,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/x1"
-    android:paddingLeft="@dimen/x1"
-    android:paddingRight="@dimen/x1"
-    android:paddingTop="@dimen/x1"
+
     tools:context=".view.WelcomeActivity">
     <RelativeLayout
         android:id="@+id/loginBtnRL"

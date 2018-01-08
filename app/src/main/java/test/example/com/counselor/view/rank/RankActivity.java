@@ -51,7 +51,7 @@ public class RankActivity extends BaseActivity implements IRankView {
     private boolean show_vs = false;
 
     private void initDatas() {
-        Log.e("ContractActivity", "加载数据");
+        Log.e("AssessmentActivity", "加载数据");
         rankEntities = mRankPresenter.getRankEntity();
         rankLv.setAdapter(new Common1Adapter<RankEntity>(this, rankEntities,
                 R.layout.item_rank, onItemClickListener) {

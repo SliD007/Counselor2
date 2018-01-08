@@ -33,7 +33,7 @@ public class ContractEntity {
 
     @Override
     public String toString() {
-        return "ContractEntity{" +
+        return "AssessmentEntity{" +
                 "name='" + id + '\'' +
                 ", workFor='" + workFor + '\'' +
 

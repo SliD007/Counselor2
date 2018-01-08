@@ -1,5 +1,6 @@
-package test.example.com.counselor.view.news;
+package test.example.com.counselor.view.assessment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,52 +18,58 @@ import test.example.com.counselor.adapter.Common1Adapter;
 import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
-import test.example.com.counselor.base.MyLvClickListener;
 
-public class NewsActivity extends BaseActivity implements INewsView {
+public class AssessmentActivity extends BaseActivity implements IAssessmentView {
 
 
-    NewsPresenter mNewsPresenter;
+    AssessmentPresenter mAssessmentPresenter;
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
-    @BindView(R.id.newsLv)
-    ListView newsLv;
 
-    List<NewsEntity> newsEntities;
+    @BindView(R.id.assessmentLv)
+    ListView assessmentLv;
+    List<AssessmentEntity> assessmentEntities;
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         super.allow_quit = false;
-        mNewsPresenter = new NewsPresenter(this);
-        titleBarTv.setText("消息");
-        mNewsPresenter.requestRank();
+        mAssessmentPresenter = new AssessmentPresenter(this);
+        titleBarTv.setText("我的合同");
+        mContext=this;
+        mAssessmentPresenter.requestAssessment();
+
     }
 
 
     protected void initContentView(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_news);
+        setContentView(R.layout.activity_assessment);
     }
+
+    private boolean show_vs = false;
 
     private void initDatas() {
         Log.e("AssessmentActivity", "加载数据");
-        newsEntities = mNewsPresenter.getNewsEntity();
-        newsLv.setAdapter(new Common1Adapter<NewsEntity>(this, newsEntities,
-                R.layout.item_news) {
+        assessmentEntities = mAssessmentPresenter.getAssessmentEntity();
+        assessmentLv.setAdapter(new Common1Adapter<AssessmentEntity>(this, assessmentEntities,
+                R.layout.item_assessment, onItemClickListener) {
             @Override
-            protected void convertView(ViewHolder1 mViewHolder, View item, NewsEntity newsEntity, int position) {
-                TextView itemTv1 = mViewHolder.getView(R.id.itemTv1);
-                TextView itemTv2 = mViewHolder.getView(R.id.itemTv2);
-                TextView itemTv3 = mViewHolder.getView(R.id.itemTv3);
-
-                itemTv1.setText(newsEntity.getFrom());
-                itemTv2.setText(newsEntity.getContext());
-                itemTv3.setText(newsEntity.getTime());
+            protected void convertView(ViewHolder1 mViewHolder, View item, AssessmentEntity assessmentEntity, int position) {
+                TextView tv1 = mViewHolder.getView(R.id.assessItemTv1);
+                TextView tv2 = mViewHolder.getView(R.id.assessItemTv2);
+                TextView tv3 = mViewHolder.getView(R.id.assessItemTv3);
+                TextView tv4 = mViewHolder.getView(R.id.assessItemTv4);
+                tv1.setText(assessmentEntity.getStr1());
+                tv2.setText(assessmentEntity.getStr2());
+                tv3.setText(assessmentEntity.getStr3());
+                tv4.setText(assessmentEntity.getStr4());
 
             }
         });
-        newsLv.setOnItemClickListener(onItemClickListener);
+        assessmentLv.setOnItemClickListener(onItemClickListener);
+
     }
 
     @OnClick({R.id.backTv})
@@ -76,13 +83,13 @@ public class NewsActivity extends BaseActivity implements INewsView {
     }
 
     @Override
-    public void requestNewsSuccess() {
+    public void requestAssessmentSuccess() {
         toast("请求成功！", true);
         initDatas();
     }
 
     @Override
-    public void requestNewsFailed() {
+    public void requestAssessmentFailed() {
         toast("请求失败！", true);
     }
 
@@ -99,17 +106,4 @@ public class NewsActivity extends BaseActivity implements INewsView {
         }
     };
 
-    MyLvClickListener mClickListener = new MyLvClickListener() {
-        @Override
-        public void myOnClick(int position, View view) {
-//            toast("" + (position), true);
-
-        }
-
-        public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去
-//            myOnClick((Integer) v.getTag(), v);
-            initDatas();
-        }
-
-    };
 }

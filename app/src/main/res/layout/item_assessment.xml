@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/assessItemTv1"
+            android:text="考核项目"
+            android:textSize="10sp"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:padding="5dp"/>
+        <TextView
+            android:id="@+id/assessItemTv2"
+            android:text="序号"
+            android:textSize="10sp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="3dp"/>
+        <TextView
+            android:id="@+id/assessItemTv3"
+            android:text="考核内容"
+            android:textSize="10sp"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:padding="5dp"/>
+        <TextView
+            android:id="@+id/assessItemTv4"
+            android:text="评分标准"
+            android:textSize="10sp"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:padding="5dp"/>
+        <EditText
+            android:hint=""
+            android:textSize="10sp"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:hint=""
+            android:textSize="10sp"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

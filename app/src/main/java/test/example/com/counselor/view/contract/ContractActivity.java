@@ -61,7 +61,7 @@ public class ContractActivity extends BaseActivity implements IContractView {
     private boolean show_vs = false;
 
     private void initDatas() {
-        Log.e("ContractActivity", "加载数据");
+        Log.e("AssessmentActivity", "加载数据");
         contractEntities = mContractPresenter.getContractEntity();
         contractLv.setAdapter(new Common1Adapter<ContractEntity>(this, contractEntities,
                 R.layout.item_contract, onItemClickListener) {
