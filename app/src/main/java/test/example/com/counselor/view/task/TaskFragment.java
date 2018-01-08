@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.todolist;
+package test.example.com.counselor.view.task;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -31,14 +31,14 @@ import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.view.news.NewsActivity;
 import test.example.com.counselor.view.rank.RankActivity;
 import test.example.com.counselor.view.service.addworklog.AddWorkLogActivity;
-import test.example.com.counselor.view.todolist.entity.DoneListEntity;
-import test.example.com.counselor.view.todolist.entity.ToDoListEntity;
+import test.example.com.counselor.view.task.entity.DoneTasskEntity;
+import test.example.com.counselor.view.task.entity.ToDoTaskEntity;
 
 /**
  * Created by Sli.D on 2017/12/20.
  */
 
-public class ToDoListFragment extends BaseFragment implements IToDoListView {
+public class TaskFragment extends BaseFragment implements ITaskView {
 
     @BindView(R.id.backlogLv)
     ListView backlogLv;
@@ -51,9 +51,9 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
     @BindView(R.id.backlogRightTv)
     TextView backlogRightTv;
 
-    ToDoListPresenter mToDoListPresenter;
-    List<ToDoListEntity> toDoListEntities;
-    List<DoneListEntity> doneListEntities;
+    TaskPresenter mTaskPresenter;
+    List<ToDoTaskEntity> toDoListEntities;
+    List<DoneTasskEntity> doneListEntities;
     private int fragmentType;
     private int[] fragmentCuttent;
     private int requestSize=20;
@@ -68,10 +68,10 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
     protected void initPresenter() {
         fragmentType = 0;
         fragmentCuttent = new int[]{0, 0};
-        mToDoListPresenter = new ToDoListPresenter(getActivity(), this);
-        star = mToDoListPresenter.requestStar();
-        mToDoListPresenter.requestToDoList(fragmentCuttent[0], requestSize, 1, MyApplication.getInstance().loginEntity.getId());
-        mToDoListPresenter.requestToDoList(fragmentCuttent[1], requestSize, 0, MyApplication.getInstance().loginEntity.getId());
+        mTaskPresenter = new TaskPresenter(getActivity(), this);
+        star = mTaskPresenter.requestStar();
+        mTaskPresenter.requestTask(fragmentCuttent[0], requestSize, 1, MyApplication.getInstance().loginEntity.getId());
+        mTaskPresenter.requestTask(fragmentCuttent[1], requestSize, 0, MyApplication.getInstance().loginEntity.getId());
         fragmentCuttent[0]=1;
         fragmentCuttent[1]=1;
     }
@@ -92,31 +92,30 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
 
     @Override
     protected void initDatas() {
-        Log.e("ToDoListFragment","加载数据");
+        Log.e("TaskFragment","加载数据");
         if (fragmentType == 0) {
-            toDoListEntities = mToDoListPresenter.getToDoListEntityList();
-            backlogLv.setAdapter(new Common1Adapter<ToDoListEntity>(super.mContext, toDoListEntities,
+            toDoListEntities = mTaskPresenter.getToDoListEntityList();
+            backlogLv.setAdapter(new Common1Adapter<ToDoTaskEntity>(super.mContext, toDoListEntities,
                     R.layout.item_commonlist, onItemClickListener) {
                 @Override
-                protected void convertView(ViewHolder1 mViewHolder, View item, ToDoListEntity toDoListEntity, int position) {
+                protected void convertView(ViewHolder1 mViewHolder, View item, ToDoTaskEntity toDoTaskEntity, int position) {
                     TextView tv1 = mViewHolder.getView(R.id.itemTv1);
                     TextView tv2 = mViewHolder.getView(R.id.itemTv2);
                     TextView tv3 = mViewHolder.getView(R.id.itemTv3);
-                    tv1.setText(toDoListEntity.getTitle());
-                    tv2.setText(toDoListEntity.getFrom());
-                    tv3.setText(toDoListEntity.getTime());
-                    TextView tv4 = mViewHolder.getView(R.id.itemTv1);
-                    tv4.setText(toDoListEntity.getTime());
+                    tv1.setText(toDoTaskEntity.getTitle());
+                    tv2.setText(toDoTaskEntity.getFrom());
+                    tv3.setText(toDoTaskEntity.getTime());
+
                 }
             });
             backlogLv.setOnItemClickListener(onItemClickListener);
 
         } else {
-            doneListEntities = mToDoListPresenter.getDoneListEntityList();
-            backlogLv.setAdapter(new Common1Adapter<DoneListEntity>(super.mContext, doneListEntities,
+            doneListEntities = mTaskPresenter.getDoneListEntityList();
+            backlogLv.setAdapter(new Common1Adapter<DoneTasskEntity>(super.mContext, doneListEntities,
                     R.layout.item_commonlist, onItemClickListener) {
                 @Override
-                protected void convertView(ViewHolder1 mViewHolder, View item, DoneListEntity toDoListEntity, int position) {
+                protected void convertView(ViewHolder1 mViewHolder, View item, DoneTasskEntity toDoListEntity, int position) {
                     TextView tv1 = mViewHolder.getView(R.id.itemTv1);
                     TextView tv2 = mViewHolder.getView(R.id.itemTv2);
                     TextView tv3 = mViewHolder.getView(R.id.itemTv3);
@@ -172,7 +171,7 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
     @Override
     public void requestToDoListSuccess() {
 //        toast("请求成功", false);
-        Log.e("ToDoListFragment","请求成功");
+        Log.e("TaskFragment","请求成功");
         initDatas();
     }
 
@@ -199,7 +198,7 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             toast("" + (position), true);
-            mToDoListPresenter.requestToDoList(fragmentCuttent[fragmentType],requestSize,
+            mTaskPresenter.requestTask(fragmentCuttent[fragmentType],requestSize,
                     fragmentType, MyApplication.getInstance().loginEntity.getId());
 
         }

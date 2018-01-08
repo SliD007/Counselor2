@@ -16,6 +16,7 @@ import okhttp3.Call;
 import okhttp3.Response;
 import test.example.com.counselor.base.BasePresenter;
 import test.example.com.counselor.util.Constants;
+import test.example.com.counselor.util.Urls;
 
 /**
  * Created by Sli.D on 2017/5/17.
@@ -35,9 +36,9 @@ public class LoginPresenter extends BasePresenter{
         Log.e(account,password);
         HashMap<String,String> params = new HashMap<>();
         //String  contact  手机号码; String  password  用户登录密码
-        params.put("account",account);
+        params.put("contact",account);
         params.put("password",password);
-        OkGo.post(URL)
+        OkGo.post(Urls.LOGINURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
                 .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
@@ -88,35 +89,11 @@ public class LoginPresenter extends BasePresenter{
         }
 
         public void onSuccess(String s, Call call, Response response) {
-            String str = "{\n" +
-                    "    \"code\": 0,\n" +
-                    "    \"success\": true,\n" +
-                    "    \"message\": \"登录成功\",\n" +
-                    "    \"value\": {\n" +
-                    "        \"id\": 1,\n" +
-                    "        \"role\": null,\n" +
-                    "        \"username\": \"131\",\n" +
-                    "        \"password\": \"000000\",\n" +
-                    "        \"gender\": \"a\",\n" +
-                    "        \"nation\": \"china\",\n" +
-                    "        \"contact\": \"111111\",\n" +
-                    "        \"email\": \"1111\",\n" +
-                    "        \"organization\": \"明诚明\",\n" +
-                    "        \"education\": \"1111\",\n" +
-                    "        \"academy\": \"111\",\n" +
-                    "        \"name\": \"黄柯云\",\n" +
-                    "        \"experience\": \"111\",\n" +
-                    "        \"evaluation\": \"111\",\n" +
-                    "        \"communityA\": \"西递\",\n" +
-                    "        \"communityB\": \"宏村\",\n" +
-                    "        \"star\": 0,\n" +
-                    "        \"com_status\": \"已选择\",\n" +
-                    "        \"status\": \"审核通过\"\n" +
-                    "    }\n" +
-                    "}";
-            JSONObject json = JSON.parseObject(str);
-            if (json.getInteger("code")==0){
-                saveValue(json);
+//            Log.e("loadLogin","onSuccess:"+s);
+
+            JSONObject object = JSON.parseObject(s);
+            if (object.getInteger("code")==0){
+                saveValue(object);
                 mLoginView.loginSuccess();
             }else {
                 mLoginView.loginFailed();
@@ -144,7 +121,7 @@ public class LoginPresenter extends BasePresenter{
         JSONObject value = JSON.parseObject(object.getString("value"));
         LoginEntity entity = JSON.parseObject(value.toString(),LoginEntity.class);
         mLoginModel.setEntity(entity);
-        Log.e("LoginEntity",mLoginModel.getEntity().toString());
+//        Log.e("LoginEntity",mLoginModel.getEntity().toString());
 
     }
 }

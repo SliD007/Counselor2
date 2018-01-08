@@ -18,7 +18,7 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.adapter.FragmentAdapter;
 import test.example.com.counselor.base.BaseActivity;
-import test.example.com.counselor.view.todolist.ToDoListFragment;
+import test.example.com.counselor.view.task.TaskFragment;
 import test.example.com.counselor.view.personal.PersonalFragment;
 import test.example.com.counselor.view.schedule.ScheduleFragment;
 import test.example.com.counselor.view.service.ServiceFragment;
@@ -48,7 +48,7 @@ public class HomeActivity extends BaseActivity {
     @BindView(R.id.viewpager)
     ViewPager viewpager;
     private int fragmentId;
-    ToDoListFragment mBacklogFragment;
+    TaskFragment mBacklogFragment;
     ScheduleFragment mScheduleFragment;
     ServiceFragment mServiceFragment;
     PersonalFragment mPersonalFragment;
@@ -71,7 +71,7 @@ public class HomeActivity extends BaseActivity {
         buttomTv1.setTextColor(Color.rgb(14, 130, 193));
         buttomIm1.setImageResource(R.drawable.u2336);
         list = new ArrayList<Fragment>();
-        mBacklogFragment = new ToDoListFragment();
+        mBacklogFragment = new TaskFragment();
         mScheduleFragment = new ScheduleFragment();
         mServiceFragment = new ServiceFragment();
         mPersonalFragment = new PersonalFragment();

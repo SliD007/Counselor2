@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.todolist.entity;
+package test.example.com.counselor.view.task.entity;
 
 import java.io.Serializable;
 
@@ -6,14 +6,18 @@ import java.io.Serializable;
  * Created by Sli.D on 2017/5/12.
  */
 
-public class DoneListEntity implements Serializable{
+public class DoneTasskEntity implements Serializable{
     private int id;
-    private String title;
-    private String from;
     private String time;
+    private String title;
+    private String fromWhere;
 
-    public DoneListEntity(int id, String title, String from, String time) {
-        this.from = from;
+    public DoneTasskEntity() {
+
+    }
+
+    public DoneTasskEntity(int id, String title, String from, String time) {
+        this.fromWhere = from;
         this.id = id;
         this.time = time;
         this.title = title;
@@ -22,15 +26,15 @@ public class DoneListEntity implements Serializable{
     @Override
     public String toString() {
         return "UserEntity [id=" + id + ", title=" + title + ", from="
-                + from + ", time=" + time + "]";
+                + fromWhere + ", time=" + time + "]";
     }
 
     public String getFrom() {
-        return from;
+        return fromWhere;
     }
 
     public void setFrom(String from) {
-        this.from = from;
+        this.fromWhere = from;
     }
 
     public int getId() {

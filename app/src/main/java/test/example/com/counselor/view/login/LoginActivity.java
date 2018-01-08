@@ -17,7 +17,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
-import test.example.com.counselor.util.Md5Util;
 import test.example.com.counselor.view.HomeActivity;
 import test.example.com.counselor.view.forgetpw.ForgetPwActivity;
 
@@ -79,7 +78,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
             rememberPwCb.setChecked(true);
             //直接发起登录
             passwordEt.setText(password);
-            password = Md5Util.md5(password);
+//            password = Md5Util.md5(password);
             mLoginPresenter.loadLogin(this,account,password);
         }else{
             rememberPwCb.setChecked(false);
@@ -114,7 +113,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
                 account = userNameEt.getEditableText().toString();
                 password = passwordEt.getEditableText().toString();
                 saveUser(account,password);
-                password = Md5Util.md5(password);
+//                password = Md5Util.md5(password);
                 mLoginPresenter.loadLogin(LoginActivity.this,account,password);
 
                 break;
@@ -146,7 +145,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
      */
     @Override
     public void loginSuccess() {
-        toast("登录成！",true);
+        toast("登录成功！",true);
         Intent intent = new Intent(LoginActivity.this, HomeActivity .class);
         startActivity(intent);
     }
