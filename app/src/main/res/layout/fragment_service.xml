@@ -88,13 +88,15 @@
                 android:id="@+id/addTv"
                 android:text="新增"
                 style="@style/serviceTitleTv"
+                android:textColor="#fff"
+                android:textSize="10sp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true" />
             <ImageView
                 android:id="@+id/addIm"
-                android:src="@drawable/u74"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/u75"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_centerHorizontal="true"
                 android:layout_above="@id/addTv"/>
         </RelativeLayout>

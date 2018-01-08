@@ -59,7 +59,7 @@ public class HomeActivity extends BaseActivity {
         ButterKnife.bind(this);
         Intent i = getIntent();
         fragmentId = i.getIntExtra("fragmentId",0);
-        initView(fragmentId);
+        initView();
     }
 
     @Override
@@ -67,8 +67,9 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
     }
 
-    private void initView(int fragmentId){
-        buttomTv1.setTextColor(Color.rgb(1, 160, 243));
+    private void initView(){
+        buttomTv1.setTextColor(Color.rgb(14, 130, 193));
+        buttomIm1.setImageResource(R.drawable.u2336);
         list = new ArrayList<Fragment>();
         mBacklogFragment = new ToDoListFragment();
         mScheduleFragment = new ScheduleFragment();
@@ -91,16 +92,20 @@ public class HomeActivity extends BaseActivity {
                 clearStatus();
                 switch (position) {
                     case 0:
-                        buttomTv1.setTextColor(Color.rgb(1, 160, 243));
+                        buttomTv1.setTextColor(Color.rgb(14, 130, 193));
+                        buttomIm1.setImageResource(R.drawable.u2336);
                         break;
                     case 1:
-                        buttomTv2.setTextColor(Color.rgb(1, 160, 243));
+                        buttomTv2.setTextColor(Color.rgb(14, 130, 193));
+                        buttomIm2.setImageResource(R.drawable.u2346);
                         break;
                     case 2:
-                        buttomTv3.setTextColor(Color.rgb(1, 160, 243));
+                        buttomTv3.setTextColor(Color.rgb(14, 130, 193));
+                        buttomIm3.setImageResource(R.drawable.u2349);
                         break;
                     case 3:
-                        buttomTv4.setTextColor(Color.rgb(1, 160, 243));
+                        buttomTv4.setTextColor(Color.rgb(14, 130, 193));
+                        buttomIm4.setImageResource(R.drawable.u1741);
                         break;
                 }
             }
@@ -133,6 +138,10 @@ public class HomeActivity extends BaseActivity {
         buttomTv2.setTextColor(Color.rgb(255, 255, 255));
         buttomTv3.setTextColor(Color.rgb(255, 255, 255));
         buttomTv4.setTextColor(Color.rgb(255, 255, 255));
+        buttomIm1.setImageResource(R.drawable.u2335);
+        buttomIm2.setImageResource(R.drawable.u2345);
+        buttomIm3.setImageResource(R.drawable.u2348);
+        buttomIm4.setImageResource(R.drawable.u1740);
     }
 
 }

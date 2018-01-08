@@ -28,6 +28,8 @@ import test.example.com.counselor.adapter.Common1Adapter;
 import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.view.news.NewsActivity;
+import test.example.com.counselor.view.rank.RankActivity;
 import test.example.com.counselor.view.service.addworklog.AddWorkLogActivity;
 import test.example.com.counselor.view.todolist.entity.DoneListEntity;
 import test.example.com.counselor.view.todolist.entity.ToDoListEntity;
@@ -48,15 +50,14 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
     View backlogRightVw;
     @BindView(R.id.backlogRightTv)
     TextView backlogRightTv;
-    ToDoListPresenter mToDoListPresenter;
 
-    private int fragmentType;
-    private int[] fragmentCuttent;
+    ToDoListPresenter mToDoListPresenter;
     List<ToDoListEntity> toDoListEntities;
     List<DoneListEntity> doneListEntities;
+    private int fragmentType;
+    private int[] fragmentCuttent;
     private int requestSize=20;
-    private int requestToDoCurrent=0;
-    private int requestDoneCurrent=0;
+    private int star;
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_backlog;
@@ -68,6 +69,7 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
         fragmentType = 0;
         fragmentCuttent = new int[]{0, 0};
         mToDoListPresenter = new ToDoListPresenter(getActivity(), this);
+        star = mToDoListPresenter.requestStar();
         mToDoListPresenter.requestToDoList(fragmentCuttent[0], requestSize, 1, MyApplication.getInstance().loginEntity.getId());
         mToDoListPresenter.requestToDoList(fragmentCuttent[1], requestSize, 0, MyApplication.getInstance().loginEntity.getId());
         fragmentCuttent[0]=1;
@@ -128,18 +130,22 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
     }
 
 
-    @OnClick({R.id.backlogLeftRl, R.id.backlogRightRl})
+    @OnClick({R.id.backlogLeftTv, R.id.backlogRightTv,R.id.newsRl})
     public void onSelectClick(View view) {
         switch (view.getId()) {
-            case R.id.backlogLeftRl:
+            case R.id.backlogLeftTv:
                 fragmentType=0;
                 setTabSelection(0);
                 initDatas();
                 break;
-            case R.id.backlogRightRl:
+            case R.id.backlogRightTv:
                 fragmentType=1;
                 setTabSelection(1);
                 initDatas();
+                break;
+            case R.id.newsRl:
+                Intent i = new Intent(getContext(), NewsActivity.class);
+                startActivity(i);
                 break;
         }
     }
@@ -182,7 +188,6 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
@@ -206,14 +211,28 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         View v = inflater.inflate(R.layout.dialog_normal_layout, null);// 得到加载view
         mDialog.setContentView(v);
-
-//        LinearLayout layout = (LinearLayout) v.findViewById(R.id.dialog_rank);// 加载布局
-//        mDialog.setContentView(layout, new LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT,
-//                LinearLayout.LayoutParams.MATCH_PARENT));// 设置布局
-
         mDialog.show();//显示
         TextView centerTv = (TextView) v.findViewById(R.id.centerTv);
+        ImageView starIm1 = (ImageView) v.findViewById(R.id.starIm1);
+        ImageView starIm2 = (ImageView) v.findViewById(R.id.starIm2);
+        ImageView starIm3 = (ImageView) v.findViewById(R.id.starIm3);
+        switch (star){
+            case 1:
+                centerTv.setText("您的得分 1颗星！");
+                starIm1.setImageResource(R.drawable.u181);
+                break;
+            case 2:
+                centerTv.setText("您的得分 2颗星！");
+                starIm1.setImageResource(R.drawable.u181);
+                starIm2.setImageResource(R.drawable.u181);
+                break;
+            case 3:
+                centerTv.setText("您的得分 3颗星！");
+                starIm1.setImageResource(R.drawable.u181);
+                starIm2.setImageResource(R.drawable.u181);
+                starIm3.setImageResource(R.drawable.u181);
+                break;
+        }
         ImageView closeIm = (ImageView) v.findViewById(R.id.closeIm);
         Button button1 = (Button) v.findViewById(R.id.dialogBt1);
         Button button2 = (Button) v.findViewById(R.id.dialogBt2);
@@ -223,12 +242,18 @@ public class ToDoListFragment extends BaseFragment implements IToDoListView {
                 mDialog.dismiss();
             }
         });
-
         button1.setOnClickListener(new View.OnClickListener() { // 设置确定按钮
-            @Override
             public void onClick(View paramView) {
                 mDialog.dismiss();
                 Intent i = new Intent(getContext(), AddWorkLogActivity.class);
+                startActivity(i);
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() { // 设置确定按钮
+            @Override
+            public void onClick(View paramView) {
+                mDialog.dismiss();
+                Intent i = new Intent(getContext(), RankActivity.class);
                 startActivity(i);
             }
         });

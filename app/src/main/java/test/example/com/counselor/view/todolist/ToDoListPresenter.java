@@ -39,7 +39,6 @@ public class ToDoListPresenter {
 
     public void requestToDoList(int current, int size, final int type, int counselorId){
 
-
         HashMap<String,String> params = new HashMap<>();
         //String  contact  手机号码; String  password  用户登录密码
         params.put("current",current+"");
@@ -85,6 +84,10 @@ public class ToDoListPresenter {
                     }
 
                 });
+    }
+
+    public int requestStar(){
+        return 2;
     }
 
 

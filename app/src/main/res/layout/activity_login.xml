@@ -8,10 +8,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1.4">
         <ImageView
             android:id="@+id/iv_icon"
-            android:src="@drawable/logo"
+            android:src="@drawable/logo1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -22,15 +22,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="0.6">
         <TextView
             android:id="@+id/tv_title"
             android:text="法律顾问"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:textColor="#000"
-            android:textSize="23sp"
+            android:textSize="20sp"
             android:typeface="monospace" />
     </RelativeLayout>
 
@@ -76,15 +77,6 @@
                 android:textColorHint="#cccccc"
                 android:textSize="15sp" />
 
-            <ImageView
-                android:id="@+id/iv_unameClear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x40"
-                android:src="@drawable/ic_backspace_grey600_24dp"
-                android:visibility="invisible" />
 
         </RelativeLayout>
 
@@ -130,15 +122,6 @@
                 android:textColorHint="#cccccc"
                 android:textSize="15sp" />
 
-            <ImageView
-                android:id="@+id/iv_pwdClear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x40"
-                android:src="@drawable/ic_backspace_grey600_24dp"
-                android:visibility="invisible" />
         </RelativeLayout>
     </RelativeLayout>
 

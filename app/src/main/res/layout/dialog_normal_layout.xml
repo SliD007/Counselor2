@@ -47,7 +47,7 @@
 
     <TextView
         android:id="@+id/centerTv"
-        android:text="您的得分 三颗星！"
+        android:text="您的得分 0颗星！"
         android:textSize="20sp"
         android:textColor="#fff"
         android:layout_width="match_parent"
