@@ -1,5 +1,7 @@
 package test.example.com.counselor.view.service;
 
+import android.util.Log;
+
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
@@ -12,6 +14,7 @@ import okhttp3.Call;
 import okhttp3.Response;
 import test.example.com.counselor.base.BasePresenter;
 import test.example.com.counselor.util.Constants;
+import test.example.com.counselor.util.Urls;
 import test.example.com.counselor.view.service.entity.AdviceEntity;
 import test.example.com.counselor.view.service.entity.ClassicCaseEntity;
 import test.example.com.counselor.view.service.entity.SummaryEntity;
@@ -23,7 +26,6 @@ import test.example.com.counselor.view.service.entity.WorkLogEntity;
 
 public class ServicePresenter extends BasePresenter {
 
-    String URL = "http://www.baidu.com";
     IServiceView mIServiceView;
     IServiceModel mServiceModel;
     List<WorkLogEntity> workLogEntities;
@@ -47,9 +49,10 @@ public class ServicePresenter extends BasePresenter {
         //String  contact  手机号码; String  password  用户登录密码
         params.put("current",current+"");
         params.put("size",size+"");
-        params.put("type",type+"");
+        params.put("type",0+"");
         params.put("counselorId",counselorId+"");
-        OkGo.post(URL)
+        params.put("search","");
+        OkGo.post(Urls.WorkLogURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
                 .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
@@ -57,7 +60,7 @@ public class ServicePresenter extends BasePresenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-//                        Log.e("s",s);
+                        Log.e("requestServiceData",s);
 //                        JSONObject object = JSON.parseObject(s);
 //                        if (object.getInteger("code")==0){
 //                            mIToDoListView.requestToDoListSuccess();

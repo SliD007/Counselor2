@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -15,8 +17,9 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
 
@@ -24,8 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
-import test.example.com.counselor.adapter.Common1Adapter;
-import test.example.com.counselor.adapter.ViewHolder1;
+import test.example.com.counselor.adapter.CommonAdapter;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.view.news.NewsActivity;
@@ -40,8 +42,6 @@ import test.example.com.counselor.view.task.entity.ToDoTaskEntity;
 
 public class TaskFragment extends BaseFragment implements ITaskView {
 
-    @BindView(R.id.backlogLv)
-    ListView backlogLv;
     @BindView(R.id.backlogLeftVw)
     View backlogLeftVw;
     @BindView(R.id.backlogLeftTv)
@@ -58,9 +58,15 @@ public class TaskFragment extends BaseFragment implements ITaskView {
     private int[] fragmentCuttent;
     private int requestSize=20;
     private int star;
+
+    @BindView(R.id.recyclerview)
+    XRecyclerView mRecyclerView;
+    private CommonAdapter mAdapter;
+    private int refreshTime = 0;
+    private int times = 0;
     @Override
     protected int getFragmentLayoutId() {
-        return R.layout.fragment_backlog;
+        return R.layout.fragment_task;
     }
 
 
@@ -83,6 +89,11 @@ public class TaskFragment extends BaseFragment implements ITaskView {
             showDialog();
             MyApplication.getInstance().show_star_dialog=false;
         }
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+
     }
 
     @Override
@@ -95,37 +106,70 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         Log.e("TaskFragment","加载数据");
         if (fragmentType == 0) {
             toDoListEntities = mTaskPresenter.getToDoTaskEntity();
-            backlogLv.setAdapter(new Common1Adapter<ToDoTaskEntity>(super.mContext, toDoListEntities,
-                    R.layout.item_commonlist, onItemClickListener) {
-                @Override
-                protected void convertView(ViewHolder1 mViewHolder, View item, ToDoTaskEntity toDoTaskEntity, int position) {
-                    TextView tv1 = mViewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = mViewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = mViewHolder.getView(R.id.itemTv3);
-                    tv1.setText(toDoTaskEntity.getTitle());
-                    tv2.setText(toDoTaskEntity.getFrom());
-                    tv3.setText(toDoTaskEntity.getTime()+"");
+
+            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_commonlist,onItemClickListener){
+                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                    tv1.setText(toDoListEntities.get(position).getTitle());
 
                 }
-            });
-            backlogLv.setOnItemClickListener(onItemClickListener);
+            };
+            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.refresh();
 
         } else {
             doneListEntities = mTaskPresenter.getDoneTaskEntityList();
-            backlogLv.setAdapter(new Common1Adapter<DoneTaskEntity>(super.mContext, doneListEntities,
-                    R.layout.item_commonlist, onItemClickListener) {
-                @Override
-                protected void convertView(ViewHolder1 mViewHolder, View item, DoneTaskEntity toDoListEntity, int position) {
-                    TextView tv1 = mViewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = mViewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = mViewHolder.getView(R.id.itemTv3);
-                    tv1.setText(toDoListEntity.getTitle());
-                    tv2.setText(toDoListEntity.getFrom());
-                    tv3.setText(toDoListEntity.getTime()+"");
+
+            mAdapter = new CommonAdapter(mContext,doneListEntities,R.layout.item_commonlist,onItemClickListener){
+                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                    tv1.setText(toDoListEntities.get(position).getTitle());
+
                 }
-            });
-            backlogLv.setOnItemClickListener(onItemClickListener);
+            };
+            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.refresh();
         }
+
+        mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                refreshTime ++;
+                times = 0;
+                new Handler().postDelayed(new Runnable(){
+                    public void run() {
+                        toast("没有更多",false);
+                        mTaskPresenter.requestTask(0, requestSize, fragmentType, MyApplication.getInstance().loginEntity.getId());
+
+                        mAdapter.notifyDataSetChanged();
+                        mRecyclerView.refreshComplete();
+                    }
+
+                }, 1000);            //refresh data here
+            }
+
+            @Override
+            public void onLoadMore() {
+                if(times < 2){
+                    new Handler().postDelayed(new Runnable(){
+                        public void run() {
+
+                            mRecyclerView.loadMoreComplete();
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    }, 1000);
+                } else {
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+
+                            mRecyclerView.setNoMore(true);
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    }, 1000);
+                }
+                times ++;
+            }
+        });
     }
 
 

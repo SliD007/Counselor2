@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#303135">
+    <!-- 头 -->
+    <LinearLayout
+        android:id="@+id/titlelBarRl"
+        style="@style/TitleBar">
+        <RelativeLayout
+            android:id="@+id/backlogLeftRl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp">
+            <View
+                android:id="@+id/backlogLeftVw"
+                android:background="#01a0f3"
+                android:layout_width="56dp"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"/>
+            <TextView
+                android:id="@+id/backlogLeftTv"
+                android:text="未查看"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_above="@id/backlogLeftVw"
+                android:layout_marginBottom="2dp"
+                android:layout_marginRight="10dp"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/backlogRightRl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp">
+            <View
+                android:id="@+id/backlogRightVw"
+                android:background="#303135"
+                android:layout_width="56dp"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"/>
+            <TextView
+                android:id="@+id/backlogRightTv"
+                android:text="已查看"
+                android:textSize="18sp"
+                android:textColor="#666"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_above="@id/backlogRightVw"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="10dp"/>
+            <RelativeLayout
+                android:id="@+id/newsRl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true">
+                <TextView
+                    android:id="@+id/newsTv"
+                    android:text="消息"
+                    android:textColor="#fff"
+                    android:textSize="10sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
+                <ImageView
+                    android:src="@drawable/u2353"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_above="@id/newsTv"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recyclerview"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

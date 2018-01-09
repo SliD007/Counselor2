@@ -41,4 +41,5 @@ dependencies {
     compile 'com.lzy.widget:ninegridview:0.2.1'
     compile 'com.lzy.widget:imagepicker:0.3.2'
     compile 'com.lzy.widget:view-core:0.2.1'
+    compile 'com.jcodecraeer:xrecyclerview:1.5.7'//下拉刷新
 }

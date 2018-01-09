@@ -128,11 +128,11 @@ public class TaskPresenter {
     public void saveValue(JSONObject object, int type){
         JSONObject page = object.getJSONObject("page");
         JSONArray listArray = page.getJSONArray("list");
-        Log.e("saveValue",""+listArray.toString());
+        Log.e("requestTask",""+listArray.toString());
         if (type==0){
             toDoTaskEntities = JSONArray.parseArray(listArray.toString(),ToDoTaskEntity.class);
             mITaskModel.setToDoTaskEntity(toDoTaskEntities);
-            Log.e("saveValue",""+toDoTaskEntities.toString());
+            Log.e("requestTask",""+toDoTaskEntities.toString());
         }else {
             doneTaskEntities = JSONArray.parseArray(listArray.toString(),DoneTaskEntity.class);
             mITaskModel.setDoneTaskEntity(doneTaskEntities);

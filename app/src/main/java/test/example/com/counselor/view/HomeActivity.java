@@ -48,7 +48,7 @@ public class HomeActivity extends BaseActivity {
     @BindView(R.id.viewpager)
     ViewPager viewpager;
     private int fragmentId;
-    TaskFragment mBacklogFragment;
+    TaskFragment mTaskFragment;
     ScheduleFragment mScheduleFragment;
     ServiceFragment mServiceFragment;
     PersonalFragment mPersonalFragment;
@@ -71,11 +71,11 @@ public class HomeActivity extends BaseActivity {
         buttomTv1.setTextColor(Color.rgb(14, 130, 193));
         buttomIm1.setImageResource(R.drawable.u2336);
         list = new ArrayList<Fragment>();
-        mBacklogFragment = new TaskFragment();
+        mTaskFragment = new TaskFragment();
         mScheduleFragment = new ScheduleFragment();
         mServiceFragment = new ServiceFragment();
         mPersonalFragment = new PersonalFragment();
-        list.add(mBacklogFragment);
+        list.add(mTaskFragment);
         list.add(mScheduleFragment);
         list.add(mServiceFragment);
         list.add(mPersonalFragment);

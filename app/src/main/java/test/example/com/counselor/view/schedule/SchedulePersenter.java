@@ -77,12 +77,12 @@ public class SchedulePersenter {
     public void saveValue(JSONObject object){
         JSONObject page = object.getJSONObject("page");
         JSONArray listArray = page.getJSONArray("list");
-        Log.e("saveValue",""+listArray.toString());
+        Log.e("requestScheduleList",""+listArray.toString());
 
         scheduleEntities = JSONArray.parseArray(listArray.toString(),ScheduleEntity.class);
         scheduleEntities.add(new ScheduleEntity(7,"2018-08-12","星沙街道新塘村"));
         mIScheduleModel.setScheduleEntities(scheduleEntities);
-        Log.e("saveValue",""+scheduleEntities.toString());
+        Log.e("requestScheduleList",""+scheduleEntities.toString());
 
     }
 }
