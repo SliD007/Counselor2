@@ -109,19 +109,25 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     TextView tv1 = viewHolder.getView(R.id.itemTv1);
                     tv1.setText(toDoListEntities.get(position).getTitle());
-
+                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                    tv2.setText(toDoListEntities.get(position).getFrom());
+                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                    tv3.setText(toDoListEntities.get(position).getTime()+"");
                 }
             };
             mRecyclerView.setAdapter(mAdapter);
 
         } else {
             doneListEntities = mTaskPresenter.getDoneTaskEntityList();
-
-            mAdapter = new CommonAdapter(mContext,doneListEntities,R.layout.item_commonlist,onItemClickListener){
+            toDoListEntities = mTaskPresenter.getToDoTaskEntity();
+            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_commonlist,onItemClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     TextView tv1 = viewHolder.getView(R.id.itemTv1);
                     tv1.setText(toDoListEntities.get(position).getTitle());
-
+                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                    tv2.setText(toDoListEntities.get(position).getFrom());
+                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                    tv3.setText(toDoListEntities.get(position).getTime()+"");
                 }
             };
             mRecyclerView.setAdapter(mAdapter);
