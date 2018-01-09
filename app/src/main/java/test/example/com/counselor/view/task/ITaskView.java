@@ -5,7 +5,8 @@ package test.example.com.counselor.view.task;
  */
 
 public interface ITaskView {
-    void requestToDoListSuccess();
-    void requestToDoListFaild();
-    void showDialog(boolean show);
+    void requestTaskSuccess();
+    void requestTaskFaild();
+    void requestStarSuccess();
+    void requestStarFaild();
 }

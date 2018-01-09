@@ -169,23 +169,6 @@ public class TaskFragment extends BaseFragment implements ITaskView {
     }
 
     @Override
-    public void requestToDoListSuccess() {
-//        toast("请求成功", false);
-        Log.e("TaskFragment","请求成功");
-        initDatas();
-    }
-
-    @Override
-    public void requestToDoListFaild() {
-        toast("请求失败", false);
-    }
-
-    @Override
-    public void showDialog(boolean show) {
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
@@ -267,4 +250,24 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         dialogWindow.setAttributes(lp);
     }
 
+    @Override
+    public void requestTaskSuccess() {
+        Log.e("TaskFragment","请求成功");
+        initDatas();
+    }
+
+    @Override
+    public void requestTaskFaild() {
+        toast("请求失败", false);
+    }
+
+    @Override
+    public void requestStarSuccess() {
+
+    }
+
+    @Override
+    public void requestStarFaild() {
+
+    }
 }

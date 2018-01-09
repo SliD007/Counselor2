@@ -8,6 +8,10 @@ import java.io.Serializable;
 
 public class ScheduleEntity implements Serializable {
     private int id;
+
+    public ScheduleEntity() {
+    }
+
     private String time;
     private String workfor;
 

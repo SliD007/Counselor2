@@ -16,6 +16,7 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Response;
+import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.Urls;
 import test.example.com.counselor.view.task.entity.DoneTaskEntity;
@@ -56,21 +57,20 @@ public class TaskPresenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("requestTask","onSuccess:"+s);
+//                        Log.e("requestTask","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             saveValue(object,type);
 
-                            mITaskView.requestToDoListSuccess();
+                            mITaskView.requestTaskSuccess();
                         }else {
-                            mITaskView.requestToDoListFaild();
+                            mITaskView.requestTaskFaild();
                         }
-                        mITaskView.requestToDoListSuccess();
                     }
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
-                        mITaskView.requestToDoListFaild();
+                        mITaskView.requestTaskFaild();
                     }
 
                     @Override
@@ -82,6 +82,38 @@ public class TaskPresenter {
     }
 
     public int requestStar(){
+        HashMap<String,String> params = new HashMap<>();
+        params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
+        OkGo.post(Urls.TASKURL)
+                .params(params)
+                .cacheKey(Constants.getAppCacheFolder())
+                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+                .cacheTime(-1)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        Log.e("requestStar","onSuccess:"+s);
+                        JSONObject object = JSON.parseObject(s);
+                        if (object.getInteger("code")==0){
+//                            saveValue(object,type);
+
+                            mITaskView.requestStarSuccess();
+                        }else {
+                            mITaskView.requestStarFaild();
+                        }
+                    }
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        mITaskView.requestStarFaild();
+                    }
+
+                    @Override
+                    public void onAfter(String s, Exception e) {
+                        super.onAfter(s, e);
+                    }
+
+                });
         return 2;
     }
 
@@ -96,7 +128,7 @@ public class TaskPresenter {
     public void saveValue(JSONObject object, int type){
         JSONObject page = object.getJSONObject("page");
         JSONArray listArray = page.getJSONArray("list");
-
+        Log.e("saveValue",""+listArray.toString());
         if (type==0){
             toDoTaskEntities = JSONArray.parseArray(listArray.toString(),ToDoTaskEntity.class);
             mITaskModel.setToDoTaskEntity(toDoTaskEntities);
@@ -104,7 +136,7 @@ public class TaskPresenter {
         }else {
             doneTaskEntities = JSONArray.parseArray(listArray.toString(),DoneTaskEntity.class);
             mITaskModel.setDoneTaskEntity(doneTaskEntities);
-            Log.e("saveValue",""+doneTaskEntities.toString());
+//            Log.e("saveValue",""+doneTaskEntities.toString());
         }
     }
 }

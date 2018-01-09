@@ -112,6 +112,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
 
                 account = userNameEt.getEditableText().toString();
                 password = passwordEt.getEditableText().toString();
+                loginBtn.setText("登录中");
                 saveUser(account,password);
 //                password = Md5Util.md5(password);
                 mLoginPresenter.loadLogin(LoginActivity.this,account,password);
@@ -145,12 +146,14 @@ public class LoginActivity extends BaseActivity implements ILoginView{
      */
     @Override
     public void loginSuccess() {
+        loginBtn.setText("登录");
         toast("登录成功！",true);
         Intent intent = new Intent(LoginActivity.this, HomeActivity .class);
         startActivity(intent);
     }
     @Override
     public void loginFailed() {
+        loginBtn.setText("登录");
         toast("登录失败！",true);
     }
 }
