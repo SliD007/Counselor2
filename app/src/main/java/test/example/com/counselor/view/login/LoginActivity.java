@@ -147,7 +147,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
     @Override
     public void loginSuccess() {
         loginBtn.setText("登录");
-        toast("登录成功！",true);
+        toast("登录成功！",false);
         Intent intent = new Intent(LoginActivity.this, HomeActivity .class);
         startActivity(intent);
     }

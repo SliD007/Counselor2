@@ -131,12 +131,15 @@ public class TaskPresenter {
         Log.e("requestTask",""+listArray.toString());
         if (type==0){
             toDoTaskEntities = JSONArray.parseArray(listArray.toString(),ToDoTaskEntity.class);
+            for(int i=0;i<20;i++){
+                toDoTaskEntities.add(toDoTaskEntities.get(0));
+            }
             mITaskModel.setToDoTaskEntity(toDoTaskEntities);
             Log.e("requestTask",""+toDoTaskEntities.toString());
         }else {
             doneTaskEntities = JSONArray.parseArray(listArray.toString(),DoneTaskEntity.class);
             mITaskModel.setDoneTaskEntity(doneTaskEntities);
-//            Log.e("saveValue",""+doneTaskEntities.toString());
+            Log.e("saveValue",""+doneTaskEntities.toString());
         }
     }
 }

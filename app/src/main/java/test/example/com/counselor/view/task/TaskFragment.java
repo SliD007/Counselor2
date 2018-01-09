@@ -93,12 +93,10 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
-
     }
 
     @Override
     protected void initEvents() {
-
     }
 
     @Override
@@ -115,7 +113,6 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                 }
             };
             mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.refresh();
 
         } else {
             doneListEntities = mTaskPresenter.getDoneTaskEntityList();
@@ -128,7 +125,6 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                 }
             };
             mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.refresh();
         }
 
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -138,7 +134,6 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                 times = 0;
                 new Handler().postDelayed(new Runnable(){
                     public void run() {
-                        toast("没有更多",false);
                         mTaskPresenter.requestTask(0, requestSize, fragmentType, MyApplication.getInstance().loginEntity.getId());
 
                         mAdapter.notifyDataSetChanged();
@@ -153,7 +148,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                 if(times < 2){
                     new Handler().postDelayed(new Runnable(){
                         public void run() {
-
+                            toast("上滑加载1",false);
                             mRecyclerView.loadMoreComplete();
                             mAdapter.notifyDataSetChanged();
                         }
@@ -161,7 +156,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                 } else {
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
-
+                            toast("上滑加载2",false);
                             mRecyclerView.setNoMore(true);
                             mAdapter.notifyDataSetChanged();
                         }
@@ -296,7 +291,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
 
     @Override
     public void requestTaskSuccess() {
-        Log.e("TaskFragment","请求成功");
+        toast("请求成功",false);
         initDatas();
     }
 
