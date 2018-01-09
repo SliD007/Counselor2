@@ -30,6 +30,7 @@ import test.example.com.counselor.R;
 import test.example.com.counselor.adapter.CommonAdapter;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.util.TimeUtil;
 import test.example.com.counselor.view.news.NewsActivity;
 import test.example.com.counselor.view.rank.RankActivity;
 import test.example.com.counselor.view.service.addworklog.AddWorkLogActivity;
@@ -112,7 +113,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                     TextView tv2 = viewHolder.getView(R.id.itemTv2);
                     tv2.setText(toDoListEntities.get(position).getFrom());
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                    tv3.setText(toDoListEntities.get(position).getTime()+"");
+                    tv3.setText(TimeUtil.getDateToString(toDoListEntities.get(position).getTime(),TimeUtil.Time));
                 }
             };
             mRecyclerView.setAdapter(mAdapter);
@@ -127,7 +128,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                     TextView tv2 = viewHolder.getView(R.id.itemTv2);
                     tv2.setText(toDoListEntities.get(position).getFrom());
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                    tv3.setText(toDoListEntities.get(position).getTime()+"");
+                    tv3.setText(TimeUtil.getDateToString(toDoListEntities.get(position).getTime(),TimeUtil.Time));
                 }
             };
             mRecyclerView.setAdapter(mAdapter);
@@ -315,4 +316,6 @@ public class TaskFragment extends BaseFragment implements ITaskView {
     public void requestStarFaild() {
 
     }
+
+    //时间戳转化
 }
