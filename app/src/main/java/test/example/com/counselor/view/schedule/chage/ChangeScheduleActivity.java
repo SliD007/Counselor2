@@ -85,6 +85,7 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
         //S
         list = new ArrayList<String>();
         list.add("坐班");
+        list.add("讲座");
         list.add("电话");
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);

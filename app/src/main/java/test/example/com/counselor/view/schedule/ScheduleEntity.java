@@ -9,8 +9,8 @@ import java.io.Serializable;
 public class ScheduleEntity implements Serializable {
 
     private int id;
-    private String jobType;
     private long placementTime;
+    private String jobType;
     private String village;
 
     public long getPlacementTime() {

@@ -52,7 +52,7 @@ public class SchedulePersenter {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
 //                        Log.e("requestScheduleList","response"+response.toString());
-                        Log.e("requestScheduleList","onSuccess"+s);
+//                        Log.e("requestScheduleList","onSuccess"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             saveValue(object);
