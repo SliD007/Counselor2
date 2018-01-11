@@ -23,7 +23,11 @@
         <activity android:name=".view.login.LoginActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
         <activity android:name=".view.forgetpw.ForgetPwActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.HomeActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+
+        <activity android:name=".view.task.showtask.ShowTaskActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+
         <activity android:name=".view.schedule.chage.ChangeScheduleActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+
         <activity android:name=".view.service.addworklog.AddWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addadvice.AddAdviceActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addclassiccase.AddClassicCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>

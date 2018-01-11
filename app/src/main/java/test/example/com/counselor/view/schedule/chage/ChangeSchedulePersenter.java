@@ -42,7 +42,7 @@ public class ChangeSchedulePersenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("onSuccess",s);
+                        Log.e("changeSchedule","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             mIChangeSchedule.changeSuccess();

@@ -1,7 +1,6 @@
 package test.example.com.counselor.view.schedule;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -77,12 +76,12 @@ public class SchedulePersenter {
     public void saveValue(JSONObject object){
         JSONObject page = object.getJSONObject("page");
         JSONArray listArray = page.getJSONArray("list");
-        Log.e("requestScheduleList",""+listArray.toString());
+//        Log.e("requestScheduleList",""+listArray.toString());
 
         scheduleEntities = JSONArray.parseArray(listArray.toString(),ScheduleEntity.class);
 
         mIScheduleModel.setScheduleEntities(scheduleEntities);
-        Log.e("requestScheduleList",""+scheduleEntities.toString());
+//        Log.e("requestScheduleList",""+scheduleEntities.toString());
 
     }
 }

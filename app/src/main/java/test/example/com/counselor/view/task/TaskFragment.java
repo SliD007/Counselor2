@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -38,6 +37,7 @@ import test.example.com.counselor.view.rank.RankActivity;
 import test.example.com.counselor.view.service.addworklog.AddWorkLogActivity;
 import test.example.com.counselor.view.task.entity.DoneTaskEntity;
 import test.example.com.counselor.view.task.entity.ToDoTaskEntity;
+import test.example.com.counselor.view.task.showtask.ShowTaskActivity;
 
 /**
  * Created by Sli.D on 2017/12/20.
@@ -113,7 +113,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                     TextView tv1 = viewHolder.getView(R.id.itemTv1);
                     tv1.setText(toDoListEntities.get(position).getTitle());
                     TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                    tv2.setText(toDoListEntities.get(position).getFrom());
+                    tv2.setText(toDoListEntities.get(position).getFromWhere());
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
                     tv3.setText(TimeUtil.getDateToString(toDoListEntities.get(position).getTime(),TimeUtil.Time));
                     RelativeLayout rl = viewHolder.getView(R.id.itemRl);
@@ -126,12 +126,12 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         } else {
             doneListEntities = mTaskPresenter.getDoneTaskEntityList();
             toDoListEntities = mTaskPresenter.getToDoTaskEntity();
-            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_commonlist,onItemClickListener){
+            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_commonlist,mClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     TextView tv1 = viewHolder.getView(R.id.itemTv1);
                     tv1.setText(toDoListEntities.get(position).getTitle());
                     TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                    tv2.setText(toDoListEntities.get(position).getFrom());
+                    tv2.setText(toDoListEntities.get(position).getFromWhere());
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
                     tv3.setText(TimeUtil.getDateToString(toDoListEntities.get(position).getTime(),TimeUtil.Time));
                 }
@@ -226,20 +226,14 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         return rootView;
     }
 
-    //Item响应回调
-    AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            toast("" + (position), true);
-        }
-    };
-
     //控件响应回调
     MyLvClickListener mClickListener = new MyLvClickListener() {
         @Override
         public void myOnClick(int position, View view) {
-            toast("" + (position), true);
+            Intent i = new Intent(mContext, ShowTaskActivity.class);
+            i.putExtra("id",toDoListEntities.get(position).getId());
+            i.putExtra("fromWhere","");
+            startActivity(i);
 
         }
         public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去

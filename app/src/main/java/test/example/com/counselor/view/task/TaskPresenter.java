@@ -61,47 +61,6 @@ public class TaskPresenter {
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             saveValue(object,type);
-
-                            mITaskView.requestTaskSuccess();
-                        }else {
-                            mITaskView.requestTaskFaild();
-                        }
-                    }
-                    @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        super.onError(call, response, e);
-                        mITaskView.requestTaskFaild();
-                    }
-
-                    @Override
-                    public void onAfter(String s, Exception e) {
-                        super.onAfter(s, e);
-                    }
-
-                });
-    }
-
-    public void requestTaskDetial(int current, int size, final int type, int counselorId){
-
-        HashMap<String,String> params = new HashMap<>();
-        //String  contact  手机号码; String  password  用户登录密码
-        params.put("current",current+"");
-        params.put("size",size+"");
-        params.put("type",type+"");
-        params.put("counselorId",counselorId+"");
-        OkGo.post(Urls.TASKURL)
-                .params(params)
-                .cacheKey(Constants.getAppCacheFolder())
-                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
-                .cacheTime(-1)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(String s, Call call, Response response) {
-//                        Log.e("requestTask","onSuccess:"+s);
-                        JSONObject object = JSON.parseObject(s);
-                        if (object.getInteger("code")==0){
-                            saveValue(object,type);
-
                             mITaskView.requestTaskSuccess();
                         }else {
                             mITaskView.requestTaskFaild();
@@ -171,12 +130,10 @@ public class TaskPresenter {
         Log.e("requestTask",""+listArray.toString());
         if (type==0){
             toDoTaskEntities = JSONArray.parseArray(listArray.toString(),ToDoTaskEntity.class);
-            for(int i=0;i<20;i++){
-                toDoTaskEntities.add(toDoTaskEntities.get(0));
-            }
             mITaskModel.setToDoTaskEntity(toDoTaskEntities);
             Log.e("requestTask",""+toDoTaskEntities.toString());
-        }else {
+        }
+        else {
             doneTaskEntities = JSONArray.parseArray(listArray.toString(),DoneTaskEntity.class);
             mITaskModel.setDoneTaskEntity(doneTaskEntities);
             Log.e("saveValue",""+doneTaskEntities.toString());
