@@ -19,6 +19,7 @@ import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.base.MyLvClickListener;
+import test.example.com.counselor.util.TimeUtil;
 import test.example.com.counselor.view.schedule.chage.ChangeScheduleActivity;
 
 /**
@@ -41,7 +42,7 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
     protected void initPresenter() {
 
         mSchedulePersenter = new SchedulePersenter(getActivity(),this);
-        mSchedulePersenter.requestScheduleList(0,12, MyApplication.getInstance().loginEntity.getId());
+        mSchedulePersenter.requestScheduleList(1,12);
     }
 
     @Override
@@ -49,7 +50,7 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
 
 //        Log.e("initViews",""+MyApplication.getInstance().refresh);
         if(MyApplication.getInstance().refresh){
-            mSchedulePersenter.requestScheduleList(0,12, MyApplication.getInstance().loginEntity.getId());
+            mSchedulePersenter.requestScheduleList(1,12);
             MyApplication.getInstance().refresh = false;
         }
     }
@@ -70,8 +71,8 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
                 TextView tv1 = mViewHolder.getView(R.id.itemTv1);
                 TextView tv2 = mViewHolder.getView(R.id.itemTv2);
                 TextView tv3 = mViewHolder.getView(R.id.itemTv3);
-                tv1.setText(scheduleEntity.getTime());
-                tv2.setText("服务单位："+scheduleEntity.getWorkfor());
+                tv1.setText(TimeUtil.getDateToString(scheduleEntity.getPlacementTime(),TimeUtil.Data));
+                tv2.setText("服务单位："+scheduleEntity.getVillage());
                 tv3.setText("申请修改");
                 tv3.setTag(position);
                 tv3.setOnClickListener(mClickListener);
@@ -92,8 +93,9 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
         public void myOnClick(int position, View view) {
             Intent i = new Intent(getActivity(),ChangeScheduleActivity.class);
             i.putExtra("id",position);
-            i.putExtra("workfor",entityList.get(position).getWorkfor());
-            i.putExtra("worktime",entityList.get(position).getTime());
+            i.putExtra("workfor",entityList.get(position).getVillage());
+            i.putExtra("worktime",entityList.get(position).getPlacementTime());
+            i.putExtra("jobType",entityList.get(position).getJobType());
             startActivity(i);
 
         }

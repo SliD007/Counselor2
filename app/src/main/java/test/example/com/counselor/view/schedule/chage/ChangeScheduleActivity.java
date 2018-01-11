@@ -22,6 +22,7 @@ import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.CustomDatePicker;
+import test.example.com.counselor.util.TimeUtil;
 
 /**
  * Created by Sli.D on 2017/12/26.
@@ -65,9 +66,10 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
         Intent i = getIntent();
         ScheduleId = i.getIntExtra("id",0);
         String workfor = i.getStringExtra("workfor");
-        String worktime = i.getStringExtra("worktime");
+        Long worktime = i.getLongExtra("worktime",0);
+        String jobType = i.getStringExtra("jobType");
         workForTv.setText(workfor);
-        workTimeTv.setText(worktime);
+        workTimeTv.setText(TimeUtil.getDateToString(worktime,TimeUtil.Data));
         //T
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         String now = sdf.format(new Date());
@@ -88,6 +90,13 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         workWaySp.setAdapter(adapter);
         workWaySp.setOnItemSelectedListener(mOnItemClickListener);
+        int k= adapter.getCount();
+        for(int j=0;j<k;j++){
+            if(jobType.equals(adapter.getItem(j).toString())){
+                workWaySp.setSelection(j,true);// 默认选中项
+                break;
+            }
+        }
     }
 
     @Override

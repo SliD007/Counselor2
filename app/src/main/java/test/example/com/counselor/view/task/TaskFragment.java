@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -30,6 +31,7 @@ import test.example.com.counselor.R;
 import test.example.com.counselor.adapter.CommonAdapter;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.base.MyLvClickListener;
 import test.example.com.counselor.util.TimeUtil;
 import test.example.com.counselor.view.news.NewsActivity;
 import test.example.com.counselor.view.rank.RankActivity;
@@ -106,7 +108,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         if (fragmentType == 0) {
             toDoListEntities = mTaskPresenter.getToDoTaskEntity();
 
-            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_commonlist,onItemClickListener){
+            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_commonlist,mClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     TextView tv1 = viewHolder.getView(R.id.itemTv1);
                     tv1.setText(toDoListEntities.get(position).getTitle());
@@ -114,6 +116,9 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                     tv2.setText(toDoListEntities.get(position).getFrom());
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
                     tv3.setText(TimeUtil.getDateToString(toDoListEntities.get(position).getTime(),TimeUtil.Time));
+                    RelativeLayout rl = viewHolder.getView(R.id.itemRl);
+                    rl.setTag(position);
+                    rl.setOnClickListener(mClickListener);
                 }
             };
             mRecyclerView.setAdapter(mAdapter);
@@ -227,10 +232,20 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             toast("" + (position), true);
-            mTaskPresenter.requestTask(fragmentCuttent[fragmentType],requestSize,
-                    fragmentType, MyApplication.getInstance().loginEntity.getId());
+        }
+    };
+
+    //控件响应回调
+    MyLvClickListener mClickListener = new MyLvClickListener() {
+        @Override
+        public void myOnClick(int position, View view) {
+            toast("" + (position), true);
 
         }
+        public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去
+            myOnClick((Integer) v.getTag(), v);
+        }
+
     };
 
     private void showDialog() {

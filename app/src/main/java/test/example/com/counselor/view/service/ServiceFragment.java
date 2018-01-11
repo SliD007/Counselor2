@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -18,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.adapter.Common1Adapter;
+import test.example.com.counselor.adapter.CommonAdapter;
 import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
@@ -63,6 +66,12 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     List<AdviceEntity> adviceEntities;
     List<ClassicCaseEntity> classicCaseEntities;
     List<SummaryEntity> summaryEntities;
+
+    @BindView(R.id.recyclerview)
+    XRecyclerView mRecyclerView;
+    private CommonAdapter mAdapter;
+    private int refreshTime = 0;
+    private int times = 0;
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_service;

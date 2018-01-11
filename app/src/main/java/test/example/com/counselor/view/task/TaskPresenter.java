@@ -81,6 +81,46 @@ public class TaskPresenter {
                 });
     }
 
+    public void requestTaskDetial(int current, int size, final int type, int counselorId){
+
+        HashMap<String,String> params = new HashMap<>();
+        //String  contact  手机号码; String  password  用户登录密码
+        params.put("current",current+"");
+        params.put("size",size+"");
+        params.put("type",type+"");
+        params.put("counselorId",counselorId+"");
+        OkGo.post(Urls.TASKURL)
+                .params(params)
+                .cacheKey(Constants.getAppCacheFolder())
+                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+                .cacheTime(-1)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                        Log.e("requestTask","onSuccess:"+s);
+                        JSONObject object = JSON.parseObject(s);
+                        if (object.getInteger("code")==0){
+                            saveValue(object,type);
+
+                            mITaskView.requestTaskSuccess();
+                        }else {
+                            mITaskView.requestTaskFaild();
+                        }
+                    }
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        mITaskView.requestTaskFaild();
+                    }
+
+                    @Override
+                    public void onAfter(String s, Exception e) {
+                        super.onAfter(s, e);
+                    }
+
+                });
+    }
+
     public int requestStar(){
         HashMap<String,String> params = new HashMap<>();
         params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");

@@ -49,8 +49,8 @@ public class ServicePresenter extends BasePresenter {
         //String  contact  手机号码; String  password  用户登录密码
         params.put("current",current+"");
         params.put("size",size+"");
-        params.put("type",0+"");
-        params.put("counselorId",counselorId+"");
+        params.put("contact",111111+"");
+        params.put("resultType",1+"");
         params.put("search","");
         OkGo.post(Urls.WorkLogURL)
                 .params(params)

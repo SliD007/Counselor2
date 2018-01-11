@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/leftImg"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:padding="1dp"
-        android:layout_height="match_parent"/>
-
     <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_weight="19"
-        android:layout_height="wrap_content">
+        android:id="@+id/itemRl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp">
         <TextView
             android:id="@+id/itemTv1"
             android:textSize="14sp"
@@ -38,4 +32,10 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/itemTv1"/>
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_margin="1dp"
+        android:background="#eee"/>
 </LinearLayout>

@@ -37,13 +37,12 @@ public class SchedulePersenter {
         scheduleEntities = new ArrayList<>();
     }
 
-    public void requestScheduleList(int current, int size, int counselorId){
+    public void requestScheduleList(int current, int size){
 
         HashMap<String,String> params = new HashMap<>();
-        //String  contact  手机号码; String  password  用户登录密码
         params.put("current",current+"");
         params.put("size",size+"");
-        params.put("counselorId",counselorId+"");
+        params.put("counselorId", 1+"");
         OkGo.post(Urls.ScheduleURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
@@ -52,6 +51,7 @@ public class SchedulePersenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
+//                        Log.e("requestScheduleList","response"+response.toString());
                         Log.e("requestScheduleList","onSuccess"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
@@ -80,7 +80,7 @@ public class SchedulePersenter {
         Log.e("requestScheduleList",""+listArray.toString());
 
         scheduleEntities = JSONArray.parseArray(listArray.toString(),ScheduleEntity.class);
-        scheduleEntities.add(new ScheduleEntity(7,"2018-08-12","星沙街道新塘村"));
+
         mIScheduleModel.setScheduleEntities(scheduleEntities);
         Log.e("requestScheduleList",""+scheduleEntities.toString());
 
