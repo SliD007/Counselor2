@@ -9,6 +9,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
+import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.TimeUtil;
 
 /**
@@ -63,7 +64,8 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
 
     @OnClick(R.id.backTv)
     public void onClick() {
-
+        MyApplication.getInstance().finishActivity(this);
+        this.finish();
     }
 
     @Override

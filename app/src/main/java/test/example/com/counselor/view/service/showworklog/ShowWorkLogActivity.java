@@ -9,6 +9,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
+import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.TimeUtil;
 
 /**
@@ -84,8 +85,10 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
 
     @OnClick(R.id.backTv)
     public void onClick() {
-
+        MyApplication.getInstance().finishActivity(this);
+        this.finish();
     }
+
 
     @Override
     public void requestWorkLogDetialSuccess() {

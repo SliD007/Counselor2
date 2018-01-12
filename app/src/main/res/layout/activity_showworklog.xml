@@ -172,12 +172,9 @@
                     style="@style/nextIm"/>
                 <TextView
                     android:id="@+id/item1Tv6"
+                    android:textSize="16sp"
                     android:layout_toLeftOf="@id/imageRightIm6"
                     style="@style/log_spinner"
-                    android:layout_width="160dp"
-                    android:text="请选择时间"
-                    android:textColor="#ccc"
-                    android:textSize="14sp"
                     />
             </RelativeLayout>
             <View
@@ -201,12 +198,9 @@
                     style="@style/nextIm"/>
                 <TextView
                     android:id="@+id/item1Tv7"
+                    android:textSize="16sp"
                     android:layout_toLeftOf="@id/imageRightIm7"
                     style="@style/log_spinner"
-                    android:layout_width="160dp"
-                    android:text="请选择时间"
-                    android:textColor="#ccc"
-                    android:textSize="14sp"
                     />
             </RelativeLayout>
             <View
