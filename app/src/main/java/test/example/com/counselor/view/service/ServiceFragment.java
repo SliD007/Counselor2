@@ -81,9 +81,9 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         fragmentType = 0;
         fragmentCuttent = new int[]{0, 0, 0, 0};
         mServicePersenter = new ServicePresenter(this);
-        mServicePersenter.requestServiceData(fragmentCuttent[0],requestSize,0, MyApplication.getInstance().loginEntity.getId());
-//        mServicePersenter.requestServiceData(fragmentCuttent[1],requestSize,1, MyApplication.getInstance().loginEntity.getId());
-//        mServicePersenter.requestServiceData(fragmentCuttent[2],requestSize,2, MyApplication.getInstance().loginEntity.getId());
+//        mServicePersenter.requestServiceData(fragmentCuttent[0],requestSize,0, MyApplication.getInstance().loginEntity.getId());
+        mServicePersenter.requestServiceData(fragmentCuttent[1],requestSize,1, MyApplication.getInstance().loginEntity.getId());
+        mServicePersenter.requestServiceData(fragmentCuttent[2],requestSize,2, MyApplication.getInstance().loginEntity.getId());
 //        mServicePersenter.requestServiceData(fragmentCuttent[3],requestSize,3, MyApplication.getInstance().loginEntity.getId());
         fragmentCuttent[0]=1;
         fragmentCuttent[1]=1;
@@ -134,10 +134,44 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
 
         }else if(fragmentType==1){
             adviceEntities = mServicePersenter.getAdviceEntities();
+            mAdapter = new CommonAdapter(mContext,adviceEntities,R.layout.item_4list,mClickListener){
+                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                    super.onBindViewHolder(viewHolder,position);
 
+                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                    TextView tv4 = viewHolder.getView(R.id.itemTv4);
+                    tv1.setText(adviceEntities.get(position).getTitle());
+                    tv2.setText("报送至："+adviceEntities.get(position).getToType());
+                    tv3.setText("服务时间："+ TimeUtil.getDateToString(adviceEntities.get(position).getCreateTime(),TimeUtil.Data));
+                    tv4.setText("服务单位："+adviceEntities.get(position).getVillage());
+                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
+                    ll.setTag(position);
+                    ll.setOnClickListener(mClickListener);
+                }
+            };
+            mRecyclerView.setAdapter(mAdapter);
         }else if(fragmentType==2){
             classicCaseEntities = mServicePersenter.getClassicCaseEntities();
+            mAdapter = new CommonAdapter(mContext,classicCaseEntities,R.layout.item_4list,mClickListener){
+                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                    super.onBindViewHolder(viewHolder,position);
 
+                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                    TextView tv4 = viewHolder.getView(R.id.itemTv4);
+                    tv1.setText(adviceEntities.get(position).getTitle());
+                    tv2.setText("报送至："+classicCaseEntities.get(position).getToType());
+                    tv3.setText("服务时间："+ TimeUtil.getDateToString(classicCaseEntities.get(position).getCreateTime(),TimeUtil.Data));
+                    tv4.setText("服务单位："+classicCaseEntities.get(position).getVillage());
+                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
+                    ll.setTag(position);
+                    ll.setOnClickListener(mClickListener);
+                }
+            };
+            mRecyclerView.setAdapter(mAdapter);
         }else {
             summaryEntities = mServicePersenter.getSummaryEntities();
 

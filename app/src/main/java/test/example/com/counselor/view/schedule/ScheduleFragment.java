@@ -2,7 +2,6 @@ package test.example.com.counselor.view.schedule;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +61,7 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
 
     @Override
     protected void initDatas() {
-        Log.e("ScheduleFragment","加载数据");
+//        Log.e("ScheduleFragment","加载数据");
         entityList = mSchedulePersenter.getScheduleEntityList();
         scheduleLv.setAdapter(new Common1Adapter<ScheduleEntity>(super.mContext, entityList,
                 R.layout.item_3list, mClickListener) {
@@ -108,7 +107,7 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
     @Override
     public void requestScheduleSuccess() {
 //        toast("请求成功",false);
-        Log.e("ScheduleFragment","请求成功");
+//        Log.e("ScheduleFragment","请求成功");
         initDatas();
     }
 

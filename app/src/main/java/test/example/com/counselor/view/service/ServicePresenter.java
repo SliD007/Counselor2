@@ -16,6 +16,7 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Response;
 import test.example.com.counselor.base.BasePresenter;
+import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.Urls;
 import test.example.com.counselor.view.service.entity.AdviceEntity;
@@ -50,7 +51,6 @@ public class ServicePresenter extends BasePresenter {
         switch (type){
             case 0:
                 HashMap<String,String> params = new HashMap<>();
-                //String  contact  手机号码; String  password  用户登录密码
                 params.put("current",current+"");
                 params.put("size",size+"");
                 params.put("contact",111111+"");
@@ -80,6 +80,102 @@ public class ServicePresenter extends BasePresenter {
                             }
                         });
                 break;
+            case 1:
+                HashMap<String,String> params1 = new HashMap<>();
+                params1.put("type",1+"");
+                params1.put("contact", MyApplication.getInstance().loginEntity.getContact());
+                params1.put("current",current+"");
+                params1.put("size",size+"");
+                OkGo.post(Urls.AdviceURL)
+                        .params(params1)
+                        .cacheKey(Constants.getAppCacheFolder())
+                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+                        .cacheTime(-1)
+                        .execute(new StringCallback() {
+
+                            public void onSuccess(String s, Call call, Response response) {
+                                Log.e("requestServiceData1",response.toString());
+                                JSONObject object = JSON.parseObject(s);
+                                if (object.getInteger("code")==0){
+                                    saveValue(object,type);
+                                    mIServiceView.requestServiceSuccess();
+                                }else {
+                                    mIServiceView.requestServiceFailed();
+                                }
+                            }
+                            @Override
+                            public void onError(Call call, Response response, Exception e) {
+                                super.onError(call, response, e);
+                                mIServiceView.requestServiceFailed();
+                            }
+                        });
+                break;
+            case 2:
+                HashMap<String,String> params2 = new HashMap<>();
+                params2.put("type",1+"");
+                params2.put("contact", MyApplication.getInstance().loginEntity.getContact());
+                params2.put("current",current+"");
+                params2.put("size",size+"");
+                OkGo.post(Urls.AdviceURL)
+                        .params(params2)
+                        .cacheKey(Constants.getAppCacheFolder())
+                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+                        .cacheTime(-1)
+                        .execute(new StringCallback() {
+
+                            public void onSuccess(String s, Call call, Response response) {
+                                Log.e("requestServiceData2",response.toString());
+                                JSONObject object = JSON.parseObject(s);
+                                if (object.getInteger("code")==0){
+                                    saveValue(object,type);
+                                    mIServiceView.requestServiceSuccess();
+                                }else {
+                                    mIServiceView.requestServiceFailed();
+                                }
+                            }
+                            @Override
+                            public void onError(Call call, Response response, Exception e) {
+                                super.onError(call, response, e);
+                                mIServiceView.requestServiceFailed();
+                            }
+                        });
+                break;
+            case 3:
+
+                HashMap<String,String> params3 = new HashMap<>();
+                params3.put("contact", MyApplication.getInstance().loginEntity.getContact());
+                params3.put("current",current+"");
+                params3.put("size",size+"");
+                Log.e("requestServiceData3",params3.toString());
+                OkGo.post(Urls.SummaryURL)
+                        .params(params3)
+                        .cacheKey(Constants.getAppCacheFolder())
+                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+                        .cacheTime(-1)
+                        .execute(new StringCallback() {
+
+                            public String convertSuccess(Response response) throws Exception {
+                                Log.e("requestServiceData3",response.toString());
+                                return super.convertSuccess(response);
+                            }
+                            public void onSuccess(String s, Call call, Response response) {
+                                Log.e("requestServiceData3",response.toString());
+                                JSONObject object = JSON.parseObject(s);
+                                if (object.getInteger("code")==0){
+                                    saveValue(object,type);
+                                    mIServiceView.requestServiceSuccess();
+                                }else {
+                                    mIServiceView.requestServiceFailed();
+                                }
+                            }
+                            @Override
+                            public void onError(Call call, Response response, Exception e) {
+                                super.onError(call, response, e);
+                                Log.e("requestServiceData3",response.toString()+e.toString());
+                                mIServiceView.requestServiceFailed();
+                            }
+                        });
+                break;
         }
 
 
@@ -88,15 +184,25 @@ public class ServicePresenter extends BasePresenter {
     public void saveValue(JSONObject object, int type){
         JSONObject page = object.getJSONObject("page");
         JSONArray listArray = page.getJSONArray("list");
-        Log.e("requestTask",""+listArray.toString());
-        if (type==0){
-            workLogEntities = JSONArray.parseArray(listArray.toString(),WorkLogEntity.class);
-            for(int j=0;j<5;j++)
-                workLogEntities.add(workLogEntities.get(0));
-            mServiceModel.setWorkLogEntities(workLogEntities);
-            Log.e("requestTask",""+workLogEntities.toString());
-        }
-        else {
+        Log.e("requestData"+type,""+listArray.toString());
+        switch (type){
+            case 0:
+                workLogEntities = JSONArray.parseArray(listArray.toString(),WorkLogEntity.class);
+                for(int j=0;j<5;j++)
+                    workLogEntities.add(workLogEntities.get(0));
+                mServiceModel.setWorkLogEntities(workLogEntities);
+                Log.e("Entity"+type,""+workLogEntities.toString());
+                break;
+            case 1:
+                adviceEntities = JSONArray.parseArray(listArray.toString(),AdviceEntity.class);
+                mServiceModel.setAdviceEntities(adviceEntities);
+                Log.e("Entity"+type,""+adviceEntities.toString());
+                break;
+            case 2:
+                classicCaseEntities = JSONArray.parseArray(listArray.toString(),ClassicCaseEntity.class);
+                mServiceModel.setClassicCaseEntities(classicCaseEntities);
+                Log.e("Entity"+type,""+adviceEntities.toString());
+                break;
         }
     }
 

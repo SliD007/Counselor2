@@ -9,28 +9,30 @@ import java.io.Serializable;
 public class ClassicCaseEntity implements Serializable{
     private int id;
     private String title;
-    private String from;
-    private String time;
+    private String toType;
 
-    public ClassicCaseEntity(int id, String title, String from, String time) {
-        this.from = from;
-        this.id = id;
-        this.time = time;
-        this.title = title;
+    public ClassicCaseEntity() {
     }
+
+    private long createTime;
 
     @Override
     public String toString() {
-        return "UserEntity [id=" + id + ", title=" + title + ", from="
-                + from + ", time=" + time + "]";
+        return "ClassicCaseEntity{" +
+                "createTime=" + createTime +
+                ", id=" + id +
+                ", title='" + title + '\'' +
+                ", toType='" + toType + '\'' +
+                ", village='" + village + '\'' +
+                '}';
     }
 
-    public String getFrom() {
-        return from;
+    public long getCreateTime() {
+        return createTime;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 
     public int getId() {
@@ -41,14 +43,6 @@ public class ClassicCaseEntity implements Serializable{
         this.id = id;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -56,4 +50,22 @@ public class ClassicCaseEntity implements Serializable{
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getToType() {
+        return toType;
+    }
+
+    public void setToType(String toType) {
+        this.toType = toType;
+    }
+
+    public String getVillage() {
+        return village;
+    }
+
+    public void setVillage(String village) {
+        this.village = village;
+    }
+
+    private String village;
 }
