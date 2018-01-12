@@ -81,10 +81,10 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         fragmentType = 0;
         fragmentCuttent = new int[]{0, 0, 0, 0};
         mServicePersenter = new ServicePresenter(this);
-//        mServicePersenter.requestServiceData(fragmentCuttent[0],requestSize,0, MyApplication.getInstance().loginEntity.getId());
+        mServicePersenter.requestServiceData(fragmentCuttent[0],requestSize,0, MyApplication.getInstance().loginEntity.getId());
         mServicePersenter.requestServiceData(fragmentCuttent[1],requestSize,1, MyApplication.getInstance().loginEntity.getId());
         mServicePersenter.requestServiceData(fragmentCuttent[2],requestSize,2, MyApplication.getInstance().loginEntity.getId());
-//        mServicePersenter.requestServiceData(fragmentCuttent[3],requestSize,3, MyApplication.getInstance().loginEntity.getId());
+        mServicePersenter.requestServiceData(fragmentCuttent[3],requestSize,3, MyApplication.getInstance().loginEntity.getId());
         fragmentCuttent[0]=1;
         fragmentCuttent[1]=1;
         fragmentCuttent[2]=1;
