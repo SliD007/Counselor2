@@ -23,7 +23,7 @@ public class Urls {
     public static final String AdviceConfigurationURL = "http://law.d9lab.net/job/log/getLogConfiguration";
     public static final String AdviceAddURL = "http://law.d9lab.net/pad/report/addReport";
 
-    public static final String SummaryURL = "http://law.d9lab.net/pad/monthly/getMonthlyOage";
+    public static final String SummaryURL = "http://law.d9lab.net/pad/monthly/getMonthlyPage";
     public static final String SummaryConfigurationURL = "http://law.d9lab.net/job/log/getLogConfiguration";
     public static final String SummaryAddURL = "http://law.d9lab.net/pad/monthly/addMonthly";
 }

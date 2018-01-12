@@ -141,7 +141,6 @@ public class ServicePresenter extends BasePresenter {
                         });
                 break;
             case 3:
-
                 HashMap<String,String> params3 = new HashMap<>();
                 params3.put("contact", MyApplication.getInstance().loginEntity.getContact());
                 params3.put("current",current+"");
@@ -154,12 +153,8 @@ public class ServicePresenter extends BasePresenter {
                         .cacheTime(-1)
                         .execute(new StringCallback() {
 
-                            public String convertSuccess(Response response) throws Exception {
-                                Log.e("requestServiceData3",response.toString());
-                                return super.convertSuccess(response);
-                            }
                             public void onSuccess(String s, Call call, Response response) {
-                                Log.e("requestServiceData3",response.toString());
+                                Log.e("requestServiceData3",s);
                                 JSONObject object = JSON.parseObject(s);
                                 if (object.getInteger("code")==0){
                                     saveValue(object,type);
@@ -184,7 +179,7 @@ public class ServicePresenter extends BasePresenter {
     public void saveValue(JSONObject object, int type){
         JSONObject page = object.getJSONObject("page");
         JSONArray listArray = page.getJSONArray("list");
-//        Log.e("requestData"+type,""+listArray.toString());
+        Log.e("requestData"+type,""+listArray.toString());
         switch (type){
             case 0:
                 workLogEntities = JSONArray.parseArray(listArray.toString(),WorkLogEntity.class);
@@ -201,6 +196,11 @@ public class ServicePresenter extends BasePresenter {
             case 2:
                 classicCaseEntities = JSONArray.parseArray(listArray.toString(),ClassicCaseEntity.class);
                 mServiceModel.setClassicCaseEntities(classicCaseEntities);
+//                Log.e("Entity"+type,""+adviceEntities.toString());
+                break;
+            case 3:
+                summaryEntities = JSONArray.parseArray(listArray.toString(),SummaryEntity.class);
+                mServiceModel.setSummaryEntities(summaryEntities);
 //                Log.e("Entity"+type,""+adviceEntities.toString());
                 break;
         }

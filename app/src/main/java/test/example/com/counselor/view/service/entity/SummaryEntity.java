@@ -9,28 +9,28 @@ import java.io.Serializable;
 public class SummaryEntity implements Serializable{
     private int id;
     private String title;
-    private String from;
-    private String time;
+    private String village;
+    private long createTime;
 
-    public SummaryEntity(int id, String title, String from, String time) {
-        this.from = from;
-        this.id = id;
-        this.time = time;
-        this.title = title;
+    public SummaryEntity() {
     }
 
     @Override
     public String toString() {
-        return "UserEntity [id=" + id + ", title=" + title + ", from="
-                + from + ", time=" + time + "]";
+        return "SummaryEntity{" +
+                "createTime=" + createTime +
+                ", id=" + id +
+                ", title='" + title + '\'' +
+                ", village='" + village + '\'' +
+                '}';
     }
 
-    public String getFrom() {
-        return from;
+    public long getCreateTime() {
+        return createTime;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 
     public int getId() {
@@ -41,14 +41,6 @@ public class SummaryEntity implements Serializable{
         this.id = id;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -56,4 +48,13 @@ public class SummaryEntity implements Serializable{
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getVillage() {
+        return village;
+    }
+
+    public void setVillage(String village) {
+        this.village = village;
+    }
+
 }

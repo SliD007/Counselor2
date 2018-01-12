@@ -106,7 +106,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         if (fragmentType == 0) {
             toDoListEntities = mTaskPresenter.getToDoTaskEntity();
 
-            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_3list,mClickListener){
+            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_2list,mClickListener){
                         public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     super.onBindViewHolder(viewHolder,position);
 //                    Log.e("mAdapter","加载数据"+toDoListEntities.size());
@@ -126,7 +126,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         } else {
             doneListEntities = mTaskPresenter.getDoneTaskEntityList();
             toDoListEntities = mTaskPresenter.getToDoTaskEntity();
-            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_3list,mClickListener){
+            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_2list,mClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     TextView tv1 = viewHolder.getView(R.id.itemTv1);
                     tv1.setText(toDoListEntities.get(position).getTitle());

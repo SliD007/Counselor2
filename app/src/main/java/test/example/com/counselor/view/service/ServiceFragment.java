@@ -174,7 +174,22 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
             mRecyclerView.setAdapter(mAdapter);
         }else {
             summaryEntities = mServicePersenter.getSummaryEntities();
+            mAdapter = new CommonAdapter(mContext,summaryEntities,R.layout.item_3list,mClickListener){
+                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                    super.onBindViewHolder(viewHolder,position);
 
+                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                    tv1.setText(summaryEntities.get(position).getTitle());
+                    tv2.setText("时间："+ TimeUtil.getDateToString(summaryEntities.get(position).getCreateTime(),TimeUtil.Data));
+                    tv3.setText("服务单位："+summaryEntities.get(position).getVillage());
+                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
+                    ll.setTag(position);
+                    ll.setOnClickListener(mClickListener);
+                }
+            };
+            mRecyclerView.setAdapter(mAdapter);
         }
 
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
