@@ -1,7 +1,6 @@
 package test.example.com.counselor.view.task.showtask;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -34,7 +33,6 @@ public class ShowTaskPresenter {
     public void requestTaskDetial(int id, int fromWhere){
 
         HashMap<String,String> params = new HashMap<>();
-        //String  contact  手机号码; String  password  用户登录密码
         params.put("id",id+"");
         params.put("fromWhere",fromWhere+"");
         OkGo.post(Urls.TASKConfigurationURL)
@@ -45,8 +43,8 @@ public class ShowTaskPresenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("requestTaskDetial","response:"+response.toString());
-                        Log.e("requestTaskDetial","onSuccess:"+s);
+//                        Log.e("requestTaskDetial","response:"+response.toString());
+//                        Log.e("requestTaskDetial","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             saveValue(object);
@@ -73,10 +71,10 @@ public class ShowTaskPresenter {
     public void saveValue(JSONObject object){
 
         JSONObject value = object.getJSONObject("value");
-        Log.e("requestTask",""+value.toString());
+//        Log.e("requestTask",""+value.toString());
         taskDetialEntity = JSONObject.parseObject(value.toString(),TaskDetialEntity.class);
         mIShowTaskModel.setTaskDetialEntity(taskDetialEntity);
-        Log.e("requestTask",""+taskDetialEntity.toString());
+//        Log.e("requestTask",""+taskDetialEntity.toString());
 
     }
 

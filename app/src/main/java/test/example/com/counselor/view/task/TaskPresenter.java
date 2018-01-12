@@ -127,16 +127,18 @@ public class TaskPresenter {
     public void saveValue(JSONObject object, int type){
         JSONObject page = object.getJSONObject("page");
         JSONArray listArray = page.getJSONArray("list");
-        Log.e("requestTask",""+listArray.toString());
+//        Log.e("requestTask",""+listArray.toString());
         if (type==0){
             toDoTaskEntities = JSONArray.parseArray(listArray.toString(),ToDoTaskEntity.class);
+            for(int j=0;j<5;j++)
+                toDoTaskEntities.add(toDoTaskEntities.get(0));
             mITaskModel.setToDoTaskEntity(toDoTaskEntities);
-            Log.e("requestTask",""+toDoTaskEntities.toString());
+//            Log.e("requestTask",""+toDoTaskEntities.toString());
         }
         else {
             doneTaskEntities = JSONArray.parseArray(listArray.toString(),DoneTaskEntity.class);
             mITaskModel.setDoneTaskEntity(doneTaskEntities);
-            Log.e("saveValue",""+doneTaskEntities.toString());
+//            Log.e("saveValue",""+doneTaskEntities.toString());
         }
     }
 }

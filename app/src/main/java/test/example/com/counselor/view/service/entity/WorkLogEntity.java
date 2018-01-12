@@ -8,29 +8,31 @@ import java.io.Serializable;
 
 public class WorkLogEntity implements Serializable{
     private int id;
-    private String title;
-    private String from;
-    private String time;
+    private String serviceObject;
+    private String serviceType;
+    private long createTime;
+    private String serviceVillage;
 
-    public WorkLogEntity(int id, String title, String from, String time) {
-        this.from = from;
-        this.id = id;
-        this.time = time;
-        this.title = title;
+    public WorkLogEntity() {
     }
 
     @Override
     public String toString() {
-        return "UserEntity [id=" + id + ", title=" + title + ", from="
-                + from + ", time=" + time + "]";
+        return "WorkLogEntity{" +
+                "createTime=" + createTime +
+                ", id=" + id +
+                ", serviceObject='" + serviceObject + '\'' +
+                ", serviceType='" + serviceType + '\'' +
+                ", serviceVillage='" + serviceVillage + '\'' +
+                '}';
     }
 
-    public String getFrom() {
-        return from;
+    public long getCreateTime() {
+        return createTime;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 
     public int getId() {
@@ -41,19 +43,27 @@ public class WorkLogEntity implements Serializable{
         this.id = id;
     }
 
-    public String getTime() {
-        return time;
+    public String getServiceObject() {
+        return serviceObject;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setServiceObject(String serviceObject) {
+        this.serviceObject = serviceObject;
     }
 
-    public String getTitle() {
-        return title;
+    public String getServiceType() {
+        return serviceType;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    public String getServiceVillage() {
+        return serviceVillage;
+    }
+
+    public void setServiceVillage(String serviceVillage) {
+        this.serviceVillage = serviceVillage;
     }
 }

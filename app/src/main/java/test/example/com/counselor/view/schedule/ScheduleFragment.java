@@ -65,7 +65,7 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
         Log.e("ScheduleFragment","加载数据");
         entityList = mSchedulePersenter.getScheduleEntityList();
         scheduleLv.setAdapter(new Common1Adapter<ScheduleEntity>(super.mContext, entityList,
-                R.layout.item_commonlist, mClickListener) {
+                R.layout.item_3list, mClickListener) {
             @Override
             protected void convertView(ViewHolder1 mViewHolder, View item, ScheduleEntity scheduleEntity, int position) {
                 TextView tv1 = mViewHolder.getView(R.id.itemTv1);

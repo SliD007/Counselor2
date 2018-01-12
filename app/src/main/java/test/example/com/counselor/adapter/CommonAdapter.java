@@ -53,6 +53,7 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<CommonAdapter.ViewHol
         this.datas = datas;
         this.layoutId = layoutId;
         this.mClickListener = myClickListener;
+//        Log.e("CommonAdapter","5");
     }
 
     public CommonAdapter(Context context, List<T> datas, int layoutId,
@@ -73,15 +74,17 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<CommonAdapter.ViewHol
     }
     @Override
     public void onBindViewHolder(ViewHolder viewHolder,final int position) {
-
+//        Log.e("CommonAdapter","onBindViewHolder");
     }
 
     //获取数据的数量
     @Override
     public int getItemCount() {
         if (datas==null){
+//            Log.e("datas","null");
             return 0;
         }else {
+//            Log.e("datas",""+datas.size());
             return datas.size();
         }
     }

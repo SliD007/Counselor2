@@ -2,6 +2,9 @@ package test.example.com.counselor.view.service;
 
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
@@ -44,55 +47,57 @@ public class ServicePresenter extends BasePresenter {
 
     public void requestServiceData(int current, int size, final int type, int counselorId){
 
+        switch (type){
+            case 0:
+                HashMap<String,String> params = new HashMap<>();
+                //String  contact  手机号码; String  password  用户登录密码
+                params.put("current",current+"");
+                params.put("size",size+"");
+                params.put("contact",111111+"");
+                params.put("resultType",1+"");
+                params.put("search","");
+                OkGo.post(Urls.WorkLogURL)
+                        .params(params)
+                        .cacheKey(Constants.getAppCacheFolder())
+                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+                        .cacheTime(-1)
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onSuccess(String s, Call call, Response response) {
+//                        Log.e("requestServiceData",s);
+                                JSONObject object = JSON.parseObject(s);
+                                if (object.getInteger("code")==0){
+                                    saveValue(object,type);
+                                    mIServiceView.requestServiceSuccess();
+                                }else {
+                                    mIServiceView.requestServiceFailed();
+                                }
+                            }
+                            @Override
+                            public void onError(Call call, Response response, Exception e) {
+                                super.onError(call, response, e);
+                                mIServiceView.requestServiceFailed();
+                            }
+                        });
+                break;
+        }
 
-        HashMap<String,String> params = new HashMap<>();
-        //String  contact  手机号码; String  password  用户登录密码
-        params.put("current",current+"");
-        params.put("size",size+"");
-        params.put("contact",111111+"");
-        params.put("resultType",1+"");
-        params.put("search","");
-        OkGo.post(Urls.WorkLogURL)
-                .params(params)
-                .cacheKey(Constants.getAppCacheFolder())
-                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
-                .cacheTime(-1)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(String s, Call call, Response response) {
-                        Log.e("requestServiceData",s);
-//                        JSONObject object = JSON.parseObject(s);
-//                        if (object.getInteger("code")==0){
-//                            mIToDoListView.requestToDoListSuccess();
-//                        }else {
-//                            mIToDoListView.requestToDoListFaild();
-//                        }
-                        if (type==0){
-                            workLogEntities.add(new WorkLogEntity(0,"工作日志","报送至：长沙县司法局","2018/01/02/19:47"));
-                            workLogEntities.add(new WorkLogEntity(1,"开展深入学习十九大精神","星沙街道司法局","2018/01/02/9:47"));
-                            mServiceModel.setWorkLogEntities(workLogEntities);
-                        }else if(type==1){
-                            adviceEntities.add(new AdviceEntity(0,"关于预防金融诈骗的建议","报送至：长沙县司法局","2018/01/02/19:47"));
-                            adviceEntities.add(new AdviceEntity(1,"关于预防金融诈骗的建议","星沙街道司法局","2018/01/02/9:47"));
-                            mServiceModel.setAdviceEntities(adviceEntities);
-                        }else if(type==2){
-                            classicCaseEntities.add(new ClassicCaseEntity(0,"关于预防金融诈骗的典型案件","报送至：长沙县司法局","2018/01/02/19:47"));
-                            classicCaseEntities.add(new ClassicCaseEntity(1,"关于预防金融诈骗的典型案件","星沙街道司法局","2018/01/02/9:47"));
-                            mServiceModel.setClassicCaseEntities(classicCaseEntities);
-                        }else {
-                            summaryEntities.add(new SummaryEntity(0,"11月总结","报送至：长沙县司法局","2017/12/02/19:47"));
-                            summaryEntities.add(new SummaryEntity(1,"12月总结","星沙街道司法局","2018/01/02/9:47"));
-                            mServiceModel.setSummaryEntities(summaryEntities);
-                        }
 
-                    mIServiceView.requestServiceSuccess();
-                    }
-                    @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        super.onError(call, response, e);
-                        mIServiceView.requestServiceFailed();
-                    }
-                });
+    }
+
+    public void saveValue(JSONObject object, int type){
+        JSONObject page = object.getJSONObject("page");
+        JSONArray listArray = page.getJSONArray("list");
+        Log.e("requestTask",""+listArray.toString());
+        if (type==0){
+            workLogEntities = JSONArray.parseArray(listArray.toString(),WorkLogEntity.class);
+            for(int j=0;j<5;j++)
+                workLogEntities.add(workLogEntities.get(0));
+            mServiceModel.setWorkLogEntities(workLogEntities);
+            Log.e("requestTask",""+workLogEntities.toString());
+        }
+        else {
+        }
     }
 
     public List<WorkLogEntity> getWorkLogEntities(){
@@ -101,7 +106,6 @@ public class ServicePresenter extends BasePresenter {
     public List<AdviceEntity> getAdviceEntities(){
         return mServiceModel.getAdviceEntities();
     }
-
     public List<ClassicCaseEntity> getClassicCaseEntities(){
         return mServiceModel.getClassicCaseEntities();
     }

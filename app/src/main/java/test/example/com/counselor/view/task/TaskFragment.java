@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -99,17 +98,18 @@ public class TaskFragment extends BaseFragment implements ITaskView {
     }
 
     @Override
-    protected void initEvents() {
-    }
+    protected void initEvents() {}
 
     @Override
     protected void initDatas() {
-        Log.e("TaskFragment","加载数据");
+//        Log.e("TaskFragment","加载数据");
         if (fragmentType == 0) {
             toDoListEntities = mTaskPresenter.getToDoTaskEntity();
 
-            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_commonlist,mClickListener){
-                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_3list,mClickListener){
+                        public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                    super.onBindViewHolder(viewHolder,position);
+//                    Log.e("mAdapter","加载数据"+toDoListEntities.size());
                     TextView tv1 = viewHolder.getView(R.id.itemTv1);
                     tv1.setText(toDoListEntities.get(position).getTitle());
                     TextView tv2 = viewHolder.getView(R.id.itemTv2);
@@ -126,7 +126,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         } else {
             doneListEntities = mTaskPresenter.getDoneTaskEntityList();
             toDoListEntities = mTaskPresenter.getToDoTaskEntity();
-            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_commonlist,mClickListener){
+            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_3list,mClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     TextView tv1 = viewHolder.getView(R.id.itemTv1);
                     tv1.setText(toDoListEntities.get(position).getTitle());
@@ -299,7 +299,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         dialogWindow.setGravity(Gravity.CENTER);
         WindowManager m = getActivity().getWindowManager();
         Display d = m.getDefaultDisplay(); // 获取屏幕宽、高度
-        lp.y = (int) (d.getWidth() * (-0.32));
+        lp.y = (int) (d.getWidth() * (-0.33));
         lp.width = (int) (d.getWidth() * 0.96); // 宽度
         lp.alpha = 0.9f; // 透明度
         dialogWindow.setAttributes(lp);
@@ -307,7 +307,8 @@ public class TaskFragment extends BaseFragment implements ITaskView {
 
     @Override
     public void requestTaskSuccess() {
-        toast("请求成功",false);
+//        toast("请求成功",false);
+//        Log.e("TaskFragment","请求成功");
         initDatas();
     }
 

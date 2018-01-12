@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#303135">
     <!-- 头 -->
     <LinearLayout
@@ -102,18 +103,9 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/serviceLv"
-        android:layout_marginTop="2dp"
-        android:background="#EBEBEB"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/titlelBarLl"
-        android:dividerHeight="1dp"/>
-
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/recyclerview"
         android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-</RelativeLayout>
+</LinearLayout>

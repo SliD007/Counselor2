@@ -3,12 +3,13 @@ package test.example.com.counselor.view.service;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -19,11 +20,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
-import test.example.com.counselor.adapter.Common1Adapter;
 import test.example.com.counselor.adapter.CommonAdapter;
-import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.base.MyLvClickListener;
+import test.example.com.counselor.util.TimeUtil;
 import test.example.com.counselor.view.service.addadvice.AddAdviceActivity;
 import test.example.com.counselor.view.service.addclassiccase.AddClassicCaseActivity;
 import test.example.com.counselor.view.service.addsummary.AddSummaryActivity;
@@ -39,8 +40,6 @@ import test.example.com.counselor.view.service.entity.WorkLogEntity;
 
 public class ServiceFragment extends BaseFragment implements IServiceView{
 
-    @BindView(R.id.serviceLv)
-    ListView serviceLv;
     @BindView(R.id.serviceTv1)
     TextView serviceTv1;
     @BindView(R.id.serviceTv2)
@@ -83,9 +82,9 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         fragmentCuttent = new int[]{0, 0, 0, 0};
         mServicePersenter = new ServicePresenter(this);
         mServicePersenter.requestServiceData(fragmentCuttent[0],requestSize,0, MyApplication.getInstance().loginEntity.getId());
-        mServicePersenter.requestServiceData(fragmentCuttent[1],requestSize,1, MyApplication.getInstance().loginEntity.getId());
-        mServicePersenter.requestServiceData(fragmentCuttent[2],requestSize,2, MyApplication.getInstance().loginEntity.getId());
-        mServicePersenter.requestServiceData(fragmentCuttent[3],requestSize,3, MyApplication.getInstance().loginEntity.getId());
+//        mServicePersenter.requestServiceData(fragmentCuttent[1],requestSize,1, MyApplication.getInstance().loginEntity.getId());
+//        mServicePersenter.requestServiceData(fragmentCuttent[2],requestSize,2, MyApplication.getInstance().loginEntity.getId());
+//        mServicePersenter.requestServiceData(fragmentCuttent[3],requestSize,3, MyApplication.getInstance().loginEntity.getId());
         fragmentCuttent[0]=1;
         fragmentCuttent[1]=1;
         fragmentCuttent[2]=1;
@@ -100,77 +99,88 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                     requestSize,fragmentType, MyApplication.getInstance().loginEntity.getId());
             MyApplication.getInstance().refresh = false;
         }
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
     }
 
     @Override
-    protected void initEvents() {
-
-    }
+    protected void initEvents() {}
 
     @Override
     protected void initDatas() {
         Log.e("ServiceFragment","加载数据");
+
         if (fragmentType == 0) {
             workLogEntities = mServicePersenter.getWorkLogEntities();
-            serviceLv.setAdapter(new Common1Adapter<WorkLogEntity>(super.mContext, workLogEntities,
-                    R.layout.item_commonlist, onItemClickListener) {
-                @Override
-                protected void convertView(ViewHolder1 mViewHolder, View item, WorkLogEntity workLogEntities, int position) {
-                    TextView tv1 = mViewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = mViewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = mViewHolder.getView(R.id.itemTv3);
-                    tv1.setText(workLogEntities.getTitle());
-                    tv2.setText(workLogEntities.getFrom());
-                    tv3.setText(workLogEntities.getTime());
+            mAdapter = new CommonAdapter(mContext,workLogEntities,R.layout.item_4list,mClickListener){
+                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                    super.onBindViewHolder(viewHolder,position);
+
+                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                    TextView tv4 = viewHolder.getView(R.id.itemTv4);
+                    tv1.setText("服务对象："+workLogEntities.get(position).getServiceObject());
+                    tv2.setText("服务类型："+workLogEntities.get(position).getServiceType());
+                    tv3.setText("服务时间："+ TimeUtil.getDateToString(workLogEntities.get(position).getCreateTime(),TimeUtil.Data));
+                    tv4.setText("服务单位：");
+                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
+                    ll.setTag(position);
+                    ll.setOnClickListener(mClickListener);
                 }
-            });
-            serviceLv.setOnItemClickListener(onItemClickListener);
+            };
+            mRecyclerView.setAdapter(mAdapter);
+
         }else if(fragmentType==1){
             adviceEntities = mServicePersenter.getAdviceEntities();
-            serviceLv.setAdapter(new Common1Adapter<AdviceEntity>(super.mContext, adviceEntities,
-                    R.layout.item_commonlist, onItemClickListener) {
-                @Override
-                protected void convertView(ViewHolder1 mViewHolder, View item, AdviceEntity adviceEntity, int position) {
-                    TextView tv1 = mViewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = mViewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = mViewHolder.getView(R.id.itemTv3);
-                    tv1.setText(adviceEntity.getTitle());
-                    tv2.setText(adviceEntity.getFrom());
-                    tv3.setText(adviceEntity.getTime());
-                }
-            });
-            serviceLv.setOnItemClickListener(onItemClickListener);
+
         }else if(fragmentType==2){
             classicCaseEntities = mServicePersenter.getClassicCaseEntities();
-            serviceLv.setAdapter(new Common1Adapter<ClassicCaseEntity>(super.mContext, classicCaseEntities,
-                    R.layout.item_commonlist, onItemClickListener) {
-                @Override
-                protected void convertView(ViewHolder1 mViewHolder, View item, ClassicCaseEntity classicCaseEntity, int position) {
-                    TextView tv1 = mViewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = mViewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = mViewHolder.getView(R.id.itemTv3);
-                    tv1.setText(classicCaseEntity.getTitle());
-                    tv2.setText(classicCaseEntity.getFrom());
-                    tv3.setText(classicCaseEntity.getTime());
-                }
-            });
-            serviceLv.setOnItemClickListener(onItemClickListener);
+
         }else {
             summaryEntities = mServicePersenter.getSummaryEntities();
-            serviceLv.setAdapter(new Common1Adapter<SummaryEntity>(super.mContext, summaryEntities,
-                    R.layout.item_commonlist, onItemClickListener) {
-                @Override
-                protected void convertView(ViewHolder1 mViewHolder, View item, SummaryEntity summaryEntity, int position) {
-                    TextView tv1 = mViewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = mViewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = mViewHolder.getView(R.id.itemTv3);
-                    tv1.setText(summaryEntity.getTitle());
-                    tv2.setText(summaryEntity.getFrom());
-                    tv3.setText(summaryEntity.getTime());
-                }
-            });
-            serviceLv.setOnItemClickListener(onItemClickListener);
+
         }
+
+        mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                refreshTime ++;
+                times = 0;
+                new Handler().postDelayed(new Runnable(){
+                    public void run() {
+//                        mTaskPresenter.requestTask(0, requestSize, fragmentType, MyApplication.getInstance().loginEntity.getId());
+
+                        mAdapter.notifyDataSetChanged();
+                        mRecyclerView.refreshComplete();
+                    }
+
+                }, 1000);            //refresh data here
+            }
+
+            @Override
+            public void onLoadMore() {
+                if(times < 2){
+                    new Handler().postDelayed(new Runnable(){
+                        public void run() {
+                            toast("上滑加载1",false);
+                            mRecyclerView.loadMoreComplete();
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    }, 1000);
+                } else {
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            toast("上滑加载2",false);
+                            mRecyclerView.setNoMore(true);
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    }, 1000);
+                }
+                times ++;
+            }
+        });
     }
 
     @OnClick({R.id.serviceRl1, R.id.serviceRl2, R.id.serviceRl3, R.id.serviceRl4})
@@ -267,14 +277,20 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         return rootView;
     }
 
-    //Item响应回调
-    AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
-
+    //控件响应回调
+    MyLvClickListener mClickListener = new MyLvClickListener() {
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        public void myOnClick(int position, View view) {
             toast("" + (position), true);
-            mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],requestSize,fragmentType, MyApplication.getInstance().loginEntity.getId());
-        }
-    };
+//            Intent i = new Intent(mContext, ShowTaskActivity.class);
+//            i.putExtra("id",toDoListEntities.get(position).getId());
+//            i.putExtra("fromWhere","");
+//            startActivity(i);
 
+        }
+        public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去
+            myOnClick((Integer) v.getTag(), v);
+        }
+
+    };
 }
