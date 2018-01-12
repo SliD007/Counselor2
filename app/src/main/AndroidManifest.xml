@@ -28,6 +28,7 @@
 
         <activity android:name=".view.schedule.chage.ChangeScheduleActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
 
+        <activity android:name=".view.service.showworklog.ShowWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addworklog.AddWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addadvice.AddAdviceActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addclassiccase.AddClassicCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>

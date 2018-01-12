@@ -154,7 +154,7 @@ public class ServicePresenter extends BasePresenter {
                         .execute(new StringCallback() {
 
                             public void onSuccess(String s, Call call, Response response) {
-                                Log.e("requestServiceData3",s);
+//                                Log.e("requestServiceData3",s);
                                 JSONObject object = JSON.parseObject(s);
                                 if (object.getInteger("code")==0){
                                     saveValue(object,type);
@@ -166,7 +166,7 @@ public class ServicePresenter extends BasePresenter {
                             @Override
                             public void onError(Call call, Response response, Exception e) {
                                 super.onError(call, response, e);
-                                Log.e("requestServiceData3",response.toString()+e.toString());
+//                                Log.e("requestServiceData3",response.toString()+e.toString());
                                 mIServiceView.requestServiceFailed();
                             }
                         });
@@ -179,7 +179,7 @@ public class ServicePresenter extends BasePresenter {
     public void saveValue(JSONObject object, int type){
         JSONObject page = object.getJSONObject("page");
         JSONArray listArray = page.getJSONArray("list");
-        Log.e("requestData"+type,""+listArray.toString());
+//        Log.e("requestData"+type,""+listArray.toString());
         switch (type){
             case 0:
                 workLogEntities = JSONArray.parseArray(listArray.toString(),WorkLogEntity.class);

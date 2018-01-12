@@ -33,6 +33,7 @@ import test.example.com.counselor.view.service.entity.AdviceEntity;
 import test.example.com.counselor.view.service.entity.ClassicCaseEntity;
 import test.example.com.counselor.view.service.entity.SummaryEntity;
 import test.example.com.counselor.view.service.entity.WorkLogEntity;
+import test.example.com.counselor.view.service.showworklog.ShowWorkLogActivity;
 
 /**
  * Created by Sli.D on 2017/12/20.
@@ -331,11 +332,13 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         @Override
         public void myOnClick(int position, View view) {
             toast("" + (position), true);
-//            Intent i = new Intent(mContext, ShowTaskActivity.class);
-//            i.putExtra("id",toDoListEntities.get(position).getId());
-//            i.putExtra("fromWhere","");
-//            startActivity(i);
-
+            switch (fragmentType){
+                case 0:
+                    Intent i = new Intent(mContext, ShowWorkLogActivity.class);
+                    i.putExtra("id",workLogEntities.get(position).getId());
+                    startActivity(i);
+                    break;
+            }
         }
         public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去
             myOnClick((Integer) v.getTag(), v);
