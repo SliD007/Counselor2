@@ -39,11 +39,6 @@
         <meta-data android:name="com.amap.api.v2.apikey" android:value="8899a4387351d9371e1357869ff6d933"/>
 
         <activity android:name=".view.WelcomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity android:name=".view.login.LoginActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
@@ -55,7 +50,16 @@
         <activity android:name=".view.schedule.chage.ChangeScheduleActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
 
         <activity android:name=".view.service.showworklog.ShowWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
-        <activity android:name=".view.service.addworklog.AddWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+        <activity android:name=".view.service.addworklog.AddWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.service.addGroupCase.AddGroupCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+        <activity android:name=".view.service.addchargecase.AddChargeCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
 
         <activity android:name=".view.service.showadvice.ShowAdviceActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addadvice.AddAdviceActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>

@@ -20,58 +20,6 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
-                <ImageView
-                    android:id="@+id/imageLeftIm1"
-                    android:layout_width="5dp"
-                    style="@style/image1"/>
-                <TextView
-                    android:text="服务对象类型"
-                    android:layout_toRightOf="@id/imageLeftIm1"
-                    style="@style/text_worklog"/>
-                <ImageView
-                    android:id="@+id/imageRightIm1"
-                    android:src="@drawable/u609"
-                    style="@style/nextIm"/>
-                <Spinner
-                    android:id="@+id/spinner1"
-                    android:layout_toLeftOf="@id/imageRightIm1"
-                    style="@style/log_spinner"
-                    />
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#ccc"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-                <ImageView
-                    android:id="@+id/imageLeftIm2"
-                    android:layout_width="5dp"
-                    style="@style/image1"/>
-                <TextView
-                    android:text="来源渠道"
-                    android:layout_toRightOf="@id/imageLeftIm2"
-                    style="@style/text_worklog"/>
-                <ImageView
-                    android:id="@+id/imageRightIm2"
-                    android:src="@drawable/u609"
-                    style="@style/nextIm"/>
-                <Spinner
-                    android:id="@+id/spinner2"
-                    android:layout_toLeftOf="@id/imageRightIm2"
-                    style="@style/log_spinner"
-                    />
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#ccc"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true">
@@ -230,11 +178,63 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <ImageView
-                    android:id="@+id/imageLeftIm8"
+                    android:id="@+id/imageLeftIm1"
+                    android:layout_width="5dp"
+                    style="@style/image1"/>
+                <TextView
+                    android:text="来源渠道"
+                    android:layout_toRightOf="@id/imageLeftIm1"
+                    style="@style/text_worklog"/>
+                <ImageView
+                    android:id="@+id/imageRightIm1"
+                    android:src="@drawable/u609"
+                    style="@style/nextIm"/>
+                <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_toLeftOf="@id/imageRightIm1"
+                    style="@style/log_spinner"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/imageLeftIm2"
                     android:layout_width="5dp"
                     style="@style/image1"/>
                 <TextView
                     android:text="服务类型"
+                    android:layout_toRightOf="@id/imageLeftIm2"
+                    style="@style/text_worklog"/>
+                <ImageView
+                    android:id="@+id/imageRightIm2"
+                    android:src="@drawable/u609"
+                    style="@style/nextIm"/>
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_toLeftOf="@id/imageRightIm2"
+                    style="@style/log_spinner"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/imageLeftIm8"
+                    android:layout_width="5dp"
+                    style="@style/image1"/>
+                <TextView
+                    android:text="服务事项"
                     android:layout_toRightOf="@id/imageLeftIm8"
                     style="@style/text_worklog"/>
                 <ImageView
@@ -260,7 +260,7 @@
                     android:layout_width="5dp"
                     style="@style/image1"/>
                 <TextView
-                    android:text="服务事项"
+                    android:text="案件类型"
                     android:layout_toRightOf="@id/imageLeftIm9"
                     style="@style/text_worklog"/>
                 <ImageView
@@ -286,7 +286,7 @@
                     android:layout_width="5dp"
                     style="@style/image1"/>
                 <TextView
-                    android:text="服务对象"
+                    android:text="服务对象类型"
                     android:layout_toRightOf="@id/imageLeftIm10"
                     style="@style/text_worklog"/>
                 <ImageView
