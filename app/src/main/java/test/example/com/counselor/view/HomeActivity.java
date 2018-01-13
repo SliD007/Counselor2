@@ -18,10 +18,10 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.adapter.FragmentAdapter;
 import test.example.com.counselor.base.BaseActivity;
-import test.example.com.counselor.view.task.TaskFragment;
 import test.example.com.counselor.view.personal.PersonalFragment;
 import test.example.com.counselor.view.schedule.ScheduleFragment;
 import test.example.com.counselor.view.service.ServiceFragment;
+import test.example.com.counselor.view.task.TaskFragment;
 
 /**
  * Created by Sli.D on 2017/12/19.
@@ -143,5 +143,7 @@ public class HomeActivity extends BaseActivity {
         buttomIm3.setImageResource(R.drawable.u2348);
         buttomIm4.setImageResource(R.drawable.u1740);
     }
+
+
 
 }

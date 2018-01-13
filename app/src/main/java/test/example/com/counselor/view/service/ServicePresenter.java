@@ -191,7 +191,7 @@ public class ServicePresenter extends BasePresenter {
             case 1:
                 adviceEntities = JSONArray.parseArray(listArray.toString(),AdviceEntity.class);
                 mServiceModel.setAdviceEntities(adviceEntities);
-//                Log.e("Entity"+type,""+adviceEntities.toString());
+                Log.e("Entity"+type,""+adviceEntities.toString());
                 break;
             case 2:
                 classicCaseEntities = JSONArray.parseArray(listArray.toString(),ClassicCaseEntity.class);

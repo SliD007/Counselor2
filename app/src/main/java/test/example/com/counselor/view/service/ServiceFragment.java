@@ -33,6 +33,7 @@ import test.example.com.counselor.view.service.entity.AdviceEntity;
 import test.example.com.counselor.view.service.entity.ClassicCaseEntity;
 import test.example.com.counselor.view.service.entity.SummaryEntity;
 import test.example.com.counselor.view.service.entity.WorkLogEntity;
+import test.example.com.counselor.view.service.showadvice.ShowAdviceActivity;
 import test.example.com.counselor.view.service.showworklog.ShowWorkLogActivity;
 
 /**
@@ -332,10 +333,16 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         @Override
         public void myOnClick(int position, View view) {
             toast("" + (position), true);
+            Intent i;
             switch (fragmentType){
                 case 0:
-                    Intent i = new Intent(mContext, ShowWorkLogActivity.class);
+                    i = new Intent(mContext, ShowWorkLogActivity.class);
                     i.putExtra("id",workLogEntities.get(position).getId());
+                    startActivity(i);
+                    break;
+                case 1:
+                    i = new Intent(mContext, ShowAdviceActivity.class);
+                    i.putExtra("id",adviceEntities.get(position).getId());
                     startActivity(i);
                     break;
             }
