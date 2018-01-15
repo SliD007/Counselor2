@@ -34,6 +34,7 @@ import test.example.com.counselor.view.service.entity.ClassicCaseEntity;
 import test.example.com.counselor.view.service.entity.SummaryEntity;
 import test.example.com.counselor.view.service.entity.WorkLogEntity;
 import test.example.com.counselor.view.service.showadvice.ShowAdviceActivity;
+import test.example.com.counselor.view.service.showclassiccase.ShowClassicCaseActivity;
 import test.example.com.counselor.view.service.showworklog.ShowWorkLogActivity;
 
 /**
@@ -163,8 +164,8 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                     TextView tv2 = viewHolder.getView(R.id.itemTv2);
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
                     TextView tv4 = viewHolder.getView(R.id.itemTv4);
-                    tv1.setText(adviceEntities.get(position).getTitle());
-                    tv2.setText("报送至："+classicCaseEntities.get(position).getToType());
+                    tv1.setText(classicCaseEntities.get(position).getTitle());
+//                    tv2.setText("报送至："+classicCaseEntities.get(position).getToType());
                     tv3.setText("服务时间："+ TimeUtil.getDateToString(classicCaseEntities.get(position).getCreateTime(),TimeUtil.Data));
                     tv4.setText("服务单位："+classicCaseEntities.get(position).getVillage());
                     LinearLayout ll = viewHolder.getView(R.id.itemLl);
@@ -342,6 +343,11 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 case 1:
                     i = new Intent(mContext, ShowAdviceActivity.class);
                     i.putExtra("id",adviceEntities.get(position).getId());
+                    startActivity(i);
+                    break;
+                case 2:
+                    i = new Intent(mContext, ShowClassicCaseActivity.class);
+                    i.putExtra("id",classicCaseEntities.get(position).getId());
                     startActivity(i);
                     break;
             }

@@ -81,7 +81,7 @@ public class ServicePresenter extends BasePresenter {
                 break;
             case 1:
                 HashMap<String,String> params1 = new HashMap<>();
-                params1.put("type",1+"");
+                params1.put("type",0+"");
                 params1.put("contact", MyApplication.getInstance().loginEntity.getContact());
                 params1.put("current",current+"");
                 params1.put("size",size+"");

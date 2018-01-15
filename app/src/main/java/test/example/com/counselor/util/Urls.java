@@ -22,10 +22,10 @@ public class Urls {
     public static final String WorkLogAddURL = "http://law.d9lab.net/job/log/addJobLog";
 
     public static final String ReportURL = "http://law.d9lab.net/pad/report/getReportPage";
-    public static final String ReportConfigurationURL = "http://law.d9lab.net/job/log/getLogConfiguration";
+    public static final String ReportConfigurationURL = "http://law.d9lab.net/pad/report/getReportConfiguration";
     public static final String ReportAddURL = "http://law.d9lab.net/pad/report/addReport";
 
     public static final String SummaryURL = "http://law.d9lab.net/pad/monthly/getMonthlyPage";
-    public static final String SummaryConfigurationURL = "http://law.d9lab.net/job/log/getLogConfiguration";
+    public static final String SummaryConfigurationURL = "http://law.d9lab.net/pad/Monthly/getMonthlyConfiguration";
     public static final String SummaryAddURL = "http://law.d9lab.net/pad/monthly/addMonthly";
 }

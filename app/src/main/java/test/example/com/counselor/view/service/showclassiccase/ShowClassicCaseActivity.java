@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.service.showadvice;
+package test.example.com.counselor.view.service.showclassiccase;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,24 +15,23 @@ import test.example.com.counselor.base.MyApplication;
  * Created by Sli.D on 2018/1/11.
  */
 
-public class ShowAdviceActivity extends BaseActivity implements IShowAdviceView {
+public class ShowClassicCaseActivity extends BaseActivity implements IShowClassicCaseView {
 
 
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
-    @BindView(R.id.showAdviceTitleTv)
-    TextView showAdviceTitleTv;
-    @BindView(R.id.showAdviceContextTv)
-    TextView showAdviceContextTv;
-    @BindView(R.id.showAdvicesentToTv)
-    TextView showAdvicesentToTv;
+    @BindView(R.id.showClassicCaseTitleTv)
+    TextView showClassicCaseTitleTv;
+    @BindView(R.id.showClassicCaseContextTv)
+    TextView showClassicCaseContextTv;
 
-    private ShowAdvicePresenter mShowAdvicePresenter;
-    private AdviceEntity adviceEntity;
+
+    private ShowClassicCasePresenter mShowClassicCasePresenter;
+    private ClassicCaseEntity classicCaseEntity;
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_showadvice);
+        setContentView(R.layout.activity_showclassiccase);
     }
 
     @Override
@@ -45,15 +44,14 @@ public class ShowAdviceActivity extends BaseActivity implements IShowAdviceView 
 
         Intent i = getIntent();
         int id = i.getIntExtra("id", 0);
-        mShowAdvicePresenter = new ShowAdvicePresenter(this, this);
-        mShowAdvicePresenter.requestAdviceDetial(id);
+        mShowClassicCasePresenter = new ShowClassicCasePresenter(this, this);
+        mShowClassicCasePresenter.requestClassicCaseDetial(id);
     }
 
     private void initView() {
-        adviceEntity = mShowAdvicePresenter.getAdviceDetialEntity();
-        showAdviceTitleTv.setText(adviceEntity.getTitle());
-        showAdviceContextTv.setText(adviceEntity.getContent());
-        showAdvicesentToTv.setText(adviceEntity.getToType());
+        classicCaseEntity = mShowClassicCasePresenter.getClassicCaseDetialEntity();
+        showClassicCaseTitleTv.setText(classicCaseEntity.getTitle());
+        showClassicCaseContextTv.setText(classicCaseEntity.getContent());
     }
 
     @OnClick(R.id.backTv)
@@ -64,13 +62,13 @@ public class ShowAdviceActivity extends BaseActivity implements IShowAdviceView 
 
 
     @Override
-    public void requestWorkLogDetialSuccess() {
+    public void requestClassicCaseDetialSuccess() {
         toast("请求成功", false);
         initView();
     }
 
     @Override
-    public void requestWorkLogDetialFailed() {
+    public void requestClassicCaseDetialFailed() {
         toast("请求失败", false);
     }
 }

@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.service.showadvice;
+package test.example.com.counselor.view.service.showclassiccase;
 
 import android.content.Context;
 import android.util.Log;
@@ -20,19 +20,19 @@ import test.example.com.counselor.util.Urls;
  * Created by Sli.D on 2017/12/25.
  */
 
-public class ShowAdvicePresenter {
+public class ShowClassicCasePresenter {
 
-    private AdviceEntity adviceEntity;
-    private IShowAdviceView mIShowAdviceView;
-    private IShowAdviceModel mIShowAdviceModel;
-    public ShowAdvicePresenter(Context context, IShowAdviceView iShowAdviceView) {
-        this.mIShowAdviceView = iShowAdviceView;
-        mIShowAdviceModel = new ShowAdviceModel();
+    private ClassicCaseEntity classicCaseEntity;
+    private IShowClassicCaseView mIShowClassicCaseView;
+    private IShowClassicCaseModel mIShowClassicCaseModel;
+
+    public ShowClassicCasePresenter(Context context, IShowClassicCaseView iShowClassicCaseView) {
+        this.mIShowClassicCaseView = iShowClassicCaseView;
+        mIShowClassicCaseModel = new ShowClassicCaseModel();
     }
 
-
-    public void requestAdviceDetial(int id){
-        Log.e("requestAdviceDetial","id:"+id);
+    public void requestClassicCaseDetial(int id){
+        Log.e("requestClassicCase","id:"+id);
         HashMap<String,String> params = new HashMap<>();
         params.put("id",1+"");
         OkGo.post(Urls.ReportConfigurationURL)
@@ -43,21 +43,21 @@ public class ShowAdvicePresenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("requestTaskDetial","response:"+response.toString());
-                        Log.e("requestTaskDetial","onSuccess:"+s);
+                        Log.e("requestClassicCase","response:"+response.toString());
+                        Log.e("requestClassicCase","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             saveValue(object);
-                            mIShowAdviceView.requestWorkLogDetialSuccess();
+                            mIShowClassicCaseView.requestClassicCaseDetialSuccess();
 
                         }else {
-                            mIShowAdviceView.requestWorkLogDetialFailed();
+                            mIShowClassicCaseView.requestClassicCaseDetialFailed();
                         }
                     }
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
-                        mIShowAdviceView.requestWorkLogDetialFailed();
+                        mIShowClassicCaseView.requestClassicCaseDetialSuccess();
                     }
 
                     @Override
@@ -72,13 +72,13 @@ public class ShowAdvicePresenter {
 
         JSONObject value = object.getJSONObject("value");
 //        Log.e("requestAdvice",""+value.toString());
-        adviceEntity = JSONObject.parseObject(value.toString(), AdviceEntity.class);
-        mIShowAdviceModel.setAdviceDetialEntity(adviceEntity);
-        Log.e("EntityDetail",""+adviceEntity.toString());
+        classicCaseEntity = JSONObject.parseObject(value.toString(), ClassicCaseEntity.class);
+        mIShowClassicCaseModel.setClassicCaseDetialEntity(classicCaseEntity);
+//        Log.e("EntityDetail",""+classicCaseEntity.toString());
 
     }
 
-    public AdviceEntity getAdviceDetialEntity(){
-        return mIShowAdviceModel.getAdviceDetialEntity();
+    public ClassicCaseEntity getClassicCaseDetialEntity(){
+        return mIShowClassicCaseModel.getClassicCaseDetialEntity();
     }
 }

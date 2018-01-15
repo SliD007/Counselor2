@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.service.entity;
+package test.example.com.counselor.view.service.showclassiccase;
 
 import java.io.Serializable;
 
@@ -6,33 +6,27 @@ import java.io.Serializable;
  * Created by Sli.D on 2017/5/12.
  */
 
-public class AdviceEntity implements Serializable{
+public class ClassicCaseEntity implements Serializable{
+
     private int id;
     private String title;
-    private String toType;
+    private String content;
     private long createTime;
+    private String toType;
+
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
         return "ClassicCaseEntity{" +
-                "createTime=" + createTime +
-                ", id=" + id +
+                "id=" + id +
                 ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", createTime=" + createTime +
                 ", toType='" + toType + '\'' +
-                ", village='" + village + '\'' +
                 '}';
-    }
-
-    public long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(long createTime) {
-        this.createTime = createTime;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setId(int id) {
@@ -47,6 +41,22 @@ public class AdviceEntity implements Serializable{
         this.title = title;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
+
     public String getToType() {
         return toType;
     }
@@ -55,17 +65,9 @@ public class AdviceEntity implements Serializable{
         this.toType = toType;
     }
 
-    public String getVillage() {
-        return village;
+    public ClassicCaseEntity() {
+
     }
 
-    public void setVillage(String village) {
-        this.village = village;
-    }
-
-    private String village;
-
-    public AdviceEntity() {
-    }
 
 }
