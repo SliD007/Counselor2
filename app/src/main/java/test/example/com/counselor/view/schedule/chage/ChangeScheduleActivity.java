@@ -41,7 +41,8 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
 
     List<String> list;
     ArrayAdapter<String> adapter;
-    int ScheduleId;
+    private int ScheduleId;
+    private int jobType;
     String workWay;
 
     ChangeSchedulePersenter mChangeSchedulePersenter;
@@ -123,7 +124,7 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
                 break;
             case R.id.sumbitTv:
                 String newtime = workTimeTv.getText().toString();
-                mChangeSchedulePersenter.changeSchedule(ScheduleId,newtime,workWay);
+                mChangeSchedulePersenter.changeSchedule(ScheduleId,newtime,jobType);
                 break;
             case R.id.workTimeTv:
                 Log.e("workTimeTv",""+workTimeTv.getText().toString());
@@ -136,6 +137,7 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
 
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             workWay = parent.getSelectedItem().toString();
+            jobType = position;
         }
 
         @Override

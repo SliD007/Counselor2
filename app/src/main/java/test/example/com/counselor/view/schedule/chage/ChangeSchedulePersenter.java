@@ -29,11 +29,12 @@ public class ChangeSchedulePersenter {
         this.mIChangeSchedule = iChangeSchedule;
     }
 
-    public void changeSchedule(int id,String time,String workWay){
+    public void changeSchedule(int id,String time,int jobType){
+//        Log.e("changeSchedule",""+id+time+jobType);
         HashMap<String,String> params = new HashMap<>();
         params.put("id",id+"");
         params.put("changeTime",time+"");
-        params.put("jobType","0");
+        params.put("jobType",jobType+"");
         OkGo.post(Urls.ChangeScheduleURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
