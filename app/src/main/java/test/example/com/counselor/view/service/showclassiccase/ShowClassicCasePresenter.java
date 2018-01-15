@@ -33,7 +33,7 @@ public class ShowClassicCasePresenter {
     public void requestClassicCaseDetial(int id){
         Log.e("requestClassicCase","id:"+id);
         HashMap<String,String> params = new HashMap<>();
-        params.put("id",1+"");
+        params.put("id",id+"");
         OkGo.post(Urls.ReportConfigurationURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())

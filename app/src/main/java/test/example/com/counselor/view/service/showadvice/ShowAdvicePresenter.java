@@ -33,7 +33,7 @@ public class ShowAdvicePresenter {
     public void requestAdviceDetial(int id){
         Log.e("requestAdviceDetial","id:"+id);
         HashMap<String,String> params = new HashMap<>();
-        params.put("id",1+"");
+        params.put("id",id+"");
         OkGo.post(Urls.ReportConfigurationURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())

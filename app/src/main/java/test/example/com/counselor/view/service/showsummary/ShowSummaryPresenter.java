@@ -34,7 +34,7 @@ public class ShowSummaryPresenter {
     public void requestSummaryDetial(int id){
         Log.e("requestSummaryDetial","id:"+id);
         HashMap<String,String> params = new HashMap<>();
-        params.put("id",1+"");
+        params.put("id",id+"");
         OkGo.post(Urls.SummaryConfigurationURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
@@ -43,19 +43,19 @@ public class ShowSummaryPresenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onBefore(BaseRequest request) {
-                        Log.e("requestSummaryDetial","request:"+request.toString());
+                        Log.e("requestSummary","request:"+request.toString());
                         super.onBefore(request);
                     }
 
                     @Override
                     public String convertSuccess(Response response) throws Exception {
-                        Log.e("requestSummaryDetial","convertSuccess:"+response.toString());
+                        Log.e("requestSummary","convertSuccess:"+response.toString());
                         return super.convertSuccess(response);
                     }
 
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("requestSummaryDetial","response:"+response.toString());
-                        Log.e("requestSummaryDetial","onSuccess:"+s);
+                        Log.e("requestSummary","response:"+response.toString());
+                        Log.e("requestSummary","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             saveValue(object);
@@ -82,7 +82,7 @@ public class ShowSummaryPresenter {
     public void saveValue(JSONObject object){
 
         JSONObject value = object.getJSONObject("value");
-//        Log.e("requestSummary",""+value.toString());
+        Log.e("requestSummary",""+value.toString());
         summaryEntity = JSONObject.parseObject(value.toString(), SummaryEntity.class);
         mIShowSummaryModel.setSummaryDetialEntity(summaryEntity);
         Log.e("EntityDetail",""+ summaryEntity.toString());
