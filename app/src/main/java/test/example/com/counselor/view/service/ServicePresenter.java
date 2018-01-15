@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 
 import java.util.ArrayList;
@@ -46,25 +45,25 @@ public class ServicePresenter extends BasePresenter {
     }
 
 
-    public void requestServiceData(int current, int size, final int type, int counselorId){
+    public void requestServiceData(int current, int size, final int type){
 
         switch (type){
             case 0:
                 HashMap<String,String> params = new HashMap<>();
                 params.put("current",current+"");
                 params.put("size",size+"");
-                params.put("contact",111111+"");
-                params.put("resultType",1+"");
+                params.put("contact", MyApplication.getInstance().loginEntity.getContact());
+                params.put("resultType",-1+"");
                 params.put("search","");
                 OkGo.post(Urls.WorkLogURL)
                         .params(params)
                         .cacheKey(Constants.getAppCacheFolder())
-                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+//                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                         .cacheTime(-1)
                         .execute(new StringCallback() {
                             @Override
                             public void onSuccess(String s, Call call, Response response) {
-//                        Log.e("requestServiceData",s);
+                                Log.e("requestServiceData"+type,s);
                                 JSONObject object = JSON.parseObject(s);
                                 if (object.getInteger("code")==0){
                                     saveValue(object,type);
@@ -86,15 +85,15 @@ public class ServicePresenter extends BasePresenter {
                 params1.put("contact", MyApplication.getInstance().loginEntity.getContact());
                 params1.put("current",current+"");
                 params1.put("size",size+"");
-                OkGo.post(Urls.AdviceURL)
+                OkGo.post(Urls.ReportURL)
                         .params(params1)
                         .cacheKey(Constants.getAppCacheFolder())
-                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+//                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                         .cacheTime(-1)
                         .execute(new StringCallback() {
 
                             public void onSuccess(String s, Call call, Response response) {
-//                                Log.e("requestServiceData1",response.toString());
+                                Log.e("requestServiceData"+type,s);
                                 JSONObject object = JSON.parseObject(s);
                                 if (object.getInteger("code")==0){
                                     saveValue(object,type);
@@ -116,15 +115,15 @@ public class ServicePresenter extends BasePresenter {
                 params2.put("contact", MyApplication.getInstance().loginEntity.getContact());
                 params2.put("current",current+"");
                 params2.put("size",size+"");
-                OkGo.post(Urls.AdviceURL)
+                OkGo.post(Urls.ReportURL)
                         .params(params2)
                         .cacheKey(Constants.getAppCacheFolder())
-                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+//                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                         .cacheTime(-1)
                         .execute(new StringCallback() {
 
                             public void onSuccess(String s, Call call, Response response) {
-//                                Log.e("requestServiceData2",response.toString());
+                                Log.e("requestServiceData"+type,s);
                                 JSONObject object = JSON.parseObject(s);
                                 if (object.getInteger("code")==0){
                                     saveValue(object,type);
@@ -145,11 +144,11 @@ public class ServicePresenter extends BasePresenter {
                 params3.put("contact", MyApplication.getInstance().loginEntity.getContact());
                 params3.put("current",current+"");
                 params3.put("size",size+"");
-                Log.e("requestServiceData3",params3.toString());
+                Log.e("requestServiceData"+type,params3.toString());
                 OkGo.post(Urls.SummaryURL)
                         .params(params3)
                         .cacheKey(Constants.getAppCacheFolder())
-                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+//                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                         .cacheTime(-1)
                         .execute(new StringCallback() {
 
@@ -179,19 +178,17 @@ public class ServicePresenter extends BasePresenter {
     public void saveValue(JSONObject object, int type){
         JSONObject page = object.getJSONObject("page");
         JSONArray listArray = page.getJSONArray("list");
-//        Log.e("requestData"+type,""+listArray.toString());
+        Log.e("saveValue"+type,""+listArray.toString());
         switch (type){
             case 0:
                 workLogEntities = JSONArray.parseArray(listArray.toString(),WorkLogEntity.class);
-                for(int j=0;j<5;j++)
-                    workLogEntities.add(workLogEntities.get(0));
                 mServiceModel.setWorkLogEntities(workLogEntities);
 //                Log.e("Entity"+type,""+workLogEntities.toString());
                 break;
             case 1:
                 adviceEntities = JSONArray.parseArray(listArray.toString(),AdviceEntity.class);
                 mServiceModel.setAdviceEntities(adviceEntities);
-                Log.e("Entity"+type,""+adviceEntities.toString());
+//                Log.e("Entity"+type,""+adviceEntities.toString());
                 break;
             case 2:
                 classicCaseEntities = JSONArray.parseArray(listArray.toString(),ClassicCaseEntity.class);

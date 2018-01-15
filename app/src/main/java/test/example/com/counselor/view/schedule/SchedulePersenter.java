@@ -1,7 +1,6 @@
 package test.example.com.counselor.view.schedule;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -52,7 +51,7 @@ public class SchedulePersenter {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
 //                        Log.e("requestScheduleList","response"+response.toString());
-                        Log.e("requestScheduleList","onSuccess"+s);
+//                        Log.e("requestScheduleList","onSuccess"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             saveValue(object);

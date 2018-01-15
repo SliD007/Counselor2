@@ -1,6 +1,7 @@
 package test.example.com.counselor.view.task.showtask;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -43,7 +44,7 @@ public class ShowTaskPresenter {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
 //                        Log.e("changeTaskState","response:"+response.toString());
-//                        Log.e("changeTaskState","onSuccess:"+s);
+                        Log.e("changeTaskState","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             mIShowTaskView.changeTaskStateSuccess();
@@ -80,7 +81,7 @@ public class ShowTaskPresenter {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
 //                        Log.e("requestTaskDetial","response:"+response.toString());
-//                        Log.e("requestTaskDetial","onSuccess:"+s);
+                        Log.e("requestTaskDetial","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             saveValue(object);

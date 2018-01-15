@@ -49,13 +49,13 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.radioButton1:
-                        rbId = 0;
+                        rbId = 2;
                         break;
                     case R.id.radioButton2:
                         rbId = 1;
                         break;
                     case R.id.radioButton3:
-                        rbId = 3;
+                        rbId = 0;
                         break;
                 }
             }
@@ -82,7 +82,6 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
                 break;
         }
     }
-
 
 
     @Override

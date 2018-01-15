@@ -83,10 +83,10 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         fragmentType = 0;
         fragmentCuttent = new int[]{0, 0, 0, 0};
         mServicePersenter = new ServicePresenter(this);
-        mServicePersenter.requestServiceData(fragmentCuttent[0],requestSize,0, MyApplication.getInstance().loginEntity.getId());
-        mServicePersenter.requestServiceData(fragmentCuttent[1],requestSize,1, MyApplication.getInstance().loginEntity.getId());
-        mServicePersenter.requestServiceData(fragmentCuttent[2],requestSize,2, MyApplication.getInstance().loginEntity.getId());
-        mServicePersenter.requestServiceData(fragmentCuttent[3],requestSize,3, MyApplication.getInstance().loginEntity.getId());
+        mServicePersenter.requestServiceData(fragmentCuttent[0],requestSize,0);
+        mServicePersenter.requestServiceData(fragmentCuttent[1],requestSize,1);
+        mServicePersenter.requestServiceData(fragmentCuttent[2],requestSize,2);
+        mServicePersenter.requestServiceData(fragmentCuttent[3],requestSize,3);
         fragmentCuttent[0]=1;
         fragmentCuttent[1]=1;
         fragmentCuttent[2]=1;
@@ -97,8 +97,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     protected void initViews() {
         setTabSelection(fragmentType);
         if(MyApplication.getInstance().refresh){
-            mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],
-                    requestSize,fragmentType, MyApplication.getInstance().loginEntity.getId());
+            mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],requestSize,fragmentType);
             MyApplication.getInstance().refresh = false;
         }
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -201,7 +200,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 times = 0;
                 new Handler().postDelayed(new Runnable(){
                     public void run() {
-//                        mTaskPresenter.requestTask(0, requestSize, fragmentType, MyApplication.getInstance().loginEntity.getId());
+                        mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],requestSize,fragmentType);
 
                         mAdapter.notifyDataSetChanged();
                         mRecyclerView.refreshComplete();

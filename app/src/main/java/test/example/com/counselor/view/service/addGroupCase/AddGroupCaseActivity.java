@@ -30,8 +30,6 @@ import test.example.com.counselor.util.CustomDatePicker;
 import test.example.com.counselor.util.GlideImageLoader;
 import test.example.com.counselor.view.service.addchargecase.AddChargeCaseActivity;
 
-import static test.example.com.counselor.R.id.spinner10;
-import static test.example.com.counselor.R.id.spinner9;
 
 /**
  * Created by Sli.D on 2017/12/21.
@@ -158,18 +156,6 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
             switch (parent.getId()) {
                 case R.id.spinner1:
                     sumbit_str[0] = parent.getSelectedItem().toString();
-                    break;
-                case R.id.spinner2:
-                    sumbit_str[1] = parent.getSelectedItem().toString();
-                    break;
-                case R.id.spinner8:
-                    sumbit_str[7] = parent.getSelectedItem().toString();
-                    break;
-                case spinner9:
-                    sumbit_str[8] = parent.getSelectedItem().toString();
-                    break;
-                case spinner10:
-                    sumbit_str[9] = parent.getSelectedItem().toString();
                     break;
             }
         }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,38 +38,45 @@ import test.example.com.counselor.view.service.addGroupCase.AddGroupCaseActivity
 public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView {
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
-    @BindView(R.id.spinner1)
-    Spinner spinner1;
-    @BindView(R.id.spinner2)
-    Spinner spinner2;
-    @BindView(R.id.editText3)
-    EditText editText3;
-    @BindView(R.id.editText4)
-    EditText editText4;
-    @BindView(R.id.editText5)
-    EditText editText5;
-    @BindView(R.id.textview6)
-    TextView textview6;
-    @BindView(R.id.textview7)
-    TextView textview7;
-    @BindView(R.id.spinner8)
-    Spinner spinner8;
-    @BindView(R.id.spinner9)
-    Spinner spinner9;
-    @BindView(R.id.spinner10)
-    Spinner spinner10;
-    @BindView(R.id.editText11)
-    EditText editText11;
-    @BindView(R.id.textview12)
-    TextView textview12;
 
     String[] sumbit_str;
     List<String> list;
     ArrayAdapter<String> adapter;
     AddWorkLogPersenter mAddWorkLogPersenter;
-    private CustomDatePicker customDatePicker1,customDatePicker2;
+    @BindView(R.id.spinner01)
+    Spinner spinner01;
+    @BindView(R.id.editText02)
+    EditText editText02;
+    @BindView(R.id.editText03)
+    EditText editText03;
+    @BindView(R.id.editText04)
+    EditText editText04;
+    @BindView(R.id.editText05)
+    EditText editText05;
+    @BindView(R.id.textview06)
+    TextView textview06;
+    @BindView(R.id.textview07)
+    TextView textview07;
+    @BindView(R.id.spinner08)
+    Spinner spinner08;
+    @BindView(R.id.spinner09)
+    Spinner spinner09;
+    @BindView(R.id.spinner10)
+    Spinner spinner10;
+    @BindView(R.id.spinner11)
+    Spinner spinner11;
+    @BindView(R.id.spinner12)
+    Spinner spinner12;
+    @BindView(R.id.rl13)
+    RelativeLayout rl13;
+    @BindView(R.id.editText13)
+    EditText editText13;
+    @BindView(R.id.textview14)
+    TextView textview14;
+    private CustomDatePicker customDatePicker1, customDatePicker2;
 
     private ArrayList<ImageItem> imageItems;
+
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addworklog);
     }
@@ -83,14 +91,14 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
 
     String[][][] str = new String[][][]{
             {{"出具专业法律意见"},
-                    {"审查合同","出具法律意见","制定或修改村规民约","协助选举","参与谈判签约","代写文书","其他"},
-                    {"镇街党委政府","村（居）委","其他"}},
-            {{"法律咨询","人民调解","法律援助"},
-                    {"民事案件","刑事案件","行政","公证","其他"},
-                    {"老年人","未成年","残疾","妇女","外来务工人员","镇街党委政府","村（居）委","其他"}},
-            {{"法治宣传","人民调解","法律援助"},
+                    {"审查合同", "出具法律意见", "制定或修改村规民约", "协助选举", "参与谈判签约", "代写文书", "其他"},
+                    {"镇街党委政府", "村（居）委", "其他"}},
+            {{"法律咨询", "人民调解", "法律援助"},
+                    {"民事案件", "刑事案件", "行政", "公证", "其他"},
+                    {"老年人", "未成年", "残疾", "妇女", "外来务工人员", "镇街党委政府", "村（居）委", "其他"}},
+            {{"法治宣传", "人民调解", "法律援助"},
                     {"法治宣传"},
-                    {"老年人","未成年","残疾","妇女","农民","下岗职工","外来务工人员","企业主","村（居）委干部","村（居）民","其他"}}
+                    {"老年人", "未成年", "残疾", "妇女", "农民", "下岗职工", "外来务工人员", "企业主", "村（居）委干部", "村（居）民", "其他"}}
     };
 
 
@@ -98,83 +106,94 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
 
         super.allow_quit = false;
         titleBarTv.setText("新增工作日志");
-        sumbit_str = new String[11];
-        //S1
+        sumbit_str = new String[15];
+
+        //S01
+        list = new ArrayList<String>();
+        if (MyApplication.getInstance().loginEntity.getCommunityA()!=null)
+            list.add(MyApplication.getInstance().loginEntity.getCommunityA());
+        if (MyApplication.getInstance().loginEntity.getCommunityB()!=null)
+            list.add(MyApplication.getInstance().loginEntity.getCommunityB());
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner01.setAdapter(adapter);
+        spinner01.setOnItemSelectedListener(mOnItemClickListener);
+        //S08
         list = new ArrayList<String>();
         list.add("村民");
         list.add("村社");
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
-        spinner1.setAdapter(adapter);
-        spinner1.setOnItemSelectedListener(mOnItemClickListener);
-        //S2
+        spinner08.setAdapter(adapter);
+        spinner08.setOnItemSelectedListener(mOnItemClickListener);
+        //S09
         list = new ArrayList<String>();
         list.add("坐班");
         list.add("电话咨询");
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
-        spinner2.setAdapter(adapter);
-        spinner2.setOnItemSelectedListener(mOnItemClickListener);
-        //S8
+        spinner09.setAdapter(adapter);
+        spinner09.setOnItemSelectedListener(mOnItemClickListener);
+        //S10
         list = new ArrayList<String>();
         list.add("民事案件");
         list.add("刑事案件");
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
-        spinner8.setAdapter(adapter);
-        spinner8.setOnItemSelectedListener(mOnItemClickListener);
-        //S9
+        spinner10.setAdapter(adapter);
+        spinner10.setOnItemSelectedListener(mOnItemClickListener);
+        //S11
         list = new ArrayList<String>();
         list.add("咨询");
         list.add("指导");
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
-        spinner9.setAdapter(adapter);
-        spinner9.setOnItemSelectedListener(mOnItemClickListener);
-        //S10
+        spinner11.setAdapter(adapter);
+        spinner11.setOnItemSelectedListener(mOnItemClickListener);
+        //S12
         list = new ArrayList<String>();
         list.add("老年人");
         list.add("青少年");
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
-        spinner10.setAdapter(adapter);
-        spinner10.setOnItemSelectedListener(mOnItemClickListener);
+        spinner12.setAdapter(adapter);
+        spinner12.setOnItemSelectedListener(mOnItemClickListener);
         //T6
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         String now = sdf.format(new Date());
-        textview6.setText(now);
+        textview06.setText(now);
         customDatePicker1 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
             @Override
             public void handle(String time) { // 回调接口，获得选中的时间
-                textview6.setText(time);
+                textview06.setText(time);
             }
         }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(true); // 显示时和分
         customDatePicker1.setIsLoop(true); // 允许循环滚动
         //T7
-        textview7.setText(now);
+        textview07.setText(now);
         customDatePicker2 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
             @Override
             public void handle(String time) { // 回调接口，获得选中的时间
-                textview7.setText(time);
+                textview07.setText(time);
             }
         }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker2.showSpecificTime(true); // 显示时和分
         customDatePicker2.setIsLoop(true); // 允许循环滚动
 
 
-
     }
-    @OnClick({R.id.textview6, R.id.textview7, R.id.textview12})
+
+    @OnClick({R.id.textview06, R.id.textview07, R.id.textview14})
     public void onItemClick(View view) {
         switch (view.getId()) {
-            case R.id.textview6:
-                customDatePicker1.show(textview6.getText().toString());
+            case R.id.textview06:
+                customDatePicker1.show(textview06.getText().toString());
                 break;
-            case R.id.textview7:
-                customDatePicker2.show(textview7.getText().toString());
+            case R.id.textview07:
+                customDatePicker2.show(textview07.getText().toString());
                 break;
-            case R.id.textview12:
+            case R.id.textview14:
                 ImagePicker imagePicker = ImagePicker.getInstance();
                 imagePicker.setImageLoader(new GlideImageLoader());
                 imagePicker.setMultiMode(true);   //多选
@@ -197,17 +216,19 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                 if (imageItems != null && imageItems.size() > 0) {
                     StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < imageItems.size(); i++) {
-                        if (i == imageItems.size() - 1) sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path);
-                        else sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path).append("\n");
+                        if (i == imageItems.size() - 1)
+                            sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path);
+                        else
+                            sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path).append("\n");
                     }
-                    textview12.setText(sb.toString());
-                    textview12.setTextSize(10);
+                    textview14.setText(sb.toString());
+                    textview14.setTextSize(10);
                 } else {
-                    textview12.setText("--");
+                    textview14.setText("--");
                 }
             } else {
                 Toast.makeText(this, "没有选择图片", Toast.LENGTH_SHORT).show();
-                textview12.setText("--");
+                textview14.setText("--");
             }
         }
     }
@@ -217,20 +238,23 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
             switch (parent.getId()) {
-                case R.id.spinner1:
-                    sumbit_str[0] = parent.getSelectedItem().toString();
-                    break;
-                case R.id.spinner2:
+                case R.id.spinner01:
                     sumbit_str[1] = parent.getSelectedItem().toString();
                     break;
-                case R.id.spinner8:
-                    sumbit_str[7] = parent.getSelectedItem().toString();
-                    break;
-                case R.id.spinner9:
+                case R.id.spinner08:
                     sumbit_str[8] = parent.getSelectedItem().toString();
                     break;
-                case R.id.spinner10:
+                case R.id.spinner09:
                     sumbit_str[9] = parent.getSelectedItem().toString();
+                    break;
+                case R.id.spinner10:
+                    sumbit_str[10] = parent.getSelectedItem().toString();
+                    break;
+                case R.id.spinner11:
+                    sumbit_str[11] = parent.getSelectedItem().toString();
+                    break;
+                case R.id.spinner12:
+                    sumbit_str[12] = parent.getSelectedItem().toString();
                     break;
             }
         }
@@ -253,12 +277,13 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                 break;
             case R.id.sumbitTv:
                 //E3
-                sumbit_str[2] = editText3.getText().toString();
-                sumbit_str[3] = editText4.getText().toString();
-                sumbit_str[4] = editText5.getText().toString();
-                sumbit_str[5] = textview6.getText().toString();
-                sumbit_str[6] = textview7.getText().toString();
-                sumbit_str[10] = editText11.getText().toString();
+                sumbit_str[2] = editText02.getText().toString();
+                sumbit_str[3] = editText03.getText().toString();
+                sumbit_str[4] = editText04.getText().toString();
+                sumbit_str[5] = editText05.getText().toString();
+                sumbit_str[6] = textview06.getText().toString();
+                sumbit_str[7] = textview07.getText().toString();
+                sumbit_str[13] = editText13.getText().toString();
                 mAddWorkLogPersenter.addWorkLog(sumbit_str);
                 break;
         }

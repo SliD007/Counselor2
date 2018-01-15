@@ -61,10 +61,6 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
         }
     }
 
-    private void sumbitAdvice(String title, String context_str) {
-    }
-
-
     @Override
     public void addSuccess() {
         toast("添加成功", false);
