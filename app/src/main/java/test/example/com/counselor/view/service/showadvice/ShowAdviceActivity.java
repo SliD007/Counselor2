@@ -51,9 +51,11 @@ public class ShowAdviceActivity extends BaseActivity implements IShowAdviceView 
 
     private void initView() {
         adviceEntity = mShowAdvicePresenter.getAdviceDetialEntity();
-        showAdviceTitleTv.setText(adviceEntity.getTitle());
-        showAdviceContextTv.setText(adviceEntity.getContent());
-        showAdvicesentToTv.setText(adviceEntity.getToType());
+        if(adviceEntity!=null){
+            showAdviceTitleTv.setText(adviceEntity.getTitle());
+            showAdviceContextTv.setText(adviceEntity.getContent());
+            showAdvicesentToTv.setText(adviceEntity.getToType());
+        }
     }
 
     @OnClick(R.id.backTv)

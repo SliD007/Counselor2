@@ -6,7 +6,6 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 
 import java.util.HashMap;
@@ -38,7 +37,7 @@ public class ShowClassicCasePresenter {
         OkGo.post(Urls.ReportConfigurationURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
-                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+//                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                 .cacheTime(-1)
                 .execute(new StringCallback() {
                     @Override

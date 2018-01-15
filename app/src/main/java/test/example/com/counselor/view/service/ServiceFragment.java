@@ -35,6 +35,7 @@ import test.example.com.counselor.view.service.entity.SummaryEntity;
 import test.example.com.counselor.view.service.entity.WorkLogEntity;
 import test.example.com.counselor.view.service.showadvice.ShowAdviceActivity;
 import test.example.com.counselor.view.service.showclassiccase.ShowClassicCaseActivity;
+import test.example.com.counselor.view.service.showsummary.ShowSummaryActivity;
 import test.example.com.counselor.view.service.showworklog.ShowWorkLogActivity;
 
 /**
@@ -269,9 +270,11 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
             case 2:
                 i = new Intent(getActivity(), AddClassicCaseActivity.class);
                 startActivity(i);
+                break;
             case 3:
                 i = new Intent(getActivity(), AddSummaryActivity.class);
                 startActivity(i);
+                break;
         }
     }
 
@@ -348,6 +351,11 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 case 2:
                     i = new Intent(mContext, ShowClassicCaseActivity.class);
                     i.putExtra("id",classicCaseEntities.get(position).getId());
+                    startActivity(i);
+                    break;
+                case 3:
+                    i = new Intent(mContext, ShowSummaryActivity.class);
+                    i.putExtra("id",summaryEntities.get(position).getId());
                     startActivity(i);
                     break;
             }

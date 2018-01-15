@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.service.showclassiccase;
+package test.example.com.counselor.view.service.showsummary;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,23 +15,22 @@ import test.example.com.counselor.base.MyApplication;
  * Created by Sli.D on 2018/1/11.
  */
 
-public class ShowClassicCaseActivity extends BaseActivity implements IShowClassicCaseView {
+public class ShowSummaryActivity extends BaseActivity implements IShowSummaryView {
 
 
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
-    @BindView(R.id.showClassicCaseTitleTv)
-    TextView showClassicCaseTitleTv;
-    @BindView(R.id.showClassicCaseContextTv)
-    TextView showClassicCaseContextTv;
+    @BindView(R.id.showSummaryTitleTv)
+    TextView showSummaryTitleTv;
+    @BindView(R.id.showSummaryContextTv)
+    TextView showSummaryContextTv;
 
-
-    private ShowClassicCasePresenter mShowClassicCasePresenter;
-    private ClassicCaseEntity classicCaseEntity;
+    private ShowSummaryPresenter mShowSummaryPresenter;
+    private SummaryEntity summaryEntity;
 
     @Override
     protected void initContentView(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_showclassiccase);
+        setContentView(R.layout.activity_showsummary);
     }
 
     @Override
@@ -40,19 +39,20 @@ public class ShowClassicCaseActivity extends BaseActivity implements IShowClassi
         ButterKnife.bind(this);
 
         super.allow_quit = false;
-        titleBarTv.setText("典型案件详情");
+        titleBarTv.setText("月度总结详情");
 
         Intent i = getIntent();
         int id = i.getIntExtra("id", 0);
-        mShowClassicCasePresenter = new ShowClassicCasePresenter(this, this);
-        mShowClassicCasePresenter.requestClassicCaseDetial(id);
+        mShowSummaryPresenter = new ShowSummaryPresenter(this, this);
+        mShowSummaryPresenter.requestSummaryDetial(id);
     }
 
     private void initView() {
-        classicCaseEntity = mShowClassicCasePresenter.getClassicCaseDetialEntity();
-        if(classicCaseEntity!=null){
-            showClassicCaseTitleTv.setText(classicCaseEntity.getTitle());
-            showClassicCaseContextTv.setText(classicCaseEntity.getContent());
+        summaryEntity = mShowSummaryPresenter.getSummaryDetialEntity();
+        if(summaryEntity!=null){
+            showSummaryTitleTv.setText(summaryEntity.getTitle());
+            showSummaryContextTv.setText(summaryEntity.getContent());
+
         }
     }
 
@@ -64,13 +64,13 @@ public class ShowClassicCaseActivity extends BaseActivity implements IShowClassi
 
 
     @Override
-    public void requestClassicCaseDetialSuccess() {
+    public void requestSummaryDetialSuccess() {
         toast("请求成功", false);
         initView();
     }
 
     @Override
-    public void requestClassicCaseDetialFailed() {
+    public void requestSummaryDetialFailed() {
         toast("请求失败", false);
     }
 }

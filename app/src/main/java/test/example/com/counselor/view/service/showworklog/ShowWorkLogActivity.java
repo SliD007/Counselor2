@@ -70,17 +70,20 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
 
     private void initView() {
         workLogDetialEntity = mShowWorkLogPresenter.getWorkLogDetialEntity();
-        item1Tv2.setText(workLogDetialEntity.getServiceObject());
-        item1Tv3.setText(workLogDetialEntity.getFromType());
-        item1Tv4.setText(workLogDetialEntity.getObjectContact());
-        item1Tv5.setText(workLogDetialEntity.getServiceIdentity());
-        item1Tv6.setText(TimeUtil.getDateToString(workLogDetialEntity.getCreateTime(),TimeUtil.Data));
-        item1Tv7.setText(TimeUtil.getDateToString(workLogDetialEntity.getCreateTime(),TimeUtil.Data));
-        item1Tv8.setText(workLogDetialEntity.getServiceType());
-        item1Tv9.setText(workLogDetialEntity.getObjectType());
-        item1Tv10.setText(workLogDetialEntity.getLogType());
-        item1Tv11.setText(workLogDetialEntity.getServiceContent());
-        item1Tv12.setText("无图片");
+        if(workLogDetialEntity!=null){
+            item1Tv2.setText(workLogDetialEntity.getServiceObject());
+            item1Tv3.setText(workLogDetialEntity.getFromType());
+            item1Tv4.setText(workLogDetialEntity.getObjectContact());
+            item1Tv5.setText(workLogDetialEntity.getServiceIdentity());
+            item1Tv6.setText(TimeUtil.getDateToString(workLogDetialEntity.getCreateTime(),TimeUtil.Data));
+            item1Tv7.setText(TimeUtil.getDateToString(workLogDetialEntity.getCreateTime(),TimeUtil.Data));
+            item1Tv8.setText(workLogDetialEntity.getServiceType());
+            item1Tv9.setText(workLogDetialEntity.getObjectType());
+            item1Tv10.setText(workLogDetialEntity.getLogType());
+            item1Tv11.setText(workLogDetialEntity.getServiceContent());
+            item1Tv12.setText("无图片");
+
+        }
     }
 
     @OnClick(R.id.backTv)

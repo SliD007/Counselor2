@@ -6,9 +6,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.request.BaseRequest;
 
 import java.util.HashMap;
 
@@ -43,22 +41,9 @@ public class AddAdvicePresenter {
         OkGo.post(Urls.ReportAddURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
-                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+//                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                 .cacheTime(-1)
                 .execute(new StringCallback() {
-                    @Override
-                    public void onBefore(BaseRequest request) {
-                        super.onBefore(request);
-                        Log.e("addAdvice","onBefore:"+request.toString());
-                    }
-
-                    @Override
-                    public String convertSuccess(Response response) throws Exception {
-                        Log.e("addAdvice","convertSuccess:"+response.toString());
-                        return super.convertSuccess(response);
-                    }
-
-                    @Override
                     public void onSuccess(String s, Call call, Response response) {
                         Log.e("addAdvice","response:"+response.toString());
                         Log.e("addAdvice","onSuccess:"+s);

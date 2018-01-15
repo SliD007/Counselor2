@@ -6,7 +6,6 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 
 import java.util.HashMap;
@@ -29,19 +28,18 @@ public class AddSummaryPresenter {
     }
 
     public void addSummary(String title,String content){
-        Log.e("Advice","title:"+title+",context:"+content);
         HashMap<String,String> params = new HashMap<>();
-        params.put("title",title);
         params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
-        params.put("village", MyApplication.getInstance().loginEntity.getCommunityA()+"");
-        params.put("content",content);
-        params.put("reportType",0+"");
+        params.put("village", MyApplication.getInstance().loginEntity.getCommunityA()+MyApplication.getInstance().loginEntity.getCommunityB()+"");
+        params.put("office",MyApplication.getInstance().loginEntity.getOrganization());
         params.put("contact", MyApplication.getInstance().loginEntity.getContact()+"");
-
-        OkGo.post(Urls.ReportAddURL)
+        params.put("title",title);
+        params.put("content",content);
+        Log.e("addSummary",params.toString());
+        OkGo.post(Urls.SummaryAddURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
-                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+//                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                 .cacheTime(-1)
                 .execute(new StringCallback() {
                     @Override

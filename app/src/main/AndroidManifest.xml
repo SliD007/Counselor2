@@ -67,6 +67,8 @@
         <activity android:name=".view.service.showclassiccase.ShowClassicCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
 
         <activity android:name=".view.service.addsummary.AddSummaryActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+        <activity android:name=".view.service.showsummary.ShowSummaryActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+
         <activity android:name=".view.changepw.ChagePwActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.rank.RankActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.contract.ContractActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>

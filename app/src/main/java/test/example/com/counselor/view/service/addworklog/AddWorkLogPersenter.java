@@ -6,7 +6,6 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 
 import java.util.HashMap;
@@ -58,12 +57,12 @@ public class AddWorkLogPersenter {
         OkGo.post(Urls.WorkLogAddURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
-                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+//                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                 .cacheTime(-1)
                 .execute(new StringCallback() {
                     public void onSuccess(String s, Call call, Response response) {
-//                        Log.e("addWorkLog","response:"+response.toString());
-//                        Log.e("addWorkLog","onSuccess:"+s);
+                        Log.e("addWorkLog","response:"+response.toString());
+                        Log.e("addWorkLog","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
 
