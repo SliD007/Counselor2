@@ -56,8 +56,13 @@ public class LoginActivity extends BaseActivity implements ILoginView{
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onStop() {
         localtionUtil.stopLocation();
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
         super.onDestroy();
     }
 

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -78,6 +79,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         fragmentCuttent = new int[]{0, 0};
         mTaskPresenter = new TaskPresenter(getActivity(), this);
         star = mTaskPresenter.requestStar();
+        //查看状态: 0/已查看 1/未查看
         mTaskPresenter.requestTask(fragmentCuttent[0], requestSize, 1, MyApplication.getInstance().loginEntity.getId());
         mTaskPresenter.requestTask(fragmentCuttent[1], requestSize, 0, MyApplication.getInstance().loginEntity.getId());
         fragmentCuttent[0]=1;
@@ -102,7 +104,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
 
     @Override
     protected void initDatas() {
-//        Log.e("TaskFragment","加载数据");
+        Log.e("TaskFragment","加载数据"+fragmentType);
         if (fragmentType == 0) {
             toDoListEntities = mTaskPresenter.getToDoTaskEntity();
 
@@ -125,15 +127,17 @@ public class TaskFragment extends BaseFragment implements ITaskView {
 
         } else {
             doneListEntities = mTaskPresenter.getDoneTaskEntityList();
-            toDoListEntities = mTaskPresenter.getToDoTaskEntity();
-            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_2list,mClickListener){
+            mAdapter = new CommonAdapter(mContext,doneListEntities,R.layout.item_2list,mClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     TextView tv1 = viewHolder.getView(R.id.itemTv1);
-                    tv1.setText(toDoListEntities.get(position).getTitle());
+                    tv1.setText(doneListEntities.get(position).getTitle());
                     TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                    tv2.setText(toDoListEntities.get(position).getFromWhere());
+                    tv2.setText(doneListEntities.get(position).getFromWhere());
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                    tv3.setText(TimeUtil.getDateToString(toDoListEntities.get(position).getTime(),TimeUtil.Time));
+                    tv3.setText(TimeUtil.getDateToString(doneListEntities.get(position).getTime(),TimeUtil.Time));
+                    RelativeLayout rl = viewHolder.getView(R.id.itemRl);
+                    rl.setTag(position);
+                    rl.setOnClickListener(mClickListener);
                 }
             };
             mRecyclerView.setAdapter(mAdapter);
@@ -231,7 +235,13 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         @Override
         public void myOnClick(int position, View view) {
             Intent i = new Intent(mContext, ShowTaskActivity.class);
-            i.putExtra("id",toDoListEntities.get(position).getId());
+            int id = 0;
+            if(fragmentType==1){
+                id = doneListEntities.get(position).getId();
+            }else {
+                id = toDoListEntities.get(position).getId();
+            }
+            i.putExtra("id",id);
             i.putExtra("fromWhere","");
             startActivity(i);
 

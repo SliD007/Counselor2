@@ -7,4 +7,7 @@ package test.example.com.counselor.view.task.showtask;
 public interface IShowTaskView {
     void requestTaskConfigurationSuccess();
     void requestTaskConfigurationFailed();
+
+    void changeTaskStateSuccess();
+    void changeTaskStateFailed();
 }

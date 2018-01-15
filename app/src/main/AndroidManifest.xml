@@ -40,6 +40,11 @@
 
         <activity android:name=".view.WelcomeActivity">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".view.login.LoginActivity" android:theme="@style/TranslucentTheme" android:launchMode="singleTask"/>
         <activity android:name=".view.forgetpw.ForgetPwActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
@@ -52,11 +57,6 @@
         <activity android:name=".view.service.showworklog.ShowWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addworklog.AddWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".view.service.addGroupCase.AddGroupCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addchargecase.AddChargeCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>

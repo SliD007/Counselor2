@@ -51,6 +51,7 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
         int fromWhere = i.getIntExtra("fromWhere",0);
         mShowTaskPresenter = new ShowTaskPresenter(this,this);
         mShowTaskPresenter.requestTaskDetial(id,0);
+        mShowTaskPresenter.changeTaskState(id,0);
     }
 
     private void initView() {
@@ -70,12 +71,22 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
 
     @Override
     public void requestTaskConfigurationSuccess() {
-        toast("请求成功",false);
+//        toast("请求成功",false);
         initView();
     }
 
     @Override
     public void requestTaskConfigurationFailed() {
         toast("请求失败",false);
+    }
+
+    @Override
+    public void changeTaskStateSuccess() {
+        toast("修改成功",false);
+    }
+
+    @Override
+    public void changeTaskStateFailed() {
+        toast("修改失败",false);
     }
 }

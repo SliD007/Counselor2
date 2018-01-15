@@ -44,7 +44,6 @@ public class TaskPresenter {
     public void requestTask(int current, int size, final int type, int counselorId){
 
         HashMap<String,String> params = new HashMap<>();
-        //String  contact  手机号码; String  password  用户登录密码
         params.put("current",current+"");
         params.put("size",size+"");
         params.put("type",type+"");
@@ -57,7 +56,7 @@ public class TaskPresenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-//                        Log.e("requestTask","onSuccess:"+s);
+                        Log.e("requestTask"+type,"onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             saveValue(object,type);
@@ -83,7 +82,7 @@ public class TaskPresenter {
     public int requestStar(){
         HashMap<String,String> params = new HashMap<>();
         params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
-        OkGo.post(Urls.TASKURL)
+        OkGo.post(Urls.RankURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
                 .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
@@ -91,10 +90,10 @@ public class TaskPresenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("requestStar","onSuccess:"+s);
+//                        Log.e("requestStar","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
-//                            saveValue(object,type);
+//                            saveRankValue(object);
 
                             mITaskView.requestStarSuccess();
                         }else {
@@ -128,10 +127,9 @@ public class TaskPresenter {
         JSONObject page = object.getJSONObject("page");
         JSONArray listArray = page.getJSONArray("list");
 //        Log.e("requestTask",""+listArray.toString());
-        if (type==0){
+        if (type==1){
             toDoTaskEntities = JSONArray.parseArray(listArray.toString(),ToDoTaskEntity.class);
-            for(int j=0;j<5;j++)
-                toDoTaskEntities.add(toDoTaskEntities.get(0));
+
             mITaskModel.setToDoTaskEntity(toDoTaskEntities);
 //            Log.e("requestTask",""+toDoTaskEntities.toString());
         }
@@ -140,5 +138,11 @@ public class TaskPresenter {
             mITaskModel.setDoneTaskEntity(doneTaskEntities);
 //            Log.e("saveValue",""+doneTaskEntities.toString());
         }
+    }
+
+    public void saveRankValue(JSONObject object){
+        JSONObject value = object.getJSONObject("value");
+        Log.e("requestTask",""+value.toString());
+
     }
 }

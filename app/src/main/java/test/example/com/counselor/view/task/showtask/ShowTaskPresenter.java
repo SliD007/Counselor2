@@ -29,6 +29,42 @@ public class ShowTaskPresenter {
         mIShowTaskModel = new ShowTaskModel();
     }
 
+    public void changeTaskState(int id, int fromWhere){
+
+        HashMap<String,String> params = new HashMap<>();
+        params.put("id",id+"");
+        params.put("fromWhere",fromWhere+"");
+        OkGo.post(Urls.ChangeTaskStateURL)
+                .params(params)
+                .cacheKey(Constants.getAppCacheFolder())
+                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+                .cacheTime(-1)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                        Log.e("changeTaskState","response:"+response.toString());
+//                        Log.e("changeTaskState","onSuccess:"+s);
+                        JSONObject object = JSON.parseObject(s);
+                        if (object.getInteger("code")==0){
+                            mIShowTaskView.changeTaskStateSuccess();
+
+                        }else {
+                            mIShowTaskView.changeTaskStateFailed();
+                        }
+                    }
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        mIShowTaskView.requestTaskConfigurationFailed();
+                    }
+
+                    @Override
+                    public void onAfter(String s, Exception e) {
+                        super.onAfter(s, e);
+                    }
+
+                });
+    }
 
     public void requestTaskDetial(int id, int fromWhere){
 
