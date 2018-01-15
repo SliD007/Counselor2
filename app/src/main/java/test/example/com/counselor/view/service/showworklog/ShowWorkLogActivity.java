@@ -2,6 +2,7 @@ package test.example.com.counselor.view.service.showworklog;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -20,30 +21,36 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
 
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
-    @BindView(R.id.item1Tv1)
-    TextView item1Tv1;
-    @BindView(R.id.item1Tv2)
-    TextView item1Tv2;
-    @BindView(R.id.item1Tv3)
-    TextView item1Tv3;
-    @BindView(R.id.item1Tv4)
-    TextView item1Tv4;
-    @BindView(R.id.item1Tv5)
-    TextView item1Tv5;
-    @BindView(R.id.item1Tv6)
-    TextView item1Tv6;
-    @BindView(R.id.item1Tv7)
-    TextView item1Tv7;
-    @BindView(R.id.item1Tv8)
-    TextView item1Tv8;
-    @BindView(R.id.item1Tv9)
-    TextView item1Tv9;
-    @BindView(R.id.item1Tv10)
-    TextView item1Tv10;
-    @BindView(R.id.item1Tv11)
-    TextView item1Tv11;
-    @BindView(R.id.item1Tv12)
-    TextView item1Tv12;
+    @BindView(R.id.textview01)
+    TextView textview01;
+    @BindView(R.id.textview02)
+    TextView textview02;
+    @BindView(R.id.textview03)
+    TextView textview03;
+    @BindView(R.id.textview04)
+    TextView textview04;
+    @BindView(R.id.textview05)
+    TextView textview05;
+    @BindView(R.id.textview06)
+    TextView textview06;
+    @BindView(R.id.textview07)
+    TextView textview07;
+    @BindView(R.id.textview08)
+    TextView textview08;
+    @BindView(R.id.textview09)
+    TextView textview09;
+    @BindView(R.id.textview10)
+    TextView textview10;
+    @BindView(R.id.textview11)
+    TextView textview11;
+    @BindView(R.id.textview12)
+    TextView textview12;
+    @BindView(R.id.rl13)
+    RelativeLayout rl13;
+    @BindView(R.id.textview13)
+    TextView textview13;
+    @BindView(R.id.textview14)
+    TextView textview14;
 
 
     private ShowWorkLogPresenter mShowWorkLogPresenter;
@@ -70,19 +77,21 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
 
     private void initView() {
         workLogDetialEntity = mShowWorkLogPresenter.getWorkLogDetialEntity();
-        if(workLogDetialEntity!=null){
-            item1Tv2.setText(workLogDetialEntity.getServiceObject());
-            item1Tv3.setText(workLogDetialEntity.getFromType());
-            item1Tv4.setText(workLogDetialEntity.getObjectContact());
-            item1Tv5.setText(workLogDetialEntity.getServiceIdentity());
-            item1Tv6.setText(TimeUtil.getDateToString(workLogDetialEntity.getCreateTime(),TimeUtil.Data));
-            item1Tv7.setText(TimeUtil.getDateToString(workLogDetialEntity.getCreateTime(),TimeUtil.Data));
-            item1Tv8.setText(workLogDetialEntity.getServiceType());
-            item1Tv9.setText(workLogDetialEntity.getObjectType());
-            item1Tv10.setText(workLogDetialEntity.getLogType());
-            item1Tv11.setText(workLogDetialEntity.getServiceContent());
-            item1Tv12.setText("无图片");
-
+        if (workLogDetialEntity != null) {
+            textview01.setText(workLogDetialEntity.getServiceVillage());
+            textview02.setText(workLogDetialEntity.getServiceObject());
+            textview03.setText(workLogDetialEntity.getObjectContact());
+            textview04.setText(workLogDetialEntity.getServiceIdentity());
+            textview05.setText(workLogDetialEntity.getInObject());
+            textview06.setText(TimeUtil.getDateToString(workLogDetialEntity.getCreateTime(),TimeUtil.DataTime));
+            textview07.setText(TimeUtil.getDateToString(workLogDetialEntity.getCreateTime(),TimeUtil.DataTime));
+            textview08.setText(workLogDetialEntity.getFromType());
+            textview09.setText(workLogDetialEntity.getServiceType());
+            textview10.setText(workLogDetialEntity.getMatterType());
+            textview11.setText(workLogDetialEntity.getSubType());
+            textview12.setText(workLogDetialEntity.getObjecttype());
+            textview13.setText(workLogDetialEntity.getServiceContent());
+            textview14.setText("无图");
         }
     }
 

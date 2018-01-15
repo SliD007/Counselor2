@@ -8,6 +8,8 @@ public class Urls {
     public static final String LOGINURL = "http://law.d9lab.net/server/login/padLogin";
     public static final String ChnagePwURL = "http://law.d9lab.net/server/login/updatePasswprd";
     public static final String ForgetPwURL = "http://law.d9lab.net/server/login/updatePasswprd";
+    public static final String ContractURL = "http://law.d9lab.net/office/contract/getCounselorContract";
+
 
     public static final String RankURL = "http://law.d9lab.net/statistics/count/getRank";
     public static final String TASKURL = "http://law.d9lab.net/pad/task/padGetTaskPage";

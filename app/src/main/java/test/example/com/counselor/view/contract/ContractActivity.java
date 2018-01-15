@@ -68,7 +68,7 @@ public class ContractActivity extends BaseActivity implements IContractView {
             @Override
             protected void convertView(ViewHolder1 mViewHolder, View item, ContractEntity contractEntity, int position) {
                 TextView tv1 = mViewHolder.getView(R.id.itemWorkForTv);
-                tv1.setText("  " + contractEntity.getWorkFor());
+                tv1.setText("  " + contractEntity.getVillage().getString("username"));
 
             }
         });
@@ -117,7 +117,7 @@ public class ContractActivity extends BaseActivity implements IContractView {
                 nextIm.setImageResource(R.drawable.u608);
 //                contractVs.inflate();
                 contractVs.setVisibility(View.VISIBLE);
-                initViewSub();
+                initViewSub(position);
 
             }else {
                 nextIm.setImageResource(R.drawable.u609);
@@ -127,9 +127,27 @@ public class ContractActivity extends BaseActivity implements IContractView {
         }
     };
 
-    private void initViewSub(){
-        ListView contractImLV = (ListView) findViewById(R.id.contractImLV);
+    private void initViewSub(int position){
+        Log.e("initViewSub",""+position);
+        TextView tv1 = (TextView) findViewById(R.id.tv1);
+        TextView tv2 = (TextView) findViewById(R.id.tv2);
+        TextView tv3 = (TextView) findViewById(R.id.tv3);
+        TextView tv4 = (TextView) findViewById(R.id.tv4);
+        TextView tv5 = (TextView) findViewById(R.id.tv5);
+        TextView tv6 = (TextView) findViewById(R.id.tv6);
+        TextView tv7 = (TextView) findViewById(R.id.tv7);
+        TextView tv8 = (TextView) findViewById(R.id.tv8);
 
+        tv1.setText(contractEntities.get(position).getVillage().getString("username"));
+        tv2.setText(contractEntities.get(position).getCounselor().getString("username"));
+        tv3.setText(contractEntities.get(position).getRepresentative());
+        tv4.setText(contractEntities.get(position).getOffice());
+        tv5.setText(contractEntities.get(position).getServiceYear());
+        tv6.setText(contractEntities.get(position).getDeadLine());
+        tv7.setText(contractEntities.get(position).getMoney()+"");
+        tv8.setText(contractEntities.get(position).getContractStatus());
+
+        ListView contractImLV = (ListView) findViewById(R.id.contractImLV);
         contractImLV.setAdapter(new SimpleAdapter(mContext, mData, R.layout.item_contract_image_list
                 , new String[]{"image"},new int[]{R.id.contractIm}));
     }

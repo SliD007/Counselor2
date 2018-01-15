@@ -8,30 +8,87 @@ import java.io.Serializable;
 
 public class WorkLogDetialEntity implements Serializable{
     private int id;
+    private String serviceVillage;
     private String serviceObject;
-    private String fromType;
     private String objectContact;
     private String serviceIdentity;
+    private String inObject;
     private long createTime;
+    private String fromType;
     private String serviceType;
-    private String objectType;
-    private String logType;
+    private String matterType;
+    private String subType;
+    private String objecttype;
     private String serviceContent;
+    private String accessory;
 
     @Override
     public String toString() {
         return "WorkLogDetialEntity{" +
-                "createTime=" + createTime +
-                ", id=" + id +
+                "id=" + id +
+                ", serviceVillage='" + serviceVillage + '\'' +
                 ", serviceObject='" + serviceObject + '\'' +
-                ", fromType='" + fromType + '\'' +
                 ", objectContact='" + objectContact + '\'' +
                 ", serviceIdentity='" + serviceIdentity + '\'' +
+                ", inObject='" + inObject + '\'' +
+                ", createTime=" + createTime +
+                ", fromType='" + fromType + '\'' +
                 ", serviceType='" + serviceType + '\'' +
-                ", objectType='" + objectType + '\'' +
-                ", logType='" + logType + '\'' +
+                ", matterType='" + matterType + '\'' +
+                ", subType='" + subType + '\'' +
+                ", objecttype='" + objecttype + '\'' +
                 ", serviceContent='" + serviceContent + '\'' +
+                ", accessory='" + accessory + '\'' +
                 '}';
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getServiceVillage() {
+        return serviceVillage;
+    }
+
+    public void setServiceVillage(String serviceVillage) {
+        this.serviceVillage = serviceVillage;
+    }
+
+    public String getServiceObject() {
+        return serviceObject;
+    }
+
+    public void setServiceObject(String serviceObject) {
+        this.serviceObject = serviceObject;
+    }
+
+    public String getObjectContact() {
+        return objectContact;
+    }
+
+    public void setObjectContact(String objectContact) {
+        this.objectContact = objectContact;
+    }
+
+    public String getServiceIdentity() {
+        return serviceIdentity;
+    }
+
+    public void setServiceIdentity(String serviceIdentity) {
+        this.serviceIdentity = serviceIdentity;
+    }
+
+    public String getInObject() {
+        return inObject;
+    }
+
+    public void setInObject(String inObject) {
+        this.inObject = inObject;
     }
 
     public long getCreateTime() {
@@ -50,36 +107,36 @@ public class WorkLogDetialEntity implements Serializable{
         this.fromType = fromType;
     }
 
-    public int getId() {
-        return id;
+    public String getServiceType() {
+        return serviceType;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
     }
 
-    public String getLogType() {
-        return logType;
+    public String getMatterType() {
+        return matterType;
     }
 
-    public void setLogType(String logType) {
-        this.logType = logType;
+    public void setMatterType(String matterType) {
+        this.matterType = matterType;
     }
 
-    public String getObjectContact() {
-        return objectContact;
+    public String getSubType() {
+        return subType;
     }
 
-    public void setObjectContact(String objectContact) {
-        this.objectContact = objectContact;
+    public void setSubType(String subType) {
+        this.subType = subType;
     }
 
-    public String getObjectType() {
-        return objectType;
+    public String getObjecttype() {
+        return objecttype;
     }
 
-    public void setObjectType(String objectType) {
-        this.objectType = objectType;
+    public void setObjecttype(String objecttype) {
+        this.objecttype = objecttype;
     }
 
     public String getServiceContent() {
@@ -90,28 +147,12 @@ public class WorkLogDetialEntity implements Serializable{
         this.serviceContent = serviceContent;
     }
 
-    public String getServiceIdentity() {
-        return serviceIdentity;
+    public String getAccessory() {
+        return accessory;
     }
 
-    public void setServiceIdentity(String serviceIdentity) {
-        this.serviceIdentity = serviceIdentity;
-    }
-
-    public String getServiceObject() {
-        return serviceObject;
-    }
-
-    public void setServiceObject(String serviceObject) {
-        this.serviceObject = serviceObject;
-    }
-
-    public String getServiceType() {
-        return serviceType;
-    }
-
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
+    public void setAccessory(String accessory) {
+        this.accessory = accessory;
     }
 
     public WorkLogDetialEntity() {
