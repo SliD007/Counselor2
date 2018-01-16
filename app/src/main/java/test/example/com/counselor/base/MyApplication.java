@@ -2,8 +2,12 @@ package test.example.com.counselor.base;
 
 import android.app.Activity;
 import android.app.Application;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -15,6 +19,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import test.example.com.counselor.view.login.LoginEntity;
+
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 /**
  * Created by Sli.D on 2017/12/19.
@@ -35,11 +41,15 @@ public class MyApplication extends Application {
     public LoginEntity loginEntity;// 当前的用户信息
     public boolean refresh = false;
     public boolean show_star_dialog = true;
+
+    private RequestQueue queues;
     public MyApplication() {
+        instance = this;
     }
 
     @Override
     public void onCreate() {
+        queues = Volley.newRequestQueue(getApplicationContext());
         super.onCreate();
         initOkGo();
     }
@@ -131,4 +141,38 @@ public class MyApplication extends Application {
         }
         System.exit(0);
     }
+
+
+    // 用于返回全局RequestQueue对象，如果为空则创建它
+    public RequestQueue getRequestQueue() {
+        if (queues == null) {
+            queues = Volley.newRequestQueue(getApplicationContext());
+        }
+        return queues;
+    }
+
+    /**
+     * 将Request对象添加进RequestQueue，由于Request有*StringRequest,JsonObjectResquest...
+     * 等多种类型，所以需要用到*泛型。同时可将*tag作为可选参数以便标示出每一个不同请求
+     */
+
+    public <T> void addToRequestQueue(Request<T> req, String tag) {
+        // 如果tag为空的话，就是用默认TAG
+        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
+
+        getRequestQueue().add(req);
+    }
+
+    public <T> void addToRequestQueue(Request<T> req) {
+        req.setTag(TAG);
+        getRequestQueue().add(req);
+    }
+
+    // 通过各Request对象的Tag属性取消请求
+    public void cancelPendingRequests(Object tag) {
+        if (getRequestQueue() != null) {
+            getRequestQueue().cancelAll(tag);
+        }
+    }
+
 }

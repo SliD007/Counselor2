@@ -46,7 +46,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        mLoginPresenter = new LoginPresenter(this);
+        mLoginPresenter = new LoginPresenter(this,this);
         initView();
 
         localtionUtil = new LocaltionUtil(this,mILocaltionModel);
@@ -102,6 +102,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
             passwordEt.setText(password);
 //            password = Md5Util.md5(password);
             mLoginPresenter.loadLogin(this,account,password);
+//            mLoginPresenter.login(account,password);
         }else{
             rememberPwCb.setChecked(false);
         }

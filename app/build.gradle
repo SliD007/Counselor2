@@ -45,4 +45,6 @@ dependencies {
 
     compile 'com.amap.api:map2d:latest.integration'
     compile 'com.amap.api:location:latest.integration'
+
+    compile 'com.mcxiaoke.volley:library:1.0.+'
 }

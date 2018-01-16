@@ -58,6 +58,7 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
                 String title = addSummaryTitleEt.getText().toString();
                 String context_str = addSummaryContextEt.getText().toString();
                 mAddSummaryPresenter.addSummary(title, context_str);
+                mAddSummaryPresenter.addsummary(title, context_str);
                 break;
         }
     }
