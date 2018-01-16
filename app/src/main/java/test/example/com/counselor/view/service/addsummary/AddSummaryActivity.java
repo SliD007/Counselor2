@@ -36,6 +36,7 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
         ButterKnife.bind(this);
         initView();
         mAddSummaryPresenter = new AddSummaryPresenter(this, this);
+        addSummaryContextEt.setText("月总结");
     }
 
     private void initView() {

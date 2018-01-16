@@ -33,7 +33,7 @@ public class AddSummaryPresenter {
         params.put("village", MyApplication.getInstance().loginEntity.getCommunityA()+MyApplication.getInstance().loginEntity.getCommunityB()+"");
         params.put("office",MyApplication.getInstance().loginEntity.getOrganization());
         params.put("contact", MyApplication.getInstance().loginEntity.getContact()+"");
-        params.put("title",title);
+        params.put("title","月");
         params.put("content",content);
         Log.e("addSummary",params.toString());
         OkGo.post(Urls.SummaryAddURL)

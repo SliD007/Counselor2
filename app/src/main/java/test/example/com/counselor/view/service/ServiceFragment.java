@@ -157,18 +157,16 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
             mRecyclerView.setAdapter(mAdapter);
         }else if(fragmentType==2){
             classicCaseEntities = mServicePersenter.getClassicCaseEntities();
-            mAdapter = new CommonAdapter(mContext,classicCaseEntities,R.layout.item_4list,mClickListener){
+            mAdapter = new CommonAdapter(mContext,classicCaseEntities,R.layout.item_3list,mClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     super.onBindViewHolder(viewHolder,position);
 
                     TextView tv1 = viewHolder.getView(R.id.itemTv1);
                     TextView tv2 = viewHolder.getView(R.id.itemTv2);
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                    TextView tv4 = viewHolder.getView(R.id.itemTv4);
                     tv1.setText(classicCaseEntities.get(position).getTitle());
-//                    tv2.setText("报送至："+classicCaseEntities.get(position).getToType());
-                    tv3.setText("服务时间："+ TimeUtil.getDateToString(classicCaseEntities.get(position).getCreateTime(),TimeUtil.Data));
-                    tv4.setText("服务单位："+classicCaseEntities.get(position).getVillage());
+                    tv2.setText("服务时间："+ TimeUtil.getDateToString(classicCaseEntities.get(position).getCreateTime(),TimeUtil.Data));
+                    tv3.setText("服务单位："+classicCaseEntities.get(position).getVillage());
                     LinearLayout ll = viewHolder.getView(R.id.itemLl);
                     ll.setTag(position);
                     ll.setOnClickListener(mClickListener);

@@ -90,7 +90,7 @@ public class TaskPresenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-//                        Log.e("requestStar","onSuccess:"+s);
+                        Log.e("requestStar","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
 //                            saveRankValue(object);

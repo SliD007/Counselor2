@@ -138,14 +138,14 @@ public class ContractActivity extends BaseActivity implements IContractView {
         TextView tv7 = (TextView) findViewById(R.id.tv7);
         TextView tv8 = (TextView) findViewById(R.id.tv8);
 
-        tv1.setText(contractEntities.get(position).getVillage().getString("username"));
-        tv2.setText(contractEntities.get(position).getCounselor().getString("username"));
-        tv3.setText(contractEntities.get(position).getRepresentative());
-        tv4.setText(contractEntities.get(position).getOffice());
-        tv5.setText(contractEntities.get(position).getServiceYear());
-        tv6.setText(contractEntities.get(position).getDeadLine());
-        tv7.setText(contractEntities.get(position).getMoney()+"");
-        tv8.setText(contractEntities.get(position).getContractStatus());
+        tv1.setText("服务村社："+contractEntities.get(position).getVillage().getString("username"));
+        tv2.setText("法律顾问："+contractEntities.get(position).getCounselor().getString("username"));
+        tv3.setText("村社法人："+contractEntities.get(position).getRepresentative());
+        tv4.setText("顾问机构："+contractEntities.get(position).getOffice());
+        tv5.setText("服务年度："+contractEntities.get(position).getServiceYear());
+        tv6.setText("合同期限："+contractEntities.get(position).getDeadLine());
+        tv7.setText("合同金额："+contractEntities.get(position).getMoney()+"");
+        tv8.setText("合同状态："+contractEntities.get(position).getContractStatus());
 
         ListView contractImLV = (ListView) findViewById(R.id.contractImLV);
         contractImLV.setAdapter(new SimpleAdapter(mContext, mData, R.layout.item_contract_image_list

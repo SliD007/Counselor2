@@ -28,6 +28,6 @@ public class Urls {
     public static final String ReportAddURL = "http://law.d9lab.net/pad/report/addReport";
 
     public static final String SummaryURL = "http://law.d9lab.net/pad/monthly/getMonthlyPage";
-    public static final String SummaryConfigurationURL = "http://law.d9lab.net/pad/Monthly/getMonthlyConfiguration";
+    public static final String SummaryConfigurationURL = "http://law.d9lab.net/pad/monthly/getMonthlyConfiguration";
     public static final String SummaryAddURL = "http://law.d9lab.net/pad/monthly/addMonthly";
 }
