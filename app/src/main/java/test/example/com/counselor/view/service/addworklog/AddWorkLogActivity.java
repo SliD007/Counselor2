@@ -100,7 +100,10 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                     {"法治宣传"},
                     {"老年人", "未成年", "残疾", "妇女", "农民", "下岗职工", "外来务工人员", "企业主", "村（居）委干部", "村（居）民", "其他"}}
     };
-
+    String[] str08 = new String[]{"来访","电话"};
+    String[] str09 = new String[]{"出具专业法律意见","法律咨询","人民调解","法律援助","法治宣传"};
+    String[] str10 = new String[]{"审查合同","出具法律意见","制定或修改村规民约","协助选举","参与谈判签约","代写文书","其他"};
+    String[] str12 = new String[]{"镇街党委政府","村（居）委","其他"};
 
     private void initView() {
 
@@ -118,42 +121,46 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner01.setAdapter(adapter);
         spinner01.setOnItemSelectedListener(mOnItemClickListener);
+
         //S08
         list = new ArrayList<String>();
-        list.add("村民");
-        list.add("村社");
+        for(int i=0;i<str08.length;i++){
+            list.add(str08[i]);
+        }
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner08.setAdapter(adapter);
         spinner08.setOnItemSelectedListener(mOnItemClickListener);
         //S09
         list = new ArrayList<String>();
-        list.add("坐班");
-        list.add("电话咨询");
+        for(int i=0;i<str09.length;i++){
+            list.add(str09[i]);
+        }
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner09.setAdapter(adapter);
         spinner09.setOnItemSelectedListener(mOnItemClickListener);
         //S10
         list = new ArrayList<String>();
-        list.add("民事案件");
-        list.add("刑事案件");
+        for(int i=0;i<str10.length;i++){
+            list.add(str10[i]);
+        }
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner10.setAdapter(adapter);
         spinner10.setOnItemSelectedListener(mOnItemClickListener);
         //S11
         list = new ArrayList<String>();
-        list.add("咨询");
-        list.add("指导");
+        list.add("普通");
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner11.setAdapter(adapter);
         spinner11.setOnItemSelectedListener(mOnItemClickListener);
         //S12
         list = new ArrayList<String>();
-        list.add("老年人");
-        list.add("青少年");
+        for(int i=0;i<str12.length;i++){
+            list.add(str12[i]);
+        }
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner12.setAdapter(adapter);

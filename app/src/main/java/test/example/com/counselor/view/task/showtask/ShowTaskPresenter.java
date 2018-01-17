@@ -43,7 +43,7 @@ public class ShowTaskPresenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-//                        Log.e("changeTaskState","response:"+response.toString());
+                        Log.e("changeTaskState","response:"+response.toString());
                         Log.e("changeTaskState","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
@@ -72,6 +72,7 @@ public class ShowTaskPresenter {
         HashMap<String,String> params = new HashMap<>();
         params.put("id",id+"");
         params.put("fromWhere",fromWhere+"");
+        Log.e("params",params.toString());
         OkGo.post(Urls.TASKConfigurationURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
@@ -80,7 +81,7 @@ public class ShowTaskPresenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-//                        Log.e("requestTaskDetial","response:"+response.toString());
+                        Log.e("requestTaskDetial","response:"+response.toString());
                         Log.e("requestTaskDetial","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){

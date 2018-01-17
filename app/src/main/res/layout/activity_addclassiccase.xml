@@ -34,7 +34,8 @@
                 android:ems="19"
                 android:hint="请输入标题"
                 android:textColorHint="#ccc"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="#666"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -59,7 +60,8 @@
                 android:layout_marginTop="10dp"
                 android:hint="请输入内容"
                 android:textColorHint="#ccc"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="#666"/>
         </RelativeLayout>
     </LinearLayout>
 

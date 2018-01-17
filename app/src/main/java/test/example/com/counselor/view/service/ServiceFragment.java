@@ -127,7 +127,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                     tv1.setText("服务对象："+workLogEntities.get(position).getServiceObject());
                     tv2.setText("服务类型："+workLogEntities.get(position).getServiceType());
                     tv3.setText("服务时间："+ TimeUtil.getDateToString(workLogEntities.get(position).getCreateTime(),TimeUtil.Data));
-                    tv4.setText("服务单位：");
+                    tv4.setText("服务单位："+workLogEntities.get(position).getServiceVillage());
                     LinearLayout ll = viewHolder.getView(R.id.itemLl);
                     ll.setTag(position);
                     ll.setOnClickListener(mClickListener);

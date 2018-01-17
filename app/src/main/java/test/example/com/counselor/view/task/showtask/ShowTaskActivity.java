@@ -49,9 +49,10 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
         Intent i =getIntent();
         int id = i.getIntExtra("id",0);
         int fromWhere = i.getIntExtra("fromWhere",0);
+
         mShowTaskPresenter = new ShowTaskPresenter(this,this);
-        mShowTaskPresenter.requestTaskDetial(id,0);
-        mShowTaskPresenter.changeTaskState(id,0);
+        mShowTaskPresenter.changeTaskState(id,fromWhere);
+        mShowTaskPresenter.requestTaskDetial(id,fromWhere);
     }
 
     private void initView() {
