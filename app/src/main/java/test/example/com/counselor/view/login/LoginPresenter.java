@@ -33,7 +33,7 @@ public class LoginPresenter extends BasePresenter{
     private ILoginModel mLoginModel;
     private ILoginView mLoginView;
     Context mContext;
-    private String URL = "http:www.baidu.com";
+
     public LoginPresenter(Context context,ILoginView view){
         mLoginView = view;
         mLoginModel = new LoginModel();
@@ -62,7 +62,6 @@ public class LoginPresenter extends BasePresenter{
 
             @Override
             public void onResponse(String arg0) {
-                // TODO Auto-generated method stub
                 Log.e("loginInfo", arg0);// 打印登录返回的数据
                 try {
                     JSONObject object = JSON.parseObject(arg0);
@@ -147,7 +146,7 @@ public class LoginPresenter extends BasePresenter{
         }
 
         public void onSuccess(String s, Call call, Response response) {
-//            Log.e("loadLogin","onSuccess:"+s);
+            Log.e("loadLogin","onSuccess:"+s);
 
             JSONObject object = JSON.parseObject(s);
             if (object.getInteger("code")==0){

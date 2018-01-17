@@ -41,9 +41,9 @@ public class PersonalFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-        nameTv.setText(MyApplication.getInstance().loginEntity.getName());
+        nameTv.setText(MyApplication.getInstance().loginEntity.getUsername());
         addressTv.setText(MyApplication.getInstance().loginEntity.getCommunityA()+","+MyApplication.getInstance().loginEntity.getCommunityB());
-        lawFirmTv.setText(MyApplication.getInstance().loginEntity.getOrganization());
+        lawFirmTv.setText(MyApplication.getInstance().loginEntity.getOffice());
     }
 
     @Override

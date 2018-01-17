@@ -64,12 +64,11 @@ public class ContractActivity extends BaseActivity implements IContractView {
         Log.e("AssessmentActivity", "加载数据");
         contractEntities = mContractPresenter.getContractEntity();
         contractLv.setAdapter(new Common1Adapter<ContractEntity>(this, contractEntities,
-                R.layout.item_contract, onItemClickListener) {
+                R.layout.item_1list, onItemClickListener) {
             @Override
             protected void convertView(ViewHolder1 mViewHolder, View item, ContractEntity contractEntity, int position) {
                 TextView tv1 = mViewHolder.getView(R.id.itemWorkForTv);
-                tv1.setText("  " + contractEntity.getVillage().getString("username"));
-
+                tv1.setText("服务村社："+contractEntities.get(position).getVillage().getString("username"));
             }
         });
         contractLv.setOnItemClickListener(onItemClickListener);

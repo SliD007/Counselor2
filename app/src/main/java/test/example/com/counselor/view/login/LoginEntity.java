@@ -15,7 +15,7 @@ public class LoginEntity implements Serializable{
     private String nation;
     private String contact;
     private String email;
-    private String organization;
+    private String office;
     private String education;
     private String academy;
     private String name;
@@ -38,7 +38,7 @@ public class LoginEntity implements Serializable{
         this.nation = nation;
         this.contact = contact;
         this.email = email;
-        this.organization = organization;
+        this.office = organization;
         this.evaluation = evaluation;
         this.academy = academy;
         this.name = name;
@@ -156,12 +156,12 @@ public class LoginEntity implements Serializable{
         this.nation = nation;
     }
 
-    public String getOrganization() {
-        return organization;
+    public String getOffice() {
+        return office;
     }
 
-    public void setOrganization(String organization) {
-        this.organization = organization;
+    public void setOffice(String organization) {
+        this.office = organization;
     }
 
     public String getPassword() {
@@ -220,7 +220,7 @@ public class LoginEntity implements Serializable{
                 ", nation='" + nation + '\'' +
                 ", contact='" + contact + '\'' +
                 ", email='" + email + '\'' +
-                ", organization='" + organization + '\'' +
+                ", office='" + office + '\'' +
                 ", education='" + education + '\'' +
                 ", name='" + name + '\'' +
                 ", experience='" + experience + '\'' +

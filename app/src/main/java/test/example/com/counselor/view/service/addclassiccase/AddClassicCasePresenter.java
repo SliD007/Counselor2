@@ -7,10 +7,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 
@@ -71,60 +69,48 @@ public class AddClassicCasePresenter {
                     }
                 });
     }
+
     public void addclassicCase(final String title, final String content) {
-
-        String url = Urls.ReportAddURL;
-        RequestQueue requestQueue = Volley.newRequestQueue(mContext);
-        StringRequest stringRequest = new StringRequest(
-                Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
-            @Override
-            public void onResponse(String arg0) {
-                Log.e("loginInfo", arg0);// 打印登录返回的数据
-                try {
-                    JSONObject object = JSON.parseObject(arg0);
-                    if (object.getInteger("code")==0){
-
-                        mIAddClassicCaseView.addSuccess();
-                    }else {
-                        mIAddClassicCaseView.addFailed();
+            StringRequest request4LoginRequest = new StringRequest(
+                    Request.Method.POST, Urls.ReportAddURL, new com.android.volley.Response.Listener<String>() {
+                @Override
+                public void onResponse(String arg0) {
+                    Log.e("loginInfo", arg0);// 打印登录返回的数据
+                    try {
+                        JSONObject object = JSON.parseObject(arg0);
+                        if (object.getInteger("code")==0){
+                            mIAddClassicCaseView.addSuccess();
+                        }else {
+                            mIAddClassicCaseView.addFailed();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            }
-        }, new com.android.volley.Response.ErrorListener() {
-            public void onErrorResponse(VolleyError arg0) {
-                Log.e("onErrorResponse", arg0.toString());// 打印错误信息
-            }
-        }) {
+            }, new com.android.volley.Response.ErrorListener() {
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+                @Override
+                public void onErrorResponse(VolleyError arg0) {
+                    Log.e("loginInfo", arg0.toString());// 打印错误信息
+                }
+            }) {
 
-                Map<String, String> map4Login = new HashMap<>();
-//                    map4Login.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
-//                    map4Login.put("village", MyApplication.getInstance().loginEntity.getCommunityA()+MyApplication.getInstance().loginEntity.getCommunityB()+"");
-//                    map4Login.put("office",MyApplication.getInstance().loginEntity.getOrganization());
-//                    map4Login.put("contact", MyApplication.getInstance().loginEntity.getContact()+"");
-//                map4Login.put("title",content);
-//                map4Login.put("content",content);
-                map4Login.put("title",title);
-                map4Login.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
-                map4Login.put("village", MyApplication.getInstance().loginEntity.getCommunityA()+MyApplication.getInstance().loginEntity.getCommunityB()+"");
-                map4Login.put("content",content);
-                map4Login.put("toType",1+"");
-                map4Login.put("reportType",1+"");
-                map4Login.put("contact", MyApplication.getInstance().loginEntity.getContact()+"");
-                if(map4Login==null){
-                    Log.e("getParams", "null");
-                }else {
-                    Log.e("getParams", map4Login.toString());
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> map4Login = new HashMap<String, String>();
+                    map4Login.put("title",title);
+                    map4Login.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
+                    map4Login.put("village", MyApplication.getInstance().loginEntity.getCommunityA()+MyApplication.getInstance().loginEntity.getCommunityB()+"");
+                    map4Login.put("content",content);
+                    map4Login.put("toType",1+"");
+                    map4Login.put("reportType",1+"");
+                    map4Login.put("contact", MyApplication.getInstance().loginEntity.getContact()+"");
+
+                    Log.e("getParams",map4Login.toString());
+                    return map4Login;
                 }
 
-                return map4Login;
-            }
-
-        };
-        requestQueue.add(stringRequest);
-    }
+            };
+            MyApplication.getInstance().addToRequestQueue(request4LoginRequest, "");
+        }
 }

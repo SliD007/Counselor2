@@ -10,7 +10,8 @@
         <TextView
             android:id="@+id/itemWorkForTv"
             android:text=""
-            style="@style/text_left_rank"/>
+            style="@style/text_left_rank"
+            android:textSize="18sp"/>
         <ImageView
             android:id="@+id/nextIm"
             android:src="@drawable/u609"

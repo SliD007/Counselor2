@@ -36,7 +36,6 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
         ButterKnife.bind(this);
         initView();
         mAddSummaryPresenter = new AddSummaryPresenter(this, this);
-        addSummaryContextEt.setText("月总结");
     }
 
     private void initView() {
@@ -57,7 +56,7 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
             case R.id.sumbitTv:
                 String title = addSummaryTitleEt.getText().toString();
                 String context_str = addSummaryContextEt.getText().toString();
-                mAddSummaryPresenter.addSummary(title, context_str);
+//                mAddSummaryPresenter.addSummary(title, context_str);
                 mAddSummaryPresenter.addsummary(title, context_str);
                 break;
         }

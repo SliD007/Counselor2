@@ -284,7 +284,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                 sumbit_str[6] = textview06.getText().toString();
                 sumbit_str[7] = textview07.getText().toString();
                 sumbit_str[13] = editText13.getText().toString();
-                mAddWorkLogPersenter.addWorkLog(sumbit_str);
+                mAddWorkLogPersenter.addworkLog(sumbit_str);
                 break;
         }
     }

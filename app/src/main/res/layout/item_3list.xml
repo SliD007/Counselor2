@@ -8,12 +8,12 @@
         android:id="@+id/itemLl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
+        android:paddingLeft="20dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/itemTv1"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textColor="#000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,13 +21,13 @@
 
         <TextView
             android:id="@+id/itemTv2"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"/>
         <TextView
             android:id="@+id/itemTv3"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"/>

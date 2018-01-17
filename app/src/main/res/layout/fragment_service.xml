@@ -12,7 +12,7 @@
             android:id="@+id/serviceRl0"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.75"
             android:paddingBottom="5dp"/>
         <RelativeLayout
             android:id="@+id/serviceRl1"
@@ -83,7 +83,7 @@
             android:id="@+id/serviceRl5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.75"
             android:paddingBottom="1dp">
             <TextView
                 android:id="@+id/addTv"

@@ -21,6 +21,8 @@ import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.Urls;
 
+import static test.example.com.counselor.util.Urls.SummaryAddURL;
+
 /**
  * Created by Sli.D on 2017/12/25.
  */
@@ -38,12 +40,12 @@ public class AddSummaryPresenter {
         HashMap<String,String> params = new HashMap<>();
         params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
         params.put("village", MyApplication.getInstance().loginEntity.getCommunityA()+MyApplication.getInstance().loginEntity.getCommunityB()+"");
-        params.put("office",MyApplication.getInstance().loginEntity.getOrganization());
+        params.put("office",MyApplication.getInstance().loginEntity.getOffice());
         params.put("contact", MyApplication.getInstance().loginEntity.getContact()+"");
         params.put("title",title);
         params.put("content",content);
         Log.e("addSummary",params.toString());
-        OkGo.post(Urls.SummaryAddURL)
+        OkGo.post(SummaryAddURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
 //                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
@@ -77,11 +79,8 @@ public class AddSummaryPresenter {
 
     public void addsummary(final String title, final String content) {
 
-
-        String SummaryAddURL = "http://law.d9lab.net/pad/monthly/addMonthly";
-
         StringRequest request4LoginRequest = new StringRequest(
-                Request.Method.POST, SummaryAddURL, new com.android.volley.Response.Listener<String>() {
+                Request.Method.POST, Urls.SummaryAddURL, new com.android.volley.Response.Listener<String>() {
 
             @Override
             public void onResponse(String arg0) {
@@ -117,12 +116,12 @@ public class AddSummaryPresenter {
 
                 Map<String, String> map4Login = new HashMap<String, String>();
 
-				map4Login.put("counselorId","2");
-				map4Login.put("village", "lwt");
-				map4Login.put("office","");
-				map4Login.put("contact", "111111");
-				map4Login.put("title","月");
-				map4Login.put("content","月月月");
+				map4Login.put("counselorId",MyApplication.getInstance().loginEntity.getId()+"");
+				map4Login.put("village",MyApplication.getInstance().loginEntity.getCommunityA()+MyApplication.getInstance().loginEntity.getCommunityB()+"");
+				map4Login.put("office",MyApplication.getInstance().loginEntity.getOffice()+"");
+				map4Login.put("contact",MyApplication.getInstance().loginEntity.getContact()+"");
+				map4Login.put("title",title);
+				map4Login.put("content",content);
                 Log.e("getParams",map4Login.toString());
                 return map4Login;
             }
