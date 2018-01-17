@@ -14,6 +14,7 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.cookie.store.PersistentCookieStore;
 import com.lzy.okgo.model.HttpHeaders;
 import com.lzy.okgo.model.HttpParams;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -50,6 +51,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         queues = Volley.newRequestQueue(getApplicationContext());
+        CrashReport.initCrashReport(getApplicationContext(), "69d7035114", false);
         super.onCreate();
         initOkGo();
     }

@@ -1,5 +1,7 @@
 package test.example.com.counselor.view.service;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,7 +27,9 @@ import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.base.MyLvClickListener;
 import test.example.com.counselor.util.TimeUtil;
+import test.example.com.counselor.view.service.addGroupCase.AddGroupCaseActivity;
 import test.example.com.counselor.view.service.addadvice.AddAdviceActivity;
+import test.example.com.counselor.view.service.addchargecase.AddChargeCaseActivity;
 import test.example.com.counselor.view.service.addclassiccase.AddClassicCaseActivity;
 import test.example.com.counselor.view.service.addsummary.AddSummaryActivity;
 import test.example.com.counselor.view.service.addworklog.AddWorkLogActivity;
@@ -258,8 +262,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         Intent i;
         switch (fragmentType) {
             case 0:
-                i = new Intent(getActivity(), AddWorkLogActivity.class);
-                startActivity(i);
+                showAddDialog();
                 break;
             case 1:
                 i = new Intent(getActivity(), AddAdviceActivity.class);
@@ -363,4 +366,36 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         }
 
     };
+
+    public void showAddDialog(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()); // 先得到构造器
+        builder.setTitle("选择新增日志类型"); // 设置标题
+        builder.setNeutralButton("普通日志", new DialogInterface.OnClickListener() { // 设置确定按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent i = new Intent(mContext,AddWorkLogActivity.class);
+                startActivity(i);
+                dialog.dismiss(); // 关闭dialog
+            }
+        });
+        builder.setNegativeButton("群体性案件", new DialogInterface.OnClickListener() { // 设置确定按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent i = new Intent(mContext,AddGroupCaseActivity.class);
+                startActivity(i);
+                dialog.dismiss(); // 关闭dialog
+            }
+        });
+        builder.setPositiveButton("另行收费案件", new DialogInterface.OnClickListener() { // 设置取消按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent i = new Intent(mContext,AddChargeCaseActivity.class);
+                startActivity(i);
+                dialog.dismiss(); // 关闭dialog
+            }
+        });
+        builder.create().show();
+    }
+
 }

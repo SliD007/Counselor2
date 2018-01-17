@@ -263,7 +263,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
 
         final Dialog mDialog = new Dialog(getActivity(),R.style.loading_dialog);// 创建自定义样式dialog
         LayoutInflater inflater = LayoutInflater.from(getActivity());
-        View v = inflater.inflate(R.layout.dialog_normal_layout, null);// 得到加载view
+        View v = inflater.inflate(R.layout.dialog_star_layout, null);// 得到加载view
         mDialog.setContentView(v);
         mDialog.show();//显示
         TextView centerTv = (TextView) v.findViewById(R.id.centerTv);

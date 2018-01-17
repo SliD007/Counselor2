@@ -29,7 +29,6 @@ import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.CustomDatePicker;
 import test.example.com.counselor.util.GlideImageLoader;
-import test.example.com.counselor.view.service.addGroupCase.AddGroupCaseActivity;
 
 /**
  * Created by Sli.D on 2017/12/21.
@@ -88,22 +87,12 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         mAddWorkLogPersenter = new AddWorkLogPersenter(this, this);
     }
 
-
-    String[][][] str = new String[][][]{
-            {{"出具专业法律意见"},
-                    {"审查合同", "出具法律意见", "制定或修改村规民约", "协助选举", "参与谈判签约", "代写文书", "其他"},
-                    {"镇街党委政府", "村（居）委", "其他"}},
-            {{"法律咨询", "人民调解", "法律援助"},
-                    {"民事案件", "刑事案件", "行政", "公证", "其他"},
-                    {"老年人", "未成年", "残疾", "妇女", "外来务工人员", "镇街党委政府", "村（居）委", "其他"}},
-            {{"法治宣传", "人民调解", "法律援助"},
-                    {"法治宣传"},
-                    {"老年人", "未成年", "残疾", "妇女", "农民", "下岗职工", "外来务工人员", "企业主", "村（居）委干部", "村（居）民", "其他"}}
-    };
-    String[] str08 = new String[]{"来访","电话"};
-    String[] str09 = new String[]{"出具专业法律意见","法律咨询","人民调解","法律援助","法治宣传"};
-    String[] str10 = new String[]{"审查合同","出具法律意见","制定或修改村规民约","协助选举","参与谈判签约","代写文书","其他"};
-    String[] str12 = new String[]{"镇街党委政府","村（居）委","其他"};
+    String[] str08 = new String[]{"坐班","电话"};
+    String[] str09 = new String[]{"法律咨询","人民调解","法律援助","法治宣传","法制讲座"};
+    String[] str10 = new String[]{"民事案件","刑事案件","行政","公证","其他"};
+    String[] str11 = new String[]{"婚姻家庭","赡养抚养","劳务合同","工伤赔偿","请求给予社会保障","请求支付劳动报酬","交通事故","医疗事故","其他人身伤害赔偿","房产纠纷",
+            "山林纠纷","相邻权纠纷","合同纠纷","刑事附带民事赔偿","抚恤救济金","最低生活保障","其他"};
+    String[] str12 = new String[]{"村（居）民","老年人","未成年","残疾人","妇女","农民","下岗职工","外来务工人员","企业主","村（居）委干部","其他"};
 
     private void initView() {
 
@@ -151,7 +140,9 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         spinner10.setOnItemSelectedListener(mOnItemClickListener);
         //S11
         list = new ArrayList<String>();
-        list.add("普通");
+        for(int i=0;i<str11.length;i++){
+            list.add(str11[i]);
+        }
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner11.setAdapter(adapter);
@@ -277,8 +268,6 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.backTv:
-                Intent i = new Intent(AddWorkLogActivity.this, AddGroupCaseActivity.class);
-                startActivity(i);
                 MyApplication.getInstance().finishActivity(this);
                 this.finish();
                 break;

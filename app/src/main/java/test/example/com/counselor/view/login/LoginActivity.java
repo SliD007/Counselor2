@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +23,6 @@ import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.util.ILocaltionModel;
 import test.example.com.counselor.util.LocaltionUtil;
 import test.example.com.counselor.view.HomeActivity;
-import test.example.com.counselor.view.forgetpw.ForgetPwActivity;
 
 public class LoginActivity extends BaseActivity implements ILoginView{
 
@@ -142,8 +142,9 @@ public class LoginActivity extends BaseActivity implements ILoginView{
                 localtionUtil.stopLocation();
                 break;
             case R.id.forgetPwTv:
-                Intent i = new Intent(LoginActivity.this, ForgetPwActivity.class);
-                startActivity(i);
+                CrashReport.testJavaCrash();
+//                Intent i = new Intent(LoginActivity.this, ForgetPwActivity.class);
+//                startActivity(i);
                 break;
         }
     }

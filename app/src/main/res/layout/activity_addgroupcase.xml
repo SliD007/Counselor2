@@ -197,6 +197,9 @@
                     android:textColorHint="#ccc"
                     android:textSize="16sp"
                     android:background="@null"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
                     />
             </RelativeLayout>
             <View

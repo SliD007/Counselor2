@@ -47,4 +47,6 @@ dependencies {
     compile 'com.amap.api:location:latest.integration'
 
     compile 'com.mcxiaoke.volley:library:1.0.+'
+
+    compile 'com.tencent.bugly:crashreport:latest.release'
 }

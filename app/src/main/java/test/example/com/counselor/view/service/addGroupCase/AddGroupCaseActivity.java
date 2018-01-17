@@ -28,7 +28,6 @@ import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.CustomDatePicker;
 import test.example.com.counselor.util.GlideImageLoader;
-import test.example.com.counselor.view.service.addchargecase.AddChargeCaseActivity;
 
 
 /**
@@ -73,7 +72,7 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
         mAddGroupCasePersenter = new AddGroupCasePersenter(this, this);
     }
 
-
+    String[] str = new String[]{"劳动争议","环境污染","山林归属","征地拆迁","物业管理","村（居）自治管理","其他"};
     private void initView() {
 
         super.allow_quit = false;
@@ -81,8 +80,9 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
         sumbit_str = new String[11];
         //S1
         list = new ArrayList<String>();
-        list.add("村民");
-        list.add("村社");
+        for(int i=0;i<str.length;i++){
+            list.add(str[i]);
+        }
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner1.setAdapter(adapter);
@@ -171,8 +171,6 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.backTv:
-                Intent i = new Intent(AddGroupCaseActivity.this, AddChargeCaseActivity.class);
-                startActivity(i);
                 MyApplication.getInstance().finishActivity(this);
                 this.finish();
                 break;

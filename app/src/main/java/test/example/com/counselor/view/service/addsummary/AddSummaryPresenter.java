@@ -116,7 +116,7 @@ public class AddSummaryPresenter {
 
                 Map<String, String> map4Login = new HashMap<String, String>();
 
-				map4Login.put("counselorId",MyApplication.getInstance().loginEntity.getId()+"");
+				map4Login.put("counselorId",MyApplication.getInstance().loginEntity.getUsername());
 				map4Login.put("village",MyApplication.getInstance().loginEntity.getCommunityA()+MyApplication.getInstance().loginEntity.getCommunityB()+"");
 				map4Login.put("office",MyApplication.getInstance().loginEntity.getOffice()+"");
 				map4Login.put("contact",MyApplication.getInstance().loginEntity.getContact()+"");
