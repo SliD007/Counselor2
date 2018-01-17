@@ -95,7 +95,6 @@ public class AddAdvicePresenter {
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                // TODO Auto-generated method stub
 
                 Map<String, String> map4Login = new HashMap<String, String>();
                 map4Login.put("title",title);

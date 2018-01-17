@@ -13,8 +13,7 @@
         android:background="#fff">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="50dp">
             <TextView
                 android:id="@+id/titleTv"
                 android:text="标题:"
@@ -26,8 +25,8 @@
                 android:layout_marginLeft="20dp"/>
             <TextView
                 android:id="@+id/showClassicCaseTitleTv"
-                android:textSize="18sp"
-                android:textColor="#333"
+                android:textSize="20sp"
+                android:textColor="#666"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -35,28 +34,36 @@
                 android:layout_marginLeft="10dp"/>
 
         </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="8">
-            <TextView
-                android:id="@+id/contextTv"
-                android:text="内容:"
-                android:textSize="20sp"
-                android:textColor="#000"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"/>
-            <TextView
-                android:id="@+id/showClassicCaseContextTv"
-                android:textSize="16sp"
-                android:textColor="#333"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/contextTv"
-                android:layout_marginLeft="10dp"/>
 
-        </RelativeLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/contextTv"
+                    android:text="内容:"
+                    android:textSize="20sp"
+                    android:textColor="#000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"/>
+                <TextView
+                    android:id="@+id/showClassicCaseContextTv"
+                    android:textSize="18sp"
+                    android:textColor="#666"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/contextTv"
+                    android:layout_below="@id/contextTv"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"/>
+
+            </RelativeLayout>
+        </ScrollView>
+
 
     </LinearLayout>
 

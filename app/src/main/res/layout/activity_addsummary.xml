@@ -18,7 +18,7 @@
             <TextView
                 android:id="@+id/addSummaryTitleTv"
                 android:text="标题:"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textColor="#000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
                 android:ems="19"
                 android:hint="请输入标题"
                 android:textColorHint="#ccc"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             <TextView
                 android:id="@+id/addSummaryContextTv"
                 android:text="内容:"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textColor="#000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,13 +53,14 @@
                 android:id="@+id/addSummaryContextEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/addSummaryContextTv"
-                android:layout_marginLeft="10dp"
+                android:layout_below="@id/addSummaryContextTv"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
                 android:background="@null"
-                android:ems="19"
                 android:hint="请输入内容"
                 android:textColorHint="#ccc"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
         </RelativeLayout>
     </LinearLayout>
 

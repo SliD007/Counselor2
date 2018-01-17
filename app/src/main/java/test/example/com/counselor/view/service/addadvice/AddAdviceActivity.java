@@ -77,8 +77,8 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
             case R.id.sumbitTv:
                 String title = addAdviceTitleEt.getText().toString();
                 String context_str = addAdviceContextEt.getText().toString();
+                mAddAdvicePersenter.addAdvice(title,context_str,rbId);
                 mAddAdvicePersenter.addadvice(title,context_str,rbId);
-
                 break;
         }
     }
