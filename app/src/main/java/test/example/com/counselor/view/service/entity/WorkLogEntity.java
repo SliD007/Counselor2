@@ -8,39 +8,46 @@ import java.io.Serializable;
 
 public class WorkLogEntity implements Serializable{
     private int id;
+    private String jobLogId;
+    private String logType;
     private String serviceObject;
-    private String serviceType;
-    private long createTime;
+    private String resultType;
     private String serviceVillage;
-
-    public WorkLogEntity() {
-    }
-
-    @Override
-    public String toString() {
-        return "WorkLogEntity{" +
-                "createTime=" + createTime +
-                ", id=" + id +
-                ", serviceObject='" + serviceObject + '\'' +
-                ", serviceType='" + serviceType + '\'' +
-                ", serviceVillage='" + serviceVillage + '\'' +
-                '}';
-    }
-
-    public long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(long createTime) {
-        this.createTime = createTime;
-    }
 
     public int getId() {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "WorkLogEntity{" +
+                "id=" + id +
+                ", jobLogId=" + jobLogId +
+                ", logType='" + logType + '\'' +
+                ", serviceObject='" + serviceObject + '\'' +
+                ", resultType='" + resultType + '\'' +
+                ", serviceVillage='" + serviceVillage + '\'' +
+                '}';
+    }
+
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getJobLogId() {
+        return jobLogId;
+    }
+
+    public void setJobLogId(String jobLogId) {
+        this.jobLogId = jobLogId;
+    }
+
+    public String getLogType() {
+        return logType;
+    }
+
+    public void setLogType(String logType) {
+        this.logType = logType;
     }
 
     public String getServiceObject() {
@@ -51,12 +58,12 @@ public class WorkLogEntity implements Serializable{
         this.serviceObject = serviceObject;
     }
 
-    public String getServiceType() {
-        return serviceType;
+    public String getResultType() {
+        return resultType;
     }
 
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
+    public void setResultType(String resultType) {
+        this.resultType = resultType;
     }
 
     public String getServiceVillage() {
@@ -66,4 +73,8 @@ public class WorkLogEntity implements Serializable{
     public void setServiceVillage(String serviceVillage) {
         this.serviceVillage = serviceVillage;
     }
+
+    public WorkLogEntity() {
+    }
+
 }
