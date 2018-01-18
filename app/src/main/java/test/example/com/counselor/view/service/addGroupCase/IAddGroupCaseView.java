@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.service.addGroupCase;
+package test.example.com.counselor.view.service.addgroupcase;
 
 /**
  * Created by Sli.D on 2017/12/25.

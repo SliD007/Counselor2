@@ -39,6 +39,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     TextView titleBarTv;
 
     String[] sumbit_str;
+    int[] sumbit_int;
     List<String> list;
     ArrayAdapter<String> adapter;
     AddWorkLogPersenter mAddWorkLogPersenter;
@@ -72,6 +73,9 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     EditText editText13;
     @BindView(R.id.textview14)
     TextView textview14;
+    @BindView(R.id.spinner15)
+    Spinner spinner15;
+
     private CustomDatePicker customDatePicker1, customDatePicker2;
 
     private ArrayList<ImageItem> imageItems;
@@ -87,19 +91,19 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         mAddWorkLogPersenter = new AddWorkLogPersenter(this, this);
     }
 
-    String[] str08 = new String[]{"坐班","电话"};
-    String[] str09 = new String[]{"法律咨询","人民调解","法律援助","法治宣传","法制讲座"};
+    String[] str08 = new String[]{"电话","来访","微信","QQ","如法网"};
+    String[] str09 = new String[]{"接受咨询","指导法律援助","参与调解","参与宣传","开展讲座"};
     String[] str10 = new String[]{"民事案件","刑事案件","行政","公证","其他"};
     String[] str11 = new String[]{"婚姻家庭","赡养抚养","劳务合同","工伤赔偿","请求给予社会保障","请求支付劳动报酬","交通事故","医疗事故","其他人身伤害赔偿","房产纠纷",
             "山林纠纷","相邻权纠纷","合同纠纷","刑事附带民事赔偿","抚恤救济金","最低生活保障","其他"};
-    String[] str12 = new String[]{"村（居）民","老年人","未成年","残疾人","妇女","农民","下岗职工","外来务工人员","企业主","村（居）委干部","其他"};
+    String[] str12 = new String[]{"老年人","赡养抚养","未成年","残疾人","妇女","外来务工人员","镇街党政府","村（居）民"};
 
     private void initView() {
 
         super.allow_quit = false;
         titleBarTv.setText("新增工作日志");
-        sumbit_str = new String[15];
-
+        sumbit_str = new String[20];
+        sumbit_int = new int[20];
         //S01
         list = new ArrayList<String>();
         if (MyApplication.getInstance().loginEntity.getCommunityA()!=null)
@@ -178,7 +182,14 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker2.showSpecificTime(true); // 显示时和分
         customDatePicker2.setIsLoop(true); // 允许循环滚动
-
+        //S15
+        list = new ArrayList<String>();
+        list.add("未完结");
+        list.add("已完结");
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner15.setAdapter(adapter);
+        spinner15.setOnItemSelectedListener(mOnItemClickListener);
 
     }
 
@@ -240,10 +251,10 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                     sumbit_str[1] = parent.getSelectedItem().toString();
                     break;
                 case R.id.spinner08:
-                    sumbit_str[8] = parent.getSelectedItem().toString();
+                    sumbit_int[8] = position;
                     break;
                 case R.id.spinner09:
-                    sumbit_str[9] = parent.getSelectedItem().toString();
+                    sumbit_int[9] = position;
                     break;
                 case R.id.spinner10:
                     sumbit_str[10] = parent.getSelectedItem().toString();
@@ -252,7 +263,10 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                     sumbit_str[11] = parent.getSelectedItem().toString();
                     break;
                 case R.id.spinner12:
-                    sumbit_str[12] = parent.getSelectedItem().toString();
+                    sumbit_int[12] = position;
+                    break;
+                case R.id.spinner15:
+                    sumbit_int[15] = position;
                     break;
             }
         }
@@ -272,7 +286,6 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                 this.finish();
                 break;
             case R.id.sumbitTv:
-                //E3
                 sumbit_str[2] = editText02.getText().toString();
                 sumbit_str[3] = editText03.getText().toString();
                 sumbit_str[4] = editText04.getText().toString();
@@ -280,7 +293,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                 sumbit_str[6] = textview06.getText().toString();
                 sumbit_str[7] = textview07.getText().toString();
                 sumbit_str[13] = editText13.getText().toString();
-                mAddWorkLogPersenter.addworkLog(sumbit_str);
+                mAddWorkLogPersenter.addworkLog(sumbit_str,sumbit_int);
                 break;
         }
     }

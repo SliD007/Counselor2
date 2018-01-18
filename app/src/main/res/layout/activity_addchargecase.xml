@@ -47,6 +47,33 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/imageLeftIm17"
+                    android:layout_width="5dp"
+                    android:src="@drawable/u125"
+                    style="@style/image1"/>
+                <TextView
+                    android:text="是否与担任法律顾问存在冲突"
+                    android:layout_toRightOf="@id/imageLeftIm17"
+                    style="@style/text_worklog"/>
+                <ImageView
+                    android:id="@+id/imageRightIm17"
+                    android:src="@drawable/u609"
+                    style="@style/nextIm"/>
+                <Spinner
+                    android:id="@+id/spinner17"
+                    android:layout_toLeftOf="@id/imageRightIm17"
+                    style="@style/log_spinner"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true">
@@ -121,7 +148,7 @@
                     android:layout_width="5dp"
                     style="@style/image1"/>
                 <TextView
-                    android:text="委托人居住地址"
+                    android:text="委托人住址"
                     android:layout_toRightOf="@id/imageLeftIm04"
                     style="@style/text_worklog"/>
                 <ImageView
@@ -153,7 +180,7 @@
                     android:layout_width="5dp"
                     style="@style/image1"/>
                 <TextView
-                    android:text="案件标的额（元）"
+                    android:text="案件标的额"
                     android:layout_toRightOf="@id/imageLeftIm05"
                     style="@style/text_worklog"/>
                 <ImageView
@@ -174,7 +201,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#ccc"/>
-
+            <!--
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
@@ -184,17 +211,21 @@
                     android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
-                    android:text="是否与担任法律顾问存在冲突"
+                    android:text="服务开始时间"
                     android:layout_toRightOf="@id/imageLeftIm06"
                     style="@style/text_worklog"/>
                 <ImageView
                     android:id="@+id/imageRightIm06"
                     android:src="@drawable/u609"
                     style="@style/nextIm"/>
-                <Spinner
-                    android:id="@+id/spinner06"
+                <TextView
+                    android:id="@+id/textview06"
                     android:layout_toLeftOf="@id/imageRightIm06"
                     style="@style/log_spinner"
+                    android:layout_width="160dp"
+                    android:text="请选择时间"
+                    android:textColor="#ccc"
+                    android:textSize="16sp"
                     />
             </RelativeLayout>
             <View
@@ -202,6 +233,37 @@
                 android:layout_height="1dp"
                 android:background="#ccc"/>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/imageLeftIm07"
+                    android:layout_width="5dp"
+                    android:src="@drawable/u125"
+                    style="@style/image1"/>
+                <TextView
+                    android:text="服务结束时间"
+                    android:layout_toRightOf="@id/imageLeftIm07"
+                    style="@style/text_worklog"/>
+                <ImageView
+                    android:id="@+id/imageRightIm07"
+                    android:src="@drawable/u609"
+                    style="@style/nextIm"/>
+                <TextView
+                    android:id="@+id/textview07"
+                    android:layout_toLeftOf="@id/imageRightIm07"
+                    style="@style/log_spinner"
+                    android:layout_width="160dp"
+                    android:text="请选择时间"
+                    android:textColor="#ccc"
+                    android:textSize="16sp"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc"/>
+            -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
@@ -265,7 +327,7 @@
                     android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
-                    android:text="服务事项"
+                    android:text="服务事项类别"
                     android:layout_toRightOf="@id/imageLeftIm10"
                     style="@style/text_worklog"/>
                 <ImageView
@@ -353,7 +415,7 @@
                         android:src="@drawable/u125"
                         style="@style/image1"/>
                     <TextView
-                        android:text="案件概述"
+                        android:text="服务内容概述"
                         android:layout_toRightOf="@id/imageLeftIm13"
                         style="@style/text_worklog"/>
 
@@ -389,29 +451,29 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true">
                 <RelativeLayout
-                    android:id="@+id/rl7"
+                    android:id="@+id/rl16"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_alignParentTop="true">
                     <ImageView
-                        android:id="@+id/imageLeftIm7"
+                        android:id="@+id/imageLeftIm16"
                         android:layout_width="5dp"
                         android:src="@drawable/u125"
                         style="@style/image1"/>
                     <TextView
                         android:text="处理建议"
-                        android:layout_toRightOf="@id/imageLeftIm7"
+                        android:layout_toRightOf="@id/imageLeftIm16"
                         style="@style/text_worklog"/>
 
                     <ImageView
-                        android:id="@+id/imageRightIm7"
+                        android:id="@+id/imageRightIm16"
                         style="@style/nextIm"/>
                 </RelativeLayout>
                 <EditText
-                    android:id="@+id/editText7"
+                    android:id="@+id/editText16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/rl7"
+                    android:layout_below="@id/rl16"
                     android:hint="请输入"
                     android:gravity="top"
                     android:textColorHint="#666"
@@ -420,8 +482,35 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
-                    android:nextFocusUp="@id/editText7"
-                    android:nextFocusLeft="@id/editText7"
+                    android:nextFocusUp="@id/editText13"
+                    android:nextFocusLeft="@id/editText13"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+                <ImageView
+                    android:id="@+id/imageLeftIm15"
+                    android:layout_width="5dp"
+                    android:src="@drawable/u125"
+                    style="@style/image1"/>
+                <TextView
+                    android:text="案件完成状态"
+                    android:layout_toRightOf="@id/imageLeftIm15"
+                    style="@style/text_worklog"/>
+                <ImageView
+                    android:id="@+id/imageRightIm15"
+                    android:src="@drawable/u609"
+                    style="@style/nextIm"/>
+                <Spinner
+                    android:id="@+id/spinner15"
+                    android:layout_toLeftOf="@id/imageRightIm15"
+                    style="@style/log_spinner"
                     />
             </RelativeLayout>
             <View
@@ -459,32 +548,6 @@
                 android:background="#ccc"
                 android:layout_marginBottom="30dp"/>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-                <ImageView
-                    android:id="@+id/imageLeftIm15"
-                    android:layout_width="5dp"
-                    android:src="@drawable/u125"
-                    style="@style/image1"/>
-                <TextView
-                    android:text="案件完成状态"
-                    android:layout_toRightOf="@id/imageLeftIm15"
-                    style="@style/text_worklog"/>
-                <ImageView
-                    android:id="@+id/imageRightIm15"
-                    android:src="@drawable/u609"
-                    style="@style/nextIm"/>
-                <Spinner
-                    android:id="@+id/spinner15"
-                    android:layout_toLeftOf="@id/imageRightIm15"
-                    style="@style/log_spinner"
-                    />
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#ccc"/>
         </LinearLayout>
     </ScrollView>
 

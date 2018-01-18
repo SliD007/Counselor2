@@ -27,7 +27,7 @@ import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.base.MyLvClickListener;
 import test.example.com.counselor.util.TimeUtil;
-import test.example.com.counselor.view.service.addGroupCase.AddGroupCaseActivity;
+import test.example.com.counselor.view.service.addgroupcase.AddGroupCaseActivity;
 import test.example.com.counselor.view.service.addadvice.AddAdviceActivity;
 import test.example.com.counselor.view.service.addchargecase.AddChargeCaseActivity;
 import test.example.com.counselor.view.service.addclassiccase.AddClassicCaseActivity;

@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 
 public class WorkLogDetialEntity implements Serializable{
+
     private int id;
     private String serviceVillage;
     private String serviceObject;
@@ -14,13 +15,20 @@ public class WorkLogDetialEntity implements Serializable{
     private String serviceIdentity;
     private String inObject;
     private long createTime;
+
     private String fromType;
     private String serviceType;
     private String matterType;
     private String subType;
     private String objecttype;
+
     private String serviceContent;
     private String accessory;
+    private String resultType;
+
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
@@ -39,12 +47,8 @@ public class WorkLogDetialEntity implements Serializable{
                 ", objecttype='" + objecttype + '\'' +
                 ", serviceContent='" + serviceContent + '\'' +
                 ", accessory='" + accessory + '\'' +
+                ", resultType='" + resultType + '\'' +
                 '}';
-    }
-
-
-    public int getId() {
-        return id;
     }
 
     public void setId(int id) {
@@ -153,6 +157,14 @@ public class WorkLogDetialEntity implements Serializable{
 
     public void setAccessory(String accessory) {
         this.accessory = accessory;
+    }
+
+    public String getResultType() {
+        return resultType;
+    }
+
+    public void setResultType(String resultType) {
+        this.resultType = resultType;
     }
 
     public WorkLogDetialEntity() {

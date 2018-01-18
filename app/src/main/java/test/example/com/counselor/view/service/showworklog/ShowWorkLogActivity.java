@@ -51,7 +51,8 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
     TextView textview13;
     @BindView(R.id.textview14)
     TextView textview14;
-
+    @BindView(R.id.textview15)
+    TextView textview15;
 
     private ShowWorkLogPresenter mShowWorkLogPresenter;
     private WorkLogDetialEntity workLogDetialEntity;
@@ -92,6 +93,7 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
             textview12.setText(workLogDetialEntity.getObjecttype());
             textview13.setText(workLogDetialEntity.getServiceContent());
             textview14.setText("无图");
+            textview15.setText(workLogDetialEntity.getResultType());
         }
     }
 

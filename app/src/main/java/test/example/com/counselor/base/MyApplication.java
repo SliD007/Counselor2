@@ -51,7 +51,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         queues = Volley.newRequestQueue(getApplicationContext());
-        CrashReport.initCrashReport(getApplicationContext(), "69d7035114", false);
+        CrashReport.initCrashReport(getApplicationContext(), "69d7035114", true);
         super.onCreate();
         initOkGo();
     }

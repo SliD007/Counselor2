@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.service.addGroupCase;
+package test.example.com.counselor.view.service.addgroupcase;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,22 +37,25 @@ import test.example.com.counselor.util.GlideImageLoader;
 public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseView {
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
-    @BindView(R.id.editText1)
-    EditText editText1;
+    @BindView(R.id.spinner1)
+    Spinner spinner1;
     @BindView(R.id.editText2)
     EditText editText2;
     @BindView(R.id.editText3)
     EditText editText3;
     @BindView(R.id.textview4)
     TextView textview4;
-    @BindView(R.id.spinner1)
-    Spinner spinner1;
+    @BindView(R.id.spinner5)
+    Spinner spinner5;
     @BindView(R.id.editText6)
     EditText editText6;
     @BindView(R.id.textview7)
     TextView textview7;
+    @BindView(R.id.spinner8)
+    Spinner spinner8;
 
     String[] sumbit_str;
+    int[] sumbit_int;
     List<String> list;
     ArrayAdapter<String> adapter;
     AddGroupCasePersenter mAddGroupCasePersenter;
@@ -77,17 +80,19 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
 
         super.allow_quit = false;
         titleBarTv.setText("新增群体性案件");
-        sumbit_str = new String[11];
+        sumbit_str = new String[10];
+        sumbit_int = new int[10];
         //S1
         list = new ArrayList<String>();
-        for(int i=0;i<str.length;i++){
-            list.add(str[i]);
-        }
+        if (MyApplication.getInstance().loginEntity.getCommunityA()!=null)
+            list.add(MyApplication.getInstance().loginEntity.getCommunityA());
+        if (MyApplication.getInstance().loginEntity.getCommunityB()!=null)
+            list.add(MyApplication.getInstance().loginEntity.getCommunityB());
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner1.setAdapter(adapter);
         spinner1.setOnItemSelectedListener(mOnItemClickListener);
-        //T6
+        //T4
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         String now = sdf.format(new Date());
         textview4.setText(now);
@@ -99,8 +104,23 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
         }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         customDatePicker1.showSpecificTime(true); // 显示时和分
         customDatePicker1.setIsLoop(true); // 允许循环滚动
-
-
+        //S5
+        list = new ArrayList<String>();
+        for(int i=0;i<str.length;i++){
+            list.add(str[i]);
+        }
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner5.setAdapter(adapter);
+        spinner5.setOnItemSelectedListener(mOnItemClickListener);
+        //S8
+        list = new ArrayList<String>();
+        list.add("未完结");
+        list.add("已完结");
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner8.setAdapter(adapter);
+        spinner8.setOnItemSelectedListener(mOnItemClickListener);
     }
 
     @OnClick({R.id.textview4,R.id.textview7})
@@ -155,7 +175,13 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
 
             switch (parent.getId()) {
                 case R.id.spinner1:
-                    sumbit_str[0] = parent.getSelectedItem().toString();
+                    sumbit_str[1] = parent.getSelectedItem().toString();
+                    break;
+                case R.id.spinner5:
+                    sumbit_int[5] = position;
+                    break;
+                case R.id.spinner8:
+                    sumbit_int[8] = position;
                     break;
             }
         }
@@ -175,7 +201,11 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
                 this.finish();
                 break;
             case R.id.sumbitTv:
-                //E3
+                sumbit_str[2] = editText2.getText().toString();
+                sumbit_int[3] =Integer.valueOf(editText3.getText().toString()).intValue();
+                sumbit_str[4] = textview4.getText().toString();
+                sumbit_str[6] = editText6.getText().toString();
+                mAddGroupCasePersenter.addgroupCase(sumbit_str,sumbit_int);
 
                 break;
         }

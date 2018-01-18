@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -24,9 +26,6 @@ import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.CustomDatePicker;
 import test.example.com.counselor.util.GlideImageLoader;
 
-import static test.example.com.counselor.R.id.spinner1;
-import static test.example.com.counselor.R.id.textview14;
-
 
 /**
  * Created by Sli.D on 2017/12/21.
@@ -36,8 +35,41 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
 
+    @BindView(R.id.spinner01)
+    Spinner spinner01;
+    @BindView(R.id.editText02)
+    EditText editText02;
+    @BindView(R.id.editText03)
+    EditText editText03;
+    @BindView(R.id.editText04)
+    EditText editText04;
+    @BindView(R.id.editText05)
+    EditText editText05;
+    @BindView(R.id.spinner08)
+    Spinner spinner08;
+    @BindView(R.id.spinner09)
+    Spinner spinner09;
+    @BindView(R.id.spinner10)
+    Spinner spinner10;
+    @BindView(R.id.spinner11)
+    Spinner spinner11;
+    @BindView(R.id.spinner12)
+    Spinner spinner12;
+    @BindView(R.id.rl13)
+    RelativeLayout rl13;
+    @BindView(R.id.editText13)
+    EditText editText13;
+    @BindView(R.id.textview14)
+    TextView textview14;
+    @BindView(R.id.spinner15)
+    Spinner spinner15;
+    @BindView(R.id.editText16)
+    EditText editText16;
+    @BindView(R.id.spinner17)
+    Spinner spinner17;
 
     String[] sumbit_str;
+    int[] sumbit_int;
     List<String> list;
     ArrayAdapter<String> adapter;
     AddChargeCasePersenter mAddChargeCasePersenter;
@@ -59,17 +91,98 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
         mAddChargeCasePersenter = new AddChargeCasePersenter(this, this);
     }
 
+    String[] str08 = new String[]{"电话","来访","微信","QQ","如法网"};
+    String[] str09 = new String[]{"接受咨询","指导法律援助","参与调解","参与宣传","开展讲座"};
+    String[] str10 = new String[]{"民事案件","刑事案件","行政","公证","其他"};
+    String[] str11 = new String[]{"婚姻家庭","赡养抚养","劳务合同","工伤赔偿","请求给予社会保障","请求支付劳动报酬","交通事故","医疗事故","其他人身伤害赔偿","房产纠纷",
+            "山林纠纷","相邻权纠纷","合同纠纷","刑事附带民事赔偿","抚恤救济金","最低生活保障","其他"};
+    String[] str12 = new String[]{"老年人","赡养抚养","未成年","残疾人","妇女","外来务工人员","镇街党政府","村（居）民"};
 
     private void initView() {
+        sumbit_str = new String[20];
+        sumbit_int = new int[20];
+        //S01
+        list = new ArrayList<String>();
+        if (MyApplication.getInstance().loginEntity.getCommunityA()!=null)
+            list.add(MyApplication.getInstance().loginEntity.getCommunityA());
+        if (MyApplication.getInstance().loginEntity.getCommunityB()!=null)
+            list.add(MyApplication.getInstance().loginEntity.getCommunityB());
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner01.setAdapter(adapter);
+        spinner01.setOnItemSelectedListener(mOnItemClickListener);
 
+        //S08
+        list = new ArrayList<String>();
+        for(int i=0;i<str08.length;i++){
+            list.add(str08[i]);
+        }
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner08.setAdapter(adapter);
+        spinner08.setOnItemSelectedListener(mOnItemClickListener);
+        //S09
+        list = new ArrayList<String>();
+        for(int i=0;i<str09.length;i++){
+            list.add(str09[i]);
+        }
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner09.setAdapter(adapter);
+        spinner09.setOnItemSelectedListener(mOnItemClickListener);
+        //S10
+        list = new ArrayList<String>();
+        for(int i=0;i<str10.length;i++){
+            list.add(str10[i]);
+        }
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner10.setAdapter(adapter);
+        spinner10.setOnItemSelectedListener(mOnItemClickListener);
+        //S11
+        list = new ArrayList<String>();
+        for(int i=0;i<str11.length;i++){
+            list.add(str11[i]);
+        }
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner11.setAdapter(adapter);
+        spinner11.setOnItemSelectedListener(mOnItemClickListener);
+        //S12
+        list = new ArrayList<String>();
+        for(int i=0;i<str12.length;i++){
+            list.add(str12[i]);
+        }
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner12.setAdapter(adapter);
+        spinner12.setOnItemSelectedListener(mOnItemClickListener);
+
+        //S15
+        list = new ArrayList<String>();
+        list.add("未完结");
+        list.add("已完结");
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner15.setAdapter(adapter);
+        spinner15.setOnItemSelectedListener(mOnItemClickListener);
+
+        //S15
+        list = new ArrayList<String>();
+        list.add("否");
+        list.add("是");
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner17.setAdapter(adapter);
+        spinner17.setOnItemSelectedListener(mOnItemClickListener);
 
     }
 
-    @OnClick({textview14})
+    @OnClick({R.id.textview14})
     public void onItemClick(View view) {
         switch (view.getId()) {
 
-            case textview14:
+            case R.id.textview14:
                 ImagePicker imagePicker = ImagePicker.getInstance();
                 imagePicker.setImageLoader(new GlideImageLoader());
                 imagePicker.setMultiMode(true);   //多选
@@ -97,14 +210,14 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
                         else
                             sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path).append("\n");
                     }
-//                    textview14.setText(sb.toString());
-//                    textview7.setTextSize(10);
+                    textview14.setText(sb.toString());
+                    textview14.setTextSize(10);
                 } else {
-//                    textview7.setText("--");
+                    textview14.setText("--");
                 }
             } else {
-                Toast.makeText(this, "没有选择图片", Toast.LENGTH_SHORT).show();
-//                textview7.setText("--");
+//                Toast.makeText(this, "没有选择图片", Toast.LENGTH_SHORT).show();
+                textview14.setText("--");
             }
         }
     }
@@ -114,10 +227,30 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
             switch (parent.getId()) {
-                case spinner1:
-                    sumbit_str[0] = parent.getSelectedItem().toString();
+                case R.id.spinner01:
+                    sumbit_str[1] = parent.getSelectedItem().toString();
                     break;
-
+                case R.id.spinner08:
+                    sumbit_int[8] = position;
+                    break;
+                case R.id.spinner09:
+                    sumbit_int[9] = position;
+                    break;
+                case R.id.spinner10:
+                    sumbit_str[10] = parent.getSelectedItem().toString();
+                    break;
+                case R.id.spinner11:
+                    sumbit_str[11] = parent.getSelectedItem().toString();
+                    break;
+                case R.id.spinner12:
+                    sumbit_int[12] = position;
+                    break;
+                case R.id.spinner15:
+                    sumbit_int[15] = position;
+                    break;
+                case R.id.spinner17:
+                    sumbit_int[17] = position;
+                    break;
             }
         }
 
@@ -137,6 +270,14 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
                 break;
             case R.id.sumbitTv:
                 //E3
+                sumbit_str[2] = editText02.getText().toString();
+                sumbit_str[3] = editText03.getText().toString();
+                sumbit_str[4] = editText04.getText().toString();
+                sumbit_str[5] = editText05.getText().toString();
+
+                sumbit_str[13] = editText13.getText().toString();
+                sumbit_str[16] = editText16.getText().toString();
+                mAddChargeCasePersenter.addchargeCase(sumbit_str,sumbit_int);
 
                 break;
         }

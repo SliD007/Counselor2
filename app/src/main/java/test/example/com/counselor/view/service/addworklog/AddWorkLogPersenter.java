@@ -32,25 +32,30 @@ public class AddWorkLogPersenter {
         this.mIAddWorkLogView = iAddWorkLogView;
     }
 
-    public void addWorkLog(String[] str){
+    public void addWorkLog(String[] str, int[] inter){
 
         HashMap<String,String> params = new HashMap<>();
         params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
+        params.put("logType", 0+"");
         params.put("serviceVillage", str[1]);
-        params.put("inObject", str[5]);
         params.put("serviceObject", str[2]);
-        params.put("serviceIdentity", str[4]);
         params.put("objectContact", str[3]);
-        params.put("fromType", 0+"");
-        params.put("accessory", "");
-        params.put("serviceType", 0+"");
+        params.put("serviceIdentity", str[4]);
+        params.put("inObject", str[5]);
+        //开始时间
+        //结束时间
+        params.put("fromType", inter[8]+"");
+        params.put("serviceType", inter[9]+"");
         params.put("matterType", str[10]);
         params.put("subType", str[11]);
-        params.put("objectType", 0+"");
+        params.put("objectType", inter[12]+"");
         params.put("serviceContent", str[13]);
+        //图片
+        params.put("resultType", inter[15]+"");
+
+        //多余的接口字段
+        params.put("accessory", "");
         params.put("resultContent", "");
-        params.put("resultType", 0+"");
-        params.put("logType", 0+"");
         params.put("matterPlace", "");
         params.put("matterNum", 0+"");
         params.put("matterTime", "");
@@ -58,7 +63,7 @@ public class AddWorkLogPersenter {
         params.put("matterMoney", 0+"");
         params.put("isConflict", false+"");
 
-        Log.e("addWorkLog",params.toString());
+        Log.e("getParams",params.toString());
         OkGo.post(Urls.WorkLogAddURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
@@ -84,7 +89,9 @@ public class AddWorkLogPersenter {
                 });
     }
 
-    public void addworkLog(final String[] str){
+    public void addworkLog(final String[] str, final int[] inter){
+
+
         StringRequest request4LoginRequest = new StringRequest(
                 Request.Method.POST, Urls.WorkLogAddURL, new com.android.volley.Response.Listener<String>() {
             @Override
@@ -114,21 +121,26 @@ public class AddWorkLogPersenter {
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
+                params.put("logType", 0+"");
                 params.put("serviceVillage", str[1]);
-                params.put("inObject", str[5]);
                 params.put("serviceObject", str[2]);
-                params.put("serviceIdentity", str[4]);
                 params.put("objectContact", str[3]);
-                params.put("fromType", 0+"");
-                params.put("accessory", "");
-                params.put("serviceType", 0+"");
+                params.put("serviceIdentity", str[4]);
+                params.put("inObject", str[5]);
+                //开始时间
+                //结束时间
+                params.put("fromType", inter[8]+"");
+                params.put("serviceType", inter[9]+"");
                 params.put("matterType", str[10]);
                 params.put("subType", str[11]);
-                params.put("objectType", 0+"");
+                params.put("objectType", inter[12]+"");
                 params.put("serviceContent", str[13]);
+                //图片
+                params.put("resultType", inter[15]+"");
+
+                //多余的接口字段
+                params.put("accessory", "");
                 params.put("resultContent", "");
-                params.put("resultType", 0+"");
-                params.put("logType", 0+"");
                 params.put("matterPlace", "");
                 params.put("matterNum", 0+"");
                 params.put("matterTime", "");
