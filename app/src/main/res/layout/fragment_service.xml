@@ -26,7 +26,7 @@
                 style="@style/serviceTitleVw"/>
             <TextView
                 android:id="@+id/serviceTv1"
-                android:text="工作日志"
+                android:text="工作记录"
                 android:textColor="#fff"
                 android:layout_above="@id/serviceVw1"
                 style="@style/serviceTitleTv" />

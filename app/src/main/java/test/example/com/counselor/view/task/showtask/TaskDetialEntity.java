@@ -15,7 +15,7 @@ public class TaskDetialEntity implements Serializable{
 
     @Override
     public String toString() {
-        return "WorkLogDetialEntity{" +
+        return "ChargeCaseDetialEntity{" +
                 "content='" + content + '\'' +
                 ", id=" + id +
                 ", title='" + title + '\'' +

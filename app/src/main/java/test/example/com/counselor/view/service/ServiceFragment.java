@@ -38,7 +38,9 @@ import test.example.com.counselor.view.service.entity.ClassicCaseEntity;
 import test.example.com.counselor.view.service.entity.SummaryEntity;
 import test.example.com.counselor.view.service.entity.WorkLogEntity;
 import test.example.com.counselor.view.service.showadvice.ShowAdviceActivity;
+import test.example.com.counselor.view.service.showchargecase.ShowChargeCaseActivity;
 import test.example.com.counselor.view.service.showclassiccase.ShowClassicCaseActivity;
+import test.example.com.counselor.view.service.showgroupcase.ShowGroupCaseActivity;
 import test.example.com.counselor.view.service.showsummary.ShowSummaryActivity;
 import test.example.com.counselor.view.service.showworklog.ShowWorkLogActivity;
 
@@ -340,7 +342,14 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
             Intent i;
             switch (fragmentType){
                 case 0:
-                    i = new Intent(mContext, ShowWorkLogActivity.class);
+                    if(workLogEntities.get(position).getLogType().equals("普通")){
+                        i = new Intent(mContext, ShowWorkLogActivity.class);
+                    }else if(workLogEntities.get(position).getLogType().equals("群体事件")){
+                        i = new Intent(mContext, ShowGroupCaseActivity.class);
+                    }else {
+                        i = new Intent(mContext, ShowChargeCaseActivity.class);
+                    }
+
                     i.putExtra("id",workLogEntities.get(position).getId());
                     startActivity(i);
                     break;

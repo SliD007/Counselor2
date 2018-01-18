@@ -57,14 +57,16 @@
         <activity android:name=".view.HomeActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
 
         <activity android:name=".view.task.showtask.ShowTaskActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
-
         <activity android:name=".view.schedule.chage.ChangeScheduleActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
 
         <activity android:name=".view.service.showworklog.ShowWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addworklog.AddWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
 
         <activity android:name=".view.service.addgroupcase.AddGroupCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+        <activity android:name=".view.service.showgroupcase.ShowGroupCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+
         <activity android:name=".view.service.addchargecase.AddChargeCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+        <activity android:name=".view.service.showchargecase.ShowChargeCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
 
         <activity android:name=".view.service.showadvice.ShowAdviceActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addadvice.AddAdviceActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>

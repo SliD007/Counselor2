@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -32,9 +31,9 @@ import test.example.com.counselor.util.GlideImageLoader;
  */
 
 public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCaseView {
+
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
-
     @BindView(R.id.spinner01)
     Spinner spinner01;
     @BindView(R.id.editText02)
@@ -55,8 +54,7 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
     Spinner spinner11;
     @BindView(R.id.spinner12)
     Spinner spinner12;
-    @BindView(R.id.rl13)
-    RelativeLayout rl13;
+
     @BindView(R.id.editText13)
     EditText editText13;
     @BindView(R.id.textview14)

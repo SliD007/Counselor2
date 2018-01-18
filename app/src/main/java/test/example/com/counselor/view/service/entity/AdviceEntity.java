@@ -9,27 +9,23 @@ import java.io.Serializable;
 public class AdviceEntity implements Serializable{
     private int id;
     private String title;
+    private String reporttype;
     private String toType;
     private long createTime;
 
     @Override
     public String toString() {
-        return "ClassicCaseEntity{" +
-                "createTime=" + createTime +
-                ", id=" + id +
+        return "AdviceEntity{" +
+                "id=" + id +
                 ", title='" + title + '\'' +
+                ", reporttype='" + reporttype + '\'' +
                 ", toType='" + toType + '\'' +
+                ", createTime=" + createTime +
                 ", village='" + village + '\'' +
                 '}';
     }
 
-    public long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(long createTime) {
-        this.createTime = createTime;
-    }
+    private String village;
 
     public int getId() {
         return id;
@@ -47,12 +43,28 @@ public class AdviceEntity implements Serializable{
         this.title = title;
     }
 
+    public String getReporttype() {
+        return reporttype;
+    }
+
+    public void setReporttype(String reporttype) {
+        this.reporttype = reporttype;
+    }
+
     public String getToType() {
         return toType;
     }
 
     public void setToType(String toType) {
         this.toType = toType;
+    }
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 
     public String getVillage() {
@@ -62,8 +74,6 @@ public class AdviceEntity implements Serializable{
     public void setVillage(String village) {
         this.village = village;
     }
-
-    private String village;
 
     public AdviceEntity() {
     }

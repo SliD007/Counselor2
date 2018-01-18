@@ -1,4 +1,4 @@
-package test.example.com.counselor.view.service.showworklog;
+package test.example.com.counselor.view.service.showchargecase;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by Sli.D on 2017/5/12.
  */
 
-public class WorkLogDetialEntity implements Serializable{
+public class ChargeCaseDetialEntity implements Serializable{
 
     private int id;
     private String serviceVillage;
@@ -167,7 +167,7 @@ public class WorkLogDetialEntity implements Serializable{
         this.resultType = resultType;
     }
 
-    public WorkLogDetialEntity() {
+    public ChargeCaseDetialEntity() {
 
     }
 
