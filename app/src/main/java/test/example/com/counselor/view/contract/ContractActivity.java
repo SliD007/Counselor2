@@ -121,7 +121,7 @@ public class ContractActivity extends BaseActivity implements IContractView {
 
     @Override
     public void requestContractSuccess() {
-        toast("请求成功！", true);
+//        toast("请求成功！", true);
         initDatas();
     }
 

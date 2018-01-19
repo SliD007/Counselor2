@@ -103,7 +103,7 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
 
     @Override
     public void changeSuccess() {
-        toast("修改成功！", false);
+        toast("修改请求已发送，等待审核", false);
         MyApplication.getInstance().refresh = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();
@@ -112,7 +112,7 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
 
     @Override
     public void changeFailed() {
-        toast("修改失败！", false);
+        toast("修改失败", false);
     }
 
     @OnClick({R.id.backTv, R.id.sumbitTv, R.id.workTimeTv})

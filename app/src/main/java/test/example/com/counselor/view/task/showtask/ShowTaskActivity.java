@@ -62,7 +62,7 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
         taskFromWhereTv.setText("来源："+taskDetialEntity.getFromWhere());
         taskCreateTimeTv.setText("时间："+TimeUtil.getDateToString(taskDetialEntity.getCreateTime(),TimeUtil.DataTime));
         taskContextTv.setText(taskDetialEntity.getContent());
-        taskFileTv.setText("无附件");
+
     }
 
     @OnClick(R.id.backTv)

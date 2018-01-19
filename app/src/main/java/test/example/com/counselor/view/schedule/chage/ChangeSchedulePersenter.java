@@ -35,6 +35,7 @@ public class ChangeSchedulePersenter {
         params.put("id",id+"");
         params.put("changeTime",time+"");
         params.put("jobType",jobType+"");
+        Log.e("params",params.toString());
         OkGo.post(Urls.ChangeScheduleURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())

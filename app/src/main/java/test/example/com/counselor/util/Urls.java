@@ -14,10 +14,10 @@ public class Urls {
     public static final String RankURL = "http://law.d9lab.net/statistics/count/getRank";
     public static final String TASKURL = "http://law.d9lab.net/pad/task/padGetTaskPage";
     public static final String TASKConfigurationURL = "http://law.d9lab.net/pad/task/getTaskConfiguration";
-    public static final String ChangeTaskStateURL = "http://law.d9lab.net/pad/task/updateReadtype";
+    public static final String ChangeTaskStateURL = "http://law.d9lab.net/pad/task/updateReadType";
 
     public static final String ScheduleURL = "http://law.d9lab.net/justice/placement/padGetPlacementPage";
-    public static final String ChangeScheduleURL = "http://law.d9lab.net//justice/placement/padChangePlacement";
+    public static final String ChangeScheduleURL = "http://law.d9lab.net/justice/placement/padChangePlacement";
 
     public static final String WorkLogURL = "http://law.d9lab.net/job/log/padGetLogPage";
     public static final String WorkLogConfigurationURL = "http://law.d9lab.net/job/log/getLogConfiguration";
@@ -30,4 +30,6 @@ public class Urls {
     public static final String SummaryURL = "http://law.d9lab.net/pad/monthly/padGetMonthlyPage";
     public static final String SummaryConfigurationURL = "http://law.d9lab.net/pad/monthly/getMonthlyConfiguration";
     public static final String SummaryAddURL = "http://law.d9lab.net/pad/monthly/addMonthly";
+
+    public static final String updataFileURL = "http://law.d9lab.net/upController/**";
 }
