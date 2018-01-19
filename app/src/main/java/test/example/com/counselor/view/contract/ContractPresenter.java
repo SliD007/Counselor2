@@ -66,7 +66,11 @@ public class ContractPresenter extends BasePresenter{
         });
     }
 
+
     public void downLoadContract(String url, String fileName){
+
+//        Log.e("downLoadContract","fileName:"+Constants.getAppDownloadFolder());
+
         OkGo.<File>get(url)//
                 .tag(this)//
                 .headers("header1", "headerValue1")//
@@ -82,7 +86,7 @@ public class ContractPresenter extends BasePresenter{
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
-                        Log.e("downLoadContract","onError:"+response.toString());
+                        Log.e("downLoadContract","/storage/emulated/0/download/:"+response.toString());
                         mIContractView.downloadContractFailed();
                     }
                 });

@@ -12,7 +12,7 @@ public class Constants {
 
     private static final String parentPath = Environment.getExternalStorageDirectory().getAbsolutePath();
 
-    private static final String APP_FOLDER_NAME = "Falvguwen";
+    private static final String APP_FOLDER_NAME = "FaLvGuWen";
     private static final String IMAGE_FOLDER_NAME = "image";
     private static final String FILE_FOLDER_NAME = "file";
     private static final String LOG_FOLDER_NAME = "log";
@@ -68,7 +68,16 @@ public class Constants {
         if(!f.exists()){
             f.mkdirs();
         }
-        return DOWNLOAD_FOLDER_PATH;
+//        File file = new File("/storage/emulated/0/download/readme.txt") ;
+//        if(!file.exists()) {
+//            try {
+//                file.createNewFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                Log.e("IOException",e.toString());
+//            }
+//        }
+            return DOWNLOAD_FOLDER_PATH;
     }
 
     public static String getAppCacheFolder() {

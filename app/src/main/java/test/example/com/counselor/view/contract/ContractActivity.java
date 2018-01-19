@@ -148,6 +148,8 @@ public class ContractActivity extends BaseActivity implements IContractView {
             if(position<100){
                 mContractPresenter.downLoadContract("http://comad.in/comad2014/Proceedings/ResearchPaper1.pdf",
                         contractEntities.get(position).getVillage().getString("username")+"服务合同.pdf");
+                TextView tv = (TextView) view;
+                tv.setText("下载中");
 
             }else {
                 File f=new File(Constants.getAppDownloadFolder()+"/"+contractEntities.get(position-100).getVillage().getString("username")+"服务合同.pdf");
@@ -159,8 +161,7 @@ public class ContractActivity extends BaseActivity implements IContractView {
                 }
 
             }
-            TextView tv = (TextView) view;
-            tv.setText("下载中");
+
         }
         public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去
             myOnClick((Integer) v.getTag(), v);
