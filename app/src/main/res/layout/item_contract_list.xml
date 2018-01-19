@@ -80,7 +80,18 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"/>
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+            <TextView
+                android:id="@+id/tv9"
+                android:text="下载合同"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"/>
 
+        </RelativeLayout>
     </LinearLayout>
 
     <ListView

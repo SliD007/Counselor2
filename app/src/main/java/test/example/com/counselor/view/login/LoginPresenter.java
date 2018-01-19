@@ -58,7 +58,7 @@ public class LoginPresenter extends BasePresenter{
         String url = Urls.LOGINURL;
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
         StringRequest stringRequest = new StringRequest(
-                Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+                Request.Method.POST, "http://www.baidu.com", new com.android.volley.Response.Listener<String>() {
 
             @Override
             public void onResponse(String arg0) {
@@ -118,31 +118,31 @@ public class LoginPresenter extends BasePresenter{
         @Override
         public void onBefore(BaseRequest request) {
             super.onBefore(request);
-//            Log.e("onBefore",request.toString());
+            Log.e("onBefore",request.toString());
         }
 
         @Override
         public void onCacheSuccess(String s, Call call) {
             super.onCacheSuccess(s, call);
-//            Log.e("onCacheSuccess",s);
+            Log.e("onCacheSuccess",s);
         }
 
         @Override
         public void onCacheError(Call call, Exception e) {
             super.onCacheError(call, e);
-//            Log.e("onCacheError",e.toString());
+            Log.e("onCacheError",e.toString());
         }
 
         @Override
         public String convertSuccess(Response response) throws Exception {
-//            Log.e("convertSuccess",response.toString());
+            Log.e("convertSuccess",response.toString());
             return super.convertSuccess(response);
         }
 
         @Override
         public void parseError(Call call, Exception e) {
             super.parseError(call, e);
-//            Log.e("parseError",e.toString());
+            Log.e("parseError",e.toString());
         }
 
         public void onSuccess(String s, Call call, Response response) {

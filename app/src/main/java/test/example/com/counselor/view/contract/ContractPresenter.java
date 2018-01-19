@@ -6,8 +6,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.callback.StringCallback;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import okhttp3.Call;
 import okhttp3.Response;
 import test.example.com.counselor.base.BasePresenter;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.Urls;
 
 /**
@@ -63,6 +66,27 @@ public class ContractPresenter extends BasePresenter{
         });
     }
 
+    public void downLoadContract(String fileName){
+        OkGo.<File>get("http://comad.in/comad2014/Proceedings/ResearchPaper1.pdf")//
+                .tag(this)//
+                .headers("header1", "headerValue1")//
+                .params("param1", "paramValue1")//
+                .execute(new FileCallback(Constants.getAppDownloadFolder(),fileName) {
+
+                    @Override
+                    public void onSuccess(File file, Call call, Response response) {
+                        Log.e("downLoadContract","onSuccess:"+response.toString());
+                        mIContractView.downloadContractSuccess();
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Log.e("downLoadContract","onError:"+response.toString());
+                        mIContractView.downloadContractFailed();
+                    }
+                });
+    }
     @Override
     public void onAttachView() {
 

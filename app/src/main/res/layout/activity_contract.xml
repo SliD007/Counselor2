@@ -19,11 +19,11 @@
             android:layout_height="wrap_content"
             android:dividerHeight="1dp"/>
 
-        <ViewStub
-            android:id="@+id/contractVs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout="@layout/item_contract_list"/>
+        <!--<ViewStub-->
+            <!--android:id="@+id/contractVs"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout="@layout/item_contract_list"/>-->
     </LinearLayout>
 
 </LinearLayout>

@@ -8,4 +8,7 @@ public interface IContractView {
 
     void requestContractSuccess();
     void requestContractFailed();
+
+    void downloadContractSuccess();
+    void downloadContractFailed();
 }

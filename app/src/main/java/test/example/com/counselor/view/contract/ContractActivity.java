@@ -4,15 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewStub;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,14 +29,14 @@ public class ContractActivity extends BaseActivity implements IContractView {
     TextView titleBarTv;
     @BindView(R.id.backTv)
     TextView backTv;
-    @BindView(R.id.contractVs)
-    ViewStub contractVs;
+//    @BindView(R.id.contractVs)
+//    ViewStub contractVs;
     @BindView(R.id.contractLv)
     ListView contractLv;
     ArrayList<Map<String,Integer>> mData= new ArrayList<Map<String,Integer>>();
     List<ContractEntity> contractEntities;
     Context mContext;
-
+    TextView downloadTv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +46,7 @@ public class ContractActivity extends BaseActivity implements IContractView {
         titleBarTv.setText("我的合同");
         mContext=this;
         mContractPresenter.requestContract();
-
+        initDatas();
     }
 
 
@@ -58,26 +54,46 @@ public class ContractActivity extends BaseActivity implements IContractView {
         setContentView(R.layout.activity_contract);
     }
 
-    private boolean show_vs = false;
 
     private void initDatas() {
         Log.e("AssessmentActivity", "加载数据");
         contractEntities = mContractPresenter.getContractEntity();
         contractLv.setAdapter(new Common1Adapter<ContractEntity>(this, contractEntities,
-                R.layout.item_1list, onItemClickListener) {
+                R.layout.item_contract, onItemClickListener) {
             @Override
-            protected void convertView(ViewHolder1 mViewHolder, View item, ContractEntity contractEntity, int position) {
+            protected void convertView(ViewHolder1 mViewHolder, View item, ContractEntity contractEntity, final int position) {
                 TextView tv1 = mViewHolder.getView(R.id.itemWorkForTv);
-                tv1.setText("服务村社："+contractEntities.get(position).getVillage().getString("username"));
+                TextView tv2 = mViewHolder.getView(R.id.tv2);
+                TextView tv3 = mViewHolder.getView(R.id.tv3);
+                TextView tv4 = mViewHolder.getView(R.id.tv4);
+                TextView tv5 = mViewHolder.getView(R.id.tv5);
+                TextView tv6 = mViewHolder.getView(R.id.tv6);
+                TextView tv7 = mViewHolder.getView(R.id.tv7);
+                TextView tv8 = mViewHolder.getView(R.id.tv8);
+                downloadTv = mViewHolder.getView(R.id.tv9);
+                if(contractEntities!=null){
+                    final String village = contractEntities.get(position).getVillage().getString("username");
+                    tv1.setText("服务村社："+contractEntities.get(position).getVillage().getString("username"));
+                    tv2.setText("法律顾问："+contractEntities.get(position).getCounselor().getString("username"));
+                    tv3.setText("村社法人："+contractEntities.get(position).getRepresentative());
+                    tv4.setText("顾问机构："+contractEntities.get(position).getOffice());
+                    tv5.setText("服务年度："+contractEntities.get(position).getServiceYear());
+                    tv6.setText("合同期限："+contractEntities.get(position).getDeadLine());
+                    tv7.setText("合同金额："+contractEntities.get(position).getMoney()+"");
+                    tv8.setText("合同状态："+contractEntities.get(position).getContractStatus());
+                    downloadTv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            downloadTv.setText("下载中");
+                            mContractPresenter.downLoadContract(village+"合同.pdf");
+                        }
+                    });
+                }
+
             }
         });
         contractLv.setOnItemClickListener(onItemClickListener);
 
-        for(int i =0; i < 3; i++) {
-            Map<String,Integer> item = new HashMap<String,Integer>();
-            item.put("image", R.drawable.logo);
-            mData.add(item);
-        }
     }
 
     @OnClick({R.id.backTv})
@@ -101,8 +117,24 @@ public class ContractActivity extends BaseActivity implements IContractView {
         toast("请求失败！", true);
     }
 
-    @OnClick(R.id.backTv)
-    public void onClick() {
+    @Override
+    public void downloadContractSuccess() {
+        if(downloadTv!=null){
+            downloadTv.setText("已下载，点击查看");
+            downloadTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    OpenFileUtil.openFile(this, Constants.getAppDownloadFolder()+"合同.pdf");
+                }
+            });
+        }
+    }
+
+    @Override
+    public void downloadContractFailed() {
+        toast("下载失败",false);
+        if(downloadTv!=null)
+            downloadTv.setText("下载合同");
     }
 
     //Item响应回调
@@ -110,45 +142,8 @@ public class ContractActivity extends BaseActivity implements IContractView {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            toast("" + (position), true);
-            ImageView nextIm = (ImageView) view.findViewById(R.id.nextIm);
-            if (!show_vs) {
-                nextIm.setImageResource(R.drawable.u608);
-//                contractVs.inflate();
-                contractVs.setVisibility(View.VISIBLE);
-                initViewSub(position);
 
-            }else {
-                nextIm.setImageResource(R.drawable.u609);
-                contractVs.setVisibility(View.GONE);
-            }
-            show_vs = !show_vs;
         }
     };
-
-    private void initViewSub(int position){
-        Log.e("initViewSub",""+position);
-        TextView tv1 = (TextView) findViewById(R.id.tv1);
-        TextView tv2 = (TextView) findViewById(R.id.tv2);
-        TextView tv3 = (TextView) findViewById(R.id.tv3);
-        TextView tv4 = (TextView) findViewById(R.id.tv4);
-        TextView tv5 = (TextView) findViewById(R.id.tv5);
-        TextView tv6 = (TextView) findViewById(R.id.tv6);
-        TextView tv7 = (TextView) findViewById(R.id.tv7);
-        TextView tv8 = (TextView) findViewById(R.id.tv8);
-
-        tv1.setText("服务村社："+contractEntities.get(position).getVillage().getString("username"));
-        tv2.setText("法律顾问："+contractEntities.get(position).getCounselor().getString("username"));
-        tv3.setText("村社法人："+contractEntities.get(position).getRepresentative());
-        tv4.setText("顾问机构："+contractEntities.get(position).getOffice());
-        tv5.setText("服务年度："+contractEntities.get(position).getServiceYear());
-        tv6.setText("合同期限："+contractEntities.get(position).getDeadLine());
-        tv7.setText("合同金额："+contractEntities.get(position).getMoney()+"");
-        tv8.setText("合同状态："+contractEntities.get(position).getContractStatus());
-
-        ListView contractImLV = (ListView) findViewById(R.id.contractImLV);
-        contractImLV.setAdapter(new SimpleAdapter(mContext, mData, R.layout.item_contract_image_list
-                , new String[]{"image"},new int[]{R.id.contractIm}));
-    }
 
 }

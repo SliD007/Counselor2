@@ -58,7 +58,7 @@ public abstract class Common1Adapter<T> extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return datas == null ? 0 : datas.size();
+        return datas == null ? 1 : datas.size();
     }
 
     @Override

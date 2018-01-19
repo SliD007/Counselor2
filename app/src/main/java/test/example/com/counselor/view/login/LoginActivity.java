@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,7 +100,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
             //直接发起登录
             passwordEt.setText(password);
 //            password = Md5Util.md5(password);
-            mLoginPresenter.loadLogin(this,account,password);
+//            mLoginPresenter.loadLogin(this,account,password);
 //            mLoginPresenter.login(account,password);
         }else{
             rememberPwCb.setChecked(false);
@@ -139,10 +138,11 @@ public class LoginActivity extends BaseActivity implements ILoginView{
                 saveUser(account,password);
 //                password = Md5Util.md5(password);
                 mLoginPresenter.loadLogin(LoginActivity.this,account,password);
+//                mLoginPresenter.login(account,password);
                 localtionUtil.stopLocation();
                 break;
             case R.id.forgetPwTv:
-                CrashReport.testJavaCrash();
+                mLoginPresenter.login(account,password);
 //                Intent i = new Intent(LoginActivity.this, ForgetPwActivity.class);
 //                startActivity(i);
                 break;
