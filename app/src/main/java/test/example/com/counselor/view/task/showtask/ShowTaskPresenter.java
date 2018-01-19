@@ -6,7 +6,6 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 
 import java.util.HashMap;
@@ -35,10 +34,11 @@ public class ShowTaskPresenter {
         HashMap<String,String> params = new HashMap<>();
         params.put("id",id+"");
         params.put("fromWhere",fromWhere+"");
+        Log.e("params",params.toString());
         OkGo.post(Urls.ChangeTaskStateURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
-                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+//                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                 .cacheTime(-1)
                 .execute(new StringCallback() {
                     @Override
@@ -76,12 +76,12 @@ public class ShowTaskPresenter {
         OkGo.post(Urls.TASKConfigurationURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
-                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+//                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                 .cacheTime(-1)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("requestTaskDetial","response:"+response.toString());
+//                        Log.e("requestTaskDetial","response:"+response.toString());
                         Log.e("requestTaskDetial","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){

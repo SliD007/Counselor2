@@ -66,8 +66,8 @@ public class ContractPresenter extends BasePresenter{
         });
     }
 
-    public void downLoadContract(String fileName){
-        OkGo.<File>get("http://comad.in/comad2014/Proceedings/ResearchPaper1.pdf")//
+    public void downLoadContract(String url, String fileName){
+        OkGo.<File>get(url)//
                 .tag(this)//
                 .headers("header1", "headerValue1")//
                 .params("param1", "paramValue1")//

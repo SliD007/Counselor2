@@ -55,6 +55,7 @@ public class ServicePresenter extends BasePresenter {
                 params.put("contact", MyApplication.getInstance().loginEntity.getContact());
                 params.put("resultType",-1+"");
                 params.put("search","");
+                Log.e("params", params.toString());
                 OkGo.post(Urls.WorkLogURL)
                         .params(params)
                         .cacheKey(Constants.getAppCacheFolder())
@@ -85,6 +86,7 @@ public class ServicePresenter extends BasePresenter {
                 params1.put("contact", MyApplication.getInstance().loginEntity.getContact());
                 params1.put("current",current+"");
                 params1.put("size",size+"");
+                Log.e("params1", params1.toString());
                 OkGo.post(Urls.ReportURL)
                         .params(params1)
                         .cacheKey(Constants.getAppCacheFolder())
@@ -115,6 +117,7 @@ public class ServicePresenter extends BasePresenter {
                 params2.put("contact", MyApplication.getInstance().loginEntity.getContact());
                 params2.put("current",current+"");
                 params2.put("size",size+"");
+                Log.e("params2", params2.toString());
                 OkGo.post(Urls.ReportURL)
                         .params(params2)
                         .cacheKey(Constants.getAppCacheFolder())
@@ -144,7 +147,7 @@ public class ServicePresenter extends BasePresenter {
                 params3.put("contact", MyApplication.getInstance().loginEntity.getContact());
                 params3.put("current",current+"");
                 params3.put("size",size+"");
-                Log.e("requestServiceData"+type,params3.toString());
+                Log.e("params3", params3.toString());
                 OkGo.post(Urls.SummaryURL)
                         .params(params3)
                         .cacheKey(Constants.getAppCacheFolder())

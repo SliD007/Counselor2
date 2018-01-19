@@ -39,7 +39,7 @@ public class AddSummaryPresenter {
     public void addSummary(String title,String content){
         HashMap<String,String> params = new HashMap<>();
         params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
-        params.put("village", MyApplication.getInstance().loginEntity.getCommunityA()+MyApplication.getInstance().loginEntity.getCommunityB()+"");
+        params.put("village", MyApplication.getInstance().loginEntity.getVillageA()+" "+MyApplication.getInstance().loginEntity.getVillageB());
         params.put("office",MyApplication.getInstance().loginEntity.getOffice());
         params.put("contact", MyApplication.getInstance().loginEntity.getContact()+"");
         params.put("title",title);
@@ -84,7 +84,6 @@ public class AddSummaryPresenter {
 
             @Override
             public void onResponse(String arg0) {
-                // TODO Auto-generated method stub
                 Log.e("loginInfo", arg0);// 打印登录返回的数据
                 try {
                     JSONObject object = JSON.parseObject(arg0);
@@ -95,7 +94,6 @@ public class AddSummaryPresenter {
                         mIAddSummaryView.addFailed();
                     }
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
 
                 }
@@ -105,21 +103,17 @@ public class AddSummaryPresenter {
 
             @Override
             public void onErrorResponse(VolleyError arg0) {
-                // TODO Auto-generated method stub
                 Log.e("loginInfo", arg0.toString());// 打印错误信息
             }
         }) {
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                // TODO Auto-generated method stub
 
                 Map<String, String> map4Login = new HashMap<String, String>();
-
 				map4Login.put("counselorId",MyApplication.getInstance().loginEntity.getUsername());
-				map4Login.put("village",MyApplication.getInstance().loginEntity.getCommunityA()+MyApplication.getInstance().loginEntity.getCommunityB()+"");
-				map4Login.put("office",MyApplication.getInstance().loginEntity.getOffice()+"");
-				map4Login.put("contact",MyApplication.getInstance().loginEntity.getContact()+"");
+                map4Login.put("village", MyApplication.getInstance().loginEntity.getVillageA()+" "+MyApplication.getInstance().loginEntity.getVillageB());				map4Login.put("office",MyApplication.getInstance().loginEntity.getOffice()+"");
+				map4Login.put("contact",MyApplication.getInstance().loginEntity.getContact());
 				map4Login.put("title",title);
 				map4Login.put("content",content);
                 Log.e("getParams",map4Login.toString());

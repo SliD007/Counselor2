@@ -13,7 +13,15 @@ public class ClassicCaseEntity implements Serializable{
     private String content;
     private long createTime;
     private String toType;
+    public String getVillage() {
+        return village;
+    }
 
+    public void setVillage(String village) {
+        this.village = village;
+    }
+
+    private String village;
     public int getId() {
         return id;
     }
@@ -26,6 +34,7 @@ public class ClassicCaseEntity implements Serializable{
                 ", content='" + content + '\'' +
                 ", createTime=" + createTime +
                 ", toType='" + toType + '\'' +
+                ", village='" + village + '\'' +
                 '}';
     }
 

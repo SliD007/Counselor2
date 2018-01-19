@@ -24,6 +24,8 @@ public class ShowClassicCaseActivity extends BaseActivity implements IShowClassi
     TextView showClassicCaseTitleTv;
     @BindView(R.id.showClassicCaseContextTv)
     TextView showClassicCaseContextTv;
+    @BindView(R.id.showVillageTv)
+    TextView showVillageTv;
 
 
     private ShowClassicCasePresenter mShowClassicCasePresenter;
@@ -50,9 +52,10 @@ public class ShowClassicCaseActivity extends BaseActivity implements IShowClassi
 
     private void initView() {
         classicCaseEntity = mShowClassicCasePresenter.getClassicCaseDetialEntity();
-        if(classicCaseEntity!=null){
+        if (classicCaseEntity != null) {
             showClassicCaseTitleTv.setText(classicCaseEntity.getTitle());
             showClassicCaseContextTv.setText(classicCaseEntity.getContent());
+            showVillageTv.setText(classicCaseEntity.getVillage());
         }
     }
 

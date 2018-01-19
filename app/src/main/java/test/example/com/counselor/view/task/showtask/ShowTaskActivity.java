@@ -51,6 +51,7 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
         int fromWhere = i.getIntExtra("fromWhere",0);
 
         mShowTaskPresenter = new ShowTaskPresenter(this,this);
+
         mShowTaskPresenter.changeTaskState(id,fromWhere);
         mShowTaskPresenter.requestTaskDetial(id,fromWhere);
     }
@@ -83,7 +84,7 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
 
     @Override
     public void changeTaskStateSuccess() {
-        toast("修改成功",false);
+//        toast("修改成功",false);
     }
 
     @Override

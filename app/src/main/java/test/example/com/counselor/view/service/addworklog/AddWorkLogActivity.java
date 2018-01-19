@@ -107,9 +107,9 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         //S01
         list = new ArrayList<String>();
         if (MyApplication.getInstance().loginEntity.getCommunityA()!=null)
-            list.add(MyApplication.getInstance().loginEntity.getCommunityA());
+            list.add(MyApplication.getInstance().loginEntity.getCommunityA().getString("username"));
         if (MyApplication.getInstance().loginEntity.getCommunityB()!=null)
-            list.add(MyApplication.getInstance().loginEntity.getCommunityB());
+            list.add(MyApplication.getInstance().loginEntity.getCommunityB().getString("username"));
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner01.setAdapter(adapter);

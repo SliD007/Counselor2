@@ -27,6 +27,7 @@
     <!--用于申请获取蓝牙信息进行室内定位-->
     <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
+
     <application
         android:name=".base.MyApplication"
         android:allowBackup="true"
@@ -57,7 +58,10 @@
         <activity android:name=".view.service.showworklog.ShowWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addworklog.AddWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
 
+        <activity android:name=".view.service.showgroupcase.ShowGroupCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addgroupcase.AddGroupCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+
+        <activity android:name=".view.service.showchargecase.ShowChargeCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addchargecase.AddChargeCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
 
         <activity android:name=".view.service.showadvice.ShowAdviceActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>

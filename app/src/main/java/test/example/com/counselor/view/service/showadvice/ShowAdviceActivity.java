@@ -26,6 +26,8 @@ public class ShowAdviceActivity extends BaseActivity implements IShowAdviceView 
     TextView showAdviceContextTv;
     @BindView(R.id.showAdvicesentToTv)
     TextView showAdvicesentToTv;
+    @BindView(R.id.showVillageTv)
+    TextView showVillageTv;
 
     private ShowAdvicePresenter mShowAdvicePresenter;
     private AdviceEntity adviceEntity;
@@ -55,6 +57,7 @@ public class ShowAdviceActivity extends BaseActivity implements IShowAdviceView 
             showAdviceTitleTv.setText(adviceEntity.getTitle());
             showAdviceContextTv.setText(adviceEntity.getContent());
             showAdvicesentToTv.setText(adviceEntity.getToType());
+            showVillageTv.setText(adviceEntity.getVillage());
         }
     }
 

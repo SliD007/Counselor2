@@ -2,9 +2,15 @@ package test.example.com.counselor.view.service.addadvice;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +32,12 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
     EditText addAdviceContextEt;
     @BindView(R.id.radioGroup)
     RadioGroup radioGroup;
-    int rbId;
+    @BindView(R.id.spinner01)
+    Spinner spinner01;
+    int rbId = 0;
+    String vStr = "";
+    List<String> list;
+    ArrayAdapter<String> adapter;
     AddAdvicePresenter mAddAdvicePersenter;
     @Override
     protected void initContentView(Bundle savedInstanceState) {
@@ -44,6 +55,17 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
     }
 
     private void initView() {
+        //S01
+        list = new ArrayList<String>();
+        if (MyApplication.getInstance().loginEntity.getCommunityA()!=null)
+            list.add(MyApplication.getInstance().loginEntity.getCommunityA().getString("username"));
+        if (MyApplication.getInstance().loginEntity.getCommunityB()!=null)
+            list.add(MyApplication.getInstance().loginEntity.getCommunityB().getString("username"));
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner01.setAdapter(adapter);
+        spinner01.setOnItemSelectedListener(mOnItemClickListener);
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -77,8 +99,8 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
             case R.id.sumbitTv:
                 String title = addAdviceTitleEt.getText().toString();
                 String context_str = addAdviceContextEt.getText().toString();
-                mAddAdvicePersenter.addAdvice(title,context_str,rbId);
-                mAddAdvicePersenter.addadvice(title,context_str,rbId);
+                mAddAdvicePersenter.addAdvice(title,context_str,rbId,vStr);
+//                mAddAdvicePersenter.addadvice(title,context_str,rbId);
                 break;
         }
     }
@@ -97,4 +119,16 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
     public void addFailed() {
         toast("添加失败",false);
     }
+
+    AdapterView.OnItemSelectedListener mOnItemClickListener = new AdapterView.OnItemSelectedListener() {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            vStr = parent.getSelectedItem().toString();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
 }

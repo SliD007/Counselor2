@@ -33,7 +33,8 @@ public class PersonalFragment extends BaseFragment {
     TextView addressTv;
     @BindView(R.id.lawFirmTv)
     TextView lawFirmTv;
-
+    String va = "";
+    String vb = "";
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_personal;
@@ -42,7 +43,8 @@ public class PersonalFragment extends BaseFragment {
     @Override
     protected void initViews() {
         nameTv.setText(MyApplication.getInstance().loginEntity.getUsername());
-        addressTv.setText(MyApplication.getInstance().loginEntity.getCommunityA()+","+MyApplication.getInstance().loginEntity.getCommunityB());
+
+        addressTv.setText(MyApplication.getInstance().loginEntity.getVillageA()+" "+MyApplication.getInstance().loginEntity.getVillageB());
         lawFirmTv.setText(MyApplication.getInstance().loginEntity.getOffice());
     }
 

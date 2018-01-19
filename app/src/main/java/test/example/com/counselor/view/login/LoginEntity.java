@@ -1,5 +1,7 @@
 package test.example.com.counselor.view.login;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.Serializable;
 
 /**
@@ -21,36 +23,11 @@ public class LoginEntity implements Serializable{
     private String name;
     private String experience;
     private String evaluation;
-    private String communityA;
-    private String communityB;
+    private JSONObject communityA;
+    private JSONObject communityB;
     private String star;
     private String com_status;
     private String status;
-
-    public LoginEntity(int id, String role, String username, String password,
-                       String gender, String nation, String contact, String email, String organization,
-                       String education, String academy, String name, String experience, String evaluation,
-                       String communityA, String communityB, String star, String com_status, String status) {
-        this.id = id;
-        this.role = role;
-        this.username = username;
-        this.gender = gender;
-        this.nation = nation;
-        this.contact = contact;
-        this.email = email;
-        this.office = organization;
-        this.evaluation = evaluation;
-        this.academy = academy;
-        this.name = name;
-        this.experience = experience;
-        this.education = education;
-        this.communityA = communityA;
-        this.communityB = communityB;
-        this.star = star;
-        this.com_status = com_status;
-        this.status = status;
-        this.password = password;
-    }
 
     public String getAcademy() {
         return academy;
@@ -76,19 +53,19 @@ public class LoginEntity implements Serializable{
         this.com_status = com_status;
     }
 
-    public String getCommunityA() {
+    public JSONObject getCommunityA() {
         return communityA;
     }
 
-    public void setCommunityA(String communityA) {
+    public void setCommunityA(JSONObject communityA) {
         this.communityA = communityA;
     }
 
-    public String getCommunityB() {
+    public JSONObject getCommunityB() {
         return communityB;
     }
 
-    public void setCommunityB(String communityB) {
+    public void setCommunityB(JSONObject communityB) {
         this.communityB = communityB;
     }
 
@@ -225,11 +202,25 @@ public class LoginEntity implements Serializable{
                 ", name='" + name + '\'' +
                 ", experience='" + experience + '\'' +
                 ", evaluation='" + evaluation + '\'' +
-                ", communityA='" + communityA + '\'' +
-                ", communityB='" + communityB + '\'' +
+                ", communityA='" + communityA.toString() + '\'' +
+                ", communityB='" + communityB.toString() + '\'' +
                 ", star='" + star + '\'' +
                 ", com_status='" + com_status + '\'' +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    public String getVillageA(){
+        if(getCommunityA()!=null)
+            return getCommunityA().getString("username");
+        else
+            return "";
+    }
+
+    public String getVillageB(){
+        if(getCommunityB()!=null)
+            return getCommunityB().getString("username");
+        else
+            return "";
     }
 }

@@ -72,7 +72,6 @@ public class LoginPresenter extends BasePresenter{
                         mLoginView.loginFailed();
                     }
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
 
                 }
@@ -82,7 +81,6 @@ public class LoginPresenter extends BasePresenter{
 
             @Override
             public void onErrorResponse(VolleyError arg0) {
-                // TODO Auto-generated method stub
                 Log.e("onErrorResponse", arg0.toString());// 打印错误信息
             }
         }) {

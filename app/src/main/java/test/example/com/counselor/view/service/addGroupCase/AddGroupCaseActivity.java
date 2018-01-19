@@ -85,9 +85,9 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
         //S1
         list = new ArrayList<String>();
         if (MyApplication.getInstance().loginEntity.getCommunityA()!=null)
-            list.add(MyApplication.getInstance().loginEntity.getCommunityA());
+            list.add(MyApplication.getInstance().loginEntity.getCommunityA().getString("username"));
         if (MyApplication.getInstance().loginEntity.getCommunityB()!=null)
-            list.add(MyApplication.getInstance().loginEntity.getCommunityB());
+            list.add(MyApplication.getInstance().loginEntity.getCommunityB().getString("username"));
         adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner1.setAdapter(adapter);

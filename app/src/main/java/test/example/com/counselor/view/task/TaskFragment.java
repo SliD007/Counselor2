@@ -242,13 +242,9 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                 fromWhere = doneListEntities.get(position).getFromWhere();
             }else {
                 id = toDoListEntities.get(position).getId();
-                fromWhere = toDoListEntities.get(position).getFromWhere();
             }
-            if(fromWhere=="justice"){
-                i.putExtra("fromWhere",0);
-            }else {
-                i.putExtra("fromWhere",1);
-            }
+
+            i.putExtra("fromWhere",position);
             i.putExtra("id",id);
             startActivity(i);
 

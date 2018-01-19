@@ -34,16 +34,16 @@ public class AddClassicCasePresenter {
         this.mContext = context;
     }
 
-    public void addClassicCase(String title,String content){
+    public void addClassicCase(String title,String content,String vStr){
         HashMap<String,String> params = new HashMap<>();
         params.put("title",title);
         params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
-        params.put("village", MyApplication.getInstance().loginEntity.getCommunityA()+MyApplication.getInstance().loginEntity.getCommunityB()+"");
+        params.put("village", vStr);
         params.put("content",content);
         params.put("toType",1+"");
         params.put("reportType",1+"");
         params.put("contact", MyApplication.getInstance().loginEntity.getContact()+"");
-
+        params.put("office",MyApplication.getInstance().loginEntity.getOffice());
         Log.e("addClassicCase",params.toString());
         OkGo.post(Urls.ReportAddURL)
                 .params(params)
@@ -100,8 +100,7 @@ public class AddClassicCasePresenter {
                     Map<String, String> map4Login = new HashMap<String, String>();
                     map4Login.put("title",title);
                     map4Login.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
-                    map4Login.put("village", MyApplication.getInstance().loginEntity.getCommunityA()+MyApplication.getInstance().loginEntity.getCommunityB()+"");
-                    map4Login.put("content",content);
+                    map4Login.put("village", MyApplication.getInstance().loginEntity.getVillageA()+" "+MyApplication.getInstance().loginEntity.getVillageB());                    map4Login.put("content",content);
                     map4Login.put("toType",1+"");
                     map4Login.put("reportType",1+"");
                     map4Login.put("contact", MyApplication.getInstance().loginEntity.getContact()+"");
