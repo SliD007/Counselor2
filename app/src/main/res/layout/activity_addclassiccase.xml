@@ -13,10 +13,11 @@
         android:background="#fff">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="0dp"
+            android:layout_weight="1">
             <TextView
                 android:id="@+id/addClassicCaseTitleTv"
-                android:text="标题:"
+                android:text="标题："
                 android:textSize="20sp"
                 android:textColor="#000"
                 android:layout_width="wrap_content"
@@ -40,10 +41,11 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="8">
             <TextView
                 android:id="@+id/addClassicCaseContextTv"
-                android:text="内容:"
+                android:text="内容："
                 android:textSize="20sp"
                 android:textColor="#000"
                 android:layout_width="wrap_content"
@@ -62,6 +64,26 @@
                 android:textColorHint="#ccc"
                 android:textSize="18sp"
                 android:textColor="#666"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tv1"
+                android:text="服务村社："
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"/>
+            <Spinner
+                android:id="@+id/spinner01"
+                android:layout_toRightOf="@id/tv1"
+                style="@style/log_spinner"
+                />
         </RelativeLayout>
     </LinearLayout>
 
