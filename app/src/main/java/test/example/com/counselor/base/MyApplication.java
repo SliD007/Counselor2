@@ -2,6 +2,8 @@ package test.example.com.counselor.base;
 
 import android.app.Activity;
 import android.app.Application;
+import android.os.Build;
+import android.os.StrictMode;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -50,9 +52,17 @@ public class MyApplication extends Application {
 
     @Override
     public void onCreate() {
-        queues = Volley.newRequestQueue(getApplicationContext());
-        CrashReport.initCrashReport(getApplicationContext(), "69d7035114", true);
         super.onCreate();
+        //Volley框架
+        queues = Volley.newRequestQueue(getApplicationContext());
+        //Crash 上报
+        CrashReport.initCrashReport(getApplicationContext(), "69d7035114", true);
+        //解决Android 7.0 FileUriExposedException
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+        }
+        //okgo框架
         initOkGo();
     }
 

@@ -1,5 +1,7 @@
 package test.example.com.counselor.view.service.entity;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.Serializable;
 
 /**
@@ -12,7 +14,7 @@ public class WorkLogEntity implements Serializable{
     private String logType;
     private String serviceObject;
     private String resultType;
-    private String serviceVillage;
+    private JSONObject serviceVillage;
 
     public int getId() {
         return id;
@@ -26,7 +28,7 @@ public class WorkLogEntity implements Serializable{
                 ", logType='" + logType + '\'' +
                 ", serviceObject='" + serviceObject + '\'' +
                 ", resultType='" + resultType + '\'' +
-                ", serviceVillage='" + serviceVillage + '\'' +
+                ", serviceVillage='" + serviceVillage.toString() + '\'' +
                 '}';
     }
 
@@ -66,15 +68,17 @@ public class WorkLogEntity implements Serializable{
         this.resultType = resultType;
     }
 
-    public String getServiceVillage() {
+    public JSONObject getServiceVillage() {
         return serviceVillage;
     }
 
-    public void setServiceVillage(String serviceVillage) {
+    public void setServiceVillage(JSONObject serviceVillage) {
         this.serviceVillage = serviceVillage;
     }
 
     public WorkLogEntity() {
     }
-
+    public String getServiceVillageName() {
+        return this.serviceVillage.getString("username");
+    }
 }
