@@ -42,7 +42,7 @@ public class ShowWorkLogPresenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("requestWorklogDetial","response:"+response.toString());
+//                        Log.e("requestWorklogDetial","response:"+response.toString());
                         Log.e("requestWorklogDetial","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
@@ -70,7 +70,7 @@ public class ShowWorkLogPresenter {
     public void saveValue(JSONObject object){
 
         JSONObject value = object.getJSONObject("value");
-        Log.e("requestWorkLog",""+value.toString());
+//        Log.e("requestWorkLog",""+value.toString());
         workLogDetialEntity = JSONObject.parseObject(value.toString(),WorkLogDetialEntity.class);
         mIShowWorkLogModel.setWorkLogDetialEntity(workLogDetialEntity);
         Log.e("EntityDetail",""+workLogDetialEntity.toString());

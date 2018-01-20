@@ -1,9 +1,14 @@
 package test.example.com.counselor.view.service.showworklog;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,7 +84,7 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
     private void initView() {
         workLogDetialEntity = mShowWorkLogPresenter.getWorkLogDetialEntity();
         if (workLogDetialEntity != null) {
-            textview01.setText(workLogDetialEntity.getServiceVillage());
+            textview01.setText(workLogDetialEntity.getServiceVillageName());
             textview02.setText(workLogDetialEntity.getServiceObject());
             textview03.setText(workLogDetialEntity.getObjectContact());
             textview04.setText(workLogDetialEntity.getServiceIdentity());
@@ -92,8 +97,20 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
             textview11.setText(workLogDetialEntity.getSubType());
             textview12.setText(workLogDetialEntity.getObjecttype());
             textview13.setText(workLogDetialEntity.getServiceContent());
-            textview14.setText("无图");
+            textview14.setText("--");
             textview15.setText(workLogDetialEntity.getResultType());
+        }
+
+        Bitmap bitmap = getLoacalBitmap("/aa/aa.jpg"); //从本地取图片
+    }
+
+    public static Bitmap getLoacalBitmap(String url) {
+        try {
+            FileInputStream fis = new FileInputStream(url);
+            return BitmapFactory.decodeStream(fis);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

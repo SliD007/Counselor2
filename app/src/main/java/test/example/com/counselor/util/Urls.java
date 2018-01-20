@@ -31,5 +31,5 @@ public class Urls {
     public static final String SummaryConfigurationURL = "http://law.d9lab.net/pad/monthly/getMonthlyConfiguration";
     public static final String SummaryAddURL = "http://law.d9lab.net/pad/monthly/addMonthly";
 
-    public static final String updataFileURL = "http://law.d9lab.net/upController/**";
+    public static final String UpdataFileURL = "http://law.d9lab.net/upController/**";
 }

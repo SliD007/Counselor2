@@ -224,10 +224,26 @@ public class LoginEntity implements Serializable{
             return "";
     }
 
+    public int getVillageAId(){
+        if(getCommunityA()!=null)
+            return getCommunityA().getInteger("id");
+        else
+            return 0;
+    }
+
+    public int getVillageBId(){
+        if(getCommunityB()!=null)
+            return getCommunityB().getInteger("id");
+        else
+            return 0;
+    }
+
     public String getOfficeName(){
         if(getOffice()!=null)
             return getOffice().getString("username");
         else
             return "";
     }
+
+
 }

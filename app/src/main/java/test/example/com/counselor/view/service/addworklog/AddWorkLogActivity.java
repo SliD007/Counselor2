@@ -249,6 +249,12 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
             switch (parent.getId()) {
                 case R.id.spinner01:
                     sumbit_str[1] = parent.getSelectedItem().toString();
+                    if(position==0){
+                        sumbit_int[1] = MyApplication.getInstance().loginEntity.getVillageAId();
+                    }else {
+                        sumbit_int[1] = MyApplication.getInstance().loginEntity.getVillageBId();
+                    }
+
                     break;
                 case R.id.spinner08:
                     sumbit_int[8] = position;
@@ -293,7 +299,9 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                 sumbit_str[6] = textview06.getText().toString();
                 sumbit_str[7] = textview07.getText().toString();
                 sumbit_str[13] = editText13.getText().toString();
-                mAddWorkLogPersenter.addworkLog(sumbit_str,sumbit_int);
+                mAddWorkLogPersenter.addWorkLog(sumbit_str,sumbit_int);
+                if(imageItems!=null)
+                    mAddWorkLogPersenter.addImage(imageItems);
                 break;
         }
     }
@@ -310,6 +318,16 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     @Override
     public void addFailed() {
         toast("添加失败", false);
+    }
+
+    @Override
+    public void addImageSuccess() {
+        toast("添加图片成功", false);
+    }
+
+    @Override
+    public void addImageFailed() {
+        toast("添加图片失败", false);
     }
 
 }

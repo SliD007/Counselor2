@@ -426,7 +426,7 @@
                     android:layout_width="5dp"
                     style="@style/image1"/>
                 <TextView
-                    android:text="上传图片"
+                    android:text="图片"
                     android:layout_toRightOf="@id/imageLeftIm14"
                     style="@style/text_worklog"/>
                 <TextView
@@ -436,7 +436,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:paddingRight="10dp"
-                    android:text="请选择（可多选）"
                     android:textColor="#ccc"
                     android:textSize="16sp"
                     />

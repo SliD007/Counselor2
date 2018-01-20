@@ -1,5 +1,7 @@
 package test.example.com.counselor.view.service.showworklog;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.Serializable;
 
 /**
@@ -9,7 +11,7 @@ import java.io.Serializable;
 public class WorkLogDetialEntity implements Serializable{
 
     private int id;
-    private String serviceVillage;
+    private JSONObject serviceVillage;
     private String serviceObject;
     private String objectContact;
     private String serviceIdentity;
@@ -34,7 +36,7 @@ public class WorkLogDetialEntity implements Serializable{
     public String toString() {
         return "ChargeCaseDetialEntity{" +
                 "id=" + id +
-                ", serviceVillage='" + serviceVillage + '\'' +
+                ", serviceVillage='" + serviceVillage.toString() + '\'' +
                 ", serviceObject='" + serviceObject + '\'' +
                 ", objectContact='" + objectContact + '\'' +
                 ", serviceIdentity='" + serviceIdentity + '\'' +
@@ -55,13 +57,21 @@ public class WorkLogDetialEntity implements Serializable{
         this.id = id;
     }
 
-    public String getServiceVillage() {
+    public JSONObject getServiceVillage() {
         return serviceVillage;
     }
 
-    public void setServiceVillage(String serviceVillage) {
+    public void setServiceVillage(JSONObject serviceVillage) {
         this.serviceVillage = serviceVillage;
     }
+
+    public String getServiceVillageName() {
+        return serviceVillage.getString("username");
+    }
+    public int getServiceVillageId() {
+        return serviceVillage.getInteger("id");
+    }
+
 
     public String getServiceObject() {
         return serviceObject;
