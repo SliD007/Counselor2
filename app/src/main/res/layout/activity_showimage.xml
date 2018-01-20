@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#303135">
+    <include
+        layout="@layout/bar_back_title">
+
+    </include>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ccc">
+        <ImageView
+            android:id="@+id/showImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo2"
+            android:layout_centerInParent="true"/>
+        <RelativeLayout
+            android:layout_below="@id/showImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <TextView
+                android:id="@+id/showImageName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+            <Button
+                android:id="@+id/showForwordImage"
+                android:text="上一张"
+                android:layout_toLeftOf="@id/showImageName"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/showNextImage"
+                android:text="下一张"
+                android:layout_toRightOf="@id/showImageName"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

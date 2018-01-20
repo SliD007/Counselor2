@@ -2,6 +2,7 @@ package test.example.com.counselor.view.service.addworklog;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -231,6 +232,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                             sb.append("图片").append(i + 1).append(" ： ").append(imageItems.get(i).path).append("\n");
                     }
                     textview14.setText(sb.toString());
+                    Log.e("textview14",sb.toString());
                     textview14.setTextSize(10);
                 } else {
                     textview14.setText("--");

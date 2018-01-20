@@ -310,6 +310,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         Window dialogWindow = mDialog.getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         dialogWindow.setGravity(Gravity.CENTER);
+
         WindowManager m = getActivity().getWindowManager();
         Display d = m.getDefaultDisplay(); // 获取屏幕宽、高度
         lp.y = (int) (d.getWidth() * (-0.33));

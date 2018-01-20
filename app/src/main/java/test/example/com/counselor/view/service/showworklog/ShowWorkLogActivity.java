@@ -1,14 +1,13 @@
 package test.example.com.counselor.view.service.showworklog;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,6 +15,7 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.util.OpenFileUtil;
 import test.example.com.counselor.util.TimeUtil;
 
 /**
@@ -59,6 +59,7 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
     @BindView(R.id.textview15)
     TextView textview15;
 
+
     private ShowWorkLogPresenter mShowWorkLogPresenter;
     private WorkLogDetialEntity workLogDetialEntity;
 
@@ -97,27 +98,36 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
             textview11.setText(workLogDetialEntity.getSubType());
             textview12.setText(workLogDetialEntity.getObjecttype());
             textview13.setText(workLogDetialEntity.getServiceContent());
-            textview14.setText("--");
+            textview14.setText("有2张图，点击下载");
             textview15.setText(workLogDetialEntity.getResultType());
         }
 
-        Bitmap bitmap = getLoacalBitmap("/aa/aa.jpg"); //从本地取图片
     }
 
-    public static Bitmap getLoacalBitmap(String url) {
-        try {
-            FileInputStream fis = new FileInputStream(url);
-            return BitmapFactory.decodeStream(fis);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
-    @OnClick(R.id.backTv)
-    public void onClick() {
-        MyApplication.getInstance().finishActivity(this);
-        this.finish();
+    @OnClick({R.id.backTv,R.id.textview14})
+    public void onClick(View view) {
+    switch (view.getId()) {
+        case R.id.backTv:
+            MyApplication.getInstance().finishActivity(this);
+            this.finish();
+            break;
+        case R.id.textview14:
+//            Intent i = new Intent(ShowWorkLogActivity.this,ShowImageActivity.class);
+//            i.putExtra("imageUrl",
+//                    "/storage/emulated/0/DCIM/Camera/IMG_20171226_185748.jpg" +
+//                            "#/storage/emulated/0/DCIM/Camera/IMG20170107153920.jpg");
+//            startActivity(i);
+            File f=new File("/storage/emulated/0/DCIM/Camera/IMG_20171226_185748.jpg");
+            if (f == null){
+                toast("文件不存在",false);
+            }else {
+                Log.e("OpenFileUtil",""+f);
+                OpenFileUtil.openFile(ShowWorkLogActivity.this,f);
+            }
+//            this.finish();
+            break;
+    }
     }
 
 
