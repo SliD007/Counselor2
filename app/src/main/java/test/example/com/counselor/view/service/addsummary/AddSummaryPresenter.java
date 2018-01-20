@@ -40,7 +40,7 @@ public class AddSummaryPresenter {
         HashMap<String,String> params = new HashMap<>();
         params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
         params.put("village", MyApplication.getInstance().loginEntity.getVillageA()+" "+MyApplication.getInstance().loginEntity.getVillageB());
-        params.put("office",MyApplication.getInstance().loginEntity.getOffice());
+        params.put("office",MyApplication.getInstance().loginEntity.getOfficeName());
         params.put("contact", MyApplication.getInstance().loginEntity.getContact()+"");
         params.put("title",title);
         params.put("content",content);

@@ -41,7 +41,7 @@ public class AddAdvicePresenter {
         params.put("toType",rbId+"");
         params.put("reportType",0+"");
         params.put("contact", MyApplication.getInstance().loginEntity.getContact());
-        params.put("office",MyApplication.getInstance().loginEntity.getOffice());
+        params.put("office",MyApplication.getInstance().loginEntity.getOfficeName());
         Log.e("Advice",params.toString());
         OkGo.post(Urls.ReportAddURL)
                 .params(params)

@@ -104,7 +104,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
             //直接发起登录
             passwordEt.setText(password);
 //            password = Md5Util.md5(password);
-//            mLoginPresenter.loadLogin(this,account,password);
+            mLoginPresenter.loadLogin(this,account,password);
 //            mLoginPresenter.login(account,password);
         }else{
             rememberPwCb.setChecked(false);

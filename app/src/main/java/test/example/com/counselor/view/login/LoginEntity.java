@@ -17,7 +17,7 @@ public class LoginEntity implements Serializable{
     private String nation;
     private String contact;
     private String email;
-    private String office;
+    private JSONObject office;
     private String education;
     private String academy;
     private String name;
@@ -133,11 +133,11 @@ public class LoginEntity implements Serializable{
         this.nation = nation;
     }
 
-    public String getOffice() {
+    public JSONObject getOffice() {
         return office;
     }
 
-    public void setOffice(String organization) {
+    public void setOffice(JSONObject organization) {
         this.office = organization;
     }
 
@@ -197,7 +197,7 @@ public class LoginEntity implements Serializable{
                 ", nation='" + nation + '\'' +
                 ", contact='" + contact + '\'' +
                 ", email='" + email + '\'' +
-                ", office='" + office + '\'' +
+                ", office='" + office.toString() + '\'' +
                 ", education='" + education + '\'' +
                 ", name='" + name + '\'' +
                 ", experience='" + experience + '\'' +
@@ -220,6 +220,13 @@ public class LoginEntity implements Serializable{
     public String getVillageB(){
         if(getCommunityB()!=null)
             return getCommunityB().getString("username");
+        else
+            return "";
+    }
+
+    public String getOfficeName(){
+        if(getOffice()!=null)
+            return getOffice().getString("username");
         else
             return "";
     }

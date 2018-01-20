@@ -43,7 +43,7 @@ public class AddClassicCasePresenter {
         params.put("toType",1+"");
         params.put("reportType",1+"");
         params.put("contact", MyApplication.getInstance().loginEntity.getContact()+"");
-        params.put("office",MyApplication.getInstance().loginEntity.getOffice());
+        params.put("office",MyApplication.getInstance().loginEntity.getOfficeName());
         Log.e("addClassicCase",params.toString());
         OkGo.post(Urls.ReportAddURL)
                 .params(params)
