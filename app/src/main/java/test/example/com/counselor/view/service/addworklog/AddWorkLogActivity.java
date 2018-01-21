@@ -16,11 +16,8 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,10 +51,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     EditText editText04;
     @BindView(R.id.editText05)
     EditText editText05;
-    @BindView(R.id.textview06)
-    TextView textview06;
-    @BindView(R.id.textview07)
-    TextView textview07;
+
     @BindView(R.id.spinner08)
     Spinner spinner08;
     @BindView(R.id.spinner09)
@@ -161,28 +155,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner12.setAdapter(adapter);
         spinner12.setOnItemSelectedListener(mOnItemClickListener);
-        //T6
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
-        String now = sdf.format(new Date());
-        textview06.setText(now);
-        customDatePicker1 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
-            @Override
-            public void handle(String time) { // 回调接口，获得选中的时间
-                textview06.setText(time);
-            }
-        }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
-        customDatePicker1.showSpecificTime(true); // 显示时和分
-        customDatePicker1.setIsLoop(true); // 允许循环滚动
-        //T7
-        textview07.setText(now);
-        customDatePicker2 = new CustomDatePicker(this, new CustomDatePicker.ResultHandler() {
-            @Override
-            public void handle(String time) { // 回调接口，获得选中的时间
-                textview07.setText(time);
-            }
-        }, "2010-01-01 00:00", now); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
-        customDatePicker2.showSpecificTime(true); // 显示时和分
-        customDatePicker2.setIsLoop(true); // 允许循环滚动
+
         //S15
         list = new ArrayList<String>();
         list.add("未完结");
@@ -192,28 +165,6 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         spinner15.setAdapter(adapter);
         spinner15.setOnItemSelectedListener(mOnItemClickListener);
 
-    }
-
-    @OnClick({R.id.textview06, R.id.textview07, R.id.textview14})
-    public void onItemClick(View view) {
-        switch (view.getId()) {
-            case R.id.textview06:
-                customDatePicker1.show(textview06.getText().toString());
-                break;
-            case R.id.textview07:
-                customDatePicker2.show(textview07.getText().toString());
-                break;
-            case R.id.textview14:
-                ImagePicker imagePicker = ImagePicker.getInstance();
-                imagePicker.setImageLoader(new GlideImageLoader());
-                imagePicker.setMultiMode(true);   //多选
-                imagePicker.setShowCamera(true);  //显示拍照按钮
-                imagePicker.setSelectLimit(9);    //最多选择9张
-                imagePicker.setCrop(false);       //不进行裁剪
-                Intent intent = new Intent(this, ImageGridActivity.class);
-                startActivityForResult(intent, 100);
-                break;
-        }
     }
 
     //图片返回
@@ -286,9 +237,20 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     };
 
 
-    @OnClick({R.id.backTv, R.id.sumbitTv})
+    @OnClick({R.id.textview14, R.id.backTv, R.id.sumbitTv})
     public void onClick(View view) {
         switch (view.getId()) {
+
+            case R.id.textview14:
+                ImagePicker imagePicker = ImagePicker.getInstance();
+                imagePicker.setImageLoader(new GlideImageLoader());
+                imagePicker.setMultiMode(true);   //多选
+                imagePicker.setShowCamera(true);  //显示拍照按钮
+                imagePicker.setSelectLimit(9);    //最多选择9张
+                imagePicker.setCrop(false);       //不进行裁剪
+                Intent intent = new Intent(this, ImageGridActivity.class);
+                startActivityForResult(intent, 100);
+                break;
             case R.id.backTv:
                 MyApplication.getInstance().finishActivity(this);
                 this.finish();
@@ -298,8 +260,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                 sumbit_str[3] = editText03.getText().toString();
                 sumbit_str[4] = editText04.getText().toString();
                 sumbit_str[5] = editText05.getText().toString();
-                sumbit_str[6] = textview06.getText().toString();
-                sumbit_str[7] = textview07.getText().toString();
+
                 sumbit_str[13] = editText13.getText().toString();
                 if(imageItems!=null)
                     mAddWorkLogPersenter.addImage(imageItems);

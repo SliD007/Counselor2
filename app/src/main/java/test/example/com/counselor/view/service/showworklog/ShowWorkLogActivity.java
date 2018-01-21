@@ -21,7 +21,6 @@ import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.OpenFileUtil;
-import test.example.com.counselor.util.TimeUtil;
 
 /**
  * Created by Sli.D on 2018/1/11.
@@ -41,10 +40,7 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
     TextView textview04;
     @BindView(R.id.textview05)
     TextView textview05;
-    @BindView(R.id.textview06)
-    TextView textview06;
-    @BindView(R.id.textview07)
-    TextView textview07;
+
     @BindView(R.id.textview08)
     TextView textview08;
     @BindView(R.id.textview09)
@@ -98,8 +94,7 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
             textview03.setText(workLogDetialEntity.getObjectContact());
             textview04.setText(workLogDetialEntity.getServiceIdentity());
             textview05.setText(workLogDetialEntity.getInObject());
-            textview06.setText(TimeUtil.getDateToString(workLogDetialEntity.getCreateTime(),TimeUtil.DataTime));
-            textview07.setText(TimeUtil.getDateToString(workLogDetialEntity.getCreateTime(),TimeUtil.DataTime));
+
             textview08.setText(workLogDetialEntity.getFromType());
             textview09.setText(workLogDetialEntity.getServiceType());
             textview10.setText(workLogDetialEntity.getMatterType());

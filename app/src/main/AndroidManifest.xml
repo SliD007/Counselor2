@@ -93,7 +93,6 @@
 
         <activity android:name=".view.service.showworklog.ShowWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addworklog.AddWorkLogActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
-        <activity android:name=".view.service.showworklog.ShowImageActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
 
         <activity android:name=".view.service.showgroupcase.ShowGroupCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addgroupcase.AddGroupCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
