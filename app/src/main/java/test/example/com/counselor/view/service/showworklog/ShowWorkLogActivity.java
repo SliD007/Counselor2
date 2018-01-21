@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,6 +19,7 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.OpenFileUtil;
 import test.example.com.counselor.util.TimeUtil;
 
@@ -59,10 +64,13 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
     @BindView(R.id.textview15)
     TextView textview15;
 
-
+    @BindView(R.id.showImageLv)
+    ListView showImageLv;
+    int downloadIndex = 0;
+    String[] imageName ;
+    String[] content ;
     private ShowWorkLogPresenter mShowWorkLogPresenter;
     private WorkLogDetialEntity workLogDetialEntity;
-
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_showworklog);
@@ -97,48 +105,87 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
             textview10.setText(workLogDetialEntity.getMatterType());
             textview11.setText(workLogDetialEntity.getSubType());
             textview12.setText(workLogDetialEntity.getObjecttype());
-            textview13.setText(workLogDetialEntity.getServiceContent());
-            textview14.setText("有2张图，点击下载");
+            content = workLogDetialEntity.getServiceContent().split("#");
+            imageName = new String[content.length-1];
+            textview13.setText(content[0]);
+            if(content.length>1){
+                textview14.setText("有"+(content.length-1)+"张图，点击查看");
+
+            }
             textview15.setText(workLogDetialEntity.getResultType());
+
         }
 
     }
 
-
     @OnClick({R.id.backTv,R.id.textview14})
     public void onClick(View view) {
-    switch (view.getId()) {
-        case R.id.backTv:
-            MyApplication.getInstance().finishActivity(this);
-            this.finish();
-            break;
-        case R.id.textview14:
-//            Intent i = new Intent(ShowWorkLogActivity.this,ShowImageActivity.class);
-//            i.putExtra("imageUrl",
-//                    "/storage/emulated/0/DCIM/Camera/IMG_20171226_185748.jpg" +
-//                            "#/storage/emulated/0/DCIM/Camera/IMG20170107153920.jpg");
-//            startActivity(i);
-            File f=new File("/storage/emulated/0/DCIM/Camera/IMG_20171226_185748.jpg");
-            if (f == null){
-                toast("文件不存在",false);
-            }else {
-                Log.e("OpenFileUtil",""+f);
-                OpenFileUtil.openFile(ShowWorkLogActivity.this,f);
-            }
-//            this.finish();
-            break;
-    }
+        switch (view.getId()) {
+            case R.id.backTv:
+                MyApplication.getInstance().finishActivity(this);
+                this.finish();
+                break;
+            case R.id.textview14:
+
+                for(int i=1;i<content.length;i++){
+                    String fileName = content[i].split("/")[content[i].split("/").length-1];
+                    imageName[i-1] = fileName;
+                    if(!OpenFileUtil.fileIsExists(Constants.getAppImageFolder()+"/"+fileName)){
+                        textview14.setText("正在下载,请稍等...");
+                        mShowWorkLogPresenter.downLoadImage(content[i],fileName);
+                    }else {
+                        initImage();
+                    }
+                    downloadIndex++;
+                }
+                break;
+        }
     }
 
 
     @Override
     public void requestWorkLogDetialSuccess() {
-        toast("请求成功", false);
+//        toast("请求成功", false);
         initView();
     }
 
     @Override
     public void requestWorkLogDetialFailed() {
         toast("请求失败", false);
+    }
+
+    @Override
+    public void downloadImageSuccess() {
+        textview14.setText("下载完成");
+        initImage();
+    }
+
+    @Override
+    public void downloadImageFailed() {
+
+    }
+
+    private void initImage(){
+        if (downloadIndex==content.length-1){
+            Log.e("imageName",""+imageName.toString());
+            ViewGroup.LayoutParams para = showImageLv.getLayoutParams();
+            para.height = 100*imageName.length;
+            showImageLv.setLayoutParams(para);
+            showImageLv.setAdapter(new ArrayAdapter<String>(this,R.layout.item_1list,imageName));
+            showImageLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    File f=new File(Constants.getAppImageFolder()+"/"+imageName[position]);
+                    if (f == null){
+                        toast("文件不存在",false);
+                    }else {
+                        Log.e("OpenFileUtil",""+f);
+                        OpenFileUtil.openFile(ShowWorkLogActivity.this,f);
+                    }
+
+                }
+            });
+        }
+
     }
 }

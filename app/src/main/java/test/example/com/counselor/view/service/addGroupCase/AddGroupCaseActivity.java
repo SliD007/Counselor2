@@ -176,6 +176,11 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
             switch (parent.getId()) {
                 case R.id.spinner1:
                     sumbit_str[1] = parent.getSelectedItem().toString();
+                    if(position==0){
+                        sumbit_int[1] = MyApplication.getInstance().loginEntity.getVillageAId();
+                    }else {
+                        sumbit_int[1] = MyApplication.getInstance().loginEntity.getVillageBId();
+                    }
                     break;
                 case R.id.spinner5:
                     sumbit_int[5] = position;
@@ -205,7 +210,10 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
                 sumbit_int[3] =Integer.valueOf(editText3.getText().toString()).intValue();
                 sumbit_str[4] = textview4.getText().toString();
                 sumbit_str[6] = editText6.getText().toString();
-                mAddGroupCasePersenter.addgroupCase(sumbit_str,sumbit_int);
+                if(imageItems!=null)
+                    mAddGroupCasePersenter.addImage(imageItems);
+                else
+                    mAddGroupCasePersenter.addGroupCase(sumbit_str,sumbit_int);
 
                 break;
         }
@@ -225,4 +233,16 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
         toast("添加失败", false);
     }
 
+    @Override
+    public void addImageSuccess(String imageUrl) {
+        toast("添加图片成功", false);
+        sumbit_str[6] = sumbit_str[6] +"#"+imageUrl;
+        mAddGroupCasePersenter.addGroupCase(sumbit_str,sumbit_int);
+    }
+
+    @Override
+    public void addImageFailed() {
+        toast("添加图片失败，仅提交了文本", false);
+        mAddGroupCasePersenter.addGroupCase(sumbit_str,sumbit_int);
+    }
 }

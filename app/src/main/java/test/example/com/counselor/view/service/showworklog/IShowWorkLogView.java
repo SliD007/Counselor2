@@ -7,4 +7,6 @@ package test.example.com.counselor.view.service.showworklog;
 public interface IShowWorkLogView {
     void requestWorkLogDetialSuccess();
     void requestWorkLogDetialFailed();
+    void downloadImageSuccess();
+    void downloadImageFailed();
 }

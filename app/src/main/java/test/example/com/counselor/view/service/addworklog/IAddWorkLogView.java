@@ -7,6 +7,7 @@ package test.example.com.counselor.view.service.addworklog;
 public interface IAddWorkLogView {
     void addSuccess();
     void addFailed();
-    void addImageSuccess();
+    void addImageSuccess(String imageUrl);
     void addImageFailed();
+
 }

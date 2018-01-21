@@ -469,7 +469,7 @@
                     android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
-                    android:text="结果类型"
+                    android:text="完成状态"
                     android:layout_toRightOf="@id/imageLeftIm15"
                     style="@style/text_worklog"/>
                 <ImageView
@@ -488,27 +488,27 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom">
+                android:layout_height="match_parent">
                 <ImageView
                     android:id="@+id/imageLeftIm14"
                     android:layout_width="5dp"
                     style="@style/image1"/>
                 <TextView
-                    android:text="上传图片"
-                    android:layout_toRightOf="@id/imageLeftIm14"
-                    style="@style/text_worklog"/>
-                <TextView
                     android:id="@+id/textview14"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:paddingRight="10dp"
-                    android:text="请选择（可多选）"
-                    android:textColor="#ccc"
-                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_toRightOf="@id/imageLeftIm14"
                     />
+
+                <ListView
+                    android:id="@+id/showImageLv"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_below="@id/textview14">
+                </ListView>
             </RelativeLayout>
             <View
                 android:layout_width="match_parent"

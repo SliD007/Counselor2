@@ -7,4 +7,6 @@ package test.example.com.counselor.view.service.addchargecase;
 public interface IAddChargeCaseView {
     void addSuccess();
     void addFailed();
+    void addImageSuccess(String imageUrl);
+    void addImageFailed();
 }

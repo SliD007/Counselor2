@@ -212,7 +212,7 @@
                     android:layout_width="5dp"
                     style="@style/image1"/>
                 <TextView
-                    android:text="群体性案件类型"
+                    android:text="完成状态"
                     android:layout_toRightOf="@id/imageLeftIm8"
                     style="@style/text_worklog"/>
                 <ImageView

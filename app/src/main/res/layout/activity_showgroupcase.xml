@@ -119,9 +119,6 @@
                     android:id="@+id/textview4"
                     android:layout_toLeftOf="@id/imageRightIm4"
                     style="@style/log_spinner"
-                    android:layout_width="160dp"
-                    android:text="请选择时间"
-                    android:textColor="#ccc"
                     android:textSize="16sp"
                     />
             </RelativeLayout>
@@ -200,19 +197,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <ImageView
-                    android:id="@+id/imageLeftIm8"
+                    android:id="@+id/imageLeftIm7"
                     android:layout_width="5dp"
                     style="@style/image1"/>
                 <TextView
-                    android:text="群体性案件类型"
-                    android:layout_toRightOf="@id/imageLeftIm8"
+                    android:text="完结状态"
+                    android:layout_toRightOf="@id/imageLeftIm7"
                     style="@style/text_worklog"/>
                 <ImageView
-                    android:id="@+id/imageRightIm8"
+                    android:id="@+id/imageRightIm7"
                     style="@style/nextIm"/>
                 <TextView
-                    android:id="@+id/textview8"
-                    android:layout_toLeftOf="@id/imageRightIm8"
+                    android:id="@+id/textview7"
+                    android:layout_toLeftOf="@id/imageRightIm7"
                     style="@style/log_spinner"
                     />
             </RelativeLayout>
@@ -226,24 +223,23 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom">
                 <ImageView
-                    android:id="@+id/imageLeftIm7"
+                    android:id="@+id/imageLeftIm8"
                     android:layout_width="5dp"
                     style="@style/image1"/>
                 <TextView
-                    android:text="上传图片"
-                    android:layout_toRightOf="@id/imageLeftIm7"
-                    style="@style/text_worklog"/>
-                <TextView
-                    android:id="@+id/textview7"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:paddingRight="10dp"
-                    android:text="请选择（可多选）"
-                    android:textColor="#ccc"
-                    android:textSize="16sp"
-                    />
+                    android:id="@+id/textview8"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/imageLeftIm14"/>
+                <ListView
+                    android:id="@+id/showImageLv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_below="@id/textview8">
+                </ListView>
             </RelativeLayout>
             <View
                 android:layout_width="match_parent"

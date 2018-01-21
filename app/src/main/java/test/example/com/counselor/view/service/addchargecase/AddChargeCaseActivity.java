@@ -85,8 +85,8 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
         ButterKnife.bind(this);
         super.allow_quit = false;
         titleBarTv.setText("新增另行收费案件");
-        initView();
         mAddChargeCasePersenter = new AddChargeCasePersenter(this, this);
+        initView();
     }
 
     String[] str08 = new String[]{"电话","来访","微信","QQ","如法网"};
@@ -227,6 +227,11 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
             switch (parent.getId()) {
                 case R.id.spinner01:
                     sumbit_str[1] = parent.getSelectedItem().toString();
+                    if(position==0){
+                        sumbit_int[1] = MyApplication.getInstance().loginEntity.getVillageAId();
+                    }else {
+                        sumbit_int[1] = MyApplication.getInstance().loginEntity.getVillageBId();
+                    }
                     break;
                 case R.id.spinner08:
                     sumbit_int[8] = position;
@@ -271,11 +276,14 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
                 sumbit_str[2] = editText02.getText().toString();
                 sumbit_str[3] = editText03.getText().toString();
                 sumbit_str[4] = editText04.getText().toString();
-                sumbit_str[5] = editText05.getText().toString();
+                sumbit_int[5] = Integer.valueOf(editText05.getText().toString()).intValue();
 
                 sumbit_str[13] = editText13.getText().toString();
                 sumbit_str[16] = editText16.getText().toString();
-                mAddChargeCasePersenter.addchargeCase(sumbit_str,sumbit_int);
+                if(imageItems!=null)
+                    mAddChargeCasePersenter.addImage(imageItems);
+                else
+                    mAddChargeCasePersenter.addChargeCase(sumbit_str,sumbit_int);
 
                 break;
         }
@@ -293,6 +301,19 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
     @Override
     public void addFailed() {
         toast("添加失败", false);
+    }
+
+    @Override
+    public void addImageSuccess(String imageUrl) {
+        toast("添加图片成功", false);
+        sumbit_str[13] = sumbit_str[13] +"#"+imageUrl;
+        mAddChargeCasePersenter.addChargeCase(sumbit_str,sumbit_int);
+    }
+
+    @Override
+    public void addImageFailed() {
+        toast("添加图片失败，仅提交了文本", false);
+        mAddChargeCasePersenter.addChargeCase(sumbit_str,sumbit_int);
     }
 
 }

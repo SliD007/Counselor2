@@ -1,5 +1,7 @@
 package test.example.com.counselor.view.service.showchargecase;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.Serializable;
 
 /**
@@ -8,8 +10,9 @@ import java.io.Serializable;
 
 public class ChargeCaseDetialEntity implements Serializable{
 
+
     private int id;
-    private String serviceVillage;
+    private JSONObject serviceVillage;
     private String serviceObject;
     private String objectContact;
     private String serviceIdentity;
@@ -26,6 +29,45 @@ public class ChargeCaseDetialEntity implements Serializable{
     private String accessory;
     private String resultType;
 
+    private String objectAddress;
+    private String matterMoney ;
+
+    public String getResultContent() {
+        return resultContent;
+    }
+
+    public void setResultContent(String resultContent) {
+        this.resultContent = resultContent;
+    }
+
+    private String resultContent;
+
+    public String getObjectAddress() {
+        return objectAddress;
+    }
+
+    public void setObjectAddress(String objectAddress) {
+        this.objectAddress = objectAddress;
+    }
+
+    public String getMatterMoney() {
+        return matterMoney;
+    }
+
+    public void setMatterMoney(String matterMoney) {
+        this.matterMoney = matterMoney;
+    }
+
+    public boolean isConflict() {
+        return isConflict;
+    }
+
+    public void setConflict(boolean conflict) {
+        isConflict = conflict;
+    }
+
+    private boolean isConflict;
+
     public int getId() {
         return id;
     }
@@ -34,7 +76,7 @@ public class ChargeCaseDetialEntity implements Serializable{
     public String toString() {
         return "ChargeCaseDetialEntity{" +
                 "id=" + id +
-                ", serviceVillage='" + serviceVillage + '\'' +
+                ", serviceVillage=" + serviceVillage +
                 ", serviceObject='" + serviceObject + '\'' +
                 ", objectContact='" + objectContact + '\'' +
                 ", serviceIdentity='" + serviceIdentity + '\'' +
@@ -48,6 +90,10 @@ public class ChargeCaseDetialEntity implements Serializable{
                 ", serviceContent='" + serviceContent + '\'' +
                 ", accessory='" + accessory + '\'' +
                 ", resultType='" + resultType + '\'' +
+                ", objectAddress='" + objectAddress + '\'' +
+                ", matterMoney='" + matterMoney + '\'' +
+                ", isConflict=" + isConflict +
+                ", resultContent=" + resultContent +
                 '}';
     }
 
@@ -55,13 +101,21 @@ public class ChargeCaseDetialEntity implements Serializable{
         this.id = id;
     }
 
-    public String getServiceVillage() {
+    public JSONObject getServiceVillage() {
         return serviceVillage;
     }
 
-    public void setServiceVillage(String serviceVillage) {
+    public void setServiceVillage(JSONObject serviceVillage) {
         this.serviceVillage = serviceVillage;
     }
+
+    public String getServiceVillageName() {
+        return serviceVillage.getString("username");
+    }
+    public int getServiceVillageId() {
+        return serviceVillage.getInteger("id");
+    }
+
 
     public String getServiceObject() {
         return serviceObject;
@@ -166,6 +220,7 @@ public class ChargeCaseDetialEntity implements Serializable{
     public void setResultType(String resultType) {
         this.resultType = resultType;
     }
+
 
     public ChargeCaseDetialEntity() {
 

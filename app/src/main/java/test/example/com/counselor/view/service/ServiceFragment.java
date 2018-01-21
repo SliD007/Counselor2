@@ -220,7 +220,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 if(times < 2){
                     new Handler().postDelayed(new Runnable(){
                         public void run() {
-                            toast("上滑加载1",false);
+//                            toast("上滑加载1",false);
                             mRecyclerView.loadMoreComplete();
                             mAdapter.notifyDataSetChanged();
                         }
@@ -228,7 +228,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 } else {
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
-                            toast("上滑加载2",false);
+//                            toast("上滑加载2",false);
                             mRecyclerView.setNoMore(true);
                             mAdapter.notifyDataSetChanged();
                         }
@@ -317,7 +317,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     @Override
     public void requestServiceSuccess() {
 //        toast("请求成功", false);
-        Log.e("ServiceFragment","请求成功");
+//        Log.e("ServiceFragment","请求成功");
         initDatas();
     }
 
@@ -338,7 +338,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     MyLvClickListener mClickListener = new MyLvClickListener() {
         @Override
         public void myOnClick(int position, View view) {
-            toast("" + (position), true);
+//            toast("" + (position), true);
             Intent i;
             switch (fragmentType){
                 case 0:

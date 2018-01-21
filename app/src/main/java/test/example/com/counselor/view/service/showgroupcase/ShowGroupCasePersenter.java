@@ -5,19 +5,15 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.callback.StringCallback;
 
+import java.io.File;
 import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Response;
-import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.Urls;
 
@@ -27,134 +23,87 @@ import test.example.com.counselor.util.Urls;
 
 public class ShowGroupCasePersenter {
 
+    GroupCaseDetialEntity groupCaseDetialEntity;
     private IShowGroupCaseView mIShowGroupCaseView;
+    private IShowGroupCaseModel mIShowGroupCaseModel;
     public ShowGroupCasePersenter(Context context, IShowGroupCaseView iShowGroupCaseView) {
         this.mIShowGroupCaseView = iShowGroupCaseView;
+        this.mIShowGroupCaseModel = new ShowGroupCaseModel();
     }
-
-
-    public void addGroupCase(String[] str, int[] inter){
+    public void requestGroupCaseDetial(int id){
 
         HashMap<String,String> params = new HashMap<>();
-        params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
-        params.put("logType", 0+"");
-        params.put("serviceVillage", str[1]);
-        params.put("serviceObject", str[2]);
-        params.put("objectContact", str[3]);
-        params.put("serviceIdentity", str[4]);
-        params.put("inObject", str[5]);
-        //开始时间
-        //结束时间
-        params.put("fromType", inter[8]+"");
-        params.put("serviceType", inter[9]+"");
-        params.put("matterType", str[10]);
-        params.put("subType", str[11]);
-        params.put("objectType", inter[12]+"");
-        params.put("serviceContent", str[13]);
-        //图片
-        params.put("resultType", inter[15]+"");
-
-        //多余的接口字段
-        params.put("accessory", "");
-        params.put("resultContent", "");
-        params.put("matterPlace", "");
-        params.put("matterNum", 0+"");
-        params.put("matterTime", "");
-        params.put("objectAddress", "");
-        params.put("matterMoney", 0+"");
-        params.put("isConflict", false+"");
-
-        Log.e("getParams",params.toString());
-        OkGo.post(Urls.WorkLogAddURL)
+        params.put("id",id+"");
+        OkGo.post(Urls.WorkLogConfigurationURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
 //                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                 .cacheTime(-1)
                 .execute(new StringCallback() {
+                    @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("addWorkLog","response:"+response.toString());
-                        Log.e("addWorkLog","onSuccess:"+s);
+//                        Log.e("requestWorklogDetial","response:"+response.toString());
+                        Log.e("requestWorklogDetial","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
+                            saveValue(object);
+                            mIShowGroupCaseView.requestGroupCaseSuccess();
 
-                            mIShowGroupCaseView.addSuccess();
                         }else {
-                            mIShowGroupCaseView.addFailed();
+                            mIShowGroupCaseView.requestGroupCaseFailed();
                         }
                     }
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
-                        mIShowGroupCaseView.addFailed();
+                        mIShowGroupCaseView.requestGroupCaseFailed();
+                    }
+
+                    @Override
+                    public void onAfter(String s, Exception e) {
+                        super.onAfter(s, e);
+                    }
+
+                });
+    }
+
+    public void downLoadImage(String url, String fileName){
+
+//        Log.e("downLoadContract","fileName:"+Constants.getAppDownloadFolder());
+
+        OkGo.<File>get(url)//
+                .tag(this)//
+                .headers("header1", "headerValue1")//
+                .params("param1", "paramValue1")//
+                .execute(new FileCallback(Constants.getAppImageFolder(),fileName) {
+
+                    @Override
+                    public void onSuccess(File file, Call call, Response response) {
+                        Log.e("downLoadContract","onSuccess:"+response.toString());
+                        mIShowGroupCaseView.downloadImageSuccess();
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+//                        Log.e("downLoadContract","/storage/emulated/0/download/:"+response.toString());
+                        mIShowGroupCaseView.downloadImageFailed();
                     }
                 });
     }
 
-    public void addgroupCase(final String[] str, final int[] inter){
+    public void saveValue(JSONObject object){
 
+        JSONObject value = object.getJSONObject("value");
+//        Log.e("requestWorkLog",""+value.toString());
+        groupCaseDetialEntity = JSONObject.parseObject(value.toString(),GroupCaseDetialEntity.class);
+        mIShowGroupCaseModel.setGroupCaseDetialEntity(groupCaseDetialEntity);
+        Log.e("EntityDetail",""+groupCaseDetialEntity.toString());
 
-        StringRequest request4LoginRequest = new StringRequest(
-                Request.Method.POST, Urls.WorkLogAddURL, new com.android.volley.Response.Listener<String>() {
-            @Override
-            public void onResponse(String arg0) {
-                Log.e("loginInfo", arg0);// 打印登录返回的数据
-                try {
-                    JSONObject object = JSON.parseObject(arg0);
-                    if (object.getInteger("code")==0){
-                        mIShowGroupCaseView.addSuccess();
-                    }else {
-                        mIShowGroupCaseView.addFailed();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new com.android.volley.Response.ErrorListener() {
+    }
 
-            @Override
-            public void onErrorResponse(VolleyError arg0) {
-                Log.e("loginInfo", arg0.toString());// 打印错误信息
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
-                params.put("logType", 1+"");
-
-                params.put("serviceVillage", str[1]);
-                params.put("matterPlace", str[2]);
-                params.put("matterNum", inter[3]+"");
-                params.put("matterTime", str[4]);
-
-                params.put("objectType", inter[5]+8+"");
-                params.put("serviceContent", str[6]);
-                params.put("resultType", inter[8]+"");
-                //图片
-
-                //多余的接口字段
-                params.put("serviceObject","");
-                params.put("objectContact", "");
-                params.put("serviceIdentity", "");
-                params.put("inObject", "");
-                params.put("fromType", 0+"");
-                params.put("serviceType", 0+"");
-                params.put("matterType", "");
-                params.put("subType", "");
-                params.put("accessory", "");
-                params.put("resultContent", "");
-                params.put("objectAddress", "");
-                params.put("matterMoney", 0+"");
-                params.put("isConflict", false+"");
-
-                Log.e("getParams",params.toString());
-                return params;
-            }
-
-        };
-        MyApplication.getInstance().addToRequestQueue(request4LoginRequest, "");
+    public GroupCaseDetialEntity getGroupCaseDetialEntity(){
+        return mIShowGroupCaseModel.getGroupCaseDetialEntity();
     }
 
 }

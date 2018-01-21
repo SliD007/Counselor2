@@ -500,7 +500,7 @@
                     android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
-                    android:text="案件完成状态"
+                    android:text="完成状态"
                     android:layout_toRightOf="@id/imageLeftIm15"
                     style="@style/text_worklog"/>
                 <ImageView

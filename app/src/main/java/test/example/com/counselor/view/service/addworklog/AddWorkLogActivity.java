@@ -88,8 +88,10 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        initView();
+        super.allow_quit = false;
+        titleBarTv.setText("新增工作日志");
         mAddWorkLogPersenter = new AddWorkLogPersenter(this, this);
+        initView();
     }
 
     String[] str08 = new String[]{"电话","来访","微信","QQ","如法网"};
@@ -101,8 +103,6 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
 
     private void initView() {
 
-        super.allow_quit = false;
-        titleBarTv.setText("新增工作日志");
         sumbit_str = new String[20];
         sumbit_int = new int[20];
         //S01
@@ -301,9 +301,11 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                 sumbit_str[6] = textview06.getText().toString();
                 sumbit_str[7] = textview07.getText().toString();
                 sumbit_str[13] = editText13.getText().toString();
-                mAddWorkLogPersenter.addWorkLog(sumbit_str,sumbit_int);
                 if(imageItems!=null)
                     mAddWorkLogPersenter.addImage(imageItems);
+                else
+                    mAddWorkLogPersenter.addWorkLog(sumbit_str,sumbit_int);
+
                 break;
         }
     }
@@ -323,13 +325,16 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     }
 
     @Override
-    public void addImageSuccess() {
+    public void addImageSuccess(String imageUrl) {
         toast("添加图片成功", false);
+        sumbit_str[13] = sumbit_str[13] +"#"+imageUrl;
+        mAddWorkLogPersenter.addWorkLog(sumbit_str,sumbit_int);
     }
 
     @Override
     public void addImageFailed() {
-        toast("添加图片失败", false);
+        toast("添加图片失败，仅提交了文本", false);
+        mAddWorkLogPersenter.addWorkLog(sumbit_str,sumbit_int);
     }
 
 }

@@ -3,7 +3,14 @@ package test.example.com.counselor.view.service.showchargecase;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -11,6 +18,8 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.util.Constants;
+import test.example.com.counselor.util.OpenFileUtil;
 
 /**
  * Created by Sli.D on 2018/1/11.
@@ -51,6 +60,11 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
     @BindView(R.id.textview17)
     TextView textview17;
 
+    @BindView(R.id.showImageLv)
+    ListView showImageLv;
+    int downloadIndex = 0;
+    String[] imageName ;
+    String[] content ;
     private ShowChargeCasePresenter mShowChargeCasePresenter;
     private ChargeCaseDetialEntity chargeCaseDetialEntity;
 
@@ -70,35 +84,60 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
         Intent i = getIntent();
         int id = i.getIntExtra("id", 0);
         mShowChargeCasePresenter = new ShowChargeCasePresenter(this, this);
-        Log.e("onCreate","mShowChargeCasePresenter");
         mShowChargeCasePresenter.requestWorkLogDetial(id);
     }
 
     private void initView() {
         chargeCaseDetialEntity = mShowChargeCasePresenter.getChargeCaseDetialEntity();
         if (chargeCaseDetialEntity != null) {
-            textview01.setText(chargeCaseDetialEntity.getServiceVillage());
+            textview01.setText(chargeCaseDetialEntity.getServiceVillageName());
             textview17.setText("否");
+            if(chargeCaseDetialEntity.isConflict())
+                textview17.setText("是");
             textview02.setText(chargeCaseDetialEntity.getServiceObject());
             textview03.setText(chargeCaseDetialEntity.getObjectContact());
-            textview04.setText(chargeCaseDetialEntity.getServiceIdentity());
-            textview05.setText(chargeCaseDetialEntity.getInObject());
+            textview04.setText(chargeCaseDetialEntity.getObjectAddress());
+            textview05.setText(chargeCaseDetialEntity.getMatterMoney());
             textview08.setText(chargeCaseDetialEntity.getFromType());
             textview09.setText(chargeCaseDetialEntity.getServiceType());
             textview10.setText(chargeCaseDetialEntity.getMatterType());
             textview11.setText(chargeCaseDetialEntity.getSubType());
             textview12.setText(chargeCaseDetialEntity.getObjecttype());
-            textview13.setText(chargeCaseDetialEntity.getServiceContent());
-            textview15.setText("在处理");
+            textview16.setText(chargeCaseDetialEntity.getResultContent());
             textview15.setText(chargeCaseDetialEntity.getResultType());
-            textview14.setText("无图");
+
+            content = chargeCaseDetialEntity.getServiceContent().split("#");
+            imageName = new String[content.length-1];
+            textview13.setText(content[0]);
+            if(content.length>1){
+                textview14.setText("有"+(content.length-1)+"张图，点击查看");
+
+            }
         }
     }
 
-    @OnClick(R.id.backTv)
-    public void onClick() {
-        MyApplication.getInstance().finishActivity(this);
-        this.finish();
+    @OnClick({R.id.backTv,R.id.textview14})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.backTv:
+                MyApplication.getInstance().finishActivity(this);
+                this.finish();
+                break;
+            case R.id.textview14:
+
+                for(int i=1;i<content.length;i++){
+                    String fileName = content[i].split("/")[content[i].split("/").length-1];
+                    imageName[i-1] = fileName;
+                    if(!OpenFileUtil.fileIsExists(Constants.getAppImageFolder()+"/"+fileName)){
+                        textview14.setText("正在下载,请稍等...");
+                        mShowChargeCasePresenter.downLoadImage(content[i],fileName);
+                    }else {
+                        initImage();
+                    }
+                    downloadIndex++;
+                }
+                break;
+        }
     }
 
 
@@ -111,5 +150,40 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
     @Override
     public void requestWorkLogDetialFailed() {
         toast("请求失败", false);
+    }
+
+    @Override
+    public void downloadImageSuccess() {
+        textview14.setText("下载完成");
+        initImage();
+    }
+
+    @Override
+    public void downloadImageFailed() {
+
+    }
+
+    private void initImage(){
+        if (downloadIndex==content.length-1){
+            Log.e("imageName",""+imageName.toString());
+            ViewGroup.LayoutParams para = showImageLv.getLayoutParams();
+            para.height = 100*imageName.length;
+            showImageLv.setLayoutParams(para);
+            showImageLv.setAdapter(new ArrayAdapter<String>(this,R.layout.item_1list,imageName));
+            showImageLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    File f=new File(Constants.getAppImageFolder()+"/"+imageName[position]);
+                    if (f == null){
+                        toast("文件不存在",false);
+                    }else {
+                        Log.e("OpenFileUtil",""+f);
+                        OpenFileUtil.openFile(ShowChargeCaseActivity.this,f);
+                    }
+
+                }
+            });
+        }
+
     }
 }

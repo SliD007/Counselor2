@@ -5,6 +5,8 @@ package test.example.com.counselor.view.service.showgroupcase;
  */
 
 public interface IShowGroupCaseView {
-    void addSuccess();
-    void addFailed();
+    void requestGroupCaseSuccess();
+    void requestGroupCaseFailed();
+    void downloadImageSuccess();
+    void downloadImageFailed();
 }

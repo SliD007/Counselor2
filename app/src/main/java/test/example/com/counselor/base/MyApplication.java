@@ -21,6 +21,7 @@ import com.tencent.bugly.crashreport.CrashReport;
 import java.util.LinkedList;
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
 import test.example.com.counselor.view.login.LoginEntity;
 
 import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
@@ -64,6 +65,8 @@ public class MyApplication extends Application {
         }
         //okgo框架
         initOkGo();
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     private void initOkGo() {

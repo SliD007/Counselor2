@@ -7,4 +7,6 @@ package test.example.com.counselor.view.service.showchargecase;
 public interface IShowChargeCaseView {
     void requestWorkLogDetialSuccess();
     void requestWorkLogDetialFailed();
+    void downloadImageSuccess();
+    void downloadImageFailed();
 }

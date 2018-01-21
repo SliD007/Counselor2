@@ -182,7 +182,7 @@ public class AddWorkLogPersenter {
                         Log.e("addWorkLog","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getString("result").equals("success")){
-                            mIAddWorkLogView.addImageSuccess();
+                            mIAddWorkLogView.addImageSuccess(object.getString("url"));
                         }else {
                             mIAddWorkLogView.addImageFailed();
                         }
@@ -194,4 +194,6 @@ public class AddWorkLogPersenter {
                     }
                 });
     }
+
+
 }
