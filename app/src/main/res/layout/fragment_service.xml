@@ -102,7 +102,12 @@
                 android:layout_above="@id/addTv"/>
         </RelativeLayout>
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/noneTv"
+        android:gravity="center"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/recyclerview"
         android:background="#ffffff"

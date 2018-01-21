@@ -32,4 +32,5 @@ public class Urls {
     public static final String SummaryAddURL = "http://law.d9lab.net/pad/monthly/addMonthly";
 
     public static final String UpdataFileURL = "http://law.d9lab.net/upController/**";
+    public static final String NewsURL = "http://law.d9lab.net/jpush/getPushMessage";
 }

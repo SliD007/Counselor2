@@ -1,5 +1,9 @@
 package test.example.com.counselor.view.rank;
 
+import android.util.Log;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 
@@ -12,14 +16,17 @@ import okhttp3.Response;
 import test.example.com.counselor.base.BasePresenter;
 import test.example.com.counselor.base.MyApplication;
 
+import static test.example.com.counselor.util.Urls.RankURL;
+
 /**
  * Created by Sli.D on 2017/5/17.
  */
 
 public class RankPresenter extends BasePresenter{
+
     private IRankView mIRankView;
     private IRankModel mRankModel;
-    private String URL = "http:www.baidu.com";
+
     public RankPresenter(IRankView view){
         mIRankView = view;
         mRankModel = new RankModel();
@@ -27,25 +34,17 @@ public class RankPresenter extends BasePresenter{
 
     public void requestRank(){
         HashMap<String,String> params = new HashMap<>();
-        params.put("contact",""+ MyApplication.getInstance().loginEntity.getContact());
-        OkGo.post(URL).params(params).execute(new StringCallback() {
+        params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
+        OkGo.post(RankURL).params(params).execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {
-//                Log.e("s",s);
-                List<RankEntity> entities = new ArrayList<RankEntity>();
-                entities.add(new RankEntity("黄可","西递","1","20","10","10","5","20","5","20"));
-                entities.add(new RankEntity("绿山","宏村","2","20","10","10","5","20","5","20"));
-                entities.add(new RankEntity("黄可","西递","3","20","10","10","5","20","5","20"));
-                entities.add(new RankEntity("绿山","宏村","4","20","10","10","5","20","5","20"));
-                entities.add(new RankEntity("黄可","西递","5","20","10","10","5","20","5","20"));
-                entities.add(new RankEntity("绿山","宏村","6","20","10","10","5","20","5","20"));
-                entities.add(new RankEntity("黄可","西递","7","20","10","10","5","20","5","20"));
-                entities.add(new RankEntity("绿山","宏村","8","20","10","10","5","20","5","20"));
-                entities.add(new RankEntity("黄可","西递","9","20","10","10","5","20","5","20"));
-                entities.add(new RankEntity("绿山","宏村","10","20","10","10","5","20","5","20"));
-
-                mRankModel.setRankEntities(entities);
-                mIRankView.requestRankSuccess();
+                JSONObject object = JSONObject.parseObject(s);
+                if(object.getInteger("code")==0){
+                    saveValue(object);
+                    mIRankView.requestRankSuccess();
+                }else {
+                    mIRankView.requestRankFailed();
+                }
 
             }
             @Override
@@ -66,7 +65,25 @@ public class RankPresenter extends BasePresenter{
     public void onDetachView() {
 
     }
+    public void saveValue(JSONObject object){
+        List<RankEntity> rankEntities = new ArrayList<>();
+        JSONObject value = JSON.parseObject(object.getString("value"));
+        for(int i=0;i<11;i++){
+            try{
+                JSONObject counselor = value.getJSONObject(String.valueOf(i));
+//                Log.e("counselor",""+counselor.toString());
+                RankEntity rankEntity =  JSON.parseObject(counselor.toString(),RankEntity.class);
+                rankEntities.add(rankEntity);
+//                Log.e("LoginEntity",rankEntity.toString());
+            }catch (Exception e){
+                continue;
+            }
 
+        }
+        Log.e("rankEntities",""+rankEntities.size());
+        mRankModel.setRankEntities(rankEntities);
+
+    }
     public List<RankEntity> getRankEntity(){
         return mRankModel.getRankEntities();
     }

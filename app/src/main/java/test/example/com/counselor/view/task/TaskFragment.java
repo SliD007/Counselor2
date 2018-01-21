@@ -53,13 +53,16 @@ public class TaskFragment extends BaseFragment implements ITaskView {
     View backlogRightVw;
     @BindView(R.id.backlogRightTv)
     TextView backlogRightTv;
-
+    @BindView(R.id.noneTv)
+    TextView noneTv;
+    ViewGroup.LayoutParams para;
+    String noneStr = "加载中";
     TaskPresenter mTaskPresenter;
     List<ToDoTaskEntity> toDoListEntities;
     List<DoneTaskEntity> doneListEntities;
     private int fragmentType;
     private int[] fragmentCuttent;
-    private int requestSize=20;
+    private int requestSize=10;
     private int star;
 
     @BindView(R.id.recyclerview)
@@ -67,6 +70,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
     private CommonAdapter mAdapter;
     private int refreshTime = 0;
     private int times = 0;
+
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_task;
@@ -76,14 +80,13 @@ public class TaskFragment extends BaseFragment implements ITaskView {
     @Override
     protected void initPresenter() {
         fragmentType = 0;
-        fragmentCuttent = new int[]{0, 0};
+        fragmentCuttent = new int[]{1, 1};
         mTaskPresenter = new TaskPresenter(getActivity(), this);
-        star = mTaskPresenter.requestStar();
+        star = MyApplication.getInstance().loginEntity.getStar();
         //查看状态: 0/已查看 1/未查看
         mTaskPresenter.requestTask(fragmentCuttent[0], requestSize, 1, MyApplication.getInstance().loginEntity.getId());
         mTaskPresenter.requestTask(fragmentCuttent[1], requestSize, 0, MyApplication.getInstance().loginEntity.getId());
-        fragmentCuttent[0]=1;
-        fragmentCuttent[1]=1;
+
     }
 
     @Override
@@ -97,6 +100,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
+        para = noneTv.getLayoutParams();
     }
 
     @Override
@@ -107,40 +111,56 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         Log.e("TaskFragment","加载数据"+fragmentType);
         if (fragmentType == 0) {
             toDoListEntities = mTaskPresenter.getToDoTaskEntity();
-
-            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_2list,mClickListener){
-                        public void onBindViewHolder(ViewHolder viewHolder,final int position) {
-                    super.onBindViewHolder(viewHolder,position);
+            if(toDoListEntities!=null){
+                para.height = 0;
+                noneTv.setLayoutParams(para);
+                mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_2list,mClickListener){
+                    public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                        super.onBindViewHolder(viewHolder,position);
 //                    Log.e("mAdapter","加载数据"+toDoListEntities.size());
-                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
-                    tv1.setText("主题："+toDoListEntities.get(position).getTitle());
-                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                    tv2.setText("来源于："+toDoListEntities.get(position).getFromWhere());
-                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                    tv3.setText(TimeUtil.getDateToString(toDoListEntities.get(position).getTime(),TimeUtil.Time));
-                    RelativeLayout rl = viewHolder.getView(R.id.itemRl);
-                    rl.setTag(position);
-                    rl.setOnClickListener(mClickListener);
+                        TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                        tv1.setText("主题："+toDoListEntities.get(position).getTitle());
+                        TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                        tv2.setText("来源于："+toDoListEntities.get(position).getFromWhere());
+                        TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                        tv3.setText(TimeUtil.getDateToString(toDoListEntities.get(position).getTime(),TimeUtil.Time));
+                        RelativeLayout rl = viewHolder.getView(R.id.itemRl);
+                        rl.setTag(position);
+                        rl.setOnClickListener(mClickListener);
+                    }
+                };
+                mRecyclerView.setAdapter(mAdapter);
+            }else {
+                para.height = 100;
+                noneTv.setLayoutParams(para);
+                    noneTv.setText(noneStr);
                 }
-            };
-            mRecyclerView.setAdapter(mAdapter);
 
         } else {
             doneListEntities = mTaskPresenter.getDoneTaskEntityList();
-            mAdapter = new CommonAdapter(mContext,doneListEntities,R.layout.item_2list,mClickListener){
-                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
-                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
-                    tv1.setText("主题："+doneListEntities.get(position).getTitle());
-                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                    tv2.setText("来源于："+doneListEntities.get(position).getFromWhere());
-                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                    tv3.setText(TimeUtil.getDateToString(doneListEntities.get(position).getTime(),TimeUtil.Time));
-                    RelativeLayout rl = viewHolder.getView(R.id.itemRl);
-                    rl.setTag(position);
-                    rl.setOnClickListener(mClickListener);
-                }
-            };
-            mRecyclerView.setAdapter(mAdapter);
+            if(doneListEntities!=null){
+                para.height = 0;
+                noneTv.setLayoutParams(para);
+                mAdapter = new CommonAdapter(mContext,doneListEntities,R.layout.item_2list,mClickListener){
+                    public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                        TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                        tv1.setText("主题："+doneListEntities.get(position).getTitle());
+                        TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                        tv2.setText("来源于："+doneListEntities.get(position).getFromWhere());
+                        TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                        tv3.setText(TimeUtil.getDateToString(doneListEntities.get(position).getTime(),TimeUtil.Time));
+                        RelativeLayout rl = viewHolder.getView(R.id.itemRl);
+                        rl.setTag(position);
+                        rl.setOnClickListener(mClickListener);
+                    }
+                };
+                mRecyclerView.setAdapter(mAdapter);
+            }else {
+                para.height = 100;
+                noneTv.setLayoutParams(para);
+                noneTv.setText(noneStr);
+            }
+
         }
 
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -150,7 +170,9 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                 times = 0;
                 new Handler().postDelayed(new Runnable(){
                     public void run() {
-                        mTaskPresenter.requestTask(0, requestSize, fragmentType, MyApplication.getInstance().loginEntity.getId());
+                        if(fragmentCuttent[fragmentType]>1)
+                            fragmentCuttent[fragmentType]--;
+                        mTaskPresenter.requestTask(fragmentCuttent[fragmentType], requestSize, fragmentType, MyApplication.getInstance().loginEntity.getId());
 
                         mAdapter.notifyDataSetChanged();
                         mRecyclerView.refreshComplete();
@@ -164,7 +186,8 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                 if(times < 2){
                     new Handler().postDelayed(new Runnable(){
                         public void run() {
-                            toast("上滑加载1",false);
+                            fragmentCuttent[fragmentType]++;
+                            mTaskPresenter.requestTask(fragmentCuttent[fragmentType], requestSize, fragmentType, MyApplication.getInstance().loginEntity.getId());
                             mRecyclerView.loadMoreComplete();
                             mAdapter.notifyDataSetChanged();
                         }
@@ -172,7 +195,8 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                 } else {
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
-                            toast("上滑加载2",false);
+                            fragmentCuttent[fragmentType]++;
+                            mTaskPresenter.requestTask(fragmentCuttent[fragmentType], requestSize, fragmentType, MyApplication.getInstance().loginEntity.getId());
                             mRecyclerView.setNoMore(true);
                             mAdapter.notifyDataSetChanged();
                         }
@@ -323,6 +347,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
     public void requestTaskSuccess() {
 //        toast("请求成功",false);
 //        Log.e("TaskFragment","请求成功");
+        noneStr = "没有内容";
         initDatas();
     }
 

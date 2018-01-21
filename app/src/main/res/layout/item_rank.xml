@@ -8,8 +8,24 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp">
         <TextView
-            android:id="@+id/itemRankTv1"
+            android:id="@+id/itemRankTv"
             android:text="排名"
+            style="@style/text_left_rank"/>
+        <ImageView
+            android:id="@+id/nextIm0"
+            style="@style/nextIm"/>
+        <TextView
+            android:id="@+id/itemNameTv"
+            android:text=""
+            style="@style/text_right_rank"
+            android:layout_toLeftOf="@id/nextIm0"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="40dp">
+        <TextView
+            android:text="服务单位"
             style="@style/text_left_rank"/>
         <ImageView
             android:id="@+id/nextIm1"
@@ -20,6 +36,7 @@
             style="@style/text_right_rank"
             android:layout_toLeftOf="@id/nextIm1"/>
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="40dp"
@@ -40,15 +57,15 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/nextIm2"/>
-        <TextView
-            android:id="@+id/itemNumRankTv2"
-            android:textColor="#666666"
-            android:textSize="14sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/nextIm2"
-            android:layout_marginRight="10dp"
-            android:layout_below="@id/itemNumRankTv1"/>
+        <!--<TextView-->
+            <!--android:id="@+id/itemNumRankTv2"-->
+            <!--android:textColor="#666666"-->
+            <!--android:textSize="14sp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toLeftOf="@id/nextIm2"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_below="@id/itemNumRankTv1"/>-->
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"

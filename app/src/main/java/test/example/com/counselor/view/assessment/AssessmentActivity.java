@@ -1,46 +1,47 @@
 package test.example.com.counselor.view.assessment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
-import test.example.com.counselor.adapter.Common1Adapter;
-import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
 
-public class AssessmentActivity extends BaseActivity implements IAssessmentView {
+public class AssessmentActivity extends BaseActivity {
 
-
-    AssessmentPresenter mAssessmentPresenter;
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
-
-    @BindView(R.id.assessmentLv)
-    ListView assessmentLv;
-    List<AssessmentEntity> assessmentEntities;
-    Context mContext;
+    @BindView(R.id.assessWv)
+    WebView assessWv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         super.allow_quit = false;
-        mAssessmentPresenter = new AssessmentPresenter(this);
-        titleBarTv.setText("我的合同");
-        mContext=this;
-        mAssessmentPresenter.requestAssessment();
+        titleBarTv.setText("我的考核");
+        requestAssessmentWeb();
+    }
 
+    private void requestAssessmentWeb() {
+        assessWv.loadUrl("http://www.baidu.com/");
+        //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
+        assessWv.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                // TODO Auto-generated method stub
+                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
+                view.loadUrl(url);
+                return true;
+            }
+        });
     }
 
 
@@ -48,27 +49,11 @@ public class AssessmentActivity extends BaseActivity implements IAssessmentView 
         setContentView(R.layout.activity_assessment);
     }
 
-    private boolean show_vs = false;
+
 
     private void initDatas() {
         Log.e("AssessmentActivity", "加载数据");
-        assessmentEntities = mAssessmentPresenter.getAssessmentEntity();
-        assessmentLv.setAdapter(new Common1Adapter<AssessmentEntity>(this, assessmentEntities,
-                R.layout.item_assessment, onItemClickListener) {
-            @Override
-            protected void convertView(ViewHolder1 mViewHolder, View item, AssessmentEntity assessmentEntity, int position) {
-                TextView tv1 = mViewHolder.getView(R.id.assessItemTv1);
-                TextView tv2 = mViewHolder.getView(R.id.assessItemTv2);
-                TextView tv3 = mViewHolder.getView(R.id.assessItemTv3);
-                TextView tv4 = mViewHolder.getView(R.id.assessItemTv4);
-                tv1.setText(assessmentEntity.getStr1());
-                tv2.setText(assessmentEntity.getStr2());
-                tv3.setText(assessmentEntity.getStr3());
-                tv4.setText(assessmentEntity.getStr4());
 
-            }
-        });
-        assessmentLv.setOnItemClickListener(onItemClickListener);
 
     }
 
@@ -81,29 +66,5 @@ public class AssessmentActivity extends BaseActivity implements IAssessmentView 
                 break;
         }
     }
-
-    @Override
-    public void requestAssessmentSuccess() {
-        toast("请求成功！", true);
-        initDatas();
-    }
-
-    @Override
-    public void requestAssessmentFailed() {
-        toast("请求失败！", true);
-    }
-
-    @OnClick(R.id.backTv)
-    public void onClick() {
-    }
-
-    //Item响应回调
-    AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            toast("" + (position), true);
-        }
-    };
 
 }

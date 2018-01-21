@@ -5,46 +5,46 @@ package test.example.com.counselor.view.news;
  */
 
 public class NewsEntity {
+
+
+    public NewsEntity() {
+    }
+
+
+    private Long createTime;
+    private String title;
+    private String content;
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public String toString() {
         return "NewsEntity{" +
-                "context='" + context + '\'' +
-                ", from='" + from + '\'' +
-                ", time='" + time + '\'' +
+                "createTime=" + createTime +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
                 '}';
-    }
-
-    private String from;
-    private String time;
-    private String context;
-
-    public String getContext() {
-        return context;
-    }
-
-    public void setContext(String context) {
-        this.context = context;
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public NewsEntity(String from, String time, String context) {
-        this.from = from;
-        this.time = time;
-        this.context = context;
     }
 }

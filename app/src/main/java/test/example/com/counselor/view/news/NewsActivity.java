@@ -1,11 +1,15 @@
 package test.example.com.counselor.view.news;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.List;
 
@@ -13,23 +17,27 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
-import test.example.com.counselor.adapter.Common1Adapter;
-import test.example.com.counselor.adapter.ViewHolder1;
+import test.example.com.counselor.adapter.CommonAdapter;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
-import test.example.com.counselor.base.MyLvClickListener;
+import test.example.com.counselor.util.TimeUtil;
 
 public class NewsActivity extends BaseActivity implements INewsView {
 
-
-    NewsPresenter mNewsPresenter;
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
-    @BindView(R.id.newsLv)
-    ListView newsLv;
-
+    @BindView(R.id.noneTv)
+    TextView noneTv;
+    ViewGroup.LayoutParams para;
+    String noneStr = "加载中";
+    @BindView(R.id.recyclerview)
+    XRecyclerView mRecyclerView;
+    private CommonAdapter mAdapter;
+    private int refreshTime = 0;
+    private int times = 0;
+    NewsPresenter mNewsPresenter;
     List<NewsEntity> newsEntities;
-
+    private int current=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +45,12 @@ public class NewsActivity extends BaseActivity implements INewsView {
         super.allow_quit = false;
         mNewsPresenter = new NewsPresenter(this);
         titleBarTv.setText("消息");
-        mNewsPresenter.requestRank();
+        mNewsPresenter.requestNews(current,20);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        para = noneTv.getLayoutParams();
     }
 
 
@@ -48,21 +61,71 @@ public class NewsActivity extends BaseActivity implements INewsView {
     private void initDatas() {
         Log.e("AssessmentActivity", "加载数据");
         newsEntities = mNewsPresenter.getNewsEntity();
-        newsLv.setAdapter(new Common1Adapter<NewsEntity>(this, newsEntities,
-                R.layout.item_news) {
+        if (newsEntities!=null){
+            para.height = 0;
+            noneTv.setLayoutParams(para);
+            mAdapter = new CommonAdapter(this,newsEntities,R.layout.item_news){
+                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                    super.onBindViewHolder(viewHolder,position);
+
+                    TextView itemTv1 = viewHolder.getView(R.id.itemTv1);
+                    TextView itemTv2 = viewHolder.getView(R.id.itemTv2);
+                    TextView itemTv3 = viewHolder.getView(R.id.itemTv3);
+
+                    itemTv1.setText(newsEntities.get(position).getTitle());
+                    itemTv2.setText(newsEntities.get(position).getContent());
+                    itemTv3.setText(TimeUtil.getDateToString(newsEntities.get(position).getCreateTime(),TimeUtil.Data));
+                }
+            };
+            mRecyclerView.setAdapter(mAdapter);
+        }else {
+            para.height = 100;
+            noneTv.setLayoutParams(para);
+            noneTv.setText(noneStr);
+        }
+
+        mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
-            protected void convertView(ViewHolder1 mViewHolder, View item, NewsEntity newsEntity, int position) {
-                TextView itemTv1 = mViewHolder.getView(R.id.itemTv1);
-                TextView itemTv2 = mViewHolder.getView(R.id.itemTv2);
-                TextView itemTv3 = mViewHolder.getView(R.id.itemTv3);
+            public void onRefresh() {
+                refreshTime ++;
+                times = 0;
+                new Handler().postDelayed(new Runnable(){
+                    public void run() {
+                        if(current>1)
+                            current--;
+                        mNewsPresenter.requestNews(current,20);
 
-                itemTv1.setText(newsEntity.getFrom());
-                itemTv2.setText(newsEntity.getContext());
-                itemTv3.setText(newsEntity.getTime());
+                        mAdapter.notifyDataSetChanged();
+                        mRecyclerView.refreshComplete();
+                    }
 
+                }, 1000);            //refresh data here
+            }
+
+            @Override
+            public void onLoadMore() {
+                if(times < 2){
+                    new Handler().postDelayed(new Runnable(){
+                        public void run() {
+                            current++;
+                            mNewsPresenter.requestNews(current,20);
+                            mRecyclerView.loadMoreComplete();
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    }, 1000);
+                } else {
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            current++;
+                            mNewsPresenter.requestNews(current,20);
+                            mRecyclerView.setNoMore(true);
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    }, 1000);
+                }
+                times ++;
             }
         });
-        newsLv.setOnItemClickListener(onItemClickListener);
     }
 
     @OnClick({R.id.backTv})
@@ -77,8 +140,14 @@ public class NewsActivity extends BaseActivity implements INewsView {
 
     @Override
     public void requestNewsSuccess() {
-        toast("请求成功！", true);
+//        toast("请求成功！", true);
+        newsEntities = mNewsPresenter.getNewsEntity();
+        noneStr = "没有内容";
+        if(newsEntities!=null){
+            noneStr = "加载中";
+        }
         initDatas();
+
     }
 
     @Override
@@ -99,17 +168,4 @@ public class NewsActivity extends BaseActivity implements INewsView {
         }
     };
 
-    MyLvClickListener mClickListener = new MyLvClickListener() {
-        @Override
-        public void myOnClick(int position, View view) {
-//            toast("" + (position), true);
-
-        }
-
-        public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去
-//            myOnClick((Integer) v.getTag(), v);
-            initDatas();
-        }
-
-    };
 }

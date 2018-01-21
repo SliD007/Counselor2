@@ -48,31 +48,35 @@ public class RankActivity extends BaseActivity implements IRankView {
         setContentView(R.layout.activity_rank);
     }
 
-    private boolean show_vs = false;
-
     private void initDatas() {
-        Log.e("AssessmentActivity", "加载数据");
         rankEntities = mRankPresenter.getRankEntity();
+        Log.e("AssessmentActivity", "加载数据"+(rankEntities.size()));
         rankLv.setAdapter(new Common1Adapter<RankEntity>(this, rankEntities,
                 R.layout.item_rank, onItemClickListener) {
             @Override
             protected void convertView(ViewHolder1 mViewHolder, View item, RankEntity rankEntity, int position) {
-                TextView itemRankTv = mViewHolder.getView(R.id.itemRankTv1);
+                TextView itemRankTv = mViewHolder.getView(R.id.itemRankTv);
+                TextView itemNameTv = mViewHolder.getView(R.id.itemNameTv);
                 TextView itemWorkForTv = mViewHolder.getView(R.id.itemWorkForTv);
+
                 TextView itemNumRankTv1 = mViewHolder.getView(R.id.itemNumRankTv1);
-                TextView itemNumRankTv2 = mViewHolder.getView(R.id.itemNumRankTv2);
                 TextView itemNumRankTv3 = mViewHolder.getView(R.id.itemNumRankTv3);
                 TextView itemNumRankTv4 = mViewHolder.getView(R.id.itemNumRankTv4);
                 TextView itemNumRankTv5 = mViewHolder.getView(R.id.itemNumRankTv5);
                 TextView itemNumRankTv6 = mViewHolder.getView(R.id.itemNumRankTv6);
-                itemRankTv.setText("第" + rankEntity.getRank() + "名  " + rankEntity.getName());
-                itemWorkForTv.setText("服务村社：" + rankEntity.getWorkFor());
-                itemNumRankTv1.setText("现场咨询：" + rankEntity.getStr11() + "次" );
-                itemNumRankTv2.setText("电话咨询：" + rankEntity.getStr12()+"次");
-                itemNumRankTv3.setText("法律援助：" + rankEntity.getStr2()+"次");
-                itemNumRankTv4.setText("参与调解：" + rankEntity.getStr3()+"次");
-                itemNumRankTv5.setText("法制宣传：" + rankEntity.getStr4()+"次");
-                itemNumRankTv6.setText("法制讲座：" + rankEntity.getStr5()+"次");
+                if(position==0){
+                    itemRankTv.setText("我");
+                }else {
+                    itemRankTv.setText("排名 " + rankEntity.getRank());
+                }
+                itemNameTv.setText(rankEntity.getCounselorName());
+                itemWorkForTv.setText(rankEntity.getVillage());
+
+                itemNumRankTv1.setText(rankEntity.getConsultCount() + "次" );
+                itemNumRankTv3.setText(rankEntity.getAidCount()+"次");
+                itemNumRankTv4.setText(rankEntity.getMediateCount()+"次");
+                itemNumRankTv5.setText(rankEntity.getPublicityCount()+"次");
+                itemNumRankTv6.setText(rankEntity.getChairCount()+"次");
 
             }
         });
@@ -91,7 +95,7 @@ public class RankActivity extends BaseActivity implements IRankView {
 
     @Override
     public void requestRankSuccess() {
-        toast("请求成功！", true);
+//        toast("请求成功！", true);
         initDatas();
     }
 

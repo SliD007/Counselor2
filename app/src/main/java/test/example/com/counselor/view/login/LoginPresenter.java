@@ -14,7 +14,6 @@ import com.android.volley.toolbox.Volley;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.request.BaseRequest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -113,38 +112,8 @@ public class LoginPresenter extends BasePresenter{
 
     StringCallback loginStringCallback = new StringCallback() {
 
-        @Override
-        public void onBefore(BaseRequest request) {
-            super.onBefore(request);
-            Log.e("onBefore",request.toString());
-        }
-
-        @Override
-        public void onCacheSuccess(String s, Call call) {
-            super.onCacheSuccess(s, call);
-            Log.e("onCacheSuccess",s);
-        }
-
-        @Override
-        public void onCacheError(Call call, Exception e) {
-            super.onCacheError(call, e);
-            Log.e("onCacheError",e.toString());
-        }
-
-        @Override
-        public String convertSuccess(Response response) throws Exception {
-            Log.e("convertSuccess",response.toString());
-            return super.convertSuccess(response);
-        }
-
-        @Override
-        public void parseError(Call call, Exception e) {
-            super.parseError(call, e);
-            Log.e("parseError",e.toString());
-        }
-
         public void onSuccess(String s, Call call, Response response) {
-            Log.e("loadLogin","onSuccess:"+s);
+//            Log.e("loadLogin","onSuccess:"+s);
 
             JSONObject object = JSON.parseObject(s);
             if (object.getInteger("code")==0){

@@ -27,10 +27,10 @@ import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.base.MyLvClickListener;
 import test.example.com.counselor.util.TimeUtil;
-import test.example.com.counselor.view.service.addgroupcase.AddGroupCaseActivity;
 import test.example.com.counselor.view.service.addadvice.AddAdviceActivity;
 import test.example.com.counselor.view.service.addchargecase.AddChargeCaseActivity;
 import test.example.com.counselor.view.service.addclassiccase.AddClassicCaseActivity;
+import test.example.com.counselor.view.service.addgroupcase.AddGroupCaseActivity;
 import test.example.com.counselor.view.service.addsummary.AddSummaryActivity;
 import test.example.com.counselor.view.service.addworklog.AddWorkLogActivity;
 import test.example.com.counselor.view.service.entity.AdviceEntity;
@@ -66,11 +66,14 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     View serviceVw3;
     @BindView(R.id.serviceVw4)
     View serviceVw4;
-
+    @BindView(R.id.noneTv)
+    TextView noneTv;
+    ViewGroup.LayoutParams para;
+    String noneStr = "加载中";
     private int fragmentType;
     private int[] fragmentCuttent;
     ServicePresenter mServicePersenter;
-    private int requestSize=20;
+    private int requestSize=10;
     List<WorkLogEntity> workLogEntities;
     List<AdviceEntity> adviceEntities;
     List<ClassicCaseEntity> classicCaseEntities;
@@ -89,16 +92,12 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     @Override
     protected void initPresenter() {
         fragmentType = 0;
-        fragmentCuttent = new int[]{0, 0, 0, 0};
+        fragmentCuttent = new int[]{1, 1, 1, 1};
         mServicePersenter = new ServicePresenter(this);
         mServicePersenter.requestServiceData(fragmentCuttent[0],requestSize,0);
         mServicePersenter.requestServiceData(fragmentCuttent[1],requestSize,1);
         mServicePersenter.requestServiceData(fragmentCuttent[2],requestSize,2);
         mServicePersenter.requestServiceData(fragmentCuttent[3],requestSize,3);
-        fragmentCuttent[0]=1;
-        fragmentCuttent[1]=1;
-        fragmentCuttent[2]=1;
-        fragmentCuttent[3]=1;
     }
 
     @Override
@@ -111,6 +110,8 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
+
+        para = noneTv.getLayoutParams();
     }
 
     @Override
@@ -122,83 +123,118 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
 
         if (fragmentType == 0) {
             workLogEntities = mServicePersenter.getWorkLogEntities();
-            mAdapter = new CommonAdapter(mContext,workLogEntities,R.layout.item_4list,mClickListener){
-                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
-                    super.onBindViewHolder(viewHolder,position);
+            if(workLogEntities!=null){
+                para.height = 0;
+                noneTv.setLayoutParams(para);
+                mAdapter = new CommonAdapter(mContext,workLogEntities,R.layout.item_4list,mClickListener){
+                    public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                        super.onBindViewHolder(viewHolder,position);
 
-                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                    TextView tv4 = viewHolder.getView(R.id.itemTv4);
-                    tv1.setText("工作记录类型："+ workLogEntities.get(position).getLogType());
-                    tv2.setText("服务对象："+workLogEntities.get(position).getServiceObject());
-                    tv3.setText("服务单位："+workLogEntities.get(position).getServiceVillageName());
-                    tv4.setText("完结状态："+workLogEntities.get(position).getResultType());
-                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
-                    ll.setTag(position);
-                    ll.setOnClickListener(mClickListener);
-                }
-            };
-            mRecyclerView.setAdapter(mAdapter);
+                        TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                        TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                        TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                        TextView tv4 = viewHolder.getView(R.id.itemTv4);
+                        tv1.setText("工作记录类型："+ workLogEntities.get(position).getLogType());
+                        tv2.setText("服务对象："+workLogEntities.get(position).getServiceObject());
+                        tv3.setText("服务单位："+workLogEntities.get(position).getServiceVillageName());
+                        tv4.setText("完结状态："+workLogEntities.get(position).getResultType());
+                        LinearLayout ll = viewHolder.getView(R.id.itemLl);
+                        ll.setTag(position);
+                        ll.setOnClickListener(mClickListener);
+                    }
+                };
+                mRecyclerView.setAdapter(mAdapter);
+            }else {
+                para.height = 100;
+                noneTv.setLayoutParams(para);
+                noneTv.setText(noneStr);
+            }
 
         }else if(fragmentType==1){
             adviceEntities = mServicePersenter.getAdviceEntities();
-            mAdapter = new CommonAdapter(mContext,adviceEntities,R.layout.item_4list,mClickListener){
-                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
-                    super.onBindViewHolder(viewHolder,position);
+            if(adviceEntities!=null){
+                para.height = 0;
+                noneTv.setLayoutParams(para);
+                mAdapter = new CommonAdapter(mContext,adviceEntities,R.layout.item_4list,mClickListener){
+                    public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                        super.onBindViewHolder(viewHolder,position);
 
-                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                    TextView tv4 = viewHolder.getView(R.id.itemTv4);
-                    tv1.setText(adviceEntities.get(position).getTitle());
-                    tv2.setText("报送至："+adviceEntities.get(position).getToType());
-                    tv3.setText("服务时间："+ TimeUtil.getDateToString(adviceEntities.get(position).getCreateTime(),TimeUtil.Data));
-                    tv4.setText("服务单位："+adviceEntities.get(position).getVillage());
-                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
-                    ll.setTag(position);
-                    ll.setOnClickListener(mClickListener);
-                }
-            };
-            mRecyclerView.setAdapter(mAdapter);
+                        TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                        TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                        TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                        TextView tv4 = viewHolder.getView(R.id.itemTv4);
+                        tv1.setText(adviceEntities.get(position).getTitle());
+                        tv2.setText("报送至："+adviceEntities.get(position).getToType());
+                        tv3.setText("服务时间："+ TimeUtil.getDateToString(adviceEntities.get(position).getCreateTime(),TimeUtil.Data));
+                        tv4.setText("服务单位："+adviceEntities.get(position).getVillage());
+                        LinearLayout ll = viewHolder.getView(R.id.itemLl);
+                        ll.setTag(position);
+                        ll.setOnClickListener(mClickListener);
+                    }
+                };
+                mRecyclerView.setAdapter(mAdapter);
+            }else {
+                para.height = 100;
+                noneTv.setLayoutParams(para);
+                noneTv.setText(noneStr);
+            }
+
         }else if(fragmentType==2){
             classicCaseEntities = mServicePersenter.getClassicCaseEntities();
-            mAdapter = new CommonAdapter(mContext,classicCaseEntities,R.layout.item_3list,mClickListener){
-                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
-                    super.onBindViewHolder(viewHolder,position);
+            if(classicCaseEntities!=null){
+                para.height = 0;
+                noneTv.setLayoutParams(para);
+                mAdapter = new CommonAdapter(mContext,classicCaseEntities,R.layout.item_3list,mClickListener){
+                    public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                        super.onBindViewHolder(viewHolder,position);
 
-                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                    tv1.setText(classicCaseEntities.get(position).getTitle());
-                    tv2.setText("服务时间："+ TimeUtil.getDateToString(classicCaseEntities.get(position).getCreateTime(),TimeUtil.Data));
-                    tv3.setText("服务单位："+classicCaseEntities.get(position).getVillage());
-                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
-                    ll.setTag(position);
-                    ll.setOnClickListener(mClickListener);
-                }
-            };
-            mRecyclerView.setAdapter(mAdapter);
+                        TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                        TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                        TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                        tv1.setText(classicCaseEntities.get(position).getTitle());
+                        tv2.setText("服务时间："+ TimeUtil.getDateToString(classicCaseEntities.get(position).getCreateTime(),TimeUtil.Data));
+                        tv3.setText("服务单位："+classicCaseEntities.get(position).getVillage());
+                        LinearLayout ll = viewHolder.getView(R.id.itemLl);
+                        ll.setTag(position);
+                        ll.setOnClickListener(mClickListener);
+                    }
+                };
+                mRecyclerView.setAdapter(mAdapter);
+            }else {
+                para.height = 100;
+                noneTv.setLayoutParams(para);
+                noneTv.setText(noneStr);
+            }
+
         }else {
             summaryEntities = mServicePersenter.getSummaryEntities();
-            mAdapter = new CommonAdapter(mContext,summaryEntities,R.layout.item_3list,mClickListener){
-                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
-                    super.onBindViewHolder(viewHolder,position);
+            if(summaryEntities!=null){
+                para.height = 0;
+                noneTv.setLayoutParams(para);
+                mAdapter = new CommonAdapter(mContext,summaryEntities,R.layout.item_3list,mClickListener){
+                    public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                        super.onBindViewHolder(viewHolder,position);
 
-                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                    tv1.setText(summaryEntities.get(position).getTitle());
-                    tv2.setText("时间："+ TimeUtil.getDateToString(summaryEntities.get(position).getCreateTime(),TimeUtil.Data));
-                    tv3.setText("服务单位："+summaryEntities.get(position).getVillage());
-                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
-                    ll.setTag(position);
-                    ll.setOnClickListener(mClickListener);
-                }
-            };
-            mRecyclerView.setAdapter(mAdapter);
+                        TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                        TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                        TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                        tv1.setText(summaryEntities.get(position).getTitle());
+                        tv2.setText("时间："+ TimeUtil.getDateToString(summaryEntities.get(position).getCreateTime(),TimeUtil.Data));
+                        tv3.setText("服务单位："+summaryEntities.get(position).getVillage());
+                        LinearLayout ll = viewHolder.getView(R.id.itemLl);
+                        ll.setTag(position);
+                        ll.setOnClickListener(mClickListener);
+                    }
+                };
+                mRecyclerView.setAdapter(mAdapter);
+            }else {
+                para.height = 100;
+                noneTv.setLayoutParams(para);
+                noneTv.setText(noneStr);
+            }
+
         }
-
+        noneStr = "没有内容";
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -206,6 +242,8 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 times = 0;
                 new Handler().postDelayed(new Runnable(){
                     public void run() {
+                        if(fragmentCuttent[fragmentType]>1)
+                            fragmentCuttent[fragmentType]--;
                         mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],requestSize,fragmentType);
 
                         mAdapter.notifyDataSetChanged();
@@ -220,7 +258,9 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 if(times < 2){
                     new Handler().postDelayed(new Runnable(){
                         public void run() {
-//                            toast("上滑加载1",false);
+                            fragmentCuttent[fragmentType]++;
+                            mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],requestSize,fragmentType);
+
                             mRecyclerView.loadMoreComplete();
                             mAdapter.notifyDataSetChanged();
                         }
@@ -228,7 +268,8 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 } else {
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
-//                            toast("上滑加载2",false);
+                            fragmentCuttent[fragmentType]++;
+                            mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],requestSize,fragmentType);
                             mRecyclerView.setNoMore(true);
                             mAdapter.notifyDataSetChanged();
                         }
@@ -264,7 +305,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         Intent i;
         switch (fragmentType) {
             case 0:
-                showAddDialog();
+                showAddWorkLogDialog();
                 break;
             case 1:
                 i = new Intent(getActivity(), AddAdviceActivity.class);
@@ -376,7 +417,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
 
     };
 
-    public void showAddDialog(){
+    public void showAddWorkLogDialog(){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()); // 先得到构造器
         builder.setTitle("选择新增日志类型"); // 设置标题

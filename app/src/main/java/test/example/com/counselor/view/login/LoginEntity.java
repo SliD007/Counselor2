@@ -25,7 +25,7 @@ public class LoginEntity implements Serializable{
     private String evaluation;
     private JSONObject communityA;
     private JSONObject communityB;
-    private String star;
+    private int star;
     private String com_status;
     private String status;
 
@@ -157,11 +157,11 @@ public class LoginEntity implements Serializable{
         this.role = role;
     }
 
-    public String getStar() {
+    public int getStar() {
         return star;
     }
 
-    public void setStar(String star) {
+    public void setStar(int star) {
         this.star = star;
     }
 

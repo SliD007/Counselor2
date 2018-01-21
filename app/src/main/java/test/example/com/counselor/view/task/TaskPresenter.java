@@ -16,7 +16,6 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Response;
-import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.Urls;
 import test.example.com.counselor.view.task.entity.DoneTaskEntity;
@@ -48,6 +47,7 @@ public class TaskPresenter {
         params.put("size",size+"");
         params.put("type",type+"");
         params.put("counselorId",counselorId+"");
+        Log.e("requestTask",""+params.toString());
         OkGo.post(Urls.TASKURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())
@@ -56,7 +56,7 @@ public class TaskPresenter {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
-                        Log.e("requestTask"+type,"onSuccess:"+s);
+//                        Log.e("requestTask"+type,"onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             saveValue(object,type);
@@ -79,41 +79,6 @@ public class TaskPresenter {
                 });
     }
 
-    public int requestStar(){
-        HashMap<String,String> params = new HashMap<>();
-        params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
-        OkGo.post(Urls.RankURL)
-                .params(params)
-                .cacheKey(Constants.getAppCacheFolder())
-                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
-                .cacheTime(-1)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(String s, Call call, Response response) {
-                        Log.e("requestStar","onSuccess:"+s);
-                        JSONObject object = JSON.parseObject(s);
-                        if (object.getInteger("code")==0){
-//                            saveRankValue(object);
-
-                            mITaskView.requestStarSuccess();
-                        }else {
-                            mITaskView.requestStarFaild();
-                        }
-                    }
-                    @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        super.onError(call, response, e);
-                        mITaskView.requestStarFaild();
-                    }
-
-                    @Override
-                    public void onAfter(String s, Exception e) {
-                        super.onAfter(s, e);
-                    }
-
-                });
-        return 2;
-    }
 
 
     public List<ToDoTaskEntity> getToDoTaskEntity(){
