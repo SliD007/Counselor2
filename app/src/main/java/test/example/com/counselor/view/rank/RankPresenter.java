@@ -1,7 +1,5 @@
 package test.example.com.counselor.view.rank;
 
-import android.util.Log;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
@@ -38,6 +36,8 @@ public class RankPresenter extends BasePresenter{
         OkGo.post(RankURL).params(params).execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {
+
+//                Log.e("requestRank","onSuccess:"+s);
                 JSONObject object = JSONObject.parseObject(s);
                 if(object.getInteger("code")==0){
                     saveValue(object);
@@ -71,7 +71,6 @@ public class RankPresenter extends BasePresenter{
         for(int i=0;i<11;i++){
             try{
                 JSONObject counselor = value.getJSONObject(String.valueOf(i));
-//                Log.e("counselor",""+counselor.toString());
                 RankEntity rankEntity =  JSON.parseObject(counselor.toString(),RankEntity.class);
                 rankEntities.add(rankEntity);
 //                Log.e("LoginEntity",rankEntity.toString());
@@ -80,7 +79,6 @@ public class RankPresenter extends BasePresenter{
             }
 
         }
-        Log.e("rankEntities",""+rankEntities.size());
         mRankModel.setRankEntities(rankEntities);
 
     }

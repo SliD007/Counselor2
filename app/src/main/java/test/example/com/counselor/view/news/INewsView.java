@@ -6,6 +6,6 @@ package test.example.com.counselor.view.news;
 
 public interface INewsView {
 
-    void requestNewsSuccess();
+    void requestNewsSuccess(boolean hasNext);
     void requestNewsFailed();
 }

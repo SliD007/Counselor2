@@ -5,7 +5,6 @@ package test.example.com.counselor.view.service;
  */
 
 public interface IServiceView {
-    void setTabSelection(int index);
-    void requestServiceSuccess();
+    void requestServiceSuccess(boolean hasNext);
     void requestServiceFailed();
 }

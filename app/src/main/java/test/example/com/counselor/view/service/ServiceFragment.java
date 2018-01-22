@@ -126,113 +126,113 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
             if(workLogEntities!=null){
                 para.height = 0;
                 noneTv.setLayoutParams(para);
-                mAdapter = new CommonAdapter(mContext,workLogEntities,R.layout.item_4list,mClickListener){
-                    public void onBindViewHolder(ViewHolder viewHolder,final int position) {
-                        super.onBindViewHolder(viewHolder,position);
 
-                        TextView tv1 = viewHolder.getView(R.id.itemTv1);
-                        TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                        TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                        TextView tv4 = viewHolder.getView(R.id.itemTv4);
-                        tv1.setText("工作记录类型："+ workLogEntities.get(position).getLogType());
-                        tv2.setText("服务对象："+workLogEntities.get(position).getServiceObject());
-                        tv3.setText("服务单位："+workLogEntities.get(position).getServiceVillageName());
-                        tv4.setText("完结状态："+workLogEntities.get(position).getResultType());
-                        LinearLayout ll = viewHolder.getView(R.id.itemLl);
-                        ll.setTag(position);
-                        ll.setOnClickListener(mClickListener);
-                    }
-                };
-                mRecyclerView.setAdapter(mAdapter);
             }else {
                 para.height = 100;
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);
             }
+            mAdapter = new CommonAdapter(mContext,workLogEntities,R.layout.item_4list,mClickListener){
+                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                    super.onBindViewHolder(viewHolder,position);
 
+                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                    TextView tv4 = viewHolder.getView(R.id.itemTv4);
+                    tv1.setText("工作记录类型："+ workLogEntities.get(position).getLogType());
+                    tv2.setText("服务对象："+workLogEntities.get(position).getServiceObject());
+                    tv3.setText("服务单位："+workLogEntities.get(position).getServiceVillageName());
+                    tv4.setText("完结状态："+workLogEntities.get(position).getResultType());
+                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
+                    ll.setTag(position);
+                    ll.setOnClickListener(mClickListener);
+                }
+            };
+            mRecyclerView.setAdapter(mAdapter);
         }else if(fragmentType==1){
             adviceEntities = mServicePersenter.getAdviceEntities();
             if(adviceEntities!=null){
                 para.height = 0;
                 noneTv.setLayoutParams(para);
-                mAdapter = new CommonAdapter(mContext,adviceEntities,R.layout.item_4list,mClickListener){
-                    public void onBindViewHolder(ViewHolder viewHolder,final int position) {
-                        super.onBindViewHolder(viewHolder,position);
 
-                        TextView tv1 = viewHolder.getView(R.id.itemTv1);
-                        TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                        TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                        TextView tv4 = viewHolder.getView(R.id.itemTv4);
-                        tv1.setText(adviceEntities.get(position).getTitle());
-                        tv2.setText("报送至："+adviceEntities.get(position).getToType());
-                        tv3.setText("服务时间："+ TimeUtil.getDateToString(adviceEntities.get(position).getCreateTime(),TimeUtil.Data));
-                        tv4.setText("服务单位："+adviceEntities.get(position).getVillage());
-                        LinearLayout ll = viewHolder.getView(R.id.itemLl);
-                        ll.setTag(position);
-                        ll.setOnClickListener(mClickListener);
-                    }
-                };
-                mRecyclerView.setAdapter(mAdapter);
             }else {
                 para.height = 100;
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);
             }
+            mAdapter = new CommonAdapter(mContext,adviceEntities,R.layout.item_4list,mClickListener){
+                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                    super.onBindViewHolder(viewHolder,position);
 
+                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                    TextView tv4 = viewHolder.getView(R.id.itemTv4);
+                    tv1.setText(adviceEntities.get(position).getTitle());
+                    tv2.setText("报送至："+adviceEntities.get(position).getToType());
+                    tv3.setText("服务时间："+ TimeUtil.getDateToString(adviceEntities.get(position).getCreateTime(),TimeUtil.Data));
+                    tv4.setText("服务单位："+adviceEntities.get(position).getVillage());
+                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
+                    ll.setTag(position);
+                    ll.setOnClickListener(mClickListener);
+                }
+            };
+            mRecyclerView.setAdapter(mAdapter);
         }else if(fragmentType==2){
             classicCaseEntities = mServicePersenter.getClassicCaseEntities();
             if(classicCaseEntities!=null){
                 para.height = 0;
                 noneTv.setLayoutParams(para);
-                mAdapter = new CommonAdapter(mContext,classicCaseEntities,R.layout.item_3list,mClickListener){
-                    public void onBindViewHolder(ViewHolder viewHolder,final int position) {
-                        super.onBindViewHolder(viewHolder,position);
 
-                        TextView tv1 = viewHolder.getView(R.id.itemTv1);
-                        TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                        TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                        tv1.setText(classicCaseEntities.get(position).getTitle());
-                        tv2.setText("服务时间："+ TimeUtil.getDateToString(classicCaseEntities.get(position).getCreateTime(),TimeUtil.Data));
-                        tv3.setText("服务单位："+classicCaseEntities.get(position).getVillage());
-                        LinearLayout ll = viewHolder.getView(R.id.itemLl);
-                        ll.setTag(position);
-                        ll.setOnClickListener(mClickListener);
-                    }
-                };
-                mRecyclerView.setAdapter(mAdapter);
             }else {
                 para.height = 100;
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);
             }
+            mAdapter = new CommonAdapter(mContext,classicCaseEntities,R.layout.item_3list,mClickListener){
+                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                    super.onBindViewHolder(viewHolder,position);
 
+                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                    tv1.setText(classicCaseEntities.get(position).getTitle());
+                    tv2.setText("服务时间："+ TimeUtil.getDateToString(classicCaseEntities.get(position).getCreateTime(),TimeUtil.Data));
+                    tv3.setText("服务单位："+classicCaseEntities.get(position).getVillage());
+                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
+                    ll.setTag(position);
+                    ll.setOnClickListener(mClickListener);
+                }
+            };
+            mRecyclerView.setAdapter(mAdapter);
         }else {
             summaryEntities = mServicePersenter.getSummaryEntities();
             if(summaryEntities!=null){
                 para.height = 0;
                 noneTv.setLayoutParams(para);
-                mAdapter = new CommonAdapter(mContext,summaryEntities,R.layout.item_3list,mClickListener){
-                    public void onBindViewHolder(ViewHolder viewHolder,final int position) {
-                        super.onBindViewHolder(viewHolder,position);
 
-                        TextView tv1 = viewHolder.getView(R.id.itemTv1);
-                        TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                        TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                        tv1.setText(summaryEntities.get(position).getTitle());
-                        tv2.setText("时间："+ TimeUtil.getDateToString(summaryEntities.get(position).getCreateTime(),TimeUtil.Data));
-                        tv3.setText("服务单位："+summaryEntities.get(position).getVillage());
-                        LinearLayout ll = viewHolder.getView(R.id.itemLl);
-                        ll.setTag(position);
-                        ll.setOnClickListener(mClickListener);
-                    }
-                };
-                mRecyclerView.setAdapter(mAdapter);
             }else {
                 para.height = 100;
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);
             }
+            mAdapter = new CommonAdapter(mContext,summaryEntities,R.layout.item_3list,mClickListener){
+                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+                    super.onBindViewHolder(viewHolder,position);
 
+                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
+                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
+                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
+                    tv1.setText(summaryEntities.get(position).getTitle());
+                    tv2.setText("时间："+ TimeUtil.getDateToString(summaryEntities.get(position).getCreateTime(),TimeUtil.Data));
+                    tv3.setText("服务单位："+summaryEntities.get(position).getVillage());
+                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
+                    ll.setTag(position);
+                    ll.setOnClickListener(mClickListener);
+                }
+            };
+            mRecyclerView.setAdapter(mAdapter);
         }
         noneStr = "没有内容";
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -258,8 +258,13 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 if(times < 2){
                     new Handler().postDelayed(new Runnable(){
                         public void run() {
-                            fragmentCuttent[fragmentType]++;
-                            mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],requestSize,fragmentType);
+                            if(hasNests[fragmentType]){
+                                fragmentCuttent[fragmentType]++;
+                                mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],requestSize,fragmentType);
+                            }else {
+                                toast("没有更多了",false);
+                            }
+
 
                             mRecyclerView.loadMoreComplete();
                             mAdapter.notifyDataSetChanged();
@@ -268,8 +273,12 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 } else {
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
-                            fragmentCuttent[fragmentType]++;
-                            mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],requestSize,fragmentType);
+                            if(hasNests[fragmentType]){
+                                fragmentCuttent[fragmentType]++;
+                                mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],requestSize,fragmentType);
+                            }else {
+                                toast("没有更多了",false);
+                            }
                             mRecyclerView.setNoMore(true);
                             mAdapter.notifyDataSetChanged();
                         }
@@ -354,11 +363,12 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 break;
         }
     }
-
+    boolean[] hasNests = new boolean[]{false,false,false,false} ;
     @Override
-    public void requestServiceSuccess() {
+    public void requestServiceSuccess(boolean hasNext) {
 //        toast("请求成功", false);
 //        Log.e("ServiceFragment","请求成功");
+        hasNests[fragmentType] = hasNext;
         initDatas();
     }
 
@@ -438,6 +448,29 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
             }
         });
         builder.setPositiveButton("另行收费案件", new DialogInterface.OnClickListener() { // 设置取消按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent i = new Intent(mContext,AddChargeCaseActivity.class);
+                startActivity(i);
+                dialog.dismiss(); // 关闭dialog
+            }
+        });
+        builder.create().show();
+    }
+    public void showReportDialog(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()); // 先得到构造器
+        builder.setTitle("选择新增上报类型"); // 设置标题
+
+        builder.setNegativeButton("建议上报", new DialogInterface.OnClickListener() { // 设置确定按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent i = new Intent(mContext,AddGroupCaseActivity.class);
+                startActivity(i);
+                dialog.dismiss(); // 关闭dialog
+            }
+        });
+        builder.setPositiveButton("典型案件上报", new DialogInterface.OnClickListener() { // 设置取消按钮
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent i = new Intent(mContext,AddChargeCaseActivity.class);

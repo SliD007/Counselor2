@@ -107,8 +107,13 @@ public class NewsActivity extends BaseActivity implements INewsView {
                 if(times < 2){
                     new Handler().postDelayed(new Runnable(){
                         public void run() {
-                            current++;
-                            mNewsPresenter.requestNews(current,20);
+                            if(hasNext){
+
+                                current++;
+                                mNewsPresenter.requestNews(current,20);
+                            }else {
+                                toast("没有更多了",false);
+                            }
                             mRecyclerView.loadMoreComplete();
                             mAdapter.notifyDataSetChanged();
                         }
@@ -116,8 +121,13 @@ public class NewsActivity extends BaseActivity implements INewsView {
                 } else {
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
-                            current++;
-                            mNewsPresenter.requestNews(current,20);
+                            if(hasNext){
+
+                                current++;
+                                mNewsPresenter.requestNews(current,20);
+                            }else {
+                                toast("没有更多了",false);
+                            }
                             mRecyclerView.setNoMore(true);
                             mAdapter.notifyDataSetChanged();
                         }
@@ -137,15 +147,16 @@ public class NewsActivity extends BaseActivity implements INewsView {
                 break;
         }
     }
-
+    boolean hasNext;
     @Override
-    public void requestNewsSuccess() {
+    public void requestNewsSuccess(boolean hasNext) {
 //        toast("请求成功！", true);
         newsEntities = mNewsPresenter.getNewsEntity();
         noneStr = "没有内容";
         if(newsEntities!=null){
             noneStr = "加载中";
         }
+        this.hasNext = hasNext;
         initDatas();
 
     }

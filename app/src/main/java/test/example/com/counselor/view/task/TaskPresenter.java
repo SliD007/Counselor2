@@ -60,7 +60,8 @@ public class TaskPresenter {
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             saveValue(object,type);
-                            mITaskView.requestTaskSuccess();
+                            boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
+                            mITaskView.requestTaskSuccess(hasNext);
                         }else {
                             mITaskView.requestTaskFaild();
                         }

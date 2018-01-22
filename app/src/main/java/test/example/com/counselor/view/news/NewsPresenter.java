@@ -44,12 +44,11 @@ public class NewsPresenter extends BasePresenter{
                 JSONObject object = JSON.parseObject(s);
                 if (object.getInteger("code")==0){
                     saveValue(object);
-                    mINewsView.requestNewsSuccess();
+                    boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
+                    mINewsView.requestNewsSuccess(hasNext);
                 }else {
                     mINewsView.requestNewsFailed();
                 }
-
-                mINewsView.requestNewsSuccess();
 
             }
             @Override

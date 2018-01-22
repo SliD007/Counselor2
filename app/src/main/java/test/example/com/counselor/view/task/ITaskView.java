@@ -5,7 +5,7 @@ package test.example.com.counselor.view.task;
  */
 
 public interface ITaskView {
-    void requestTaskSuccess();
+    void requestTaskSuccess(boolean hasNext);
     void requestTaskFaild();
     void requestStarSuccess();
     void requestStarFaild();

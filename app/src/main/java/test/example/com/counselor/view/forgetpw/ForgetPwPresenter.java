@@ -10,6 +10,7 @@ import java.util.HashMap;
 import okhttp3.Call;
 import okhttp3.Response;
 import test.example.com.counselor.base.BasePresenter;
+import test.example.com.counselor.util.Urls;
 
 /**
  * Created by Sli.D on 2017/5/17.
@@ -18,7 +19,6 @@ import test.example.com.counselor.base.BasePresenter;
 public class ForgetPwPresenter extends BasePresenter{
     private IForgetPwView mIForgetPwView;
 
-    private String URL = "http:www.baidu.com";
     public ForgetPwPresenter(IForgetPwView view){
         mIForgetPwView = view;
     }
@@ -26,10 +26,10 @@ public class ForgetPwPresenter extends BasePresenter{
     public void sentVCode(String contact){
         HashMap<String,String> params = new HashMap<>();
         params.put("contact",contact);
-        OkGo.post(URL).params(params).execute(new StringCallback() {
+        OkGo.post(Urls.GetCodeURL).params(params).execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {
-//                Log.e("s",s);
+                Log.e("s",s);
                 mIForgetPwView.getVCodeSuccess();
 
             }
@@ -47,10 +47,10 @@ public class ForgetPwPresenter extends BasePresenter{
         params.put("contact",contact);
         params.put("code",code);
         params.put("password",password);
-        OkGo.post(URL).params(params).execute(new StringCallback() {
+        OkGo.post(Urls.FindPWURL).params(params).execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {
-//                Log.e("s",s);
+                Log.e("s",s);
                 mIForgetPwView.resetPwSuccess();
 
             }

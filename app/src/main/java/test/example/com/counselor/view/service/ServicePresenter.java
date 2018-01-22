@@ -68,7 +68,8 @@ public class ServicePresenter extends BasePresenter {
                                 JSONObject object = JSON.parseObject(s);
                                 if (object.getInteger("code")==0){
                                     saveValue(object,type);
-                                    mIServiceView.requestServiceSuccess();
+                                    boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
+                                    mIServiceView.requestServiceSuccess(hasNext);
                                 }else {
                                     mIServiceView.requestServiceFailed();
                                 }
@@ -99,7 +100,8 @@ public class ServicePresenter extends BasePresenter {
                                 JSONObject object = JSON.parseObject(s);
                                 if (object.getInteger("code")==0){
                                     saveValue(object,type);
-                                    mIServiceView.requestServiceSuccess();
+                                    boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
+                                    mIServiceView.requestServiceSuccess(hasNext);
                                 }else {
                                     mIServiceView.requestServiceFailed();
                                 }
@@ -130,7 +132,8 @@ public class ServicePresenter extends BasePresenter {
                                 JSONObject object = JSON.parseObject(s);
                                 if (object.getInteger("code")==0){
                                     saveValue(object,type);
-                                    mIServiceView.requestServiceSuccess();
+                                    boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
+                                    mIServiceView.requestServiceSuccess(hasNext);
                                 }else {
                                     mIServiceView.requestServiceFailed();
                                 }
@@ -160,7 +163,8 @@ public class ServicePresenter extends BasePresenter {
                                 JSONObject object = JSON.parseObject(s);
                                 if (object.getInteger("code")==0){
                                     saveValue(object,type);
-                                    mIServiceView.requestServiceSuccess();
+                                    boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
+                                    mIServiceView.requestServiceSuccess(hasNext);
                                 }else {
                                     mIServiceView.requestServiceFailed();
                                 }

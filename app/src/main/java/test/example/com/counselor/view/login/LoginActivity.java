@@ -25,6 +25,7 @@ import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.util.ILocaltionModel;
 import test.example.com.counselor.util.LocaltionUtil;
 import test.example.com.counselor.view.HomeActivity;
+import test.example.com.counselor.view.forgetpw.ForgetPwActivity;
 
 public class LoginActivity extends BaseActivity implements ILoginView{
 
@@ -146,9 +147,8 @@ public class LoginActivity extends BaseActivity implements ILoginView{
                 localtionUtil.stopLocation();
                 break;
             case R.id.forgetPwTv:
-                mLoginPresenter.login(account,password);
-//                Intent i = new Intent(LoginActivity.this, ForgetPwActivity.class);
-//                startActivity(i);
+                Intent i = new Intent(LoginActivity.this, ForgetPwActivity.class);
+                startActivity(i);
                 break;
         }
     }
