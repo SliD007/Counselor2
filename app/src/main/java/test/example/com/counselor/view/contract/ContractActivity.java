@@ -98,7 +98,7 @@ public class ContractActivity extends BaseActivity implements IContractView {
 
                 }
                 String filePath = contractEntities.get(position).getVillage().getString("username")+"服务合同.pdf";
-                if(OpenFileUtil.fileIsExists(Constants.getAppDownloadFolder())){
+                if(OpenFileUtil.fileIsExists(Constants.getAppDownloadFolder()+"/"+filePath)){
                     showTv.setText("合同已下载，点击查看");
                     showTv.setTag(100+position);
                     showTv.setOnClickListener(mClickListener);
