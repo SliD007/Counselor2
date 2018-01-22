@@ -1,5 +1,6 @@
 package test.example.com.counselor.view.service.showgroupcase;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,7 +59,7 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
     int downloadIndex = 0;
     String[] imageName ;
     String[] content ;
-
+    ProgressDialog dialog;
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_showgroupcase);
     }
@@ -69,7 +70,7 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
 
         super.allow_quit = false;
         titleBarTv.setText("群体性案件详情");
-
+        dialog = new ProgressDialog(this);
         Intent i = getIntent();
         int id = i.getIntExtra("id", 0);
         mShowGroupCasePersenter = new ShowGroupCasePersenter(this, this);
@@ -114,6 +115,9 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
                     imageName[i-1] = fileName;
                     if(!OpenFileUtil.fileIsExists(Constants.getAppImageFolder()+"/"+fileName)){
                         textview8.setText("正在下载,请稍等...");
+                        dialog.setMessage("正在下载");
+                        dialog.show();
+                        dialog.setCancelable(false);
                         mShowGroupCasePersenter.downLoadImage(content[i],fileName);
                     }else {
                         initImage();
@@ -128,7 +132,7 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
         if (downloadIndex==content.length-1){
             Log.e("imageName",""+imageName.toString());
             ViewGroup.LayoutParams para = showImageLv.getLayoutParams();
-            para.height = 100*imageName.length;
+            para.height = 150*imageName.length;
             showImageLv.setLayoutParams(para);
             showImageLv.setAdapter(new ArrayAdapter<String>(this,R.layout.item_1list,imageName));
             showImageLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -160,6 +164,7 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
 
     @Override
     public void downloadImageSuccess() {
+        dialog.dismiss();
         textview8.setText("下载完成");
         initImage();
     }

@@ -1,5 +1,6 @@
 package test.example.com.counselor.view.service.showchargecase;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -65,6 +66,7 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
     int downloadIndex = 0;
     String[] imageName ;
     String[] content ;
+    ProgressDialog dialog;
     private ShowChargeCasePresenter mShowChargeCasePresenter;
     private ChargeCaseDetialEntity chargeCaseDetialEntity;
 
@@ -80,7 +82,7 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
 
         super.allow_quit = false;
         titleBarTv.setText("另行收费案件详情");
-
+        dialog = new ProgressDialog(this);
         Intent i = getIntent();
         int id = i.getIntExtra("id", 0);
         mShowChargeCasePresenter = new ShowChargeCasePresenter(this, this);
@@ -130,6 +132,9 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
                     imageName[i-1] = fileName;
                     if(!OpenFileUtil.fileIsExists(Constants.getAppImageFolder()+"/"+fileName)){
                         textview14.setText("正在下载,请稍等...");
+                        dialog.setMessage("正在下载");
+                        dialog.show();
+                        dialog.setCancelable(false);
                         mShowChargeCasePresenter.downLoadImage(content[i],fileName);
                     }else {
                         initImage();
@@ -143,7 +148,7 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
 
     @Override
     public void requestWorkLogDetialSuccess() {
-        toast("请求成功", false);
+//        toast("请求成功", false);
         initView();
     }
 
@@ -154,6 +159,7 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
 
     @Override
     public void downloadImageSuccess() {
+        dialog.dismiss();
         textview14.setText("下载完成");
         initImage();
     }
@@ -167,7 +173,7 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
         if (downloadIndex==content.length-1){
             Log.e("imageName",""+imageName.toString());
             ViewGroup.LayoutParams para = showImageLv.getLayoutParams();
-            para.height = 100*imageName.length;
+            para.height = 150*imageName.length;
             showImageLv.setLayoutParams(para);
             showImageLv.setAdapter(new ArrayAdapter<String>(this,R.layout.item_1list,imageName));
             showImageLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -1,5 +1,6 @@
 package test.example.com.counselor.view.service.showworklog;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -65,6 +66,7 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
     int downloadIndex = 0;
     String[] imageName ;
     String[] content ;
+    ProgressDialog dialog;
     private ShowWorkLogPresenter mShowWorkLogPresenter;
     private WorkLogDetialEntity workLogDetialEntity;
     @Override
@@ -84,6 +86,8 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
         int id = i.getIntExtra("id", 0);
         mShowWorkLogPresenter = new ShowWorkLogPresenter(this, this);
         mShowWorkLogPresenter.requestWorkLogDetial(id);
+
+        dialog= new ProgressDialog(this);
     }
 
     private void initView() {
@@ -112,7 +116,6 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
         }
 
     }
-
     @OnClick({R.id.backTv,R.id.textview14})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -127,6 +130,10 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
                     imageName[i-1] = fileName;
                     if(!OpenFileUtil.fileIsExists(Constants.getAppImageFolder()+"/"+fileName)){
                         textview14.setText("正在下载,请稍等...");
+
+                        dialog.setMessage("正在下载");
+                        dialog.show();
+                        dialog.setCancelable(false);
                         mShowWorkLogPresenter.downLoadImage(content[i],fileName);
                     }else {
                         initImage();
@@ -151,6 +158,7 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
 
     @Override
     public void downloadImageSuccess() {
+        dialog.dismiss();
         textview14.setText("下载完成");
         initImage();
     }
@@ -164,7 +172,7 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
         if (downloadIndex==content.length-1){
             Log.e("imageName",""+imageName.toString());
             ViewGroup.LayoutParams para = showImageLv.getLayoutParams();
-            para.height = 100*imageName.length;
+            para.height = 150*imageName.length;
             showImageLv.setLayoutParams(para);
             showImageLv.setAdapter(new ArrayAdapter<String>(this,R.layout.item_1list,imageName));
             showImageLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

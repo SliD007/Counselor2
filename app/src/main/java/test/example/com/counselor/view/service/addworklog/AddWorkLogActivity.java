@@ -1,5 +1,6 @@
 package test.example.com.counselor.view.service.addworklog;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -237,7 +238,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         }
     };
 
-
+    ProgressDialog dialog ;
     @OnClick({R.id.textview14, R.id.backTv, R.id.sumbitTv})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -263,8 +264,14 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                 sumbit_str[5] = editText05.getText().toString();
 
                 sumbit_str[13] = editText13.getText().toString();
-                if(imageItems!=null)
+                if(imageItems!=null){
+                    dialog= new ProgressDialog(this);
+                    dialog.setMessage("正在上传图片");
+                    dialog.show();
+                    dialog.setCancelable(false);
                     mAddWorkLogPersenter.addImage(imageItems);
+
+                }
                 else if(TextUtils.isEmpty(sumbit_str[2])||TextUtils.isEmpty(sumbit_str[3])||TextUtils.isEmpty(sumbit_str[13])){
                 toast("带星号的输入不能为空",false);
             }else {
@@ -297,10 +304,14 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     }
 
     @Override
-    public void addImageSuccess(String imageUrl) {
-        toast("添加图片成功", false);
+    public void addImageSuccess(String imageUrl,int i ) {
         sumbit_str[13] = sumbit_str[13] +"#"+imageUrl;
-        mAddWorkLogPersenter.addWorkLog(sumbit_str,sumbit_int);
+        Log.e("addImageSuccess",i+" "+imageUrl);
+        if(i==imageItems.size()) {
+            dialog.dismiss();
+            toast("添加图片成功", false);
+            mAddWorkLogPersenter.addWorkLog(sumbit_str,sumbit_int);
+        }
     }
 
     @Override

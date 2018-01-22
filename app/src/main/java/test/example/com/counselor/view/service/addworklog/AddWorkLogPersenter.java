@@ -158,41 +158,45 @@ public class AddWorkLogPersenter {
         };
         MyApplication.getInstance().addToRequestQueue(request4LoginRequest, "");
     }
-
+    int i = 0;
     public void addImage(ArrayList<ImageItem> imageItems){
-        ArrayList<File> files = new ArrayList<>();
+//        ArrayList<File> files = new ArrayList<>();
         if (imageItems != null && imageItems.size() > 0) {
-            for (int i = 0; i < imageItems.size(); i++) {
-                files.add(new File(imageItems.get(i).path));
+            for ( i = 0; i < imageItems.size(); i++) {
+//                files.add(new File(imageItems.get(i).path));
+                Log.e("addImage",""+imageItems.get(i).path);
+
+                OkGo.post(Urls.UpdataFileURL)
+                        .tag(this)//
+                        .headers("header1", "headerValue1")//
+                        .headers("header2", "headerValue2")//
+                        .params("param1", "paramValue1")//
+                        .params("param2", "paramValue2")//
+                        .params("file1",new File(imageItems.get(i).path))   //这种方式为一个key，对应一个文件
+        //                .params("file2",new File("文件路径"))
+        //                .params("file3",new File("文件路径"))
+//                        .addFileParams("file", files)           // 这种方式为同一个key，上传多个文件
+
+                        .execute(new StringCallback() {
+                            public void onSuccess(String s, Call call, Response response) {
+                                Log.e("addWorkLog","response:"+response.toString());
+                                Log.e("addWorkLog","onSuccess:"+s);
+                                JSONObject object = JSON.parseObject(s);
+                                if (object.getString("result").equals("success")){
+                                    mIAddWorkLogView.addImageSuccess(object.getString("url"),i);
+                                }else {
+                                    mIAddWorkLogView.addImageFailed();
+                                }
+                            }
+                            @Override
+                            public void onError(Call call, Response response, Exception e) {
+                                super.onError(call, response, e);
+                                mIAddWorkLogView.addImageFailed();
+                            }
+                        });
+
             }
         }
-        OkGo.post(Urls.UpdataFileURL)
-                .tag(this)//
-                .headers("header1", "headerValue1")//
-                .headers("header2", "headerValue2")//
-                .params("param1", "paramValue1")//
-                .params("param2", "paramValue2")//
-//                .params("file1",new File("文件路径"))   //这种方式为一个key，对应一个文件
-//                .params("file2",new File("文件路径"))
-//                .params("file3",new File("文件路径"))
-                .addFileParams("file", files)           // 这种方式为同一个key，上传多个文件
-                .execute(new StringCallback() {
-                    public void onSuccess(String s, Call call, Response response) {
-                        Log.e("addWorkLog","response:"+response.toString());
-                        Log.e("addWorkLog","onSuccess:"+s);
-                        JSONObject object = JSON.parseObject(s);
-                        if (object.getString("result").equals("success")){
-                            mIAddWorkLogView.addImageSuccess(object.getString("url"));
-                        }else {
-                            mIAddWorkLogView.addImageFailed();
-                        }
-                    }
-                    @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        super.onError(call, response, e);
-                        mIAddWorkLogView.addImageFailed();
-                    }
-                });
     }
 
 

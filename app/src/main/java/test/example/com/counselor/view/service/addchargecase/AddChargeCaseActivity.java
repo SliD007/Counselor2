@@ -1,5 +1,6 @@
 package test.example.com.counselor.view.service.addchargecase;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -74,7 +75,7 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
     AddChargeCasePersenter mAddChargeCasePersenter;
 
     private CustomDatePicker customDatePicker1;
-
+    ProgressDialog dialog ;
     private ArrayList<ImageItem> imageItems;
 
     protected void initContentView(Bundle savedInstanceState) {
@@ -281,8 +282,13 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
 
                 sumbit_str[13] = editText13.getText().toString();
                 sumbit_str[16] = editText16.getText().toString();
-                if(imageItems!=null)
+                if(imageItems!=null){
+                    dialog= new ProgressDialog(this);
+                    dialog.setMessage("正在上传图片");
+                    dialog.show();
+                    dialog.setCancelable(false);
                     mAddChargeCasePersenter.addImage(imageItems);
+                }
                 else if(TextUtils.isEmpty(sumbit_str[2])||TextUtils.isEmpty(sumbit_str[3])||TextUtils.isEmpty(sumbit_str[4])
                         ||TextUtils.isEmpty(sumbit_str[5])||TextUtils.isEmpty(sumbit_str[16])||TextUtils.isEmpty(sumbit_str[13])){
                     toast("带星号的输入不能为空",false);
@@ -310,6 +316,7 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
 
     @Override
     public void addImageSuccess(String imageUrl) {
+        dialog.dismiss();
         toast("添加图片成功", false);
         sumbit_str[13] = sumbit_str[13] +"#"+imageUrl;
         mAddChargeCasePersenter.addChargeCase(sumbit_str,sumbit_int);

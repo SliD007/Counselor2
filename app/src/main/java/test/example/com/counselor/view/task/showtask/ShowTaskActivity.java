@@ -70,7 +70,7 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
             taskCreateTimeTv.setText("时间："+TimeUtil.getDateToString(taskDetialEntity.getCreateTime(),TimeUtil.DataTime));
             taskContextTv.setText(taskDetialEntity.getContent());
             if (taskDetialEntity.getAccesory()!=null){
-                fileName = taskDetialEntity.getTitle()+taskDetialEntity.getAccesory().split(".")[1];
+                fileName = taskDetialEntity.getTitle()+taskDetialEntity.getAccesory().split(".")[taskDetialEntity.getAccesory().split(".").length-1];
                 taskFileTv.setText("点击查看附件");
 
                 taskFileTv.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,6 @@
 package test.example.com.counselor.view.service.addgroupcase;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -62,7 +63,7 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
     AddGroupCasePersenter mAddGroupCasePersenter;
 
     private CustomDatePicker customDatePicker1;
-
+    ProgressDialog dialog ;
     private ArrayList<ImageItem> imageItems;
 
     protected void initContentView(Bundle savedInstanceState) {
@@ -211,8 +212,13 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
                 sumbit_str[3] = editText3.getText().toString();
                 sumbit_str[4] = textview4.getText().toString();
                 sumbit_str[6] = editText6.getText().toString();
-                if(imageItems!=null)
+                if(imageItems!=null){
+                    dialog= new ProgressDialog(this);
+                    dialog.setMessage("正在上传图片");
+                    dialog.show();
+                    dialog.setCancelable(false);
                     mAddGroupCasePersenter.addImage(imageItems);
+                }
                 else if(TextUtils.isEmpty(sumbit_str[2])||TextUtils.isEmpty(sumbit_str[6])||TextUtils.isEmpty(sumbit_str[3])){
                     toast("带星号的输入不能为空",false);
                 }else {
@@ -240,6 +246,7 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
 
     @Override
     public void addImageSuccess(String imageUrl) {
+        dialog.dismiss();
         toast("添加图片成功", false);
         sumbit_str[6] = sumbit_str[6] +"#"+imageUrl;
         mAddGroupCasePersenter.addGroupCase(sumbit_str,sumbit_int);
