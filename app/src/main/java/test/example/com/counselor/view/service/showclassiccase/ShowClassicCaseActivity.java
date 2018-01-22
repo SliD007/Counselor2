@@ -68,7 +68,7 @@ public class ShowClassicCaseActivity extends BaseActivity implements IShowClassi
 
     @Override
     public void requestClassicCaseDetialSuccess() {
-        toast("请求成功", false);
+//        toast("请求成功", false);
         initView();
     }
 

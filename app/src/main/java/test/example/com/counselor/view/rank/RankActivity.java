@@ -29,8 +29,6 @@ public class RankActivity extends BaseActivity implements IRankView {
     ListView rankLv;
 
     List<RankEntity> rankEntities;
-    @BindView(R.id.backTv)
-    TextView backTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +111,7 @@ public class RankActivity extends BaseActivity implements IRankView {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            toast("" + (position), true);
+//            toast("" + (position), true);
         }
     };
 

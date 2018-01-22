@@ -48,22 +48,22 @@
                 style="@style/serviceTitleTv" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/serviceRl3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingBottom="5dp">
-            <View
-                android:id="@+id/serviceVw3"
-                style="@style/serviceTitleVw"/>
-            <TextView
-                android:id="@+id/serviceTv3"
-                android:text="典型案件"
-                android:layout_above="@id/serviceVw3"
-                style="@style/serviceTitleTv" />
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/serviceRl3"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:paddingBottom="5dp">-->
+            <!--<View-->
+                <!--android:id="@+id/serviceVw3"-->
+                <!--style="@style/serviceTitleVw"/>-->
+            <!--<TextView-->
+                <!--android:id="@+id/serviceTv3"-->
+                <!--android:text="典型案件"-->
+                <!--android:layout_above="@id/serviceVw3"-->
+                <!--style="@style/serviceTitleTv" />-->
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
         <RelativeLayout
             android:id="@+id/serviceRl4"
             android:layout_width="0dp"

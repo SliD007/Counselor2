@@ -168,10 +168,10 @@ public class AddWorkLogPersenter {
 
                 OkGo.post(Urls.UpdataFileURL)
                         .tag(this)//
-                        .headers("header1", "headerValue1")//
-                        .headers("header2", "headerValue2")//
-                        .params("param1", "paramValue1")//
-                        .params("param2", "paramValue2")//
+//                        .headers("header1", "headerValue1")//
+//                        .headers("header2", "headerValue2")//
+//                        .params("param1", "paramValue1")//
+//                        .params("param2", "paramValue2")//
                         .params("file1",new File(imageItems.get(i).path))   //这种方式为一个key，对应一个文件
         //                .params("file2",new File("文件路径"))
         //                .params("file3",new File("文件路径"))

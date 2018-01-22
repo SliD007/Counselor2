@@ -35,10 +35,7 @@ public class ContractActivity extends BaseActivity implements IContractView {
     ContractPresenter mContractPresenter;
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
-    @BindView(R.id.backTv)
-    TextView backTv;
-//    @BindView(R.id.contractVs)
-//    ViewStub contractVs;
+
     @BindView(R.id.contractLv)
     ListView contractLv;
     ArrayList<Map<String,Integer>> mData= new ArrayList<Map<String,Integer>>();

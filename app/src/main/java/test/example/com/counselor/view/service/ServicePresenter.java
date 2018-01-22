@@ -83,7 +83,7 @@ public class ServicePresenter extends BasePresenter {
                 break;
             case 1:
                 HashMap<String,String> params1 = new HashMap<>();
-                params1.put("type",0+"");
+                params1.put("type",-1+"");
                 params1.put("contact", MyApplication.getInstance().loginEntity.getContact());
                 params1.put("current",current+"");
                 params1.put("size",size+"");
@@ -113,38 +113,38 @@ public class ServicePresenter extends BasePresenter {
                             }
                         });
                 break;
-            case 2:
-                HashMap<String,String> params2 = new HashMap<>();
-                params2.put("type",1+"");
-                params2.put("contact", MyApplication.getInstance().loginEntity.getContact());
-                params2.put("current",current+"");
-                params2.put("size",size+"");
-                Log.e("params2", params2.toString());
-                OkGo.post(Urls.ReportURL)
-                        .params(params2)
-                        .cacheKey(Constants.getAppCacheFolder())
-//                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
-                        .cacheTime(-1)
-                        .execute(new StringCallback() {
-
-                            public void onSuccess(String s, Call call, Response response) {
-//                                Log.e("requestServiceData"+type,s);
-                                JSONObject object = JSON.parseObject(s);
-                                if (object.getInteger("code")==0){
-                                    saveValue(object,type);
-                                    boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
-                                    mIServiceView.requestServiceSuccess(hasNext,type);
-                                }else {
-                                    mIServiceView.requestServiceFailed();
-                                }
-                            }
-                            @Override
-                            public void onError(Call call, Response response, Exception e) {
-                                super.onError(call, response, e);
-                                mIServiceView.requestServiceFailed();
-                            }
-                        });
-                break;
+//            case 2:
+//                HashMap<String,String> params2 = new HashMap<>();
+//                params2.put("type",1+"");
+//                params2.put("contact", MyApplication.getInstance().loginEntity.getContact());
+//                params2.put("current",current+"");
+//                params2.put("size",size+"");
+//                Log.e("params2", params2.toString());
+//                OkGo.post(Urls.ReportURL)
+//                        .params(params2)
+//                        .cacheKey(Constants.getAppCacheFolder())
+////                        .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+//                        .cacheTime(-1)
+//                        .execute(new StringCallback() {
+//
+//                            public void onSuccess(String s, Call call, Response response) {
+////                                Log.e("requestServiceData"+type,s);
+//                                JSONObject object = JSON.parseObject(s);
+//                                if (object.getInteger("code")==0){
+//                                    saveValue(object,type);
+//                                    boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
+//                                    mIServiceView.requestServiceSuccess(hasNext,type);
+//                                }else {
+//                                    mIServiceView.requestServiceFailed();
+//                                }
+//                            }
+//                            @Override
+//                            public void onError(Call call, Response response, Exception e) {
+//                                super.onError(call, response, e);
+//                                mIServiceView.requestServiceFailed();
+//                            }
+//                        });
+//                break;
             case 3:
                 HashMap<String,String> params3 = new HashMap<>();
                 params3.put("contact", MyApplication.getInstance().loginEntity.getContact());

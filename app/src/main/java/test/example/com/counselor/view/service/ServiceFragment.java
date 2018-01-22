@@ -54,16 +54,16 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     TextView serviceTv1;
     @BindView(R.id.serviceTv2)
     TextView serviceTv2;
-    @BindView(R.id.serviceTv3)
-    TextView serviceTv3;
+//    @BindView(R.id.serviceTv3)
+//    TextView serviceTv3;
     @BindView(R.id.serviceTv4)
     TextView serviceTv4;
     @BindView(R.id.serviceVw1)
     View serviceVw1;
     @BindView(R.id.serviceVw2)
     View serviceVw2;
-    @BindView(R.id.serviceVw3)
-    View serviceVw3;
+//    @BindView(R.id.serviceVw3)
+//    View serviceVw3;
     @BindView(R.id.serviceVw4)
     View serviceVw4;
     @BindView(R.id.noneTv)
@@ -96,7 +96,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         mServicePersenter = new ServicePresenter(this);
         mServicePersenter.requestServiceData(fragmentCuttent[0],requestSize,0);
         mServicePersenter.requestServiceData(fragmentCuttent[1],requestSize,1);
-        mServicePersenter.requestServiceData(fragmentCuttent[2],requestSize,2);
+//        mServicePersenter.requestServiceData(fragmentCuttent[2],requestSize,2);
         mServicePersenter.requestServiceData(fragmentCuttent[3],requestSize,3);
     }
 
@@ -174,44 +174,46 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                     TextView tv2 = viewHolder.getView(R.id.itemTv2);
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
                     TextView tv4 = viewHolder.getView(R.id.itemTv4);
-                    tv1.setText(adviceEntities.get(position).getTitle());
-                    tv2.setText("报送至："+adviceEntities.get(position).getToType());
-                    tv3.setText("服务时间："+ TimeUtil.getDateToString(adviceEntities.get(position).getCreateTime(),TimeUtil.Data));
-                    tv4.setText("服务单位："+adviceEntities.get(position).getVillage());
+                    tv1.setText("上报类型："+adviceEntities.get(position).getReporttype());
+                    tv2.setText("标题："+adviceEntities.get(position).getTitle());
+                    tv3.setText("服务单位："+adviceEntities.get(position).getVillage());
+                    tv4.setText("报送至："+adviceEntities.get(position).getToType());
                     LinearLayout ll = viewHolder.getView(R.id.itemLl);
                     ll.setTag(position);
                     ll.setOnClickListener(mClickListener);
                 }
             };
             mRecyclerView.setAdapter(mAdapter);
-        }else if(fragmentType==2){
-            classicCaseEntities = mServicePersenter.getClassicCaseEntities();
-            if(classicCaseEntities!=null){
-                para.height = 0;
-                noneTv.setLayoutParams(para);
-
-            }else {
-                para.height = 100;
-                noneTv.setLayoutParams(para);
-                noneTv.setText(noneStr);
-            }
-            mAdapter = new CommonAdapter(mContext,classicCaseEntities,R.layout.item_3list,mClickListener){
-                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
-                    super.onBindViewHolder(viewHolder,position);
-
-                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
-                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
-                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
-                    tv1.setText(classicCaseEntities.get(position).getTitle());
-                    tv2.setText("服务时间："+ TimeUtil.getDateToString(classicCaseEntities.get(position).getCreateTime(),TimeUtil.Data));
-                    tv3.setText("服务单位："+classicCaseEntities.get(position).getVillage());
-                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
-                    ll.setTag(position);
-                    ll.setOnClickListener(mClickListener);
-                }
-            };
-            mRecyclerView.setAdapter(mAdapter);
-        }else {
+        }
+//        else if(fragmentType==2){
+//            classicCaseEntities = mServicePersenter.getClassicCaseEntities();
+//            if(classicCaseEntities!=null){
+//                para.height = 0;
+//                noneTv.setLayoutParams(para);
+//
+//            }else {
+//                para.height = 100;
+//                noneTv.setLayoutParams(para);
+//                noneTv.setText(noneStr);
+//            }
+//            mAdapter = new CommonAdapter(mContext,classicCaseEntities,R.layout.item_3list,mClickListener){
+//                public void onBindViewHolder(ViewHolder viewHolder,final int position) {
+//                    super.onBindViewHolder(viewHolder,position);
+//
+//                    TextView tv1 = viewHolder.getView(R.id.itemTv1);
+//                    TextView tv2 = viewHolder.getView(R.id.itemTv2);
+//                    TextView tv3 = viewHolder.getView(R.id.itemTv3);
+//                    tv1.setText(classicCaseEntities.get(position).getTitle());
+//                    tv2.setText("服务时间："+ TimeUtil.getDateToString(classicCaseEntities.get(position).getCreateTime(),TimeUtil.Data));
+//                    tv3.setText("服务单位："+classicCaseEntities.get(position).getVillage());
+//                    LinearLayout ll = viewHolder.getView(R.id.itemLl);
+//                    ll.setTag(position);
+//                    ll.setOnClickListener(mClickListener);
+//                }
+//            };
+//            mRecyclerView.setAdapter(mAdapter);
+//        }
+        else {
             summaryEntities = mServicePersenter.getSummaryEntities();
             if(summaryEntities!=null){
                 para.height = 0;
@@ -294,7 +296,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
 
     }
 
-    @OnClick({R.id.serviceRl1, R.id.serviceRl2, R.id.serviceRl3, R.id.serviceRl4})
+    @OnClick({R.id.serviceRl1, R.id.serviceRl2, R.id.serviceRl4})
     public void onSelectClick(View view) {
         clearStatus();
         switch (view.getId()) {
@@ -304,9 +306,9 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
             case R.id.serviceRl2:
                 fragmentType = 1;
                 break;
-            case R.id.serviceRl3:
-                fragmentType = 2;
-                break;
+//            case R.id.serviceRl3:
+//                fragmentType = 2;
+//                break;
             case R.id.serviceRl4:
                 fragmentType = 3;
         }
@@ -322,13 +324,12 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 showAddWorkLogDialog();
                 break;
             case 1:
-                i = new Intent(getActivity(), AddAdviceActivity.class);
-                startActivity(i);
+                showReportDialog();
                 break;
-            case 2:
-                i = new Intent(getActivity(), AddClassicCaseActivity.class);
-                startActivity(i);
-                break;
+//            case 2:
+//                i = new Intent(getActivity(), AddClassicCaseActivity.class);
+//                startActivity(i);
+//                break;
             case 3:
                 i = new Intent(getActivity(), AddSummaryActivity.class);
                 startActivity(i);
@@ -339,11 +340,11 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     private void clearStatus() {
         serviceTv1.setTextColor(Color.rgb(144, 144, 144));
         serviceTv2.setTextColor(Color.rgb(144, 144, 144));
-        serviceTv3.setTextColor(Color.rgb(144, 144, 144));
+//        serviceTv3.setTextColor(Color.rgb(144, 144, 144));
         serviceTv4.setTextColor(Color.rgb(144, 144, 144));
         serviceVw1.setBackgroundColor(Color.rgb(48,49,53));
         serviceVw2.setBackgroundColor(Color.rgb(48,49,53));
-        serviceVw3.setBackgroundColor(Color.rgb(48,49,53));
+//        serviceVw3.setBackgroundColor(Color.rgb(48,49,53));
         serviceVw4.setBackgroundColor(Color.rgb(48,49,53));
     }
 
@@ -358,10 +359,10 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 serviceTv2.setTextColor(Color.rgb(255, 255, 255));
                 serviceVw2.setBackgroundColor(Color.rgb(1,160,243));
                 break;
-            case 2:
-                serviceTv3.setTextColor(Color.rgb(255, 255, 255));
-                serviceVw3.setBackgroundColor(Color.rgb(1,160,243));
-                break;
+//            case 2:
+//                serviceTv3.setTextColor(Color.rgb(255, 255, 255));
+//                serviceVw3.setBackgroundColor(Color.rgb(1,160,243));
+//                break;
             case 3:
                 serviceTv4.setTextColor(Color.rgb(255, 255, 255));
                 serviceVw4.setBackgroundColor(Color.rgb(1,160,243));
@@ -411,15 +412,19 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                     startActivity(i);
                     break;
                 case 1:
-                    i = new Intent(mContext, ShowAdviceActivity.class);
+                    if(adviceEntities.get(position).getReporttype().equals("建议")){
+                        i = new Intent(mContext, ShowAdviceActivity.class);
+                    }else {
+                        i = new Intent(mContext, ShowClassicCaseActivity.class);
+                    }
                     i.putExtra("id",adviceEntities.get(position).getId());
                     startActivity(i);
                     break;
-                case 2:
-                    i = new Intent(mContext, ShowClassicCaseActivity.class);
-                    i.putExtra("id",classicCaseEntities.get(position).getId());
-                    startActivity(i);
-                    break;
+//                case 2:
+//                    i = new Intent(mContext, ShowClassicCaseActivity.class);
+//                    i.putExtra("id",classicCaseEntities.get(position).getId());
+//                    startActivity(i);
+//                    break;
                 case 3:
                     i = new Intent(mContext, ShowSummaryActivity.class);
                     i.putExtra("id",summaryEntities.get(position).getId());
@@ -471,7 +476,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         builder.setNegativeButton("建议上报", new DialogInterface.OnClickListener() { // 设置确定按钮
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent i = new Intent(mContext,AddGroupCaseActivity.class);
+                Intent i = new Intent(mContext,AddAdviceActivity.class);
                 startActivity(i);
                 dialog.dismiss(); // 关闭dialog
             }
@@ -479,7 +484,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         builder.setPositiveButton("典型案件上报", new DialogInterface.OnClickListener() { // 设置取消按钮
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent i = new Intent(mContext,AddChargeCaseActivity.class);
+                Intent i = new Intent(mContext,AddClassicCaseActivity.class);
                 startActivity(i);
                 dialog.dismiss(); // 关闭dialog
             }

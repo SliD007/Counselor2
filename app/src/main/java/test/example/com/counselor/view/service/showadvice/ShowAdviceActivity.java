@@ -70,7 +70,7 @@ public class ShowAdviceActivity extends BaseActivity implements IShowAdviceView 
 
     @Override
     public void requestWorkLogDetialSuccess() {
-        toast("请求成功", false);
+//        toast("请求成功", false);
         initView();
     }
 
