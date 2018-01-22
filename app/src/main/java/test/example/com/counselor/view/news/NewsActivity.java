@@ -51,6 +51,7 @@ public class NewsActivity extends BaseActivity implements INewsView {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         para = noneTv.getLayoutParams();
+        noneTv.setText(noneStr);
     }
 
 
@@ -153,9 +154,7 @@ public class NewsActivity extends BaseActivity implements INewsView {
 //        toast("请求成功！", true);
         newsEntities = mNewsPresenter.getNewsEntity();
         noneStr = "没有内容";
-        if(newsEntities!=null){
-            noneStr = "加载中";
-        }
+
         this.hasNext = hasNext;
         initDatas();
 

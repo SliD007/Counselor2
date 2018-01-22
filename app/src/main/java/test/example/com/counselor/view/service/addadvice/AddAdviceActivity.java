@@ -1,6 +1,7 @@
 package test.example.com.counselor.view.service.addadvice;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,7 +35,7 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
     RadioGroup radioGroup;
     @BindView(R.id.spinner01)
     Spinner spinner01;
-    int rbId = 0;
+    int rbId = -1;
     String vStr = "";
     List<String> list;
     ArrayAdapter<String> adapter;
@@ -84,10 +85,6 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
         });
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 
     @OnClick({R.id.backTv, R.id.sumbitTv})
     public void onClick(View view) {
@@ -99,8 +96,11 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
             case R.id.sumbitTv:
                 String title = addAdviceTitleEt.getText().toString();
                 String context_str = addAdviceContextEt.getText().toString();
-                mAddAdvicePersenter.addAdvice(title,context_str,rbId,vStr);
-//                mAddAdvicePersenter.addadvice(title,context_str,rbId);
+                if(TextUtils.isEmpty(title)||TextUtils.isEmpty(context_str)||rbId==-1){
+                    toast("标题或内容不能为空",false);
+                }else {
+                    mAddAdvicePersenter.addAdvice(title, context_str, rbId, vStr);
+                }
                 break;
         }
     }
@@ -108,7 +108,7 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
 
     @Override
     public void addSuccess() {
-        toast("添加成功",false);
+        toast("添加成功，下拉刷新列表", false);
         MyApplication.getInstance().refresh = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();

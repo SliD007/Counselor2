@@ -146,6 +146,7 @@
                 <ImageView
                     android:id="@+id/imageLeftIm04"
                     android:layout_width="5dp"
+                    android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
                     android:text="委托人住址"
@@ -178,6 +179,7 @@
                 <ImageView
                     android:id="@+id/imageLeftIm05"
                     android:layout_width="5dp"
+                    android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
                     android:text="案件标的额（元）"

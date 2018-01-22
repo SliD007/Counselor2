@@ -69,7 +69,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     @BindView(R.id.noneTv)
     TextView noneTv;
     ViewGroup.LayoutParams para;
-    String noneStr = "加载中";
+    String noneStr = "加载中...";
     private int fragmentType;
     private int[] fragmentCuttent;
     ServicePresenter mServicePersenter;
@@ -103,10 +103,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     @Override
     protected void initViews() {
         setTabSelection(fragmentType);
-        if(MyApplication.getInstance().refresh){
-            mServicePersenter.requestServiceData(fragmentCuttent[fragmentType],requestSize,fragmentType);
-            MyApplication.getInstance().refresh = false;
-        }
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -119,8 +116,12 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
 
     @Override
     protected void initDatas() {
-        Log.e("ServiceFragment","加载数据");
-
+        Log.e("ServiceFragment","加载数据"+fragmentType+MyApplication.getInstance().refresh);
+        //返回刷新
+        if(MyApplication.getInstance().refresh){
+            mServicePersenter.requestServiceData(1,requestSize,fragmentType);
+            MyApplication.getInstance().refresh = false;
+        }
         if (fragmentType == 0) {
             workLogEntities = mServicePersenter.getWorkLogEntities();
             if(workLogEntities!=null){
@@ -131,6 +132,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 para.height = 100;
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);
+
             }
             mAdapter = new CommonAdapter(mContext,workLogEntities,R.layout.item_4list,mClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
@@ -142,6 +144,9 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                     TextView tv4 = viewHolder.getView(R.id.itemTv4);
                     tv1.setText("工作记录类型："+ workLogEntities.get(position).getLogType());
                     tv2.setText("服务对象："+workLogEntities.get(position).getServiceObject());
+                    if(workLogEntities.get(position).getLogType().equals("群体事件")){
+                        tv2.setText("服务对象："+workLogEntities.get(position).getServiceVillageName());
+                    }
                     tv3.setText("服务单位："+workLogEntities.get(position).getServiceVillageName());
                     tv4.setText("完结状态："+workLogEntities.get(position).getResultType());
                     LinearLayout ll = viewHolder.getView(R.id.itemLl);
@@ -234,7 +239,6 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
             };
             mRecyclerView.setAdapter(mAdapter);
         }
-        noneStr = "没有内容";
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
@@ -366,11 +370,12 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     }
     boolean[] hasNests = new boolean[]{false,false,false,false} ;
     @Override
-    public void requestServiceSuccess(boolean hasNext) {
+    public void requestServiceSuccess(boolean hasNext,int type) {
 //        toast("请求成功", false);
-//        Log.e("ServiceFragment","请求成功");
+        noneStr = "没有内容";
         hasNests[fragmentType] = hasNext;
-        initDatas();
+        if(type==fragmentType)
+            initDatas();
     }
 
     @Override

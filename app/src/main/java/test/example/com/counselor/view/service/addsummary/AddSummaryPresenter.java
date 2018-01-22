@@ -64,6 +64,7 @@ public class AddSummaryPresenter {
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
 
+                            MyApplication.getInstance().refresh = true;
                             mIAddSummaryView.addSuccess();
                         }else {
                             mIAddSummaryView.addFailed();

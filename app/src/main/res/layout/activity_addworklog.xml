@@ -133,7 +133,7 @@
                     style="@style/log_spinner"
                     android:hint="请输入"
                     android:textColorHint="#ccc"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:nextFocusUp="@id/editText04"
                     android:nextFocusLeft="@id/editText04"
                     />
@@ -427,7 +427,7 @@
                     android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
-                    android:text="案件完成状态"
+                    android:text="完成状态"
                     android:layout_toRightOf="@id/imageLeftIm15"
                     style="@style/text_worklog"/>
                 <ImageView

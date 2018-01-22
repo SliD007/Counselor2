@@ -24,6 +24,8 @@ import test.example.com.counselor.base.BasePresenter;
 import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.Urls;
 
+import static cn.jpush.android.api.JPushInterface.setAlias;
+
 /**
  * Created by Sli.D on 2017/5/17.
  */
@@ -118,6 +120,7 @@ public class LoginPresenter extends BasePresenter{
             JSONObject object = JSON.parseObject(s);
             if (object.getInteger("code")==0){
                 saveValue(object);
+
                 mLoginView.loginSuccess();
             }else {
                 mLoginView.loginFailed();
@@ -143,6 +146,7 @@ public class LoginPresenter extends BasePresenter{
 
     public void saveValue(JSONObject object){
         JSONObject value = JSON.parseObject(object.getString("value"));
+        setAlias(mContext, 0, value.getString("id")+"");
         LoginEntity entity = JSON.parseObject(value.toString(),LoginEntity.class);
         mLoginModel.setEntity(entity);
 //        Log.e("LoginEntity",mLoginModel.getEntity().toString());

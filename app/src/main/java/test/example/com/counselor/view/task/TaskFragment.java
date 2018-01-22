@@ -96,7 +96,6 @@ public class TaskFragment extends BaseFragment implements ITaskView {
             showDialog();
             MyApplication.getInstance().show_star_dialog=false;
         }
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -108,7 +107,13 @@ public class TaskFragment extends BaseFragment implements ITaskView {
 
     @Override
     protected void initDatas() {
-        Log.e("TaskFragment","加载数据"+fragmentType);
+
+        Log.e("TaskFragment","加载数据"+fragmentType+MyApplication.getInstance().refresh);
+        //返回刷新
+        if(MyApplication.getInstance().refresh){
+            mTaskPresenter.requestTask(1, requestSize, fragmentType, MyApplication.getInstance().loginEntity.getId());
+            MyApplication.getInstance().refresh = false;
+        }
         if (fragmentType == 0) {
             toDoListEntities = mTaskPresenter.getToDoTaskEntity();
             if(toDoListEntities!=null){
@@ -328,7 +333,8 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         button1.setOnClickListener(new View.OnClickListener() { // 设置确定按钮
             public void onClick(View paramView) {
                 mDialog.dismiss();
-                Intent i = new Intent(getContext(), AddWorkLogActivity.class);
+                Intent i = new Intent(getContext(), RankActivity.class);
+
                 startActivity(i);
             }
         });
@@ -336,7 +342,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
             @Override
             public void onClick(View paramView) {
                 mDialog.dismiss();
-                Intent i = new Intent(getContext(), RankActivity.class);
+                Intent i = new Intent(getContext(), AddWorkLogActivity.class);
                 startActivity(i);
             }
         });
@@ -353,12 +359,13 @@ public class TaskFragment extends BaseFragment implements ITaskView {
     }
     boolean[] hasNests = new boolean[]{false,false} ;
     @Override
-    public void requestTaskSuccess(boolean hasNext) {
+    public void requestTaskSuccess(boolean hasNext,int type) {
 //        toast("请求成功",false);
 //        Log.e("TaskFragment","请求成功");
         noneStr = "没有内容";
         hasNests[fragmentType] = hasNext;
-        initDatas();
+        if(type == fragmentType)
+            initDatas();
     }
 
     @Override

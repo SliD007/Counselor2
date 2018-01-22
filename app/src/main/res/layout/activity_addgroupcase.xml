@@ -26,6 +26,7 @@
                 <ImageView
                     android:id="@+id/imageLeftIm1"
                     android:layout_width="5dp"
+                    android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
                     android:text="服务村社"
@@ -53,6 +54,7 @@
                 <ImageView
                     android:id="@+id/imageLeftIm2"
                     android:layout_width="5dp"
+                    android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
                     android:text="群体性案件发生地"
@@ -83,6 +85,7 @@
                 <ImageView
                     android:id="@+id/imageLeftIm3"
                     android:layout_width="5dp"
+                    android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
                     android:text="涉及人数"
@@ -111,6 +114,7 @@
                 <ImageView
                     android:id="@+id/imageLeftIm4"
                     android:layout_width="5dp"
+                    android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
                     android:text="发生时间"
@@ -141,6 +145,7 @@
                 <ImageView
                     android:id="@+id/imageLeftIm5"
                     android:layout_width="5dp"
+                    android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
                     android:text="群体性案件类型"
@@ -174,6 +179,7 @@
                     <ImageView
                         android:id="@+id/imageLeftIm6"
                         android:layout_width="5dp"
+                        android:src="@drawable/u125"
                         style="@style/image1"/>
                     <TextView
                         android:text="案件概述"

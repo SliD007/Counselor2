@@ -2,6 +2,7 @@ package test.example.com.counselor.view.service.addclassiccase;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -76,19 +77,19 @@ public class AddClassicCaseActivity extends BaseActivity implements IAddClassicC
             case R.id.sumbitTv:
                 String title = addClassicCaseTitleEt.getText().toString();
                 String context_str = addClassicCaseContextEt.getText().toString();
-                mAddClassicCasePresenter.addClassicCase(title, context_str, vStr);
-//                mAddClassicCasePresenter.addclassicCase(title, context_str);
+                if(TextUtils.isEmpty(title)||TextUtils.isEmpty(context_str)){
+                    toast("标题或内容不能为空",false);
+                }else {
+                    mAddClassicCasePresenter.addClassicCase(title, context_str, vStr);
+                }
                 break;
         }
-    }
-
-    private void sumbitAdvice(String title, String context_str) {
     }
 
 
     @Override
     public void addSuccess() {
-        toast("添加成功", false);
+        toast("添加成功，下拉刷新列表", false);
         MyApplication.getInstance().refresh = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();

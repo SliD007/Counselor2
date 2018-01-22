@@ -2,6 +2,7 @@ package test.example.com.counselor.view.service.addworklog;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -264,12 +265,17 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                 sumbit_str[13] = editText13.getText().toString();
                 if(imageItems!=null)
                     mAddWorkLogPersenter.addImage(imageItems);
-                else
-                    mAddWorkLogPersenter.addWorkLog(sumbit_str,sumbit_int);
-                clock();
+                else if(TextUtils.isEmpty(sumbit_str[2])||TextUtils.isEmpty(sumbit_str[3])||TextUtils.isEmpty(sumbit_str[13])){
+                toast("带星号的输入不能为空",false);
+            }else {
+                    mAddWorkLogPersenter.addWorkLog(sumbit_str, sumbit_int);
+                    clock();
+                }
                 break;
         }
     }
+
+
 
     @Override
     public void clock() {
@@ -279,7 +285,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
 
     @Override
     public void addSuccess() {
-        toast("添加成功", false);
+        toast("添加成功，下拉刷新列表", false);
         MyApplication.getInstance().refresh = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();

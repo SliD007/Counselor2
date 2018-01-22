@@ -18,6 +18,8 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.adapter.FragmentAdapter;
 import test.example.com.counselor.base.BaseActivity;
+import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.view.news.NewsActivity;
 import test.example.com.counselor.view.personal.PersonalFragment;
 import test.example.com.counselor.view.schedule.ScheduleFragment;
 import test.example.com.counselor.view.service.ServiceFragment;
@@ -60,6 +62,12 @@ public class HomeActivity extends BaseActivity {
         Intent i = getIntent();
         fragmentId = i.getIntExtra("fragmentId",0);
         initView();
+        //如果登录来着推送消息触发，当加载完主页之后，立即跳转到消息列表
+        if(MyApplication.getInstance().goToNews){
+            Intent intent = new Intent(HomeActivity.this, NewsActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     @Override

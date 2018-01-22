@@ -5,6 +5,6 @@ package test.example.com.counselor.view.service;
  */
 
 public interface IServiceView {
-    void requestServiceSuccess(boolean hasNext);
+    void requestServiceSuccess(boolean hasNext,int type);
     void requestServiceFailed();
 }

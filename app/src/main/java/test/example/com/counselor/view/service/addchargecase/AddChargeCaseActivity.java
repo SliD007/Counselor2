@@ -2,6 +2,7 @@ package test.example.com.counselor.view.service.addchargecase;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -276,15 +277,19 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
                 sumbit_str[2] = editText02.getText().toString();
                 sumbit_str[3] = editText03.getText().toString();
                 sumbit_str[4] = editText04.getText().toString();
-                sumbit_int[5] = Integer.valueOf(editText05.getText().toString()).intValue();
+                sumbit_str[5] = editText05.getText().toString();
 
                 sumbit_str[13] = editText13.getText().toString();
                 sumbit_str[16] = editText16.getText().toString();
                 if(imageItems!=null)
                     mAddChargeCasePersenter.addImage(imageItems);
-                else
-                    mAddChargeCasePersenter.addChargeCase(sumbit_str,sumbit_int);
-
+                else if(TextUtils.isEmpty(sumbit_str[2])||TextUtils.isEmpty(sumbit_str[3])||TextUtils.isEmpty(sumbit_str[4])
+                        ||TextUtils.isEmpty(sumbit_str[5])||TextUtils.isEmpty(sumbit_str[16])||TextUtils.isEmpty(sumbit_str[13])){
+                    toast("带星号的输入不能为空",false);
+                }else {
+                    sumbit_int[5] = Integer.valueOf(sumbit_str[5]).intValue();
+                    mAddChargeCasePersenter.addChargeCase(sumbit_str, sumbit_int);
+                }
                 break;
         }
     }
@@ -292,7 +297,7 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
 
     @Override
     public void addSuccess() {
-        toast("添加成功", false);
+        toast("添加成功，下拉刷新列表", false);
         MyApplication.getInstance().refresh = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();

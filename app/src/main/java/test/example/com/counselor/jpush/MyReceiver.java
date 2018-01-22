@@ -13,6 +13,10 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
+import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.view.WelcomeActivity;
+import test.example.com.counselor.view.login.ILoginModel;
+import test.example.com.counselor.view.login.LoginModel;
 import test.example.com.counselor.view.news.NewsActivity;
 
 /**
@@ -49,11 +53,25 @@ public class MyReceiver extends BroadcastReceiver {
 				Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
 
 //				打开自定义的Activity
-				Intent i = new Intent(context, NewsActivity.class);
-				i.putExtras(bundle);
-				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-				context.startActivity(i);
+				ILoginModel iLoginModel = new LoginModel();
+				//没登陆的情况下 完成登录流程
+				if(iLoginModel.getEntity()==null){
+					Log.d(TAG, "[MyReceiver] 用户当前没有登录");
+					MyApplication.getInstance().goToNews = true;
+					Intent i = new Intent(context, WelcomeActivity.class);
+					i.putExtras(bundle);
+					i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+					context.startActivity(i);
+				}else {
+
+					Intent i = new Intent(context, NewsActivity.class);
+					i.putExtras(bundle);
+					i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+					context.startActivity(i);
+				}
+
 
 			} else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
 				Log.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));

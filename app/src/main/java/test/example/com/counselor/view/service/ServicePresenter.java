@@ -69,7 +69,7 @@ public class ServicePresenter extends BasePresenter {
                                 if (object.getInteger("code")==0){
                                     saveValue(object,type);
                                     boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
-                                    mIServiceView.requestServiceSuccess(hasNext);
+                                    mIServiceView.requestServiceSuccess(hasNext,type);
                                 }else {
                                     mIServiceView.requestServiceFailed();
                                 }
@@ -101,7 +101,7 @@ public class ServicePresenter extends BasePresenter {
                                 if (object.getInteger("code")==0){
                                     saveValue(object,type);
                                     boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
-                                    mIServiceView.requestServiceSuccess(hasNext);
+                                    mIServiceView.requestServiceSuccess(hasNext,type);
                                 }else {
                                     mIServiceView.requestServiceFailed();
                                 }
@@ -133,7 +133,7 @@ public class ServicePresenter extends BasePresenter {
                                 if (object.getInteger("code")==0){
                                     saveValue(object,type);
                                     boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
-                                    mIServiceView.requestServiceSuccess(hasNext);
+                                    mIServiceView.requestServiceSuccess(hasNext,type);
                                 }else {
                                     mIServiceView.requestServiceFailed();
                                 }
@@ -164,7 +164,7 @@ public class ServicePresenter extends BasePresenter {
                                 if (object.getInteger("code")==0){
                                     saveValue(object,type);
                                     boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
-                                    mIServiceView.requestServiceSuccess(hasNext);
+                                    mIServiceView.requestServiceSuccess(hasNext,type);
                                 }else {
                                     mIServiceView.requestServiceFailed();
                                 }

@@ -2,6 +2,7 @@ package test.example.com.counselor.view.service.addsummary;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -56,16 +57,21 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
             case R.id.sumbitTv:
                 String title = addSummaryTitleEt.getText().toString();
                 String context_str = addSummaryContextEt.getText().toString();
-                mAddSummaryPresenter.addSummary(title, context_str);
-//                mAddSummaryPresenter.addsummary(title, context_str);
+                if(TextUtils.isEmpty(title)||TextUtils.isEmpty(context_str)){
+                    toast("标题或内容不能为空",false);
+                }else {
+                    mAddSummaryPresenter.addSummary(title, context_str);
+                }
+
                 break;
         }
     }
 
     @Override
     public void addSuccess() {
-        toast("添加成功", false);
+        toast("添加成功，下拉刷新列表", false);
         MyApplication.getInstance().refresh = true;
+//        Log.e("addSuccess",""+MyApplication.getInstance().refresh);
         MyApplication.getInstance().finishActivity(this);
         this.finish();
     }

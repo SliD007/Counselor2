@@ -96,9 +96,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
             rememberPwCb.setChecked(true);
             //直接发起登录
             passwordEt.setText(password);
-//            password = Md5Util.md5(password);
-            mLoginPresenter.loadLogin(this,account,password);
-//            mLoginPresenter.login(account,password);
+
         }else{
             rememberPwCb.setChecked(false);
         }
@@ -135,7 +133,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
                 saveUser(account,password);
 //                password = Md5Util.md5(password);
                 mLoginPresenter.loadLogin(LoginActivity.this,account,password);
-//                mLoginPresenter.login(account,password);
+
 
                 break;
             case R.id.forgetPwTv:

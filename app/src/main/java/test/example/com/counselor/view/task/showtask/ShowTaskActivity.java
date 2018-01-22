@@ -1,8 +1,12 @@
 package test.example.com.counselor.view.task.showtask;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -10,6 +14,8 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.util.Constants;
+import test.example.com.counselor.util.OpenFileUtil;
 import test.example.com.counselor.util.TimeUtil;
 
 /**
@@ -30,7 +36,7 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
     TextView taskContextTv;
     @BindView(R.id.taskFileTv)
     TextView taskFileTv;
-
+    Context mContext;
     private ShowTaskPresenter mShowTaskPresenter;
     private TaskDetialEntity taskDetialEntity;
     @Override
@@ -42,7 +48,7 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-
+        mContext = this;
         super.allow_quit = false;
         titleBarTv.setText("待办事项详情");
 
@@ -55,14 +61,41 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
         mShowTaskPresenter.changeTaskState(id,fromWhere);
         mShowTaskPresenter.requestTaskDetial(id,fromWhere);
     }
-
+    String fileName ;
     private void initView() {
         taskDetialEntity = mShowTaskPresenter.getTaskDetialEntity();
-        taskTitleTv.setText(taskDetialEntity.getTitle());
-        taskFromWhereTv.setText("来源："+taskDetialEntity.getFromWhere());
-        taskCreateTimeTv.setText("时间："+TimeUtil.getDateToString(taskDetialEntity.getCreateTime(),TimeUtil.DataTime));
-        taskContextTv.setText(taskDetialEntity.getContent());
+        if (taskDetialEntity != null){
+            taskTitleTv.setText(taskDetialEntity.getTitle());
+            taskFromWhereTv.setText("来源："+taskDetialEntity.getFromWhere());
+            taskCreateTimeTv.setText("时间："+TimeUtil.getDateToString(taskDetialEntity.getCreateTime(),TimeUtil.DataTime));
+            taskContextTv.setText(taskDetialEntity.getContent());
+            if (taskDetialEntity.getAccesory()!=null){
+                fileName = taskDetialEntity.getTitle()+taskDetialEntity.getAccesory().split(".")[1];
+                taskFileTv.setText("点击查看附件");
 
+                taskFileTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(OpenFileUtil.fileIsExists(Constants.getAppDownloadFolder()+"/"+fileName)){
+                            File file = new File(Constants.getAppDownloadFolder()+"/"+fileName);
+                            OpenFileUtil.openFile(mContext,file);
+                        }else {
+                            taskFileTv.setText("下载附件中，请稍候...");
+                            mShowTaskPresenter.downLoadTaskFile(taskDetialEntity.getAccesory(),fileName);
+                        }
+
+                    }
+                });
+            }
+        }
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MyApplication.getInstance().refresh = true;
     }
 
     @OnClick(R.id.backTv)
@@ -90,5 +123,17 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
     @Override
     public void changeTaskStateFailed() {
         toast("修改失败",false);
+    }
+
+    @Override
+    public void downloadTaskFileSuccess() {
+        toast("下载成功",false);
+        File file = new File(Constants.getAppDownloadFolder()+"/"+fileName);
+        OpenFileUtil.openFile(mContext,file);
+    }
+
+    @Override
+    public void downloadTaskFileFialed() {
+        toast("下载失败",false);
     }
 }

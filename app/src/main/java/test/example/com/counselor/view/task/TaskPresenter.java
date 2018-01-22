@@ -61,7 +61,7 @@ public class TaskPresenter {
                         if (object.getInteger("code")==0){
                             saveValue(object,type);
                             boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
-                            mITaskView.requestTaskSuccess(hasNext);
+                            mITaskView.requestTaskSuccess(hasNext,type);
                         }else {
                             mITaskView.requestTaskFaild();
                         }

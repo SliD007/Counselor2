@@ -8,21 +8,19 @@ import java.io.Serializable;
 
 public class TaskDetialEntity implements Serializable{
     private int id;
+    private String title;
+    private String content;
+    private String fromWhere;
+    private String readType;
+    private long createTime;
+    private String accesory;
+
+    public TaskDetialEntity() {
+
+    }
 
     public String getTitle() {
         return title;
-    }
-
-    @Override
-    public String toString() {
-        return "ChargeCaseDetialEntity{" +
-                "content='" + content + '\'' +
-                ", id=" + id +
-                ", title='" + title + '\'' +
-                ", fromWhere='" + fromWhere + '\'' +
-                ", readType='" + readType + '\'' +
-                ", createTime='" + createTime + '\'' +
-                '}';
     }
 
     public void setTitle(String title) {
@@ -69,15 +67,25 @@ public class TaskDetialEntity implements Serializable{
         this.readType = readType;
     }
 
-    private String title;
-    private String content;
-    private String fromWhere;
-    private String readType;
-    private long createTime;
-
-    public TaskDetialEntity() {
-
+    public String getAccesory() {
+        return accesory;
     }
 
+    public void setAccesory(String accesory) {
+        this.accesory = accesory;
+    }
+
+    @Override
+    public String toString() {
+        return "ChargeCaseDetialEntity{" +
+                "content='" + content + '\'' +
+                ", id=" + id +
+                ", title='" + title + '\'' +
+                ", fromWhere='" + fromWhere + '\'' +
+                ", readType='" + readType + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", accesory='" + accesory + '\'' +
+                '}';
+    }
 
 }

@@ -46,6 +46,7 @@ public class MyApplication extends Application {
     public boolean refresh = false;
     public boolean show_star_dialog = true;
     public boolean clock = false;
+    public boolean goToNews = false;
     public int clockVillage = 0;
 
     private RequestQueue queues;

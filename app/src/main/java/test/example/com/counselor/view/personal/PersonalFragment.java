@@ -19,6 +19,7 @@ import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.view.assessment.AssessmentActivity;
 import test.example.com.counselor.view.changepw.ChagePwActivity;
 import test.example.com.counselor.view.contract.ContractActivity;
+import test.example.com.counselor.view.login.LoginActivity;
 import test.example.com.counselor.view.rank.RankActivity;
 
 /**
@@ -110,7 +111,8 @@ public class PersonalFragment extends BaseFragment {
         builder.setNegativeButton("确定", new DialogInterface.OnClickListener() { // 设置取消按钮
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                Intent i = new Intent(getActivity(), LoginActivity.class);
+                startActivity(i);
                 MyApplication.getInstance().finishActivity(getActivity());
                 getActivity().finish();
             }

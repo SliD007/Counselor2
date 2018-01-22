@@ -63,7 +63,7 @@ public class ContractActivity extends BaseActivity implements IContractView {
         setContentView(R.layout.activity_contract);
     }
 
-
+    String contractUrl;
     private void initDatas() {
         Log.e("AssessmentActivity", "加载数据");
         contractEntities = mContractPresenter.getContractEntity();
@@ -91,12 +91,16 @@ public class ContractActivity extends BaseActivity implements IContractView {
                     tv6.setText("合同期限："+contractEntities.get(position).getDeadLine());
                     tv7.setText("合同金额："+contractEntities.get(position).getMoney()+"");
                     tv8.setText("合同状态："+contractEntities.get(position).getContractStatus());
-                    downloadTv.setTag(position);
-                    downloadTv.setOnClickListener(mClickListener);
+                    if(contractEntities.get(position).getAccesory()==null){
+//                        downloadTv.setText("");
+                    }else {
+                        contractUrl = contractEntities.get(position).getAccesory();
+                        downloadTv.setTag(position);
+                        downloadTv.setOnClickListener(mClickListener);
+                    }
 
                 }
                 String filePath = contractEntities.get(position).getVillage().getString("username")+"服务合同.pdf";
-//                Log.e("fileIsExists",""+fileIsExists(Constants.getAppDownloadFolder()+"/"+filePath));
                 if(OpenFileUtil.fileIsExists(Constants.getAppDownloadFolder())){
                     showTv.setText("合同已下载，点击查看");
                     showTv.setTag(100+position);
@@ -146,7 +150,7 @@ public class ContractActivity extends BaseActivity implements IContractView {
         @Override
         public void myOnClick(int position, View view) {
             if(position<100){
-                mContractPresenter.downLoadContract("http://comad.in/comad2014/Proceedings/ResearchPaper1.pdf",
+                mContractPresenter.downLoadContract(contractUrl,
                         contractEntities.get(position).getVillage().getString("username")+"服务合同.pdf");
                 TextView tv = (TextView) view;
                 tv.setText("下载中");

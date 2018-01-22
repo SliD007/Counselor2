@@ -10,4 +10,7 @@ public interface IShowTaskView {
 
     void changeTaskStateSuccess();
     void changeTaskStateFailed();
+
+    void downloadTaskFileSuccess();
+    void downloadTaskFileFialed();
 }
