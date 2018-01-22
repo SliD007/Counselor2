@@ -287,6 +287,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 times ++;
             }
         });
+
     }
 
     @OnClick({R.id.serviceRl1, R.id.serviceRl2, R.id.serviceRl3, R.id.serviceRl4})

@@ -8,6 +8,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+
+import java.util.HashMap;
+
+import okhttp3.Call;
+import okhttp3.Response;
+import test.example.com.counselor.util.Urls;
+
 
 public abstract class BaseActivity extends FragmentActivity {
 
@@ -76,6 +85,25 @@ public abstract class BaseActivity extends FragmentActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
+    public void clock(){
+        HashMap<String,String> params = new HashMap<>();
+        params.put("counselorId",MyApplication.getInstance().loginEntity.getId()+"");
+        params.put("villageId", MyApplication.getInstance().clockVillage+"");
+        Log.e("clock","params");
+        OkGo.post(Urls.ClockURL)
+                .params(params)
+                .cacheTime(-1)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                        Log.e("requestScheduleList","response"+response.toString());
+                        Log.e("clock","onSuccess"+s);
+                    }
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                    }
+                });
+    }
 
 }

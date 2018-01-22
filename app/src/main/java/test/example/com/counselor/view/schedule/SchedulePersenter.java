@@ -15,6 +15,7 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Response;
+import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.Urls;
 
@@ -41,7 +42,7 @@ public class SchedulePersenter {
         HashMap<String,String> params = new HashMap<>();
         params.put("current",current+"");
         params.put("size",size+"");
-        params.put("counselorId", 1+"");
+        params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
         OkGo.post(Urls.ScheduleURL)
                 .params(params)
                 .cacheKey(Constants.getAppCacheFolder())

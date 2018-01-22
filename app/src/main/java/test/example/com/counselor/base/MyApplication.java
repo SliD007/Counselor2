@@ -45,6 +45,8 @@ public class MyApplication extends Application {
     public LoginEntity loginEntity;// 当前的用户信息
     public boolean refresh = false;
     public boolean show_star_dialog = true;
+    public boolean clock = false;
+    public int clockVillage = 0;
 
     private RequestQueue queues;
     public MyApplication() {

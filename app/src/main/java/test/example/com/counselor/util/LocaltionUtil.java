@@ -9,10 +9,18 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps2d.AMapUtils;
+import com.amap.api.maps2d.model.LatLng;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Locale;
+
+import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.view.schedule.IScheduleModel;
+import test.example.com.counselor.view.schedule.ScheduleEntity;
+import test.example.com.counselor.view.schedule.ScheduleModel;
 
 /**
  * Created by Sli.D on 2018/1/13.
@@ -21,9 +29,13 @@ import java.util.Locale;
 public class LocaltionUtil {
     Context mContext;
     ILocaltionModel mILocaltionModel;
-    public LocaltionUtil(Context context,ILocaltionModel iLocaltionModel){
+    IScheduleModel mIScheduleModel;
+    List<ScheduleEntity> scheduleEntities;
+    public LocaltionUtil(Context context,List<ScheduleEntity> scheduleEntities){
         this.mContext = context;
-        this.mILocaltionModel = iLocaltionModel;
+        this.mILocaltionModel = localtionModel;
+        this.mIScheduleModel = new ScheduleModel();
+        this.scheduleEntities = scheduleEntities;
     }
 
     /**
@@ -80,7 +92,7 @@ public class LocaltionUtil {
         mOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);//可选，设置定位模式，可选的模式有高精度、仅设备、仅网络。默认为高精度模式
         mOption.setGpsFirst(true);//可选，设置是否gps优先，只在高精度模式下有效。默认关闭
         mOption.setHttpTimeOut(30000);//可选，设置网络请求超时时间。默认为30秒。在仅设备模式下无效
-        mOption.setInterval(2000);//可选，设置定位间隔。默认为2秒
+        mOption.setInterval(10000);//可选，设置定位间隔。默认为2秒
         mOption.setNeedAddress(true);//可选，设置是否返回逆地理地址信息。默认是true
         mOption.setOnceLocation(false);//可选，设置是否单次定位。默认是false
         mOption.setOnceLocationLatest(false);//可选，设置是否等待wifi刷新，默认为false.如果设置为true,会自动变为单次定位，持续定位时不要使用
@@ -118,4 +130,82 @@ public class LocaltionUtil {
         }
         return null;
     }
+
+    private void clock(double x, double y){
+        String village = "";
+        double Vx = 0;
+        double Vy = 0;
+        //不在工作时间不能打卡
+        //获取现在时（精度：天）
+        long nowTime=System.currentTimeMillis();
+        nowTime = TimeUtil.getStringToDate(TimeUtil.getDateToString(nowTime,TimeUtil.Data),TimeUtil.Data);
+//        Log.e("NowTime",""+nowTime);
+        //获取工作安排,判断顾问应该在哪个村社服务（只有在三个页面有效）
+        if(scheduleEntities==null){
+            Log.e("scheduleEntities","null");
+        }
+        for(int i=0;i<scheduleEntities.size();i++){
+            long workTime = scheduleEntities.get(i).getPlacementTime();
+//            Log.e("workTime",""+workTime);
+            if(workTime==nowTime)
+                village = scheduleEntities.get(i).getVillage();
+        }
+
+        //获取当前服务村社经纬度
+        if(village.equals(MyApplication.getInstance().loginEntity.getVillageA())){
+            Vx = MyApplication.getInstance().loginEntity.getCommunityA().getDouble("longitude");
+            Vy = MyApplication.getInstance().loginEntity.getCommunityA().getDouble("latitude");
+            MyApplication.getInstance().clockVillage = MyApplication.getInstance().loginEntity.getVillageAId();
+        }else if(village.equals(MyApplication.getInstance().loginEntity.getVillageB())){
+            Vx = MyApplication.getInstance().loginEntity.getCommunityB().getDouble("longitude");
+            Vy = MyApplication.getInstance().loginEntity.getCommunityB().getDouble("latitude");
+            MyApplication.getInstance().clockVillage = MyApplication.getInstance().loginEntity.getVillageAId();
+        }
+
+        //判断距离
+        LatLng latLng1 = new LatLng(y,x);
+        LatLng latLng2 = new LatLng(Vy,Vx);
+
+        float distance = AMapUtils.calculateLineDistance(latLng1,latLng2);
+        Log.e("distance",""+distance);
+        if(distance<=5000){
+            MyApplication.getInstance().clock = true;
+            locationClient.stopLocation();
+        }
+
+    }
+
+    ILocaltionModel localtionModel = new ILocaltionModel() {
+        @Override
+        public void getLocaltionSuccess(AMapLocation location) {
+
+            Log.e("定位","返回code:"+location.getErrorCode());
+            //errCode等于0代表定位成功，其他的为定位失败，具体的可以参照官网定位错误码说明
+            switch (location.getErrorCode()){
+                case 0:
+                    Log.e("定位成功",""
+//                            "定位类型: " + location.getLocationType() + "\n"+
+//                                    "经    度    : " + location.getLongitude() + "\n"+
+//                                    "纬    度    : " + location.getLatitude() + "\n"+
+//                                    "精    度    : " + location.getAccuracy() + "米" + "\n"+
+//                                    "提供者    : " + location.getProvider()+ "\n" +
+//                                    "地    址    : " +location.getAddress() + "\n"
+//                                "国家信息    : " +location.getCountry() +
+//                                "省    : " +location.getProvince() +
+//                                "市    : " +location.getCity() +
+//                                "县区    : " +location.getDistrict() +
+//                                "镇街    : " +location.getStreet() +
+//                                "门牌号    : " +location.getStreetNum()
+                    );
+                    clock(location.getLongitude(),location.getLatitude());
+                    break;
+
+            }
+        }
+
+        @Override
+        public void getLocaltionFailed() {
+
+        }
+    };
 }

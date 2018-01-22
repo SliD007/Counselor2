@@ -113,7 +113,7 @@ public class LoginPresenter extends BasePresenter{
     StringCallback loginStringCallback = new StringCallback() {
 
         public void onSuccess(String s, Call call, Response response) {
-//            Log.e("loadLogin","onSuccess:"+s);
+            Log.e("loadLogin","onSuccess:"+s);
 
             JSONObject object = JSON.parseObject(s);
             if (object.getInteger("code")==0){

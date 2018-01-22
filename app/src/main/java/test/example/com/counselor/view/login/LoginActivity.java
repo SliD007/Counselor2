@@ -15,15 +15,11 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.amap.api.location.AMapLocation;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
-import test.example.com.counselor.util.ILocaltionModel;
-import test.example.com.counselor.util.LocaltionUtil;
 import test.example.com.counselor.view.HomeActivity;
 import test.example.com.counselor.view.forgetpw.ForgetPwActivity;
 
@@ -43,7 +39,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
     private String account;
     private String password;
     private LoginPresenter mLoginPresenter;
-    LocaltionUtil localtionUtil;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +49,11 @@ public class LoginActivity extends BaseActivity implements ILoginView{
         mLoginPresenter = new LoginPresenter(this,this);
         initView();
 
-        localtionUtil = new LocaltionUtil(this,mILocaltionModel);
-        Log.e("sHA1", ""+localtionUtil.sHA1(this));
-        localtionUtil.startLocation();
-
     }
 
     @Override
     protected void onStop() {
-        localtionUtil.stopLocation();
+
         super.onStop();
     }
 
@@ -144,7 +136,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
 //                password = Md5Util.md5(password);
                 mLoginPresenter.loadLogin(LoginActivity.this,account,password);
 //                mLoginPresenter.login(account,password);
-                localtionUtil.stopLocation();
+
                 break;
             case R.id.forgetPwTv:
                 Intent i = new Intent(LoginActivity.this, ForgetPwActivity.class);
@@ -185,40 +177,7 @@ public class LoginActivity extends BaseActivity implements ILoginView{
         toast("登录失败！",true);
     }
 
-    ILocaltionModel mILocaltionModel = new ILocaltionModel() {
-        @Override
-        public void getLocaltionSuccess(AMapLocation location) {
 
-            Log.e("定位","返回code:"+location.getErrorCode());
-            //errCode等于0代表定位成功，其他的为定位失败，具体的可以参照官网定位错误码说明
-            switch (location.getErrorCode()){
-                case 0:
-                    Log.e("定位成功",
-                            "定位类型: " + location.getLocationType() + "\n"+
-                                    "经    度    : " + location.getLongitude() + "\n"+
-                                    "纬    度    : " + location.getLatitude() + "\n"+
-                                    "精    度    : " + location.getAccuracy() + "米" + "\n"+
-                                    "提供者    : " + location.getProvider()+ "\n" +
-                                    "地    址    : " +location.getAddress() + "\n"
-//                                "国家信息    : " +location.getCountry() +
-//                                "省    : " +location.getProvince() +
-//                                "市    : " +location.getCity() +
-//                                "县区    : " +location.getDistrict() +
-//                                "镇街    : " +location.getStreet() +
-//                                "门牌号    : " +location.getStreetNum()
-                    );
-                    break;
-                case 12:
-                    toast("请开启获取位置（定位）权限",false);
-                    break;
-            }
-        }
-
-        @Override
-        public void getLocaltionFailed() {
-
-        }
-    };
     private static final int BAIDU_READ_PHONE_STATE =100;
 
     /** 检查权限 */

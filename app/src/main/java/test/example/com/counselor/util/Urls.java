@@ -35,4 +35,5 @@ public class Urls {
     public static final String NewsURL = "http://law.d9lab.net/jpush/getPushMessage";
     public static final String GetCodeURL = "http://law.d9lab.net/server/login/sendRegisterCode";
     public static final String FindPWURL = "http://law.d9lab.net/server/login/findPassWord";
+    public static final String ClockURL = "http://law.d9lab.net/justice/placement/attendanceCounselor";
 }

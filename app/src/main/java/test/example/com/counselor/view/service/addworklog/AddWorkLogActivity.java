@@ -266,11 +266,16 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                     mAddWorkLogPersenter.addImage(imageItems);
                 else
                     mAddWorkLogPersenter.addWorkLog(sumbit_str,sumbit_int);
-
+                clock();
                 break;
         }
     }
 
+    @Override
+    public void clock() {
+        if(MyApplication.getInstance().clock)
+            super.clock();
+    }
 
     @Override
     public void addSuccess() {

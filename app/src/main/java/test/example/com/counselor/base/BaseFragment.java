@@ -4,12 +4,21 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+
+import java.util.HashMap;
+
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Response;
+import test.example.com.counselor.util.Urls;
 
 /**
  * Fragment基类
@@ -102,4 +111,23 @@ toast封装
             Toast.makeText(mContext, str,Toast.LENGTH_SHORT).show();
     }
 
+    public void clock(){
+        HashMap<String,String> params = new HashMap<>();
+        params.put("counselorId",MyApplication.getInstance().loginEntity.getId()+"");
+        params.put("villageId", MyApplication.getInstance().clockVillage+"");
+        OkGo.post(Urls.ClockURL)
+                .params(params)
+                .cacheTime(-1)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                        Log.e("requestScheduleList","response"+response.toString());
+                        Log.e("requestScheduleList","onSuccess"+s);
+                    }
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                    }
+                });
+    }
 }

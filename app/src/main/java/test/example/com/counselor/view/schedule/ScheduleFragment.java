@@ -2,6 +2,7 @@ package test.example.com.counselor.view.schedule;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.base.MyLvClickListener;
+import test.example.com.counselor.util.LocaltionUtil;
 import test.example.com.counselor.util.TimeUtil;
 import test.example.com.counselor.view.schedule.chage.ChangeScheduleActivity;
 
@@ -32,6 +34,7 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
     ListView scheduleLv;
     private List<ScheduleEntity> entityList;
     public SchedulePersenter mSchedulePersenter;
+    LocaltionUtil localtionUtil;
     @Override
     protected int getFragmentLayoutId() {
         return R.layout.fragment_schedule;
@@ -46,12 +49,12 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
 
     @Override
     protected void initViews() {
-
-//        Log.e("initViews",""+MyApplication.getInstance().refresh);
+        //返回刷新
         if(MyApplication.getInstance().refresh){
             mSchedulePersenter.requestScheduleList(1,12);
             MyApplication.getInstance().refresh = false;
         }
+
     }
 
     @Override
@@ -109,11 +112,21 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
 //        toast("请求成功",false);
 //        Log.e("ScheduleFragment","请求成功");
         initDatas();
+        //定位打卡弄一弄
+        localtionUtil = new LocaltionUtil(getActivity(),entityList);
+        Log.e("sHA1", ""+localtionUtil.sHA1(getActivity()));
+        localtionUtil.startLocation();
     }
 
     @Override
     public void requestScheduleFaild() {
         toast("请求失败",false);
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        localtionUtil.stopLocation();
     }
 }
