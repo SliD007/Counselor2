@@ -3,6 +3,7 @@ package test.example.com.counselor.view.task.showtask;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -92,14 +93,10 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
 
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        MyApplication.getInstance().refresh = true;
-    }
 
     @OnClick(R.id.backTv)
     public void onClick() {
+        MyApplication.getInstance().refresh[0] = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();
     }
@@ -136,4 +133,18 @@ public class ShowTaskActivity extends BaseActivity implements IShowTaskView{
     public void downloadTaskFileFialed() {
         toast("下载失败",false);
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            MyApplication.getInstance().refresh[0] = true;
+            MyApplication.getInstance().finishActivity(this);
+            this.finish();
+            return false;
+        }else {
+            return super.onKeyDown(keyCode, event);
+        }
+
+    }
+
 }

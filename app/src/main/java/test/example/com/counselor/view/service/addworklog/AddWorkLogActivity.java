@@ -1,6 +1,5 @@
 package test.example.com.counselor.view.service.addworklog;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,6 +28,7 @@ import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.CustomDatePicker;
 import test.example.com.counselor.util.GlideImageLoader;
+import test.example.com.counselor.util.PDialog;
 
 /**
  * Created by Sli.D on 2017/12/21.
@@ -72,7 +72,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     TextView textview14;
     @BindView(R.id.spinner15)
     Spinner spinner15;
-
+    PDialog dialog;
     private CustomDatePicker customDatePicker1, customDatePicker2;
 
     private ArrayList<ImageItem> imageItems;
@@ -238,7 +238,6 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         }
     };
 
-    ProgressDialog dialog ;
     @OnClick({R.id.textview14, R.id.backTv, R.id.sumbitTv})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -265,17 +264,15 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
 
                 sumbit_str[13] = editText13.getText().toString();
                 if(imageItems!=null){
-                    dialog= new ProgressDialog(this);
-                    dialog.setMessage("正在上传图片");
+                    dialog = new PDialog(this,"正在提交图片",false);
                     dialog.show();
-                    dialog.setCancelable(false);
                     mAddWorkLogPersenter.addImage(imageItems);
 
                 }
                 else if(TextUtils.isEmpty(sumbit_str[2])||TextUtils.isEmpty(sumbit_str[3])||TextUtils.isEmpty(sumbit_str[13])){
                 toast("带星号的输入不能为空",false);
             }else {
-                    mAddWorkLogPersenter.addWorkLog(sumbit_str, sumbit_int);
+                    sumbit(sumbit_str,sumbit_int);
                     clock();
                 }
                 break;
@@ -293,7 +290,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     @Override
     public void addSuccess() {
         toast("添加成功，下拉刷新列表", false);
-        MyApplication.getInstance().refresh = true;
+        MyApplication.getInstance().refresh[0] = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();
     }
@@ -310,13 +307,19 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         if(i==imageItems.size()) {
             dialog.dismiss();
             toast("添加图片成功", false);
-            mAddWorkLogPersenter.addWorkLog(sumbit_str,sumbit_int);
+            sumbit(sumbit_str,sumbit_int);
         }
     }
 
     @Override
     public void addImageFailed() {
         toast("添加图片失败，仅提交了文本", false);
+        sumbit(sumbit_str,sumbit_int);
+    }
+
+    private void sumbit(String[] sumbit_str, int[] sumbit_int){
+        dialog = new PDialog(this,"正在提交",false);
+        dialog.show();
         mAddWorkLogPersenter.addWorkLog(sumbit_str,sumbit_int);
     }
 

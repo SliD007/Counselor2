@@ -13,6 +13,7 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.util.PDialog;
 
 /**
  * Created by Sli.D on 2017/12/21.
@@ -26,7 +27,7 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
     EditText addSummaryTitleEt;
     @BindView(R.id.addSummaryContextEt)
     EditText addSummaryContextEt;
-
+    PDialog dialog;
     AddSummaryPresenter mAddSummaryPresenter;
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addsummary);
@@ -60,6 +61,8 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
                 if(TextUtils.isEmpty(title)||TextUtils.isEmpty(context_str)){
                     toast("标题或内容不能为空",false);
                 }else {
+                    dialog = new PDialog(this,"正在提交",false);
+                    dialog.show();
                     mAddSummaryPresenter.addSummary(title, context_str);
                 }
 
@@ -69,9 +72,9 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
 
     @Override
     public void addSuccess() {
+        dialog.dismiss();
         toast("添加成功，下拉刷新列表", false);
-        MyApplication.getInstance().refresh = true;
-//        Log.e("addSuccess",""+MyApplication.getInstance().refresh);
+        MyApplication.getInstance().refresh[3] = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();
     }

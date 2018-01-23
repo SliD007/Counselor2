@@ -1,6 +1,5 @@
 package test.example.com.counselor.view.service.addchargecase;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,6 +25,7 @@ import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.CustomDatePicker;
 import test.example.com.counselor.util.GlideImageLoader;
+import test.example.com.counselor.util.PDialog;
 
 
 /**
@@ -75,9 +75,8 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
     AddChargeCasePersenter mAddChargeCasePersenter;
 
     private CustomDatePicker customDatePicker1;
-    ProgressDialog dialog ;
     private ArrayList<ImageItem> imageItems;
-
+    PDialog dialog;
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addchargecase);
     }
@@ -283,10 +282,8 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
                 sumbit_str[13] = editText13.getText().toString();
                 sumbit_str[16] = editText16.getText().toString();
                 if(imageItems!=null){
-                    dialog= new ProgressDialog(this);
-                    dialog.setMessage("正在上传图片");
+                    dialog = new PDialog(this,"正在提交图片",false);
                     dialog.show();
-                    dialog.setCancelable(false);
                     mAddChargeCasePersenter.addImage(imageItems);
                 }
                 else if(TextUtils.isEmpty(sumbit_str[2])||TextUtils.isEmpty(sumbit_str[3])||TextUtils.isEmpty(sumbit_str[4])
@@ -294,7 +291,7 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
                     toast("带星号的输入不能为空",false);
                 }else {
                     sumbit_int[5] = Integer.valueOf(sumbit_str[5]).intValue();
-                    mAddChargeCasePersenter.addChargeCase(sumbit_str, sumbit_int);
+                    sumbit(sumbit_str,sumbit_int);
                 }
                 break;
         }
@@ -304,7 +301,8 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
     @Override
     public void addSuccess() {
         toast("添加成功，下拉刷新列表", false);
-        MyApplication.getInstance().refresh = true;
+        dialog.dismiss();
+        MyApplication.getInstance().refresh[0] = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();
     }
@@ -319,12 +317,18 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
         dialog.dismiss();
         toast("添加图片成功", false);
         sumbit_str[13] = sumbit_str[13] +"#"+imageUrl;
-        mAddChargeCasePersenter.addChargeCase(sumbit_str,sumbit_int);
+        sumbit(sumbit_str,sumbit_int);
     }
 
     @Override
     public void addImageFailed() {
         toast("添加图片失败，仅提交了文本", false);
+        sumbit(sumbit_str,sumbit_int);
+    }
+
+    private void sumbit(String[] sumbit_str, int[] sumbit_int){
+        dialog = new PDialog(this,"正在提交",false);
+        dialog.show();
         mAddChargeCasePersenter.addChargeCase(sumbit_str,sumbit_int);
     }
 

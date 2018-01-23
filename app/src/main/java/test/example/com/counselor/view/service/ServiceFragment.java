@@ -73,7 +73,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
     private int fragmentType;
     private int[] fragmentCuttent;
     ServicePresenter mServicePersenter;
-    private int requestSize=10;
+    private int requestSize=20;
     List<WorkLogEntity> workLogEntities;
     List<AdviceEntity> adviceEntities;
     List<ClassicCaseEntity> classicCaseEntities;
@@ -109,6 +109,12 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         mRecyclerView.setLayoutManager(layoutManager);
 
         para = noneTv.getLayoutParams();
+//        Log.e("ServiceFragment","initView:"+MyApplication.getInstance().isRefresh());
+        //返回刷新
+        if(MyApplication.getInstance().refresh[fragmentType]){
+            mServicePersenter.requestServiceData(1,requestSize,fragmentType);
+            MyApplication.getInstance().refresh[fragmentType] = false;
+        }
     }
 
     @Override
@@ -116,12 +122,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
 
     @Override
     protected void initDatas() {
-        Log.e("ServiceFragment","加载数据"+fragmentType+MyApplication.getInstance().refresh);
-        //返回刷新
-        if(MyApplication.getInstance().refresh){
-            mServicePersenter.requestServiceData(1,requestSize,fragmentType);
-            MyApplication.getInstance().refresh = false;
-        }
+        Log.e("ServiceFragment","加载数据");
         if (fragmentType == 0) {
             workLogEntities = mServicePersenter.getWorkLogEntities();
             if(workLogEntities!=null){
@@ -145,7 +146,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                     tv1.setText("工作记录类型："+ workLogEntities.get(position).getLogType());
                     tv2.setText("服务对象："+workLogEntities.get(position).getServiceObject());
                     if(workLogEntities.get(position).getLogType().equals("群体事件")){
-                        tv2.setText("服务对象："+workLogEntities.get(position).getServiceVillageName());
+                        tv2.setText("服务对象："+workLogEntities.get(position).());
                     }
                     tv3.setText("服务单位："+workLogEntities.get(position).getServiceVillageName());
                     tv4.setText("完结状态："+workLogEntities.get(position).getResultType());

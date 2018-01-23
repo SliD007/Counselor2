@@ -65,6 +65,7 @@ public abstract class BaseFragment extends Fragment {
         super.onStart();
         initViews();
         initDatas();
+
 //        Log.e("BaseFragment","onStart"+getFragmentLayoutId());
     }
 

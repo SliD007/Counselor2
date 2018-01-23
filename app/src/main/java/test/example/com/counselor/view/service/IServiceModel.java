@@ -23,4 +23,5 @@ public interface IServiceModel {
 
     void setSummaryEntities(List<SummaryEntity> summaryEntities);
     List<SummaryEntity> getSummaryEntities();
+
 }

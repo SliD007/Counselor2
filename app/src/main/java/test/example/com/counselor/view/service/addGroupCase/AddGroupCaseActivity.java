@@ -1,6 +1,5 @@
 package test.example.com.counselor.view.service.addgroupcase;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,6 +29,7 @@ import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.CustomDatePicker;
 import test.example.com.counselor.util.GlideImageLoader;
+import test.example.com.counselor.util.PDialog;
 
 
 /**
@@ -63,7 +63,7 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
     AddGroupCasePersenter mAddGroupCasePersenter;
 
     private CustomDatePicker customDatePicker1;
-    ProgressDialog dialog ;
+    PDialog dialog ;
     private ArrayList<ImageItem> imageItems;
 
     protected void initContentView(Bundle savedInstanceState) {
@@ -213,18 +213,15 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
                 sumbit_str[4] = textview4.getText().toString();
                 sumbit_str[6] = editText6.getText().toString();
                 if(imageItems!=null){
-                    dialog= new ProgressDialog(this);
-                    dialog.setMessage("正在上传图片");
+                    dialog = new PDialog(this,"正在提交图片",false);
                     dialog.show();
-                    dialog.setCancelable(false);
                     mAddGroupCasePersenter.addImage(imageItems);
                 }
                 else if(TextUtils.isEmpty(sumbit_str[2])||TextUtils.isEmpty(sumbit_str[6])||TextUtils.isEmpty(sumbit_str[3])){
                     toast("带星号的输入不能为空",false);
                 }else {
-
                     sumbit_int[3] =Integer.valueOf(sumbit_str[3]).intValue();
-                    mAddGroupCasePersenter.addGroupCase(sumbit_str, sumbit_int);
+                    sumbit(sumbit_str,sumbit_int);
                 }
                 break;
         }
@@ -234,7 +231,8 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
     @Override
     public void addSuccess() {
         toast("添加成功，下拉刷新列表", false);
-        MyApplication.getInstance().refresh = true;
+        dialog.dismiss();
+        MyApplication.getInstance().refresh[0] = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();
     }
@@ -249,12 +247,18 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
         dialog.dismiss();
         toast("添加图片成功", false);
         sumbit_str[6] = sumbit_str[6] +"#"+imageUrl;
-        mAddGroupCasePersenter.addGroupCase(sumbit_str,sumbit_int);
+        sumbit(sumbit_str,sumbit_int);
     }
 
     @Override
     public void addImageFailed() {
         toast("添加图片失败，仅提交了文本", false);
+        sumbit(sumbit_str,sumbit_int);
+    }
+
+    private void sumbit(String[] sumbit_str, int[] sumbit_int){
+        dialog = new PDialog(this,"正在提交",false);
+        dialog.show();
         mAddGroupCasePersenter.addGroupCase(sumbit_str,sumbit_int);
     }
 }

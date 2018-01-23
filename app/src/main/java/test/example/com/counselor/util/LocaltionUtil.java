@@ -167,7 +167,7 @@ public class LocaltionUtil {
         LatLng latLng2 = new LatLng(Vy,Vx);
 
         float distance = AMapUtils.calculateLineDistance(latLng1,latLng2);
-        Log.e("distance",""+distance);
+//        Log.e("distance",""+distance);
         if(distance<=5000){
             MyApplication.getInstance().clock = true;
             locationClient.stopLocation();
@@ -179,7 +179,7 @@ public class LocaltionUtil {
         @Override
         public void getLocaltionSuccess(AMapLocation location) {
 
-            Log.e("定位","返回code:"+location.getErrorCode());
+//            Log.e("定位","返回code:"+location.getErrorCode());
             //errCode等于0代表定位成功，其他的为定位失败，具体的可以参照官网定位错误码说明
             switch (location.getErrorCode()){
                 case 0:

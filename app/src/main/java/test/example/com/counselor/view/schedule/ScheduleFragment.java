@@ -18,7 +18,6 @@ import test.example.com.counselor.R;
 import test.example.com.counselor.adapter.Common1Adapter;
 import test.example.com.counselor.adapter.ViewHolder1;
 import test.example.com.counselor.base.BaseFragment;
-import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.base.MyLvClickListener;
 import test.example.com.counselor.util.LocaltionUtil;
 import test.example.com.counselor.util.TimeUtil;
@@ -50,11 +49,6 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
 
     @Override
     protected void initViews() {
-        //返回刷新
-        if(MyApplication.getInstance().refresh){
-            mSchedulePersenter.requestScheduleList(1,12);
-            MyApplication.getInstance().refresh = false;
-        }
 
     }
 

@@ -17,7 +17,6 @@ public class ServiceModel implements IServiceModel{
     List<AdviceEntity> adviceEntities;
     List<ClassicCaseEntity> classicCaseEntities;
     List<SummaryEntity> summaryEntities;
-
     @Override
     public void setWorkLogEntities(List<WorkLogEntity> workLogEntities) {
         this.workLogEntities = workLogEntities;
@@ -57,4 +56,5 @@ public class ServiceModel implements IServiceModel{
     public List<SummaryEntity> getSummaryEntities() {
         return this.summaryEntities;
     }
+
 }

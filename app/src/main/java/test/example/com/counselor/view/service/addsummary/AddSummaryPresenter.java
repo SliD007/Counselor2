@@ -38,7 +38,7 @@ public class AddSummaryPresenter {
 
     public void addSummary(String title,String content){
         HashMap<String,String> params = new HashMap<>();
-        params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
+        params.put("counselor", MyApplication.getInstance().loginEntity.getId()+"");
         params.put("village", MyApplication.getInstance().loginEntity.getVillageA()+" "+MyApplication.getInstance().loginEntity.getVillageB());
         params.put("office",MyApplication.getInstance().loginEntity.getOfficeName());
         params.put("contact", MyApplication.getInstance().loginEntity.getContact()+"");
@@ -51,11 +51,6 @@ public class AddSummaryPresenter {
 //                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                 .cacheTime(-1)
                 .execute(new StringCallback() {
-                    @Override
-                    public String convertSuccess(Response response) throws Exception {
-                        Log.e("addAdvice","convertSuccess:"+response.toString());
-                        return super.convertSuccess(response);
-                    }
 
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
@@ -64,7 +59,6 @@ public class AddSummaryPresenter {
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
 
-                            MyApplication.getInstance().refresh = true;
                             mIAddSummaryView.addSuccess();
                         }else {
                             mIAddSummaryView.addFailed();

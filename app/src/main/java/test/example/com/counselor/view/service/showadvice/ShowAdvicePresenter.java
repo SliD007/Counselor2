@@ -26,7 +26,7 @@ public class ShowAdvicePresenter {
     private IShowAdviceModel mIShowAdviceModel;
     public ShowAdvicePresenter(Context context, IShowAdviceView iShowAdviceView) {
         this.mIShowAdviceView = iShowAdviceView;
-        mIShowAdviceModel = new ShowAdviceModel();
+        this.mIShowAdviceModel = new ShowAdviceModel();
     }
 
 

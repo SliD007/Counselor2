@@ -104,7 +104,6 @@ public class ChangeScheduleActivity extends BaseActivity implements IChangeSched
     @Override
     public void changeSuccess() {
         toast("修改请求已发送，等待审核", false);
-        MyApplication.getInstance().refresh = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();
 

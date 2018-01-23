@@ -62,7 +62,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
     List<DoneTaskEntity> doneListEntities;
     private int fragmentType;
     private int[] fragmentCuttent;
-    private int requestSize=10;
+    private int requestSize=20;
     private int star;
 
     @BindView(R.id.recyclerview)
@@ -96,6 +96,13 @@ public class TaskFragment extends BaseFragment implements ITaskView {
             showDialog();
             MyApplication.getInstance().show_star_dialog=false;
         }
+        //返回刷新
+
+        if(MyApplication.getInstance().refresh[fragmentType]){
+            mTaskPresenter.requestTask(1, requestSize, 0, MyApplication.getInstance().loginEntity.getId());
+            mTaskPresenter.requestTask(1, requestSize, 1, MyApplication.getInstance().loginEntity.getId());
+            MyApplication.getInstance().refresh[fragmentType] = false;
+        }
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -108,12 +115,8 @@ public class TaskFragment extends BaseFragment implements ITaskView {
     @Override
     protected void initDatas() {
 
-        Log.e("TaskFragment","加载数据"+fragmentType+MyApplication.getInstance().refresh);
-        //返回刷新
-        if(MyApplication.getInstance().refresh){
-            mTaskPresenter.requestTask(1, requestSize, fragmentType, MyApplication.getInstance().loginEntity.getId());
-            MyApplication.getInstance().refresh = false;
-        }
+        Log.e("TaskFragment","加载数据"+fragmentType);
+
         if (fragmentType == 0) {
             toDoListEntities = mTaskPresenter.getToDoTaskEntity();
             if(toDoListEntities!=null){

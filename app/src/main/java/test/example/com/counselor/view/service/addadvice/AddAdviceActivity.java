@@ -19,6 +19,7 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.util.PDialog;
 
 /**
  * Created by Sli.D on 2017/12/21.
@@ -40,6 +41,7 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
     List<String> list;
     ArrayAdapter<String> adapter;
     AddAdvicePresenter mAddAdvicePersenter;
+    PDialog dialog;
     @Override
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addadvice);
@@ -99,6 +101,8 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
                 if(TextUtils.isEmpty(title)||TextUtils.isEmpty(context_str)||rbId==-1){
                     toast("标题或内容不能为空",false);
                 }else {
+                    dialog = new PDialog(this,"正在提交",false);
+                    dialog.show();
                     mAddAdvicePersenter.addAdvice(title, context_str, rbId, vStr);
                 }
                 break;
@@ -109,7 +113,8 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
     @Override
     public void addSuccess() {
         toast("添加成功，下拉刷新列表", false);
-        MyApplication.getInstance().refresh = true;
+        dialog.dismiss();
+        MyApplication.getInstance().refresh[1] = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();
 

@@ -23,6 +23,8 @@ import test.example.com.counselor.view.service.entity.ClassicCaseEntity;
 import test.example.com.counselor.view.service.entity.SummaryEntity;
 import test.example.com.counselor.view.service.entity.WorkLogEntity;
 
+import static com.alibaba.fastjson.JSON.parseArray;
+
 /**
  * Created by Sli.D on 2017/12/25.
  */
@@ -45,7 +47,7 @@ public class ServicePresenter extends BasePresenter {
     }
 
 
-    public void requestServiceData(int current, int size, final int type){
+    public void requestServiceData(final int current, int size, final int type){
 
         switch (type){
             case 0:
@@ -67,7 +69,7 @@ public class ServicePresenter extends BasePresenter {
 //                                Log.e("requestServiceData"+type,s);
                                 JSONObject object = JSON.parseObject(s);
                                 if (object.getInteger("code")==0){
-                                    saveValue(object,type);
+                                    saveValue(object,type,current);
                                     boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
                                     mIServiceView.requestServiceSuccess(hasNext,type);
                                 }else {
@@ -99,7 +101,7 @@ public class ServicePresenter extends BasePresenter {
 //                                Log.e("requestServiceData"+type,s);
                                 JSONObject object = JSON.parseObject(s);
                                 if (object.getInteger("code")==0){
-                                    saveValue(object,type);
+                                    saveValue(object,type,current);
                                     boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
                                     mIServiceView.requestServiceSuccess(hasNext,type);
                                 }else {
@@ -162,7 +164,7 @@ public class ServicePresenter extends BasePresenter {
 //                                Log.e("requestServiceData3",s);
                                 JSONObject object = JSON.parseObject(s);
                                 if (object.getInteger("code")==0){
-                                    saveValue(object,type);
+                                    saveValue(object,type,current);
                                     boolean hasNext = object.getJSONObject("page").getBoolean("hasNext");
                                     mIServiceView.requestServiceSuccess(hasNext,type);
                                 }else {
@@ -182,28 +184,37 @@ public class ServicePresenter extends BasePresenter {
 
     }
 
-    public void saveValue(JSONObject object, int type){
+    public void saveValue(JSONObject object, int type, int current){
         JSONObject page = object.getJSONObject("page");
         JSONArray listArray = page.getJSONArray("list");
 //        Log.e("saveValue"+type,""+listArray.toString());
         switch (type){
             case 0:
-                workLogEntities = JSONArray.parseArray(listArray.toString(),WorkLogEntity.class);
+                if(workLogEntities==null||current==1)
+                    workLogEntities = parseArray(listArray.toString(),WorkLogEntity.class);
+                else
+                    workLogEntities.addAll(parseArray(listArray.toString(),WorkLogEntity.class));
                 mServiceModel.setWorkLogEntities(workLogEntities);
 //                Log.e("Entity"+type,""+workLogEntities.toString());
                 break;
             case 1:
-                adviceEntities = JSONArray.parseArray(listArray.toString(),AdviceEntity.class);
+                if(adviceEntities==null||current==1)
+                    adviceEntities = parseArray(listArray.toString(),AdviceEntity.class);
+                else
+                    adviceEntities.addAll(parseArray(listArray.toString(),AdviceEntity.class));
                 mServiceModel.setAdviceEntities(adviceEntities);
 //                Log.e("Entity"+type,""+adviceEntities.toString());
                 break;
-            case 2:
-                classicCaseEntities = JSONArray.parseArray(listArray.toString(),ClassicCaseEntity.class);
-                mServiceModel.setClassicCaseEntities(classicCaseEntities);
-//                Log.e("Entity"+type,""+adviceEntities.toString());
-                break;
+//            case 2:
+//                classicCaseEntities = JSONArray.parseArray(listArray.toString(),ClassicCaseEntity.class);
+//                mServiceModel.setClassicCaseEntities(classicCaseEntities);
+////                Log.e("Entity"+type,""+adviceEntities.toString());
+//                break;
             case 3:
-                summaryEntities = JSONArray.parseArray(listArray.toString(),SummaryEntity.class);
+                if(summaryEntities==null||current==1)
+                    summaryEntities = parseArray(listArray.toString(),SummaryEntity.class);
+                else
+                    summaryEntities.addAll(JSONArray.parseArray(listArray.toString(),SummaryEntity.class));
                 mServiceModel.setSummaryEntities(summaryEntities);
 //                Log.e("Entity"+type,""+adviceEntities.toString());
                 break;

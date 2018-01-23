@@ -19,6 +19,7 @@ import butterknife.OnClick;
 import test.example.com.counselor.R;
 import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
+import test.example.com.counselor.util.PDialog;
 
 /**
  * Created by Sli.D on 2017/12/21.
@@ -38,7 +39,7 @@ public class AddClassicCaseActivity extends BaseActivity implements IAddClassicC
     List<String> list;
     ArrayAdapter<String> adapter;
     AddClassicCasePresenter mAddClassicCasePresenter;
-
+    PDialog dialog;
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addclassiccase);
     }
@@ -80,6 +81,8 @@ public class AddClassicCaseActivity extends BaseActivity implements IAddClassicC
                 if(TextUtils.isEmpty(title)||TextUtils.isEmpty(context_str)){
                     toast("标题或内容不能为空",false);
                 }else {
+                    dialog = new PDialog(this,"正在提交",false);
+                    dialog.show();
                     mAddClassicCasePresenter.addClassicCase(title, context_str, vStr);
                 }
                 break;
@@ -90,7 +93,8 @@ public class AddClassicCaseActivity extends BaseActivity implements IAddClassicC
     @Override
     public void addSuccess() {
         toast("添加成功，下拉刷新列表", false);
-        MyApplication.getInstance().refresh = true;
+        dialog.dismiss();
+        MyApplication.getInstance().refresh[1] = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();
     }
