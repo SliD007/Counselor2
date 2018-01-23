@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.File;
@@ -56,6 +57,9 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
     TextView textview8;
     @BindView(R.id.showImageLv)
     ListView showImageLv;
+    @BindView(R.id.Rl8)
+    RelativeLayout Rl8;
+
     int downloadIndex = 0;
     String[] imageName ;
     String[] content ;
@@ -95,6 +99,10 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
             if(content.length>1){
                 textview8.setText("有"+(content.length-1)+"张图，点击查看");
 
+            } {
+                ViewGroup.LayoutParams para = Rl8.getLayoutParams();
+                para.height = 0;
+                Rl8.setLayoutParams(para);
             }
 
         }

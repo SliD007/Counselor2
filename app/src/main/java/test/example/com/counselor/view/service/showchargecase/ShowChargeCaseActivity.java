@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.File;
@@ -60,7 +61,8 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
     TextView textview16;
     @BindView(R.id.textview17)
     TextView textview17;
-
+    @BindView(R.id.Rl14)
+    RelativeLayout Rl14;
     @BindView(R.id.showImageLv)
     ListView showImageLv;
     int downloadIndex = 0;
@@ -114,6 +116,10 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
             if(content.length>1){
                 textview14.setText("有"+(content.length-1)+"张图，点击查看");
 
+            } {
+                ViewGroup.LayoutParams para = Rl14.getLayoutParams();
+                para.height = 0;
+                Rl14.setLayoutParams(para);
             }
         }
     }

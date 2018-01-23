@@ -1,6 +1,5 @@
 package test.example.com.counselor.view.service.showworklog;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +21,7 @@ import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.OpenFileUtil;
+import test.example.com.counselor.util.PDialog;
 
 /**
  * Created by Sli.D on 2018/1/11.
@@ -54,6 +54,8 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
     TextView textview12;
     @BindView(R.id.rl13)
     RelativeLayout rl13;
+    @BindView(R.id.Rl14)
+    RelativeLayout Rl14;
     @BindView(R.id.textview13)
     TextView textview13;
     @BindView(R.id.textview14)
@@ -66,7 +68,8 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
     int downloadIndex = 0;
     String[] imageName ;
     String[] content ;
-    ProgressDialog dialog;
+    PDialog dialog;
+
     private ShowWorkLogPresenter mShowWorkLogPresenter;
     private WorkLogDetialEntity workLogDetialEntity;
     @Override
@@ -86,8 +89,6 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
         int id = i.getIntExtra("id", 0);
         mShowWorkLogPresenter = new ShowWorkLogPresenter(this, this);
         mShowWorkLogPresenter.requestWorkLogDetial(id);
-
-        dialog= new ProgressDialog(this);
     }
 
     private void initView() {
@@ -109,7 +110,10 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
             textview13.setText(content[0]);
             if(content.length>1){
                 textview14.setText("有"+(content.length-1)+"张图，点击查看");
-
+            }else {
+                ViewGroup.LayoutParams para = Rl14.getLayoutParams();
+                para.height = 0;
+                Rl14.setLayoutParams(para);
             }
             textview15.setText(workLogDetialEntity.getResultType());
 
@@ -131,9 +135,9 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
                     if(!OpenFileUtil.fileIsExists(Constants.getAppImageFolder()+"/"+fileName)){
                         textview14.setText("正在下载,请稍等...");
 
-                        dialog.setMessage("正在下载");
-                        dialog.show();
-                        dialog.setCancelable(false);
+                        dialog = new PDialog(this,"正在下载",false);
+//                        dialog.show();
+
                         mShowWorkLogPresenter.downLoadImage(content[i],fileName);
                     }else {
                         initImage();
@@ -156,16 +160,28 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
         toast("请求失败", false);
     }
 
+    int index=0;
     @Override
     public void downloadImageSuccess() {
-        dialog.dismiss();
-        textview14.setText("下载完成");
-        initImage();
+
+        index++;
+        Log.e("downloadImageSuccess",imageName.length+ " "+index+" "+content[index]);
+
+        if(index == imageName.length){
+
+            dialog.dismiss();
+            textview14.setText("下载完成");
+            initImage();
+        }else {
+//            dialog = new PDialog(this,"正在下载第"+(index+1)+"张图片，共"+(content.length-1)+"张",false);
+//            dialog.show();
+        }
+
     }
 
     @Override
     public void downloadImageFailed() {
-
+        toast("下载失败",false);
     }
 
     private void initImage(){

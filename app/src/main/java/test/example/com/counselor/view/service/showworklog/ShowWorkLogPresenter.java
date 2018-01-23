@@ -75,8 +75,8 @@ public class ShowWorkLogPresenter {
 
         OkGo.<File>get(url)//
                 .tag(this)//
-                .headers("header1", "headerValue1")//
-                .params("param1", "paramValue1")//
+//                .headers("header1", "headerValue1")//
+//                .params("param1", "paramValue1")//
                 .execute(new FileCallback(Constants.getAppImageFolder(),fileName) {
 
                     @Override
