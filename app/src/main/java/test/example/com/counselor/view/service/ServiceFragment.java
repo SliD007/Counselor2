@@ -146,7 +146,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                     tv1.setText("工作记录类型："+ workLogEntities.get(position).getLogType());
                     tv2.setText("服务对象："+workLogEntities.get(position).getServiceObject());
                     if(workLogEntities.get(position).getLogType().equals("群体事件")){
-                        tv2.setText("服务对象："+workLogEntities.get(position).());
+                        tv2.setText("服务对象："+workLogEntities.get(position).getServiceVillageName());
                     }
                     tv3.setText("服务单位："+workLogEntities.get(position).getServiceVillageName());
                     tv4.setText("完结状态："+workLogEntities.get(position).getResultType());
@@ -370,6 +370,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 break;
         }
     }
+
     boolean[] hasNests = new boolean[]{false,false,false,false} ;
     @Override
     public void requestServiceSuccess(boolean hasNext,int type) {

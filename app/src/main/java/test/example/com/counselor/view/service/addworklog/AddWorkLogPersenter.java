@@ -158,11 +158,11 @@ public class AddWorkLogPersenter {
         };
         MyApplication.getInstance().addToRequestQueue(request4LoginRequest, "");
     }
-    int i = 0;
+
     public void addImage(ArrayList<ImageItem> imageItems){
 //        ArrayList<File> files = new ArrayList<>();
         if (imageItems != null && imageItems.size() > 0) {
-            for ( i = 0; i < imageItems.size(); i++) {
+            for (int i = 0; i < imageItems.size(); i++) {
 //                files.add(new File(imageItems.get(i).path));
                 Log.e("addImage",""+imageItems.get(i).path);
 
@@ -183,7 +183,7 @@ public class AddWorkLogPersenter {
                                 Log.e("addWorkLog","onSuccess:"+s);
                                 JSONObject object = JSON.parseObject(s);
                                 if (object.getString("result").equals("success")){
-                                    mIAddWorkLogView.addImageSuccess(object.getString("url"),i);
+                                    mIAddWorkLogView.addImageSuccess(object.getString("url"));
                                 }else {
                                     mIAddWorkLogView.addImageFailed();
                                 }

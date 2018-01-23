@@ -264,7 +264,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
 
                 sumbit_str[13] = editText13.getText().toString();
                 if(imageItems!=null){
-                    dialog = new PDialog(this,"正在提交图片",false);
+                    dialog = new PDialog(this,"正在上传图片",false);
                     dialog.show();
                     mAddWorkLogPersenter.addImage(imageItems);
 
@@ -299,21 +299,23 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     public void addFailed() {
         toast("添加失败", false);
     }
-
+    int index=0;
     @Override
-    public void addImageSuccess(String imageUrl,int i ) {
+    public void addImageSuccess(String imageUrl ) {
+        index++;
         sumbit_str[13] = sumbit_str[13] +"#"+imageUrl;
-        Log.e("addImageSuccess",i+" "+imageUrl);
-        if(i==imageItems.size()) {
+
+        dialog = new PDialog(this,"完成上传第"+index+"张图片，共"+imageItems.size()+"张",false);
+        if(index==imageItems.size()) {
             dialog.dismiss();
-            toast("添加图片成功", false);
             sumbit(sumbit_str,sumbit_int);
         }
     }
 
     @Override
     public void addImageFailed() {
-        toast("添加图片失败，仅提交了文本", false);
+        toast("上传图片第"+index+1+"张时出错，仅提交其余内容", false);
+        dialog.dismiss();
         sumbit(sumbit_str,sumbit_int);
     }
 

@@ -213,7 +213,7 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
                 sumbit_str[4] = textview4.getText().toString();
                 sumbit_str[6] = editText6.getText().toString();
                 if(imageItems!=null){
-                    dialog = new PDialog(this,"正在提交图片",false);
+                    dialog = new PDialog(this,"正在上传图片",false);
                     dialog.show();
                     mAddGroupCasePersenter.addImage(imageItems);
                 }
@@ -242,17 +242,22 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
         toast("添加失败", false);
     }
 
+    int index=0;
     @Override
     public void addImageSuccess(String imageUrl) {
-        dialog.dismiss();
-        toast("添加图片成功", false);
+        index++;
         sumbit_str[6] = sumbit_str[6] +"#"+imageUrl;
-        sumbit(sumbit_str,sumbit_int);
+        dialog = new PDialog(this,"完成上传第"+index+"张图片，共"+imageItems.size()+"张",false);
+        if(index==imageItems.size()) {
+            dialog.dismiss();
+            sumbit(sumbit_str,sumbit_int);
+        }
     }
 
     @Override
     public void addImageFailed() {
-        toast("添加图片失败，仅提交了文本", false);
+        toast("上传图片第"+index+1+"张时出错，仅提交其余内容", false);
+        dialog.dismiss();
         sumbit(sumbit_str,sumbit_int);
     }
 

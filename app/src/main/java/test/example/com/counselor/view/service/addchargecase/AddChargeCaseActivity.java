@@ -312,12 +312,16 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
         toast("添加失败", false);
     }
 
+    int index=0;
     @Override
     public void addImageSuccess(String imageUrl) {
-        dialog.dismiss();
-        toast("添加图片成功", false);
+        index++;
         sumbit_str[13] = sumbit_str[13] +"#"+imageUrl;
-        sumbit(sumbit_str,sumbit_int);
+        dialog = new PDialog(this,"完成上传第"+index+"张图片，共"+imageItems.size()+"张",false);
+        if(index==imageItems.size()) {
+            dialog.dismiss();
+            sumbit(sumbit_str,sumbit_int);
+        }
     }
 
     @Override
