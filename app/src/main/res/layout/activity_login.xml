@@ -118,7 +118,7 @@
                 android:drawablePadding="@dimen/x10"
                 android:ems="19"
                 android:hint=" 密码"
-                android:inputType="textPassword"
+                android:password="true"
                 android:textColorHint="#cccccc"
                 android:textSize="15sp" />
 

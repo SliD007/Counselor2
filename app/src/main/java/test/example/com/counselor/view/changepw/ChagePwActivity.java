@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
 import java.util.regex.Matcher;
@@ -35,6 +37,14 @@ public class ChagePwActivity extends BaseActivity implements IChangePwView {
         ButterKnife.bind(this);
         super.allow_quit=false;
         mChangePwPresenter = new ChangePwPresenter(this);
+        oldPwEt.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        oldPwEt .setImeOptions(EditorInfo.IME_ACTION_DONE);
+        newPwEt.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        newPwEt .setImeOptions(EditorInfo.IME_ACTION_DONE);
+        new2PwEt.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        new2PwEt .setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+
     }
 
     @Override

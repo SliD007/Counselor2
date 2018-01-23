@@ -7,8 +7,10 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -74,6 +76,8 @@ public class LoginActivity extends BaseActivity implements ILoginView{
           暂不实现自动登录
      */
     public void initView() {
+        userNameEt.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+        passwordEt.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 
         //初始化用户名
         SharedPreferences userNameSp = getSharedPreferences("userNameSp", Context.MODE_PRIVATE);

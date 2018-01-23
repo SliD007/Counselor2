@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -43,6 +45,9 @@ public class ForgetPwActivity extends BaseActivity implements IForgetPwView {
         super.allow_quit = false;
         mForgetPwPresenter = new ForgetPwPresenter(this);
         titleBarTv.setText("忘记密码");
+        telEt.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+        vCodeEt.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+        newPwEt.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
     }
 
     @Override

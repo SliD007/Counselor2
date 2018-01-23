@@ -44,11 +44,11 @@
                 <EditText
                     android:id="@+id/oldPwEt"
                     android:hint="请输入旧密码"
-                    android:textColor="#ccc"
+                    android:textColorHint="#ccc"
                     android:textSize="14sp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
+                    android:password="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
@@ -83,8 +83,8 @@
 
                 <EditText
                     android:id="@+id/newPwEt"
-                    android:hint="请重置登录密码（6-12位）"
-                    android:textColor="#ccc"
+                    android:hint="请重置登录密码"
+                    android:textColorHint="#ccc"
                     android:textSize="15sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -92,6 +92,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:background="@null"
+                    android:password="true"
                     android:layout_toRightOf="@id/nowPwtv"
                     />
             </RelativeLayout>
@@ -122,7 +123,7 @@
                 <EditText
                     android:id="@+id/new2PwEt"
                     android:hint="请再次输入新密码"
-                    android:textColor="#ccc"
+                    android:textColorHint="#ccc"
                     android:textSize="14sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -131,6 +132,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@null"
                     android:layout_toRightOf="@id/now2Pwtv"
+                    android:password="true"
                     />
             </RelativeLayout>
 
