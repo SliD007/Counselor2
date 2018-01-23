@@ -31,6 +31,7 @@ public class ChargeCaseDetialEntity implements Serializable{
 
     private String objectAddress;
     private String matterMoney ;
+    private String resultContent;
 
     public String getResultContent() {
         return resultContent;
@@ -40,7 +41,6 @@ public class ChargeCaseDetialEntity implements Serializable{
         this.resultContent = resultContent;
     }
 
-    private String resultContent;
 
     public String getObjectAddress() {
         return objectAddress;

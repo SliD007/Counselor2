@@ -14,6 +14,8 @@ public class AdviceEntity implements Serializable{
     private long createTime;
     private String toType;
 
+    private String village;
+
     public String getVillage() {
         return village;
     }
@@ -21,8 +23,6 @@ public class AdviceEntity implements Serializable{
     public void setVillage(String village) {
         this.village = village;
     }
-
-    private String village;
     public int getId() {
         return id;
     }

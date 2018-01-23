@@ -24,6 +24,8 @@ public class ShowSummaryActivity extends BaseActivity implements IShowSummaryVie
     TextView showSummaryTitleTv;
     @BindView(R.id.showSummaryContextTv)
     TextView showSummaryContextTv;
+    @BindView(R.id.showVillageTv)
+    TextView showVillageTv;
 
     private ShowSummaryPresenter mShowSummaryPresenter;
     private SummaryEntity summaryEntity;
@@ -49,10 +51,10 @@ public class ShowSummaryActivity extends BaseActivity implements IShowSummaryVie
 
     private void initView() {
         summaryEntity = mShowSummaryPresenter.getSummaryDetialEntity();
-        if(summaryEntity!=null){
+        if (summaryEntity != null) {
             showSummaryTitleTv.setText(summaryEntity.getTitle());
             showSummaryContextTv.setText(summaryEntity.getContent());
-
+            showVillageTv.setText(summaryEntity.getVillage());
         }
     }
 

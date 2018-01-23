@@ -5,10 +5,6 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -16,7 +12,6 @@ import com.lzy.okgo.callback.StringCallback;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -46,10 +41,11 @@ public class AddGroupCasePersenter {
         params.put("matterPlace", str[2]);
         params.put("matterNum", inter[3]+"");
         params.put("matterTime", str[4]);
-
         params.put("objectType", inter[5]+8+"");
         params.put("serviceContent", str[6]);
+        params.put("accessory", str[7]);
         params.put("resultType", inter[8]+"");
+        params.put("resultContent", str[9]);
         //图片
 
         //多余的接口字段
@@ -61,8 +57,6 @@ public class AddGroupCasePersenter {
         params.put("serviceType", 0+"");
         params.put("matterType", "");
         params.put("subType", "");
-        params.put("accessory", "");
-        params.put("resultContent", "");
         params.put("objectAddress", "");
         params.put("matterMoney", 0+"");
         params.put("isConflict", false+"");
@@ -91,73 +85,6 @@ public class AddGroupCasePersenter {
                         mIAddGroupCaseView.addFailed();
                     }
                 });
-    }
-
-    public void addgroupCase(final String[] str, final int[] inter){
-
-
-        StringRequest request4LoginRequest = new StringRequest(
-                Request.Method.POST, Urls.WorkLogAddURL, new com.android.volley.Response.Listener<String>() {
-            @Override
-            public void onResponse(String arg0) {
-                Log.e("loginInfo", arg0);// 打印登录返回的数据
-                try {
-                    JSONObject object = JSON.parseObject(arg0);
-                    if (object.getInteger("code")==0){
-                        mIAddGroupCaseView.addSuccess();
-                    }else {
-                        mIAddGroupCaseView.addFailed();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new com.android.volley.Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError arg0) {
-                Log.e("loginInfo", arg0.toString());// 打印错误信息
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-
-                params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
-                params.put("logType", 1+"");
-
-                params.put("serviceVillage", str[1]);
-                params.put("matterPlace", str[2]);
-                params.put("matterNum", inter[3]+"");
-                params.put("matterTime", str[4]);
-
-                params.put("objectType", inter[5]+8+"");
-                params.put("serviceContent", str[6]);
-                params.put("resultType", inter[8]+"");
-                //图片
-
-                //多余的接口字段
-                params.put("serviceObject","");
-                params.put("objectContact", "");
-                params.put("serviceIdentity", "");
-                params.put("inObject", "");
-                params.put("fromType", 0+"");
-                params.put("serviceType", 0+"");
-                params.put("matterType", "");
-                params.put("subType", "");
-                params.put("accessory", "");
-                params.put("resultContent", "");
-                params.put("objectAddress", "");
-                params.put("matterMoney", 0+"");
-                params.put("isConflict", false+"");
-
-                Log.e("getParams",params.toString());
-                return params;
-            }
-
-        };
-        MyApplication.getInstance().addToRequestQueue(request4LoginRequest, "");
     }
 
     public void addImage(ArrayList<ImageItem> imageItems) {

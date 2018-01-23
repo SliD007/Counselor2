@@ -55,7 +55,7 @@
                     android:layout_width="5dp"
                     style="@style/image1"/>
                 <TextView
-                    android:text="群体性案件发生地"
+                    android:text="案件发生地"
                     android:layout_toRightOf="@id/imageLeftIm2"
                     style="@style/text_worklog"/>
                 <ImageView
@@ -154,7 +154,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="wrap_content"
                 android:focusable="true"
                 android:focusableInTouchMode="true">
                 <RelativeLayout
@@ -180,6 +180,47 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/rl6"
+                    android:gravity="top"
+                    android:textSize="16sp"
+                    android:background="@null"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ccc"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+                <RelativeLayout
+                    android:id="@+id/rl9"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentTop="true">
+                    <ImageView
+                        android:id="@+id/imageLeftIm9"
+                        android:layout_width="5dp"
+                        style="@style/image1"/>
+                    <TextView
+                        android:text="案件概述"
+                        android:layout_toRightOf="@id/imageLeftIm9"
+                        style="@style/text_worklog"/>
+
+                    <ImageView
+                        android:id="@+id/imageRightIm9"
+                        style="@style/nextIm"/>
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/textview9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/rl9"
                     android:gravity="top"
                     android:textSize="16sp"
                     android:background="@null"

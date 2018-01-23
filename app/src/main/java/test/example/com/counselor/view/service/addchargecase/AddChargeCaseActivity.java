@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -112,7 +113,10 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner01.setAdapter(adapter);
         spinner01.setOnItemSelectedListener(mOnItemClickListener);
-
+        //E03
+        editText03.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+        //E05
+        editText05.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         //S08
         list = new ArrayList<String>();
         for(int i=0;i<str08.length;i++){
@@ -213,6 +217,7 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
                     }
                     textview14.setText(sb.toString());
                     textview14.setTextSize(10);
+                    sumbit_str[14] = "";
                 } else {
                     textview14.setText("--");
                 }

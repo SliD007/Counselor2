@@ -1,6 +1,5 @@
 package test.example.com.counselor.view.service.showchargecase;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +21,7 @@ import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.OpenFileUtil;
+import test.example.com.counselor.util.PDialog;
 
 /**
  * Created by Sli.D on 2018/1/11.
@@ -67,8 +67,9 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
     ListView showImageLv;
     int downloadIndex = 0;
     String[] imageName ;
-    String[] content ;
-    ProgressDialog dialog;
+    String[] imageUrl ;
+    PDialog dialog;
+
     private ShowChargeCasePresenter mShowChargeCasePresenter;
     private ChargeCaseDetialEntity chargeCaseDetialEntity;
 
@@ -84,7 +85,6 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
 
         super.allow_quit = false;
         titleBarTv.setText("另行收费案件详情");
-        dialog = new ProgressDialog(this);
         Intent i = getIntent();
         int id = i.getIntExtra("id", 0);
         mShowChargeCasePresenter = new ShowChargeCasePresenter(this, this);
@@ -95,28 +95,29 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
         chargeCaseDetialEntity = mShowChargeCasePresenter.getChargeCaseDetialEntity();
         if (chargeCaseDetialEntity != null) {
             textview01.setText(chargeCaseDetialEntity.getServiceVillageName());
-            textview17.setText("否");
-            if(chargeCaseDetialEntity.isConflict())
-                textview17.setText("是");
             textview02.setText(chargeCaseDetialEntity.getServiceObject());
             textview03.setText(chargeCaseDetialEntity.getObjectContact());
             textview04.setText(chargeCaseDetialEntity.getObjectAddress());
             textview05.setText(chargeCaseDetialEntity.getMatterMoney());
+
             textview08.setText(chargeCaseDetialEntity.getFromType());
             textview09.setText(chargeCaseDetialEntity.getServiceType());
             textview10.setText(chargeCaseDetialEntity.getMatterType());
             textview11.setText(chargeCaseDetialEntity.getSubType());
             textview12.setText(chargeCaseDetialEntity.getObjecttype());
-            textview16.setText(chargeCaseDetialEntity.getResultContent());
+            textview13.setText(chargeCaseDetialEntity.getServiceContent());
+
             textview15.setText(chargeCaseDetialEntity.getResultType());
+            textview16.setText(chargeCaseDetialEntity.getResultContent());
+            textview17.setText("否");
+            if(chargeCaseDetialEntity.isConflict())
+                textview17.setText("是");
 
-            content = chargeCaseDetialEntity.getServiceContent().split("#");
-            imageName = new String[content.length-1];
-            textview13.setText(content[0]);
-            if(content.length>1){
-                textview14.setText("有"+(content.length-1)+"张图，点击查看");
-
-            } {
+            if(chargeCaseDetialEntity.getAccessory()!=null){
+                imageUrl = chargeCaseDetialEntity.getAccessory().split("#");
+                imageName = new String[imageUrl.length-1];
+                textview14.setText("有"+(imageUrl.length-1)+"张图，点击查看");
+            } else {
                 ViewGroup.LayoutParams para = Rl14.getLayoutParams();
                 para.height = 0;
                 Rl14.setLayoutParams(para);
@@ -132,16 +133,16 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
                 this.finish();
                 break;
             case R.id.textview14:
+                dialog = new PDialog(this,"正在下载第1张图片，共"+(imageUrl.length-1)+"张",false);
 
-                for(int i=1;i<content.length;i++){
-                    String fileName = content[i].split("/")[content[i].split("/").length-1];
+                for(int i=1;i<imageUrl.length;i++){
+                    String fileName = imageUrl[i].split("/")[imageUrl[i].split("/").length-1];
                     imageName[i-1] = fileName;
                     if(!OpenFileUtil.fileIsExists(Constants.getAppImageFolder()+"/"+fileName)){
                         textview14.setText("正在下载,请稍等...");
-                        dialog.setMessage("正在下载");
                         dialog.show();
-                        dialog.setCancelable(false);
-                        mShowChargeCasePresenter.downLoadImage(content[i],fileName);
+                        Log.e("downLoadImage",imageUrl.length+ " "+fileName+" "+imageUrl[i]);
+                        mShowChargeCasePresenter.downLoadImage(imageUrl[i],fileName);
                     }else {
                         initImage();
                     }
@@ -176,7 +177,7 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
     }
 
     private void initImage(){
-        if (downloadIndex==content.length-1){
+        if (downloadIndex==imageName.length){
             Log.e("imageName",""+imageName.toString());
             ViewGroup.LayoutParams para = showImageLv.getLayoutParams();
             para.height = 150*imageName.length;

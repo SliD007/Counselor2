@@ -14,6 +14,15 @@ public class SummaryEntity implements Serializable{
     private long createTime;
     private String toType;
 
+    private String village;
+
+    public String getVillage() {
+        return village;
+    }
+
+    public void setVillage(String village) {
+        this.village = village;
+    }
     public int getId() {
         return id;
     }
@@ -26,6 +35,7 @@ public class SummaryEntity implements Serializable{
                 ", content='" + content + '\'' +
                 ", createTime=" + createTime +
                 ", toType='" + toType + '\'' +
+                ", village='" + village + '\'' +
                 '}';
     }
 

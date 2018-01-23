@@ -18,7 +18,8 @@ public class GroupCaseDetialEntity implements Serializable{
     private String objecttype;
     private String serviceContent;
     private String resultType;
-
+    private String resultContent;
+    private String accessory;
     @Override
     public String toString() {
         return "GroupCaseDetialEntity{" +
@@ -30,6 +31,8 @@ public class GroupCaseDetialEntity implements Serializable{
                 ", objecttype='" + objecttype + '\'' +
                 ", serviceContent='" + serviceContent + '\'' +
                 ", resultType='" + resultType + '\'' +
+                ", resultContent='" + resultContent + '\'' +
+                ", accessory='" + accessory + '\'' +
                 '}';
     }
 
@@ -102,6 +105,22 @@ public class GroupCaseDetialEntity implements Serializable{
 
     public void setResultType(String resultType) {
         this.resultType = resultType;
+    }
+
+    public String getResultContent() {
+        return resultContent;
+    }
+
+    public void setResultContent(String resultContent) {
+        this.resultContent = resultContent;
+    }
+
+    public String getAccessory() {
+        return accessory;
+    }
+
+    public void setAccessory(String accessory) {
+        this.accessory = accessory;
     }
 
     public GroupCaseDetialEntity() {

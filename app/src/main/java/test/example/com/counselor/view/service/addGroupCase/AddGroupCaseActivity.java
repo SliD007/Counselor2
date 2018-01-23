@@ -3,7 +3,9 @@ package test.example.com.counselor.view.service.addgroupcase;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -55,6 +57,8 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
     TextView textview7;
     @BindView(R.id.spinner8)
     Spinner spinner8;
+    @BindView(R.id.editText9)
+    EditText editText9;
 
     String[] sumbit_str;
     int[] sumbit_int;
@@ -94,6 +98,8 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner1.setAdapter(adapter);
         spinner1.setOnItemSelectedListener(mOnItemClickListener);
+        //E03
+        editText3.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         //T4
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
         String now = sdf.format(new Date());
@@ -212,12 +218,14 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
                 sumbit_str[3] = editText3.getText().toString();
                 sumbit_str[4] = textview4.getText().toString();
                 sumbit_str[6] = editText6.getText().toString();
+                sumbit_str[9] = editText9.getText().toString();
                 if(imageItems!=null){
                     dialog = new PDialog(this,"正在上传图片",false);
                     dialog.show();
                     mAddGroupCasePersenter.addImage(imageItems);
                 }
-                else if(TextUtils.isEmpty(sumbit_str[2])||TextUtils.isEmpty(sumbit_str[6])||TextUtils.isEmpty(sumbit_str[3])){
+                else if(TextUtils.isEmpty(sumbit_str[2])||TextUtils.isEmpty(sumbit_str[6])||
+                        TextUtils.isEmpty(sumbit_str[9])||TextUtils.isEmpty(sumbit_str[3])){
                     toast("带星号的输入不能为空",false);
                 }else {
                     sumbit_int[3] =Integer.valueOf(sumbit_str[3]).intValue();
@@ -246,8 +254,8 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
     @Override
     public void addImageSuccess(String imageUrl) {
         index++;
-        sumbit_str[6] = sumbit_str[6] +"#"+imageUrl;
-        dialog = new PDialog(this,"完成上传第"+index+"张图片，共"+imageItems.size()+"张",false);
+        sumbit_str[7] += "#"+imageUrl;
+        dialog.setMessage("正在上传第"+(index+1)+"张图片，共"+(imageItems.size())+"张");
         if(index==imageItems.size()) {
             dialog.dismiss();
             sumbit(sumbit_str,sumbit_int);
@@ -266,4 +274,17 @@ public class AddGroupCaseActivity extends BaseActivity implements IAddGroupCaseV
         dialog.show();
         mAddGroupCasePersenter.addGroupCase(sumbit_str,sumbit_int);
     }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (dialog != null) {
+            if (dialog.showDialog) {
+                dialog.dismiss();
+                toast("现在正在上传图片，强行退出可能导致上传失败！", true);
+            }
+            return false;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+    };
 }

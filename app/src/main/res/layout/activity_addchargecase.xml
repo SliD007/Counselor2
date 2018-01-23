@@ -54,9 +54,10 @@
                     android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
-                    android:text="是否与担任法律顾问存在冲突"
+                    android:text="是否与担任\n法律顾问存在冲突"
                     android:layout_toRightOf="@id/imageLeftIm17"
-                    style="@style/text_worklog"/>
+                    style="@style/text_worklog"
+                    android:textSize="14sp"/>
                 <ImageView
                     android:id="@+id/imageRightIm17"
                     android:src="@drawable/u609"
@@ -430,7 +431,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/rl13"
-                    android:hint="    请输入"
+                    android:hint="请输入"
                     android:gravity="top"
                     android:textColorHint="#666"
                     android:textSize="16sp"
@@ -477,7 +478,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/rl16"
-                    android:hint="    请输入"
+                    android:hint="请输入"
                     android:gravity="top"
                     android:textColorHint="#666"
                     android:textSize="16sp"

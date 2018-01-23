@@ -27,6 +27,7 @@ public class WorkLogDetialEntity implements Serializable{
     private String serviceContent;
     private String accessory;
     private String resultType;
+    private String resultContent;
 
     public int getId() {
         return id;
@@ -50,6 +51,7 @@ public class WorkLogDetialEntity implements Serializable{
                 ", serviceContent='" + serviceContent + '\'' +
                 ", accessory='" + accessory + '\'' +
                 ", resultType='" + resultType + '\'' +
+                ", resultContent='" + resultContent + '\'' +
                 '}';
     }
 
@@ -175,6 +177,14 @@ public class WorkLogDetialEntity implements Serializable{
 
     public void setResultType(String resultType) {
         this.resultType = resultType;
+    }
+
+    public String getResultContent() {
+        return resultContent;
+    }
+
+    public void setResultContent(String resultContent) {
+        this.resultContent = resultContent;
     }
 
     public WorkLogDetialEntity() {

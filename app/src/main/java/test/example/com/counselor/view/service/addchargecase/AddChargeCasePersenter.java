@@ -64,7 +64,6 @@ public class AddChargeCasePersenter {
         }
 
         //多余的接口字段
-        params.put("accessory", "");
         params.put("matterPlace", "");
         params.put("matterNum", 0+"");
         params.put("matterTime", "");

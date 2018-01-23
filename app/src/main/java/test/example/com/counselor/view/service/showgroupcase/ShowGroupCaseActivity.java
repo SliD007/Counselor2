@@ -1,6 +1,5 @@
 package test.example.com.counselor.view.service.showgroupcase;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +22,7 @@ import test.example.com.counselor.base.BaseActivity;
 import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.OpenFileUtil;
+import test.example.com.counselor.util.PDialog;
 
 
 /**
@@ -59,11 +59,13 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
     ListView showImageLv;
     @BindView(R.id.Rl8)
     RelativeLayout Rl8;
+    @BindView(R.id.textview9)
+    TextView textview9;
 
     int downloadIndex = 0;
     String[] imageName ;
-    String[] content ;
-    ProgressDialog dialog;
+    String[] imageUrl ;
+    PDialog dialog;
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_showgroupcase);
     }
@@ -74,7 +76,6 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
 
         super.allow_quit = false;
         titleBarTv.setText("群体性案件详情");
-        dialog = new ProgressDialog(this);
         Intent i = getIntent();
         int id = i.getIntExtra("id", 0);
         mShowGroupCasePersenter = new ShowGroupCasePersenter(this, this);
@@ -92,14 +93,16 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
             textview3.setText(groupCaseDetialEntity.getMatterNum()+"");
             textview4.setText(groupCaseDetialEntity.getMatterTime());
             textview5.setText(groupCaseDetialEntity.getObjecttype());
+            textview6.setText(groupCaseDetialEntity.getServiceContent());
             textview7.setText(groupCaseDetialEntity.getResultType());
-            content = groupCaseDetialEntity.getServiceContent().split("#");
-            textview6.setText(content[0]);
-            imageName = new String[content.length-1];
-            if(content.length>1){
-                textview8.setText("有"+(content.length-1)+"张图，点击查看");
+            textview9.setText(groupCaseDetialEntity.getResultContent());
 
-            } {
+            if(groupCaseDetialEntity.getAccessory()!=null){
+                imageUrl = groupCaseDetialEntity.getAccessory().split("#");
+                imageName = new String[imageUrl.length-1];
+                textview8.setText("有"+(imageUrl.length-1)+"张图，点击查看");
+
+            } else {
                 ViewGroup.LayoutParams para = Rl8.getLayoutParams();
                 para.height = 0;
                 Rl8.setLayoutParams(para);
@@ -117,16 +120,16 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
                 this.finish();
                 break;
             case R.id.textview8:
+                dialog = new PDialog(this,"正在下载第1张图片，共"+(imageUrl.length-1)+"张",false);
 
-                for(int i=1;i<content.length;i++){
-                    String fileName = content[i].split("/")[content[i].split("/").length-1];
+                for(int i=1;i<imageUrl.length;i++){
+                    String fileName = imageUrl[i].split("/")[imageUrl[i].split("/").length-1];
                     imageName[i-1] = fileName;
                     if(!OpenFileUtil.fileIsExists(Constants.getAppImageFolder()+"/"+fileName)){
                         textview8.setText("正在下载,请稍等...");
-                        dialog.setMessage("正在下载");
                         dialog.show();
-                        dialog.setCancelable(false);
-                        mShowGroupCasePersenter.downLoadImage(content[i],fileName);
+                        Log.e("downLoadImage",imageUrl.length+ " "+fileName+" "+imageUrl[i]);
+                        mShowGroupCasePersenter.downLoadImage(imageUrl[i],fileName);
                     }else {
                         initImage();
                     }
@@ -137,7 +140,7 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
     }
 
     private void initImage(){
-        if (downloadIndex==content.length-1){
+        if (downloadIndex==imageName.length){
             Log.e("imageName",""+imageName.toString());
             ViewGroup.LayoutParams para = showImageLv.getLayoutParams();
             para.height = 150*imageName.length;
@@ -170,11 +173,17 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
 
     }
 
+    int index=0;
     @Override
     public void downloadImageSuccess() {
-        dialog.dismiss();
-        textview8.setText("下载完成");
-        initImage();
+        index++;
+        Log.e("downLoadImage",imageUrl.length+ " "+index+" "+imageUrl[index]);
+        dialog.setMessage("正在下载第"+(index+1)+"张图片，共"+(imageUrl.length-1)+"张");
+        if(index == imageName.length){
+            dialog.dismiss();
+            textview8.setText("下载完成");
+            initImage();
+        }
     }
 
     @Override

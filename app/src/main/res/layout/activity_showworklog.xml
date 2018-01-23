@@ -113,7 +113,7 @@
                         android:layout_width="5dp"
                         style="@style/image1"/>
                     <TextView
-                        android:text="服务对象身份证号"
+                        android:text="身份证号"
                         android:layout_toRightOf="@id/imageLeftIm04"
                         style="@style/text_worklog"/>
                     <ImageView
@@ -123,7 +123,7 @@
                         android:id="@+id/textview04"
                         android:layout_toLeftOf="@id/imageRightIm04"
                         style="@style/log_spinner"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         />
                 </RelativeLayout>
                 <View
@@ -351,7 +351,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
+                    android:layout_height="wrap_content"
                     android:focusable="true"
                     android:focusableInTouchMode="true">
                     <RelativeLayout
@@ -378,6 +378,48 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@id/rl13"
+                        android:gravity="top"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@null"
+                        />
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ccc"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+                    <RelativeLayout
+                        android:id="@+id/rl16"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_alignParentTop="true">
+                        <ImageView
+                            android:id="@+id/imageLeftIm16"
+                            android:layout_width="5dp"
+                            android:src="@drawable/u125"
+                            style="@style/image1"/>
+                        <TextView
+                            android:text="处理建议"
+                            android:layout_toRightOf="@id/imageLeftIm16"
+                            style="@style/text_worklog"/>
+
+                        <ImageView
+                            android:id="@+id/imageRightIm16"
+                            style="@style/nextIm"/>
+                    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/textview16"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/rl16"
                         android:gravity="top"
                         android:textSize="16sp"
                         android:layout_marginLeft="20dp"

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -116,7 +117,10 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner01.setAdapter(adapter);
         spinner01.setOnItemSelectedListener(mOnItemClickListener);
-
+        //E03
+        editText03.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+        //E04
+        editText04.setInputType(EditorInfo.TYPE_CLASS_PHONE);
         //S08
         list = new ArrayList<String>();
         for(int i=0;i<str08.length;i++){

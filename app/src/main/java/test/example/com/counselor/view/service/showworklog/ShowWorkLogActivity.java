@@ -62,7 +62,8 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
     TextView textview14;
     @BindView(R.id.textview15)
     TextView textview15;
-
+    @BindView(R.id.textview16)
+    TextView textview16;
     @BindView(R.id.showImageLv)
     ListView showImageLv;
     int downloadIndex = 0;
@@ -106,18 +107,19 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
             textview11.setText(workLogDetialEntity.getSubType());
             textview12.setText(workLogDetialEntity.getObjecttype());
             textview13.setText(workLogDetialEntity.getServiceContent());
-            imageUrl = workLogDetialEntity.getAccessory().split("#");
-            imageName = new String[imageUrl.length-1];
 
-            if(imageUrl.length>1){
+            textview15.setText(workLogDetialEntity.getResultType());
+            textview16.setText(workLogDetialEntity.getResultContent());
+
+            if(workLogDetialEntity.getAccessory()!=null){
+                imageUrl = workLogDetialEntity.getAccessory().split("#");
+                imageName = new String[imageUrl.length-1];
                 textview14.setText("有"+(imageUrl.length-1)+"张图，点击查看");
             }else {
                 ViewGroup.LayoutParams para = Rl14.getLayoutParams();
                 para.height = 0;
                 Rl14.setLayoutParams(para);
             }
-            textview15.setText(workLogDetialEntity.getResultType());
-
         }
 
     }

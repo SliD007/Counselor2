@@ -57,7 +57,7 @@
                     android:src="@drawable/u125"
                     style="@style/image1"/>
                 <TextView
-                    android:text="群体性案件发生地"
+                    android:text="案件发生地"
                     android:layout_toRightOf="@id/imageLeftIm2"
                     style="@style/text_worklog"/>
                 <ImageView
@@ -195,7 +195,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/rl6"
-                    android:hint="  请输入"
+                    android:hint="请输入"
                     android:gravity="top"
                     android:textColorHint="#ccc"
                     android:textSize="16sp"
@@ -239,7 +239,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/rl9"
-                    android:hint="    请输入"
+                    android:hint="请输入"
                     android:gravity="top"
                     android:textColorHint="#666"
                     android:textSize="16sp"
