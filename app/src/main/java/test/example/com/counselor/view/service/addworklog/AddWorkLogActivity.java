@@ -299,6 +299,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     public void addFailed() {
         toast("添加失败", false);
     }
+
     int index=0;
     @Override
     public void addImageSuccess(String imageUrl ) {

@@ -136,8 +136,7 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
                         textview14.setText("正在下载,请稍等...");
 
                         dialog = new PDialog(this,"正在下载",false);
-//                        dialog.show();
-
+                        dialog.show();
                         mShowWorkLogPresenter.downLoadImage(content[i],fileName);
                     }else {
                         initImage();
@@ -166,7 +165,7 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
 
         index++;
         Log.e("downloadImageSuccess",imageName.length+ " "+index+" "+content[index]);
-
+        dialog = new PDialog(this,"完成下载第"+index+"张图片，共"+(content.length-1)+"张",false);
         if(index == imageName.length){
 
             dialog.dismiss();
