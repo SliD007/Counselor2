@@ -307,7 +307,7 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
 
     @Override
     public void addSuccess() {
-        toast("添加成功，下拉刷新列表", false);
+        toast("添加成功", false);
         dialog.dismiss();
         MyApplication.getInstance().refresh[0] = true;
         MyApplication.getInstance().finishActivity(this);

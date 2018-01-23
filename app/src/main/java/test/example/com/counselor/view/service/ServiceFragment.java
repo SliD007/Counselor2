@@ -122,19 +122,22 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
 
     @Override
     protected void initDatas() {
-        Log.e("ServiceFragment","加载数据");
+        Log.e("ServiceFragment","加载数据"+fragmentType);
         if (fragmentType == 0) {
             workLogEntities = mServicePersenter.getWorkLogEntities();
             if(workLogEntities!=null){
-                para.height = 0;
-                noneTv.setLayoutParams(para);
-
+                if(workLogEntities.size()!=0){
+                    para.height = 0;
+                    noneTv.setLayoutParams(para);
+                }else {
+                    para.height = 100;
+                    noneTv.setLayoutParams(para);
+                    noneTv.setText(noneStr);
+                }
             }else {
-                Log.e("ServiceFragment",fragmentType+" "+noneStr);
                 para.height = 100;
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);
-
             }
             mAdapter = new CommonAdapter(mContext,workLogEntities,R.layout.item_4list,mClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
@@ -160,11 +163,15 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         }else if(fragmentType==1){
             adviceEntities = mServicePersenter.getAdviceEntities();
             if(adviceEntities!=null){
-                para.height = 0;
-                noneTv.setLayoutParams(para);
-
+                if(adviceEntities.size()!=0){
+                    para.height = 0;
+                    noneTv.setLayoutParams(para);
+                }else {
+                    para.height = 100;
+                    noneTv.setLayoutParams(para);
+                    noneTv.setText(noneStr);
+                }
             }else {
-                Log.e("ServiceFragment",fragmentType+" "+noneStr);
                 para.height = 100;
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);
@@ -219,11 +226,15 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         else {
             summaryEntities = mServicePersenter.getSummaryEntities();
             if(summaryEntities!=null){
-                para.height = 0;
-                noneTv.setLayoutParams(para);
-
+                if(summaryEntities.size()!=0){
+                    para.height = 0;
+                    noneTv.setLayoutParams(para);
+                }else {
+                    para.height = 100;
+                    noneTv.setLayoutParams(para);
+                    noneTv.setText(noneStr);
+                }
             }else {
-                Log.e("ServiceFragment",fragmentType+" "+noneStr);
                 para.height = 100;
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);

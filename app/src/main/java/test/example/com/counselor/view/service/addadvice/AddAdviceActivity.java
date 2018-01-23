@@ -105,7 +105,7 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
 
     @Override
     public void addSuccess() {
-        toast("添加成功，下拉刷新列表", false);
+        toast("添加成功", false);
         dialog.dismiss();
         MyApplication.getInstance().refresh[1] = true;
         MyApplication.getInstance().finishActivity(this);

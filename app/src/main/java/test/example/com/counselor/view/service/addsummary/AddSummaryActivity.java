@@ -112,7 +112,7 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
     @Override
     public void addSuccess() {
         dialog.dismiss();
-        toast("添加成功，下拉刷新列表", false);
+        toast("添加成功", false);
         MyApplication.getInstance().refresh[3] = true;
         MyApplication.getInstance().finishActivity(this);
         this.finish();
