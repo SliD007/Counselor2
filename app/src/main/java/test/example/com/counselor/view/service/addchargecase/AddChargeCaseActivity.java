@@ -3,6 +3,8 @@ package test.example.com.counselor.view.service.addchargecase;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -282,7 +284,7 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
                 sumbit_str[13] = editText13.getText().toString();
                 sumbit_str[16] = editText16.getText().toString();
                 if(imageItems!=null){
-                    dialog = new PDialog(this,"正在提交图片",false);
+                    dialog = new PDialog(this,"正在上传第1张图片，共"+(imageItems.size())+"张",false);
                     dialog.show();
                     mAddChargeCasePersenter.addImage(imageItems);
                 }
@@ -316,8 +318,9 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
     @Override
     public void addImageSuccess(String imageUrl) {
         index++;
-        sumbit_str[13] = sumbit_str[13] +"#"+imageUrl;
-        dialog = new PDialog(this,"完成上传第"+index+"张图片，共"+imageItems.size()+"张",false);
+        sumbit_str[14] += "#"+imageUrl;
+        Log.e("downloadImageSuccess",imageItems.size()+ " "+index+" "+sumbit_str[14]);
+        dialog.setMessage("正在上传第"+(index+1)+"张图片，共"+(imageItems.size())+"张");
         if(index==imageItems.size()) {
             dialog.dismiss();
             sumbit(sumbit_str,sumbit_int);
@@ -335,5 +338,18 @@ public class AddChargeCaseActivity extends BaseActivity implements IAddChargeCas
         dialog.show();
         mAddChargeCasePersenter.addChargeCase(sumbit_str,sumbit_int);
     }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (dialog != null) {
+            if (dialog.showDialog) {
+                dialog.dismiss();
+                toast("现在正在上传图片，强行退出可能导致上传失败！", true);
+            }
+            return false;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+    };
 
 }

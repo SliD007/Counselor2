@@ -71,7 +71,7 @@
             android:layout_weight="1">
             <TextView
                 android:id="@+id/tv1"
-                android:text="服务村社："
+                android:text="服务单位："
                 android:textSize="18sp"
                 android:textColor="#000"
                 android:layout_width="wrap_content"
@@ -81,6 +81,7 @@
             <Spinner
                 android:id="@+id/spinner01"
                 android:layout_toRightOf="@id/tv1"
+                android:layout_centerVertical="true"
                 style="@style/log_spinner"
                 />
         </RelativeLayout>
@@ -91,7 +92,7 @@
             android:layout_height="0dp"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/addAdvicesentToTv"
+                android:id="@+id/tv2"
                 android:text="报送至："
                 android:textSize="18sp"
                 android:textColor="#000"
@@ -99,30 +100,13 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"/>
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_toRightOf="@id/addAdvicesentToTv"
+
+            <Spinner
+                android:id="@+id/spinner02"
+                android:layout_toRightOf="@id/tv2"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp">
-                <RadioButton
-                    android:id="@+id/radioButton1"
-                    android:text="县司法局"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:text="镇街司法所"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <RadioButton
-                    android:id="@+id/radioButton3"
-                    android:text="村社"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </RadioGroup>
+                style="@style/log_spinner"
+                />
         </RelativeLayout>
     </LinearLayout>
 

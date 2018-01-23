@@ -41,7 +41,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="9">
+            android:layout_weight="8">
             <TextView
                 android:id="@+id/addSummaryContextTv"
                 android:text="内容:"
@@ -64,6 +64,28 @@
                 android:textSize="18sp"
                 android:textColor="#666"/>
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tv1"
+                android:text="服务村社："
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"/>
+            <Spinner
+                android:id="@+id/spinner01"
+                android:layout_toRightOf="@id/tv1"
+                android:layout_centerVertical="true"
+                style="@style/log_spinner"
+                />
+        </RelativeLayout>
+
     </LinearLayout>
 
 

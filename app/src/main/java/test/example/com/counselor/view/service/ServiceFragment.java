@@ -130,6 +130,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 noneTv.setLayoutParams(para);
 
             }else {
+                Log.e("ServiceFragment",fragmentType+" "+noneStr);
                 para.height = 100;
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);
@@ -163,6 +164,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 noneTv.setLayoutParams(para);
 
             }else {
+                Log.e("ServiceFragment",fragmentType+" "+noneStr);
                 para.height = 100;
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);
@@ -221,6 +223,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 noneTv.setLayoutParams(para);
 
             }else {
+                Log.e("ServiceFragment",fragmentType+" "+noneStr);
                 para.height = 100;
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);

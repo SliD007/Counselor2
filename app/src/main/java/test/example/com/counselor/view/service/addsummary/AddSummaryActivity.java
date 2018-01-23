@@ -4,8 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +33,15 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
     EditText addSummaryTitleEt;
     @BindView(R.id.addSummaryContextEt)
     EditText addSummaryContextEt;
+    @BindView(R.id.spinner01)
+    Spinner spinner01;
+
     PDialog dialog;
+
+    List<String> list;
+    String vStr = "";
+
+    ArrayAdapter<String> adapter;
     AddSummaryPresenter mAddSummaryPresenter;
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addsummary);
@@ -45,7 +59,16 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
         Intent i = getIntent();
         super.allow_quit = false;
         titleBarTv.setText("新增月度总结");
-
+        //S01
+        list = new ArrayList<String>();
+        if (MyApplication.getInstance().loginEntity.getCommunityA()!=null)
+            list.add(MyApplication.getInstance().loginEntity.getCommunityA().getString("username"));
+        if (MyApplication.getInstance().loginEntity.getCommunityB()!=null)
+            list.add(MyApplication.getInstance().loginEntity.getCommunityB().getString("username"));
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner01.setAdapter(adapter);
+        spinner01.setOnItemSelectedListener(mOnItemClickListener);
     }
 
     @OnClick({R.id.backTv, R.id.sumbitTv})
@@ -63,12 +86,28 @@ public class AddSummaryActivity extends BaseActivity implements IAddSummaryView 
                 }else {
                     dialog = new PDialog(this,"正在提交",false);
                     dialog.show();
-                    mAddSummaryPresenter.addSummary(title, context_str);
+                    mAddSummaryPresenter.addSummary(title, context_str,vStr);
                 }
 
                 break;
         }
     }
+    AdapterView.OnItemSelectedListener mOnItemClickListener = new AdapterView.OnItemSelectedListener() {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            switch (parent.getId()) {
+                case R.id.spinner01:
+                    vStr = parent.getSelectedItem().toString();
+                    break;
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
 
     @Override
     public void addSuccess() {

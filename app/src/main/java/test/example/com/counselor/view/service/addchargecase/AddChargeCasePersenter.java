@@ -42,11 +42,6 @@ public class AddChargeCasePersenter {
         params.put("counselorId", MyApplication.getInstance().loginEntity.getId()+"");
         params.put("logType", 2+"");
         params.put("serviceVillage", inter[1]+"");
-        if(inter[17]==0){
-            params.put("isConflict", false+"");
-        }else {
-            params.put("isConflict", true+"");
-        }
         params.put("serviceObject", str[2]);
         params.put("objectContact", str[3]);
         params.put("objectAddress", str[4]);
@@ -59,9 +54,14 @@ public class AddChargeCasePersenter {
         params.put("subType", str[11]);
         params.put("objectType", inter[12]+"");
         params.put("serviceContent", str[13]);
-        params.put("resultContent", str[16]);
-        //图片
+        params.put("accessory", str[14]);
         params.put("resultType", inter[15]+"");
+        params.put("resultContent", str[16]);
+        if(inter[17]==0){
+            params.put("isConflict", false+"");
+        }else {
+            params.put("isConflict", true+"");
+        }
 
         //多余的接口字段
         params.put("accessory", "");

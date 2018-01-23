@@ -5,18 +5,11 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -55,53 +48,6 @@ public class LoginPresenter extends BasePresenter{
                 .execute(loginStringCallback);
     }
 
-    public void login(final String id, final String psw) {
-        String url = Urls.LOGINURL;
-        RequestQueue requestQueue = Volley.newRequestQueue(mContext);
-        StringRequest stringRequest = new StringRequest(
-                Request.Method.POST, "http://www.baidu.com", new com.android.volley.Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String arg0) {
-                Log.e("loginInfo", arg0);// 打印登录返回的数据
-                try {
-                    JSONObject object = JSON.parseObject(arg0);
-                    if (object.getInteger("code")==0){
-                        saveValue(object);
-                        mLoginView.loginSuccess();
-                    }else {
-                        mLoginView.loginFailed();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-
-                }
-
-            }
-        }, new com.android.volley.Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError arg0) {
-                Log.e("onErrorResponse", arg0.toString());// 打印错误信息
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                // TODO Auto-generated method stub
-
-                Map<String, String> map4Login = new HashMap<String, String>();
-                map4Login.put("contact", id);
-                map4Login.put("password", psw);
-                Log.e("getParams", map4Login.toString());
-                return map4Login;
-            }
-
-        };
-        requestQueue.add(stringRequest);
-    }
-
-
     @Override
     public void onAttachView() {
 
@@ -115,7 +61,7 @@ public class LoginPresenter extends BasePresenter{
     StringCallback loginStringCallback = new StringCallback() {
 
         public void onSuccess(String s, Call call, Response response) {
-            Log.e("loadLogin","onSuccess:"+s);
+//            Log.e("loadLogin","onSuccess:"+s);
 
             JSONObject object = JSON.parseObject(s);
             if (object.getInteger("code")==0){

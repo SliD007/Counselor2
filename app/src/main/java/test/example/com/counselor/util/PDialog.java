@@ -8,17 +8,23 @@ import android.content.Context;
  */
 
 public class PDialog {
+    public boolean showDialog = false;
     ProgressDialog dialog;
     public PDialog(Context context,String msg, boolean close) {
         if(dialog==null)
             this.dialog = new ProgressDialog(context);
         this.dialog.setMessage(msg);
-        this.dialog.setCancelable(close);
+        this.dialog.setCanceledOnTouchOutside(close);
     }
     public void show(){
+        this.showDialog = true;
         this.dialog.show();
     }
     public void dismiss(){
+        this.showDialog = false;
         this.dialog.dismiss();
+    }
+    public void setMessage(String msg){
+        this.dialog.setMessage(msg);
     }
 }

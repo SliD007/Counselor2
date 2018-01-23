@@ -61,7 +61,7 @@ public class MyApplication extends Application {
         //Volley框架
         queues = Volley.newRequestQueue(getApplicationContext());
         //Crash 上报
-        CrashReport.initCrashReport(getApplicationContext(), "69d7035114", true);
+        CrashReport.initCrashReport(getApplicationContext(), "69d7035114", false);
         //解决Android 7.0 FileUriExposedException
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();

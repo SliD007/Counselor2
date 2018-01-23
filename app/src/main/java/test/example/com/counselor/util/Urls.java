@@ -6,9 +6,6 @@ package test.example.com.counselor.util;
 
 public class Urls {
     public static final String LOGINURL = "http://law.d9lab.net/server/login/padLogin";
-    public static final String ChnagePwURL = "http://law.d9lab.net/server/login/updatePasswprd";
-    public static final String ForgetPwURL = "http://law.d9lab.net/server/login/updatePasswprd";
-    public static final String ContractURL = "http://law.d9lab.net/office/contract/getCounselorContract";
 
 
     public static final String RankURL = "http://law.d9lab.net/statistics/count/getRank";
@@ -36,4 +33,7 @@ public class Urls {
     public static final String GetCodeURL = "http://law.d9lab.net/server/login/sendRegisterCode";
     public static final String FindPWURL = "http://law.d9lab.net/server/login/findPassWord";
     public static final String ClockURL = "http://law.d9lab.net/justice/placement/attendanceCounselor";
+
+    public static final String ChnagePwURL = "http://law.d9lab.net/server/login/updatePassword";
+    public static final String ContractURL = "http://law.d9lab.net/office/contract/getCounselorContract";
 }

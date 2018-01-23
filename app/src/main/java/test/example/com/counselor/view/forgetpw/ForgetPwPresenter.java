@@ -2,6 +2,8 @@ package test.example.com.counselor.view.forgetpw;
 
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 
@@ -30,7 +32,12 @@ public class ForgetPwPresenter extends BasePresenter{
             @Override
             public void onSuccess(String s, Call call, Response response) {
                 Log.e("s",s);
-                mIForgetPwView.getVCodeSuccess();
+                JSONObject object = JSON.parseObject(s);
+                if(object.getInteger("code")==0) {
+                    mIForgetPwView.getVCodeSuccess();
+                }else {
+                    mIForgetPwView.getVCodeFailed();
+                }
 
             }
             @Override
@@ -51,8 +58,12 @@ public class ForgetPwPresenter extends BasePresenter{
             @Override
             public void onSuccess(String s, Call call, Response response) {
                 Log.e("s",s);
-                mIForgetPwView.resetPwSuccess();
-
+                JSONObject object = JSON.parseObject(s);
+                if(object.getInteger("code")==0) {
+                    mIForgetPwView.resetPwSuccess();
+                }else {
+                    mIForgetPwView.resetPwFailed();
+                }
             }
             @Override
             public void onError(Call call, Response response, Exception e) {

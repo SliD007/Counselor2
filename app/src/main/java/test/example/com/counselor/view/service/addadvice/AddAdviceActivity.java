@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -32,10 +31,10 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
     EditText addAdviceTitleEt;
     @BindView(R.id.addAdviceContextEt)
     EditText addAdviceContextEt;
-    @BindView(R.id.radioGroup)
-    RadioGroup radioGroup;
     @BindView(R.id.spinner01)
     Spinner spinner01;
+    @BindView(R.id.spinner02)
+    Spinner spinner02;
     int rbId = -1;
     String vStr = "";
     List<String> list;
@@ -68,23 +67,17 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
         adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
         spinner01.setAdapter(adapter);
         spinner01.setOnItemSelectedListener(mOnItemClickListener);
+        //S02
+        list = new ArrayList<String>();
+        list.add("县司法局");
+        list.add("镇街司法所");
+        list.add("服务村社");
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
-                    case R.id.radioButton1:
-                        rbId = 2;
-                        break;
-                    case R.id.radioButton2:
-                        rbId = 1;
-                        break;
-                    case R.id.radioButton3:
-                        rbId = 0;
-                        break;
-                }
-            }
-        });
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_show_worklog, list);
+        adapter.setDropDownViewResource(R.layout.spinner_item_worklog);
+        spinner02.setAdapter(adapter);
+        spinner02.setOnItemSelectedListener(mOnItemClickListener);
+
     }
 
 
@@ -128,7 +121,15 @@ public class AddAdviceActivity extends BaseActivity implements IAddAdviceView{
     AdapterView.OnItemSelectedListener mOnItemClickListener = new AdapterView.OnItemSelectedListener() {
 
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            vStr = parent.getSelectedItem().toString();
+
+            switch (parent.getId()) {
+                case R.id.spinner01:
+                    vStr = parent.getSelectedItem().toString();
+                    break;
+                case R.id.spinner02:
+                    rbId = position;
+                    break;
+            }
         }
 
         @Override

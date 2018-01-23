@@ -45,7 +45,7 @@ public class ShowWorkLogPresenter {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
 //                        Log.e("requestWorklogDetial","response:"+response.toString());
-                        Log.e("requestWorklogDetial","onSuccess:"+s);
+//                        Log.e("requestWorklogDetial","onSuccess:"+s);
                         JSONObject object = JSON.parseObject(s);
                         if (object.getInteger("code")==0){
                             saveValue(object);
@@ -81,7 +81,7 @@ public class ShowWorkLogPresenter {
 
                     @Override
                     public void onSuccess(File file, Call call, Response response) {
-                        Log.e("downLoadContract","onSuccess:"+response.toString());
+                        Log.e("downLoadImage","onSuccess:"+response.toString());
                         mIShowWorkLogView.downloadImageSuccess();
                     }
 

@@ -98,7 +98,8 @@
         <activity android:name=".view.service.addgroupcase.AddGroupCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
 
         <activity android:name=".view.service.showchargecase.ShowChargeCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
-        <activity android:name=".view.service.addchargecase.AddChargeCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
+        <activity android:name=".view.service.addchargecase.AddChargeCaseActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"
+            android:windowSoftInputMode="adjustResize"/>
 
         <activity android:name=".view.service.showadvice.ShowAdviceActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>
         <activity android:name=".view.service.addadvice.AddAdviceActivity" android:launchMode="singleTask" android:theme="@style/TranslucentTheme"/>

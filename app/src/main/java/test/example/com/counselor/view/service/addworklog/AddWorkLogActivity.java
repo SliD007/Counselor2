@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -38,11 +39,6 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     @BindView(R.id.titleBarTv)
     TextView titleBarTv;
 
-    String[] sumbit_str;
-    int[] sumbit_int;
-    List<String> list;
-    ArrayAdapter<String> adapter;
-    AddWorkLogPersenter mAddWorkLogPersenter;
     @BindView(R.id.spinner01)
     Spinner spinner01;
     @BindView(R.id.editText02)
@@ -72,10 +68,19 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     TextView textview14;
     @BindView(R.id.spinner15)
     Spinner spinner15;
+    @BindView(R.id.editText16)
+    EditText editText16;
+
     PDialog dialog;
-    private CustomDatePicker customDatePicker1, customDatePicker2;
 
     private ArrayList<ImageItem> imageItems;
+    String[] sumbit_str;
+    int[] sumbit_int;
+    List<String> list;
+    ArrayAdapter<String> adapter;
+
+    private CustomDatePicker customDatePicker1, customDatePicker2;
+    AddWorkLogPersenter mAddWorkLogPersenter;
 
     protected void initContentView(Bundle savedInstanceState) {
         setContentView(R.layout.activity_addworklog);
@@ -187,6 +192,7 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                     textview14.setText(sb.toString());
                     Log.e("textview14",sb.toString());
                     textview14.setTextSize(10);
+                    sumbit_str[14] = "";
                 } else {
                     textview14.setText("--");
                 }
@@ -263,13 +269,15 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
                 sumbit_str[5] = editText05.getText().toString();
 
                 sumbit_str[13] = editText13.getText().toString();
+                sumbit_str[16] = editText16.getText().toString();
                 if(imageItems!=null){
-                    dialog = new PDialog(this,"正在上传图片",false);
+                    dialog = new PDialog(this,"正在上传第1张图片，共"+(imageItems.size())+"张",false);
                     dialog.show();
                     mAddWorkLogPersenter.addImage(imageItems);
 
                 }
-                else if(TextUtils.isEmpty(sumbit_str[2])||TextUtils.isEmpty(sumbit_str[3])||TextUtils.isEmpty(sumbit_str[13])){
+                else if(TextUtils.isEmpty(sumbit_str[2])||TextUtils.isEmpty(sumbit_str[3])
+                        ||TextUtils.isEmpty(sumbit_str[16])||TextUtils.isEmpty(sumbit_str[13])){
                 toast("带星号的输入不能为空",false);
             }else {
                     sumbit(sumbit_str,sumbit_int);
@@ -304,9 +312,9 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
     @Override
     public void addImageSuccess(String imageUrl ) {
         index++;
-        sumbit_str[13] = sumbit_str[13] +"#"+imageUrl;
-
-        dialog = new PDialog(this,"完成上传第"+index+"张图片，共"+imageItems.size()+"张",false);
+        sumbit_str[14] += "#"+imageUrl;
+        Log.e("downloadImageSuccess",imageItems.size()+ " "+index+" "+sumbit_str[14]);
+        dialog.setMessage("正在上传第"+(index+1)+"张图片，共"+(imageItems.size())+"张");
         if(index==imageItems.size()) {
             dialog.dismiss();
             sumbit(sumbit_str,sumbit_int);
@@ -326,4 +334,17 @@ public class AddWorkLogActivity extends BaseActivity implements IAddWorkLogView 
         mAddWorkLogPersenter.addWorkLog(sumbit_str,sumbit_int);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if(dialog!=null){
+            if(dialog.showDialog){
+                dialog.dismiss();
+                toast("现在正在上传图片，强行退出可能导致上传失败！",true);
+            }
+            return false;
+        }else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
 }

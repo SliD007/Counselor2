@@ -72,7 +72,7 @@
             android:layout_weight="1">
             <TextView
                 android:id="@+id/tv1"
-                android:text="服务村社："
+                android:text="服务单位："
                 android:textSize="18sp"
                 android:textColor="#000"
                 android:layout_width="wrap_content"
@@ -82,6 +82,7 @@
             <Spinner
                 android:id="@+id/spinner01"
                 android:layout_toRightOf="@id/tv1"
+                android:layout_centerVertical="true"
                 style="@style/log_spinner"
                 />
         </RelativeLayout>

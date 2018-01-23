@@ -96,7 +96,7 @@ public class ForgetPwActivity extends BaseActivity implements IForgetPwView {
 
     @Override
     public void resetPwFailed() {
-
+        toast("重置失败",false);
     }
 
     @Override
@@ -106,6 +106,6 @@ public class ForgetPwActivity extends BaseActivity implements IForgetPwView {
 
     @Override
     public void getVCodeFailed() {
-
+        toast("验证码获取失败",false);
     }
 }

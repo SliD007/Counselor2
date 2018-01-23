@@ -430,7 +430,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/rl13"
-                    android:hint="请输入"
+                    android:hint="    请输入"
                     android:gravity="top"
                     android:textColorHint="#666"
                     android:textSize="16sp"
@@ -440,6 +440,7 @@
                     android:layout_marginTop="10dp"
                     android:nextFocusUp="@id/editText13"
                     android:nextFocusLeft="@id/editText13"
+                    android:scrollbars="vertical"
                     />
             </RelativeLayout>
             <View
@@ -449,7 +450,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true">
                 <RelativeLayout
@@ -474,9 +475,9 @@
                 <EditText
                     android:id="@+id/editText16"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_below="@id/rl16"
-                    android:hint="请输入"
+                    android:hint="    请输入"
                     android:gravity="top"
                     android:textColorHint="#666"
                     android:textSize="16sp"
@@ -484,8 +485,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
-                    android:nextFocusUp="@id/editText13"
-                    android:nextFocusLeft="@id/editText13"
+                    android:nextFocusUp="@id/editText16"
+                    android:nextFocusLeft="@id/editText16"
                     />
             </RelativeLayout>
             <View
@@ -522,33 +523,41 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_gravity="bottom">
                 <ImageView
                     android:id="@+id/imageLeftIm14"
                     android:layout_width="5dp"
-                    style="@style/image1"/>
+                    style="@style/image1"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="10dp"/>
                 <TextView
+
                     android:text="上传图片"
                     android:layout_toRightOf="@id/imageLeftIm14"
-                    style="@style/text_worklog"/>
+                    style="@style/text_worklog"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:layout_alignParentTop="true"/>
                 <TextView
                     android:id="@+id/textview14"
+                    android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:paddingRight="10dp"
-                    android:text="请选择（可多选）"
+                    android:padding="5dp"
+                    android:text="请选择        \n（不多于3张）"
                     android:textColor="#ccc"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ccc"
+                    android:layout_below="@id/textview14"/>
             </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#ccc"
-                android:layout_marginBottom="30dp"/>
+
 
         </LinearLayout>
     </ScrollView>

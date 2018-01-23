@@ -36,10 +36,10 @@ public class AddSummaryPresenter {
         this.mContext = context;
     }
 
-    public void addSummary(String title,String content){
+    public void addSummary(String title,String content,String vStr){
         HashMap<String,String> params = new HashMap<>();
         params.put("counselor", MyApplication.getInstance().loginEntity.getId()+"");
-        params.put("village", MyApplication.getInstance().loginEntity.getVillageA()+" "+MyApplication.getInstance().loginEntity.getVillageB());
+        params.put("village", vStr);
         params.put("office",MyApplication.getInstance().loginEntity.getOfficeName());
         params.put("contact", MyApplication.getInstance().loginEntity.getContact()+"");
         params.put("title",title);

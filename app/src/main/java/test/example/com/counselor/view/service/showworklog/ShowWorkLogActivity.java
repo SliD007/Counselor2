@@ -67,7 +67,7 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
     ListView showImageLv;
     int downloadIndex = 0;
     String[] imageName ;
-    String[] content ;
+    String[] imageUrl ;
     PDialog dialog;
 
     private ShowWorkLogPresenter mShowWorkLogPresenter;
@@ -105,11 +105,12 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
             textview10.setText(workLogDetialEntity.getMatterType());
             textview11.setText(workLogDetialEntity.getSubType());
             textview12.setText(workLogDetialEntity.getObjecttype());
-            content = workLogDetialEntity.getServiceContent().split("#");
-            imageName = new String[content.length-1];
-            textview13.setText(content[0]);
-            if(content.length>1){
-                textview14.setText("有"+(content.length-1)+"张图，点击查看");
+            textview13.setText(workLogDetialEntity.getServiceContent());
+            imageUrl = workLogDetialEntity.getAccessory().split("#");
+            imageName = new String[imageUrl.length-1];
+
+            if(imageUrl.length>1){
+                textview14.setText("有"+(imageUrl.length-1)+"张图，点击查看");
             }else {
                 ViewGroup.LayoutParams para = Rl14.getLayoutParams();
                 para.height = 0;
@@ -128,16 +129,16 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
                 this.finish();
                 break;
             case R.id.textview14:
+                dialog = new PDialog(this,"正在下载第1张图片，共"+(imageUrl.length-1)+"张",false);
 
-                for(int i=1;i<content.length;i++){
-                    String fileName = content[i].split("/")[content[i].split("/").length-1];
+                for(int i=1;i<imageUrl.length;i++){
+                    String fileName = imageUrl[i].split("/")[imageUrl[i].split("/").length-1];
                     imageName[i-1] = fileName;
                     if(!OpenFileUtil.fileIsExists(Constants.getAppImageFolder()+"/"+fileName)){
                         textview14.setText("正在下载,请稍等...");
-
-                        dialog = new PDialog(this,"正在下载",false);
                         dialog.show();
-                        mShowWorkLogPresenter.downLoadImage(content[i],fileName);
+                        Log.e("downLoadImage",imageUrl.length+ " "+fileName+" "+imageUrl[i]);
+                        mShowWorkLogPresenter.downLoadImage(imageUrl[i],fileName);
                     }else {
                         initImage();
                     }
@@ -164,18 +165,13 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
     public void downloadImageSuccess() {
 
         index++;
-        Log.e("downloadImageSuccess",imageName.length+ " "+index+" "+content[index]);
-        dialog = new PDialog(this,"完成下载第"+index+"张图片，共"+(content.length-1)+"张",false);
+        Log.e("downLoadImage",imageUrl.length+ " "+index+" "+imageUrl[index]);
+        dialog.setMessage("正在下载第"+(index+1)+"张图片，共"+(imageUrl.length-1)+"张");
         if(index == imageName.length){
-
             dialog.dismiss();
             textview14.setText("下载完成");
             initImage();
-        }else {
-//            dialog = new PDialog(this,"正在下载第"+(index+1)+"张图片，共"+(content.length-1)+"张",false);
-//            dialog.show();
         }
-
     }
 
     @Override
@@ -184,7 +180,7 @@ public class ShowWorkLogActivity extends BaseActivity implements IShowWorkLogVie
     }
 
     private void initImage(){
-        if (downloadIndex==content.length-1){
+        if (downloadIndex==imageName.length){
             Log.e("imageName",""+imageName.toString());
             ViewGroup.LayoutParams para = showImageLv.getLayoutParams();
             para.height = 150*imageName.length;
