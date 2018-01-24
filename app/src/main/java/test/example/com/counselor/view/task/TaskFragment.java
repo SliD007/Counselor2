@@ -16,7 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -120,15 +120,20 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         if (fragmentType == 0) {
             toDoListEntities = mTaskPresenter.getToDoTaskEntity();
             if(toDoListEntities!=null){
-                para.height = 0;
-                noneTv.setLayoutParams(para);
-
+                if(toDoListEntities.size()!=0){
+                    para.height = 0;
+                    noneTv.setLayoutParams(para);
+                }else {
+                    para.height = 100;
+                    noneTv.setLayoutParams(para);
+                    noneTv.setText(noneStr);
+                }
             }else {
                 para.height = 100;
                 noneTv.setLayoutParams(para);
-                    noneTv.setText(noneStr);
-                }
-            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_2list,mClickListener){
+                noneTv.setText(noneStr);
+            }
+            mAdapter = new CommonAdapter(mContext,toDoListEntities,R.layout.item_tasklist,mClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     super.onBindViewHolder(viewHolder,position);
 //                    Log.e("mAdapter","加载数据"+toDoListEntities.size());
@@ -138,7 +143,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                     tv2.setText("来源于："+toDoListEntities.get(position).getFromWhere());
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
                     tv3.setText(TimeUtil.getDateToString(toDoListEntities.get(position).getTime(),TimeUtil.Time));
-                    RelativeLayout rl = viewHolder.getView(R.id.itemRl);
+                    LinearLayout rl = viewHolder.getView(R.id.itemLl);
                     rl.setTag(position);
                     rl.setOnClickListener(mClickListener);
                 }
@@ -147,15 +152,20 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         } else {
             doneListEntities = mTaskPresenter.getDoneTaskEntityList();
             if(doneListEntities!=null){
-                para.height = 0;
-                noneTv.setLayoutParams(para);
-
+                if(doneListEntities.size()!=0){
+                    para.height = 0;
+                    noneTv.setLayoutParams(para);
+                }else {
+                    para.height = 100;
+                    noneTv.setLayoutParams(para);
+                    noneTv.setText(noneStr);
+                }
             }else {
                 para.height = 100;
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);
             }
-            mAdapter = new CommonAdapter(mContext,doneListEntities,R.layout.item_2list,mClickListener){
+            mAdapter = new CommonAdapter(mContext,doneListEntities,R.layout.item_tasklist,mClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     TextView tv1 = viewHolder.getView(R.id.itemTv1);
                     tv1.setText("主题："+doneListEntities.get(position).getTitle());
@@ -163,7 +173,7 @@ public class TaskFragment extends BaseFragment implements ITaskView {
                     tv2.setText("来源于："+doneListEntities.get(position).getFromWhere());
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
                     tv3.setText(TimeUtil.getDateToString(doneListEntities.get(position).getTime(),TimeUtil.Time));
-                    RelativeLayout rl = viewHolder.getView(R.id.itemRl);
+                    LinearLayout rl = viewHolder.getView(R.id.itemLl);
                     rl.setTag(position);
                     rl.setOnClickListener(mClickListener);
                 }

@@ -34,7 +34,7 @@ public abstract class BaseActivity extends FragmentActivity {
         initContentView(savedInstanceState);
         MyApplication.getInstance().addActivity(this);
         Log.i(TAG,""+this);
-
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);//解决虚拟键
 
     }
     /*
@@ -105,5 +105,7 @@ public abstract class BaseActivity extends FragmentActivity {
                     }
                 });
     }
+
+
 
 }

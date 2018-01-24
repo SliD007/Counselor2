@@ -1,7 +1,6 @@
 package test.example.com.counselor.view.schedule;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -62,7 +61,7 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
 //        Log.e("ScheduleFragment","加载数据");
         entityList = mSchedulePersenter.getScheduleEntityList();
         scheduleLv.setAdapter(new Common1Adapter<ScheduleEntity>(super.mContext, entityList,
-                R.layout.item_schedule, mClickListener) {
+                R.layout.item_schedulelist, mClickListener) {
             @Override
             protected void convertView(ViewHolder1 mViewHolder, View item, ScheduleEntity scheduleEntity, int position) {
                 TextView tv1 = mViewHolder.getView(R.id.itemTv1);
@@ -70,8 +69,7 @@ public class ScheduleFragment extends BaseFragment implements IScheduleView{
                 TextView tv3 = mViewHolder.getView(R.id.itemTv3);
                 tv1.setText(TimeUtil.getDateToString(scheduleEntity.getPlacementTime(),TimeUtil.Data));
                 tv2.setText("服务单位："+scheduleEntity.getVillage());
-                tv3.setText("申请修改");
-                tv3.setBackgroundColor(Color.rgb(240,240,240));
+
                 tv3.setTag(position);
                 tv3.setOnClickListener(mClickListener);
             }

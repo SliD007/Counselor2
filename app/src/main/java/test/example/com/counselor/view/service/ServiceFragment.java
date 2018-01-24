@@ -139,7 +139,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);
             }
-            mAdapter = new CommonAdapter(mContext,workLogEntities,R.layout.item_4list,mClickListener){
+            mAdapter = new CommonAdapter(mContext,workLogEntities,R.layout.item_workloglist,mClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     super.onBindViewHolder(viewHolder,position);
 
@@ -147,13 +147,15 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                     TextView tv2 = viewHolder.getView(R.id.itemTv2);
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
                     TextView tv4 = viewHolder.getView(R.id.itemTv4);
+                    TextView tv5 = viewHolder.getView(R.id.itemTv5);
                     tv1.setText("工作记录类型："+ workLogEntities.get(position).getLogType());
                     tv2.setText("服务对象："+workLogEntities.get(position).getServiceObject());
                     if(workLogEntities.get(position).getLogType().equals("群体事件")){
-                        tv2.setText("服务对象："+workLogEntities.get(position).getServiceVillageName());
+                        tv2.setText("案件发生地："+workLogEntities.get(position).getServiceVillageName());
                     }
                     tv3.setText("服务单位："+workLogEntities.get(position).getServiceVillageName());
                     tv4.setText("完结状态："+workLogEntities.get(position).getResultType());
+                    tv5.setText(TimeUtil.getDateToString(workLogEntities.get(position).getCreateTime(),TimeUtil.DataTime));
                     LinearLayout ll = viewHolder.getView(R.id.itemLl);
                     ll.setTag(position);
                     ll.setOnClickListener(mClickListener);
@@ -176,7 +178,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);
             }
-            mAdapter = new CommonAdapter(mContext,adviceEntities,R.layout.item_4list,mClickListener){
+            mAdapter = new CommonAdapter(mContext,adviceEntities,R.layout.item_reportlist,mClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     super.onBindViewHolder(viewHolder,position);
 
@@ -184,10 +186,12 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                     TextView tv2 = viewHolder.getView(R.id.itemTv2);
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
                     TextView tv4 = viewHolder.getView(R.id.itemTv4);
+                    TextView tv5 = viewHolder.getView(R.id.itemTv5);
                     tv1.setText("上报类型："+adviceEntities.get(position).getReporttype());
                     tv2.setText("标题："+adviceEntities.get(position).getTitle());
                     tv3.setText("服务单位："+adviceEntities.get(position).getVillage());
                     tv4.setText("报送至："+adviceEntities.get(position).getToType());
+                    tv5.setText(TimeUtil.getDateToString(adviceEntities.get(position).getCreateTime(),TimeUtil.DataTime));
                     LinearLayout ll = viewHolder.getView(R.id.itemLl);
                     ll.setTag(position);
                     ll.setOnClickListener(mClickListener);
@@ -239,7 +243,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                 noneTv.setLayoutParams(para);
                 noneTv.setText(noneStr);
             }
-            mAdapter = new CommonAdapter(mContext,summaryEntities,R.layout.item_3list,mClickListener){
+            mAdapter = new CommonAdapter(mContext,summaryEntities,R.layout.item_summarylist,mClickListener){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     super.onBindViewHolder(viewHolder,position);
 
@@ -247,8 +251,8 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
                     TextView tv2 = viewHolder.getView(R.id.itemTv2);
                     TextView tv3 = viewHolder.getView(R.id.itemTv3);
                     tv1.setText(summaryEntities.get(position).getTitle());
-                    tv2.setText("时间："+ TimeUtil.getDateToString(summaryEntities.get(position).getCreateTime(),TimeUtil.Data));
-                    tv3.setText("服务单位："+summaryEntities.get(position).getVillage());
+                    tv2.setText("服务单位："+summaryEntities.get(position).getVillage());
+                    tv3.setText(TimeUtil.getDateToString(summaryEntities.get(position).getCreateTime(),TimeUtil.DataTime));
                     LinearLayout ll = viewHolder.getView(R.id.itemLl);
                     ll.setTag(position);
                     ll.setOnClickListener(mClickListener);

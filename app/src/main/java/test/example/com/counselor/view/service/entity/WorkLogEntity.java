@@ -19,6 +19,7 @@ public class WorkLogEntity implements Serializable{
     public int getId() {
         return id;
     }
+    private long createTime;
 
     @Override
     public String toString() {
@@ -29,6 +30,7 @@ public class WorkLogEntity implements Serializable{
                 ", serviceObject='" + serviceObject + '\'' +
                 ", resultType='" + resultType + '\'' +
                 ", serviceVillage='" + serviceVillage.toString() + '\'' +
+                ", createTime='" + createTime + '\'' +
                 '}';
     }
 
@@ -80,5 +82,13 @@ public class WorkLogEntity implements Serializable{
     }
     public String getServiceVillageName() {
         return this.serviceVillage.getString("username");
+    }
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 }

@@ -31,7 +31,7 @@ public class ChangePwPresenter extends BasePresenter{
         Log.e(oldPassword,newPassword);
         HashMap<String,String> params = new HashMap<>();
         params.put("contact",""+ MyApplication.getInstance().loginEntity.getContact());
-        params.put("olderpassword",oldPassword);
+        params.put("oldPassword",oldPassword);
         params.put("newPassword",newPassword);
         Log.e("changePw","params"+params.toString());
         OkGo.post(Urls.ChnagePwURL).params(params).execute(new StringCallback() {

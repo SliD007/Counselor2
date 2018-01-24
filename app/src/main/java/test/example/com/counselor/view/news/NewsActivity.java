@@ -62,10 +62,21 @@ public class NewsActivity extends BaseActivity implements INewsView {
     private void initDatas() {
         Log.e("AssessmentActivity", "加载数据");
         newsEntities = mNewsPresenter.getNewsEntity();
-        if (newsEntities!=null){
-            para.height = 0;
+        if(newsEntities!=null){
+            if(newsEntities.size()!=0){
+                para.height = 0;
+                noneTv.setLayoutParams(para);
+            }else {
+                para.height = 100;
+                noneTv.setLayoutParams(para);
+                noneTv.setText(noneStr);
+            }
+        }else {
+            para.height = 100;
             noneTv.setLayoutParams(para);
-            mAdapter = new CommonAdapter(this,newsEntities,R.layout.item_news){
+            noneTv.setText(noneStr);
+        }
+            mAdapter = new CommonAdapter(this,newsEntities,R.layout.item_newslist){
                 public void onBindViewHolder(ViewHolder viewHolder,final int position) {
                     super.onBindViewHolder(viewHolder,position);
 
@@ -79,11 +90,7 @@ public class NewsActivity extends BaseActivity implements INewsView {
                 }
             };
             mRecyclerView.setAdapter(mAdapter);
-        }else {
-            para.height = 100;
-            noneTv.setLayoutParams(para);
-            noneTv.setText(noneStr);
-        }
+
 
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override

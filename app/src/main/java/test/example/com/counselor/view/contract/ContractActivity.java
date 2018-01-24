@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,6 +39,14 @@ public class ContractActivity extends BaseActivity implements IContractView {
 
     @BindView(R.id.contractLv)
     ListView contractLv;
+
+    @BindView(R.id.noneTv)
+    TextView noneTv;
+
+    ViewGroup.LayoutParams para;
+
+    String noneStr = "加载中";
+
     ArrayList<Map<String,Integer>> mData= new ArrayList<Map<String,Integer>>();
     List<ContractEntity> contractEntities;
     Context mContext;
@@ -51,6 +60,7 @@ public class ContractActivity extends BaseActivity implements IContractView {
         mContractPresenter = new ContractPresenter(this);
         titleBarTv.setText("我的合同");
         mContext=this;
+        para = noneTv.getLayoutParams();
         mContractPresenter.requestContract();
         initDatas();
     }
@@ -64,6 +74,20 @@ public class ContractActivity extends BaseActivity implements IContractView {
     private void initDatas() {
         Log.e("AssessmentActivity", "加载数据");
         contractEntities = mContractPresenter.getContractEntity();
+        if(contractEntities!=null){
+            if(contractEntities.size()!=0){
+                para.height = 0;
+                noneTv.setLayoutParams(para);
+            }else {
+                para.height = 100;
+                noneTv.setLayoutParams(para);
+                noneTv.setText(noneStr);
+            }
+        }else {
+            para.height = 100;
+            noneTv.setLayoutParams(para);
+            noneTv.setText(noneStr);
+        }
         contractLv.setAdapter(new Common1Adapter<ContractEntity>(this, contractEntities,
                 R.layout.item_contract,mClickListener, onItemClickListener ) {
             @Override
@@ -123,6 +147,7 @@ public class ContractActivity extends BaseActivity implements IContractView {
     @Override
     public void requestContractSuccess() {
 //        toast("请求成功！", true);
+        noneStr = "没有内容";
         initDatas();
     }
 

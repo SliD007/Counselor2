@@ -3,6 +3,7 @@ package test.example.com.counselor.view.rank;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,7 +28,12 @@ public class RankActivity extends BaseActivity implements IRankView {
     TextView titleBarTv;
     @BindView(R.id.rankLv)
     ListView rankLv;
+    @BindView(R.id.noneTv)
+    TextView noneTv;
 
+    ViewGroup.LayoutParams para;
+
+    String noneStr = "加载中";
     List<RankEntity> rankEntities;
 
     @Override
@@ -37,7 +43,7 @@ public class RankActivity extends BaseActivity implements IRankView {
         super.allow_quit = false;
         mRankPresenter = new RankPresenter(this);
         titleBarTv.setText("我的排行");
-
+        para = noneTv.getLayoutParams();
         mRankPresenter.requestRank();
     }
 
@@ -49,6 +55,20 @@ public class RankActivity extends BaseActivity implements IRankView {
     private void initDatas() {
         rankEntities = mRankPresenter.getRankEntity();
         Log.e("AssessmentActivity", "加载数据"+(rankEntities.size()));
+        if(rankEntities!=null){
+            if(rankEntities.size()!=0){
+                para.height = 0;
+                noneTv.setLayoutParams(para);
+            }else {
+                para.height = 100;
+                noneTv.setLayoutParams(para);
+                noneTv.setText(noneStr);
+            }
+        }else {
+            para.height = 100;
+            noneTv.setLayoutParams(para);
+            noneTv.setText(noneStr);
+        }
         rankLv.setAdapter(new Common1Adapter<RankEntity>(this, rankEntities,
                 R.layout.item_rank, onItemClickListener) {
             @Override
@@ -94,6 +114,7 @@ public class RankActivity extends BaseActivity implements IRankView {
     @Override
     public void requestRankSuccess() {
 //        toast("请求成功！", true);
+        noneStr = "没有内容";
         initDatas();
     }
 
