@@ -1,71 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:background="#000">
-    <RelativeLayout
-        android:id="@+id/buttomRl1"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/buttomIm1"
-            android:src="@drawable/u2335"
-            style="@style/icon_buttom"/>
-        <TextView
-            android:id="@+id/buttomTv1"
-            android:text="待办事项"
-            android:layout_below="@id/buttomIm1"
-            style="@style/text_buttom" />
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/bottomBarLl"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#000">
+        <RelativeLayout
+            android:id="@+id/buttomRl1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/buttomIm1"
+                android:src="@drawable/u2335"
+                style="@style/icon_buttom"/>
+            <TextView
+                android:id="@+id/buttomTv1"
+                android:text="待办事项"
+                android:layout_below="@id/buttomIm1"
+                style="@style/text_buttom" />
 
-    </RelativeLayout>
-    
-    <RelativeLayout
-        android:id="@+id/buttomRl2"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/buttomIm2"
-            android:src="@drawable/u2345"
-            style="@style/icon_buttom"/>
-        <TextView
-            android:id="@+id/buttomTv2"
-            android:text="工作安排"
-            android:layout_below="@id/buttomIm2"
-            style="@style/text_buttom" />
-    </RelativeLayout>
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/buttomRl3"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/buttomIm3"
-            android:src="@drawable/u2348"
-            style="@style/icon_buttom"/>
-        <TextView
-            android:id="@+id/buttomTv3"
-            android:text="业务办理"
-            android:layout_below="@id/buttomIm3"
-            style="@style/text_buttom" />
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/buttomRl2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/buttomIm2"
+                android:src="@drawable/u2345"
+                style="@style/icon_buttom"/>
+            <TextView
+                android:id="@+id/buttomTv2"
+                android:text="工作安排"
+                android:layout_below="@id/buttomIm2"
+                style="@style/text_buttom" />
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/buttomRl4"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/buttomIm4"
-            android:src="@drawable/u1740"
-            style="@style/icon_buttom"/>
-        <TextView
-            android:id="@+id/buttomTv4"
-            android:text="个人中心"
-            android:layout_below="@id/buttomIm4"
-            style="@style/text_buttom" />
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/buttomRl3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/buttomIm3"
+                android:src="@drawable/u2348"
+                style="@style/icon_buttom"/>
+            <TextView
+                android:id="@+id/buttomTv3"
+                android:text="业务办理"
+                android:layout_below="@id/buttomIm3"
+                style="@style/text_buttom" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/buttomRl4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/buttomIm4"
+                android:src="@drawable/u1740"
+                style="@style/icon_buttom"/>
+            <TextView
+                android:id="@+id/buttomTv4"
+                android:text="个人中心"
+                android:layout_below="@id/buttomIm4"
+                style="@style/text_buttom" />
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

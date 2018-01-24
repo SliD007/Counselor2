@@ -46,7 +46,7 @@ public class ContractPresenter extends BasePresenter{
                 .execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {
-                Log.e("requestContract",s);
+//                Log.e("requestContract",s);
                 JSONObject object = JSON.parseObject(s);
                 if (object.getInteger("code")==0){
                     saveValue(object);
@@ -108,11 +108,11 @@ public class ContractPresenter extends BasePresenter{
     public void saveValue(JSONObject object){
         JSONObject page = object.getJSONObject("page");
         JSONArray listArray = page.getJSONArray("list");
-        Log.e("requestContract",""+listArray.toString());
+//        Log.e("requestContract",""+listArray.toString());
 
         contractEntities = JSONArray.parseArray(listArray.toString(),ContractEntity.class);
         mContractModel.setContractEntity(contractEntities);
-        Log.e("requestScheduleList",""+contractEntities.toString());
+//        Log.e("requestScheduleList",""+contractEntities.toString());
 
     }
 }

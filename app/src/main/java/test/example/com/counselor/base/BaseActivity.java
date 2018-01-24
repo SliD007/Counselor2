@@ -1,16 +1,25 @@
 package test.example.com.counselor.base;
 
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.ViewConfiguration;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 
 import okhttp3.Call;
@@ -18,11 +27,13 @@ import okhttp3.Response;
 import test.example.com.counselor.util.Urls;
 
 
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity implements ViewTreeObserver.OnGlobalLayoutListener{
 
     private String TAG = "BaseActivity";
     protected boolean hide_status = false;
     protected boolean hide_title = true;
+    /** 是否禁止旋转屏幕 **/
+    public boolean isAllowScreenRoate = false;
 
     public BaseActivity() {
     }
@@ -34,8 +45,21 @@ public abstract class BaseActivity extends FragmentActivity {
         initContentView(savedInstanceState);
         MyApplication.getInstance().addActivity(this);
         Log.i(TAG,""+this);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);//解决虚拟键
+        Log.i(TAG,""+this+getNavigationBarHeight(this));
 
+        //虚拟键盘
+        content = (FrameLayout) findViewById(android.R.id.content);
+        content.post(new Runnable() {
+            @Override
+            public void run() {
+                mLayoutComplete = true;
+            }
+        });
+        content.getViewTreeObserver().addOnGlobalLayoutListener(this);
+
+        if (!isAllowScreenRoate) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
     }
     /*
     初始化布局
@@ -85,6 +109,8 @@ public abstract class BaseActivity extends FragmentActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    //打卡
     public void clock(){
         HashMap<String,String> params = new HashMap<>();
         params.put("counselorId",MyApplication.getInstance().loginEntity.getId()+"");
@@ -106,6 +132,77 @@ public abstract class BaseActivity extends FragmentActivity {
                 });
     }
 
+    //获取虚拟按键的高度
+    public static int getNavigationBarHeight(Context context) {
+        int result = 0;
+        if (hasNavBar(context)) {
+            Resources res = context.getResources();
+            int resourceId = res.getIdentifier("navigation_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                result = res.getDimensionPixelSize(resourceId);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 检查是否存在虚拟按键栏
+     *
+     * @param context
+     * @return
+     */
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    public static boolean hasNavBar(Context context) {
+        Resources res = context.getResources();
+        int resourceId = res.getIdentifier("config_showNavigationBar", "bool", "android");
+        if (resourceId != 0) {
+            boolean hasNav = res.getBoolean(resourceId);
+            // check override flag
+            String sNavBarOverride = getNavBarOverride();
+            if ("1".equals(sNavBarOverride)) {
+                hasNav = false;
+            } else if ("0".equals(sNavBarOverride)) {
+                hasNav = true;
+            }
+            return hasNav;
+        } else { // fallback
+            return !ViewConfiguration.get(context).hasPermanentMenuKey();
+        }
+    }
+    /**
+     * 判断虚拟按键栏是否重写
+     *
+     * @return
+     */
+    private static String getNavBarOverride() {
+        String sNavBarOverride = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            try {
+                Class c = Class.forName("android.os.SystemProperties");
+                Method m = c.getDeclaredMethod("get", String.class);
+                m.setAccessible(true);
+                sNavBarOverride = (String) m.invoke(null, "qemu.hw.mainkeys");
+            } catch (Throwable e) {
+            }
+        }
+        return sNavBarOverride;
+    }
+
+    FrameLayout content;
+    private boolean mLayoutComplete = false;
+
+    @Override
+    public void onGlobalLayout() {
+        if (!mLayoutComplete)
+            return;
+        onNavigationBarStatusChanged();
+//        Log.e(TAG, "content 布局改变");
+
+    }
+
+    protected void onNavigationBarStatusChanged() {
+// 子类重写该方法，实现自己的逻辑即可。
+    }
 
 
 }

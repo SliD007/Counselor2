@@ -29,6 +29,16 @@ public class LoginEntity implements Serializable{
     private String com_status;
     private String status;
 
+    public JSONObject getJustice() {
+        return justice;
+    }
+
+    public void setJustice(JSONObject justice) {
+        this.justice = justice;
+    }
+
+    private JSONObject justice;
+
     public String getAcademy() {
         return academy;
     }

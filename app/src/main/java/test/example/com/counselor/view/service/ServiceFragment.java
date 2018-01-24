@@ -263,6 +263,7 @@ public class ServiceFragment extends BaseFragment implements IServiceView{
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+                noneTv.setText("");
                 refreshTime ++;
                 times = 0;
                 new Handler().postDelayed(new Runnable(){

@@ -24,6 +24,8 @@ import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.OpenFileUtil;
 import test.example.com.counselor.util.PDialog;
 
+import static test.example.com.counselor.R.id.Rl14;
+
 
 /**
  * Created by Sli.D on 2017/12/21.
@@ -99,8 +101,15 @@ public class ShowGroupCaseActivity extends BaseActivity implements IShowGroupCas
 
             if(groupCaseDetialEntity.getAccessory()!=null){
                 imageUrl = groupCaseDetialEntity.getAccessory().split("#");
-                imageName = new String[imageUrl.length-1];
-                textview8.setText("有"+(imageUrl.length-1)+"张图，点击查看");
+                Log.e("imageUrl",""+imageUrl);
+                if(imageUrl.length-1!=0){
+                    imageName = new String[imageUrl.length-1];
+                    textview8.setText("有"+(imageUrl.length-1)+"张图，点击查看");
+                }else {
+                    ViewGroup.LayoutParams para = Rl8.getLayoutParams();
+                    para.height = 0;
+                    Rl8.setLayoutParams(para);
+                }
 
             } else {
                 ViewGroup.LayoutParams para = Rl8.getLayoutParams();

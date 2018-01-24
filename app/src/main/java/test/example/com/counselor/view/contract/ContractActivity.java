@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import test.example.com.counselor.base.MyApplication;
 import test.example.com.counselor.base.MyLvClickListener;
 import test.example.com.counselor.util.Constants;
 import test.example.com.counselor.util.OpenFileUtil;
+import test.example.com.counselor.util.PDialog;
 
 import static com.lzy.imagepicker.ui.ImageGridActivity.REQUEST_PERMISSION_STORAGE;
 
@@ -39,7 +41,8 @@ public class ContractActivity extends BaseActivity implements IContractView {
 
     @BindView(R.id.contractLv)
     ListView contractLv;
-
+    @BindView(R.id.contractWv)
+    WebView contractWv;
     @BindView(R.id.noneTv)
     TextView noneTv;
 
@@ -52,6 +55,7 @@ public class ContractActivity extends BaseActivity implements IContractView {
     Context mContext;
     TextView downloadTv;
     TextView showTv;
+    private String contractUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +74,6 @@ public class ContractActivity extends BaseActivity implements IContractView {
         setContentView(R.layout.activity_contract);
     }
 
-    String contractUrl;
     private void initDatas() {
         Log.e("AssessmentActivity", "加载数据");
         contractEntities = mContractPresenter.getContractEntity();
@@ -112,21 +115,18 @@ public class ContractActivity extends BaseActivity implements IContractView {
                     tv6.setText("合同期限："+contractEntities.get(position).getDeadLine());
                     tv7.setText("合同金额："+contractEntities.get(position).getMoney()+"");
                     tv8.setText("合同状态："+contractEntities.get(position).getContractStatus());
-                    if(contractEntities.get(position).getAccesory()==null){
+
+                    contractUrl = contractEntities.get(position).getAccessory();
+                    if(contractUrl==null){
 //                        downloadTv.setText("");
                     }else {
-                        contractUrl = contractEntities.get(position).getAccesory();
+                        downloadTv.setText("点击查看合同");
                         downloadTv.setTag(position);
                         downloadTv.setOnClickListener(mClickListener);
                     }
 
                 }
-                String filePath = contractEntities.get(position).getVillage().getString("username")+"服务合同.pdf";
-                if(OpenFileUtil.fileIsExists(Constants.getAppDownloadFolder()+"/"+filePath)){
-                    showTv.setText("合同已下载，点击查看");
-                    showTv.setTag(100+position);
-                    showTv.setOnClickListener(mClickListener);
-                }
+
 
             }
         });
@@ -158,10 +158,11 @@ public class ContractActivity extends BaseActivity implements IContractView {
 
     @Override
     public void downloadContractSuccess() {
-
+        dialog.dismiss();
+        toast("下载已完成",false);
         initDatas();
     }
-
+    PDialog dialog ;
     @Override
     public void downloadContractFailed() {
         toast("下载失败",false);
@@ -171,22 +172,40 @@ public class ContractActivity extends BaseActivity implements IContractView {
     MyLvClickListener mClickListener = new MyLvClickListener() {
         @Override
         public void myOnClick(int position, View view) {
-            if(position<100){
-                mContractPresenter.downLoadContract(contractUrl,
-                        contractEntities.get(position).getVillage().getString("username")+"服务合同.pdf");
-                TextView tv = (TextView) view;
-                tv.setText("下载中");
+            if(contractUrl.split(":")[0].equals("httsp")){
 
-            }else {
-                File f=new File(Constants.getAppDownloadFolder()+"/"+contractEntities.get(position-100).getVillage().getString("username")+"服务合同.pdf");
-                if (f == null){
-                    toast("文件不存在",false);
+                String filePath = contractEntities.get(position).getVillage().getString("username")+"服务合同.pdf";
+                if(OpenFileUtil.fileIsExists(Constants.getAppDownloadFolder()+"/"+filePath)){
+                    File f=new File(Constants.getAppDownloadFolder()+"/"+contractEntities.get(position).getVillage().getString("username")+"服务合同.pdf");
+                    if (f == null){
+                        toast("文件不存在",false);
+                    }else {
+                        Log.e("OpenFileUtil",""+f);
+                        OpenFileUtil.openFile(ContractActivity.this,f);
+                    }
                 }else {
-                    Log.e("OpenFileUtil",""+f);
-                    OpenFileUtil.openFile(ContractActivity.this,f);
+                    mContractPresenter.downLoadContract(contractUrl,filePath);
+                    TextView tv = (TextView) view;
+                    tv.setText("下载中");
+                    dialog = new PDialog(mContext,"正在下载合同",false);
+                    dialog.show();
                 }
 
+
+            }else {
+                contractWv.loadUrl("http://www.baidu.com/");
+                //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
+//                contractWv.setWebViewClient(new WebViewClient(){
+//                    @Override
+//                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//                        // TODO Auto-generated method stub
+//                        //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
+//                        view.loadUrl(url);
+//                        return true;
+//                    }
+//                });
             }
+
 
         }
         public void onClick(View v) {   //先响应onclick(权限高) 可以将响应移交出去

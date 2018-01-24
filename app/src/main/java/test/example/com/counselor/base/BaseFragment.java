@@ -124,11 +124,15 @@ toast封装
                     public void onSuccess(String s, Call call, Response response) {
 //                        Log.e("requestScheduleList","response"+response.toString());
                         Log.e("requestScheduleList","onSuccess"+s);
+                        toast("打卡成功",false);
                     }
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
+                        toast("打卡失败",false);
                     }
                 });
     }
+
+
 }

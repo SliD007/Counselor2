@@ -184,6 +184,8 @@ public class TaskFragment extends BaseFragment implements ITaskView {
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
+
+                noneTv.setText("");
                 refreshTime ++;
                 times = 0;
                 new Handler().postDelayed(new Runnable(){

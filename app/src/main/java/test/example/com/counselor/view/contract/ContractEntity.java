@@ -16,7 +16,7 @@ public class ContractEntity {
     private String deadLine;
     private int money;
     private String contractStatus;
-    private String accesory;
+    private String accessory;
 
     @Override
     public String toString() {
@@ -29,7 +29,7 @@ public class ContractEntity {
                 ", deadLine='" + deadLine + '\'' +
                 ", money=" + money +
                 ", contractStatus='" + contractStatus + '\'' +
-                ", accesory='" + accesory + '\'' +
+                ", accessory='" + accessory + '\'' +
                 '}';
     }
 
@@ -97,12 +97,12 @@ public class ContractEntity {
         this.deadLine = deadLine;
     }
 
-    public String getAccesory() {
-        return accesory;
+    public String getAccessory() {
+        return accessory;
     }
 
-    public void setAccesory(String accesory) {
-        this.accesory = accesory;
+    public void setAccessory(String accessory) {
+        this.accessory = accessory;
     }
 
     public ContractEntity() {

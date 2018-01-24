@@ -67,7 +67,7 @@ public class ShowSummaryActivity extends BaseActivity implements IShowSummaryVie
 
     @Override
     public void requestSummaryDetialSuccess() {
-        toast("请求成功", false);
+//        toast("请求成功", false);
         initView();
     }
 

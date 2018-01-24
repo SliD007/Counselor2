@@ -40,6 +40,7 @@ public class WelcomeActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mContext = this;
         hideStatus(); //隐藏状态栏
         init();

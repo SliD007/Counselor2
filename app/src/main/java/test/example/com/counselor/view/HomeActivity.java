@@ -2,11 +2,14 @@ package test.example.com.counselor.view;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -49,25 +52,39 @@ public class HomeActivity extends BaseActivity {
     TextView buttomTv4;
     @BindView(R.id.viewpager)
     ViewPager viewpager;
-    private int fragmentId;
+    @BindView(R.id.bottomBarLl)
+    LinearLayout bottomBarLl;
+
     TaskFragment mTaskFragment;
     ScheduleFragment mScheduleFragment;
     ServiceFragment mServiceFragment;
     PersonalFragment mPersonalFragment;
+
+    private int fragmentId;
+
     private List<Fragment> list;// 声明一个list集合存放Fragment（数据源）
+    private int barHeight=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         Intent i = getIntent();
-        fragmentId = i.getIntExtra("fragmentId",0);
+        fragmentId = i.getIntExtra("fragmentId", 0);
         initView();
         //如果登录来着推送消息触发，当加载完主页之后，立即跳转到消息列表
-        if(MyApplication.getInstance().goToNews){
+        if (MyApplication.getInstance().goToNews) {
             Intent intent = new Intent(HomeActivity.this, NewsActivity.class);
             startActivity(intent);
         }
-
+//        if (getNavigationBarHeight(this) != 0) {
+//            ViewGroup.LayoutParams para = bottomBarLl.getLayoutParams();
+//            Log.e("HomeActivity",getNavigationBarHeight(this)+" "+para.height);
+//            barHeight = para.height;
+//            para.height+=getNavigationBarHeight(this)-10;
+//            bottomBarLl.setLayoutParams(para);
+//        }
+        steepStatusBar();
     }
 
     @Override
@@ -75,7 +92,7 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
     }
 
-    private void initView(){
+    private void initView() {
         buttomTv1.setTextColor(Color.rgb(14, 130, 193));
         buttomIm1.setImageResource(R.drawable.u2336);
         list = new ArrayList<Fragment>();
@@ -88,18 +105,21 @@ public class HomeActivity extends BaseActivity {
         list.add(mServiceFragment);
         list.add(mPersonalFragment);
         //设置适配器
-        FragmentAdapter mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(),list);
+        FragmentAdapter mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), list);
         viewpager.setAdapter(mFragmentAdapter);
         //设置滑动监听
         viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
+
             @Override
             public void onPageSelected(int position) {
+
                 clearStatus();
                 switch (position) {
                     case 0:
+
                         buttomTv1.setTextColor(Color.rgb(14, 130, 193));
                         buttomIm1.setImageResource(R.drawable.u2336);
                         break;
@@ -117,6 +137,7 @@ public class HomeActivity extends BaseActivity {
                         break;
                 }
             }
+
             @Override
             public void onPageScrollStateChanged(int state) {
             }
@@ -125,8 +146,11 @@ public class HomeActivity extends BaseActivity {
 
     @OnClick({R.id.buttomRl1, R.id.buttomRl2, R.id.buttomRl3, R.id.buttomRl4})
     public void onButtomBarClick(View view) {
+
+
         switch (view.getId()) {
             case R.id.buttomRl1:
+
                 viewpager.setCurrentItem(0);
                 break;
             case R.id.buttomRl2:
@@ -152,6 +176,30 @@ public class HomeActivity extends BaseActivity {
         buttomIm4.setImageResource(R.drawable.u1740);
     }
 
+    @Override
+    protected void onNavigationBarStatusChanged() {
+//        Log.e("canChange",MyApplication.getInstance().canChangeBar+"");
+//        if(!MyApplication.getInstance().canChangeBar){
+//            ViewGroup.LayoutParams para = bottomBarLl.getLayoutParams();
+//            if(para.height == (getNavigationBarHeight(this) + barHeight) ){
+//                para.height = barHeight;
+//            }else {
+//                para.height = (getNavigationBarHeight(this) + barHeight);
+//            }
+//        }
 
-
+    }
+    /**
+     * [沉浸状态栏]
+     */
+    private void steepStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // 透明状态栏
+            getWindow().addFlags(
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            // 透明导航栏
+            // getWindow().addFlags(
+            // WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+    }
 }

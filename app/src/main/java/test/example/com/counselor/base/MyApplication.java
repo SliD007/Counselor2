@@ -48,7 +48,7 @@ public class MyApplication extends Application {
     public boolean clock = false;
     public boolean goToNews = false;
     public int clockVillage = 0;
-
+    public boolean canChangeBar = true;
 
     private RequestQueue queues;
     public MyApplication() {

@@ -68,6 +68,7 @@ public class RankPresenter extends BasePresenter{
     public void saveValue(JSONObject object){
         List<RankEntity> rankEntities = new ArrayList<>();
         JSONObject value = JSON.parseObject(object.getString("value"));
+
         for(int i=0;i<11;i++){
             try{
                 JSONObject counselor = value.getJSONObject(String.valueOf(i));

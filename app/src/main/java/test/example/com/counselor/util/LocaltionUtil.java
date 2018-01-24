@@ -167,7 +167,7 @@ public class LocaltionUtil {
         LatLng latLng2 = new LatLng(Vy,Vx);
 
         float distance = AMapUtils.calculateLineDistance(latLng1,latLng2);
-//        Log.e("distance",""+distance);
+        Log.e("distance",""+distance);
         if(distance<=5000){
             MyApplication.getInstance().clock = true;
             locationClient.stopLocation();

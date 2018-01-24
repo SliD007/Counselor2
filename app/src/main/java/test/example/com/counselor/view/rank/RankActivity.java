@@ -120,7 +120,7 @@ public class RankActivity extends BaseActivity implements IRankView {
 
     @Override
     public void requestRankFailed() {
-        toast("请求失败！", true);
+        toast("当前律师数量较少，暂时无法显示！", true);
     }
 
     @OnClick(R.id.backTv)

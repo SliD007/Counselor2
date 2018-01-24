@@ -115,13 +115,21 @@ public class ShowChargeCaseActivity extends BaseActivity implements IShowChargeC
 
             if(chargeCaseDetialEntity.getAccessory()!=null){
                 imageUrl = chargeCaseDetialEntity.getAccessory().split("#");
-                imageName = new String[imageUrl.length-1];
-                textview14.setText("有"+(imageUrl.length-1)+"张图，点击查看");
-            } else {
+                Log.e("imageUrl",""+imageUrl);
+                if(imageUrl.length-1!=0){
+                    imageName = new String[imageUrl.length-1];
+                    textview14.setText("有"+(imageUrl.length-1)+"张图，点击查看");
+                }else {
+                    ViewGroup.LayoutParams para = Rl14.getLayoutParams();
+                    para.height = 0;
+                    Rl14.setLayoutParams(para);
+                }
+            }else {
                 ViewGroup.LayoutParams para = Rl14.getLayoutParams();
                 para.height = 0;
                 Rl14.setLayoutParams(para);
             }
+
         }
     }
 
